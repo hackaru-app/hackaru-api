@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    env_file: .env.development
+    volumes:
+      - .:/hackaru
+
+  sidekiq:
+    env_file: .env.development
+    command: bundle exec sidekiq
+      -q hackaru-api_development_default
+      -q hackaru-api_development_mailers
+    volumes:
+      - .:/hackaru
+
+  mailcatcher:
+    image: schickling/mailcatcher:latest
+    ports:
+      - 1080:1080

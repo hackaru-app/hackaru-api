@@ -1,0 +1,10 @@
+# rails
+.bundle
+vendor/bundle
+log
+tmp
+.byebug_history
+coverage
+
+# env
+.env*

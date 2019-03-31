@@ -1,0 +1,433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hackaru",
+    "version": "v1"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "basePath": "/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/activities": {
+      "get": {
+        "summary": "Returns list of activities",
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "getActivities",
+        "security": [
+          {
+            "oauth": [
+              "activities:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "type": "string",
+            "format": "date-time",
+            "required": false
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "type": "string",
+            "format": "date-time",
+            "required": false
+          },
+          {
+            "name": "working",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/activity"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates an activity",
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "createActivity",
+        "security": [
+          {
+            "oauth": [
+              "activities:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activity": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "started_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "stopped_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "started_at"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          }
+        }
+      }
+    },
+    "/activities/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update an activity",
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "updateActivity",
+        "security": [
+          {
+            "oauth": [
+              "activities:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activity": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "integer"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "started_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "stopped_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an activity",
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "deleteActivity",
+        "security": [
+          {
+            "oauth": [
+              "activities:write"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "summary": "Returns list of projects",
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "getProjects",
+        "security": [
+          {
+            "oauth": [
+              "projects:read"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates an project",
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "createProject",
+        "security": [
+          {
+            "oauth": [
+              "projects:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "color": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "color"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update an project",
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "updateProject",
+        "security": [
+          {
+            "oauth": [
+              "projects:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "color": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "color"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an project",
+        "tags": [
+          "Projects"
+        ],
+        "operationId": "deleteProject",
+        "security": [
+          {
+            "oauth": [
+              "projects:write"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ]
+    },
+    "activity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "stopped_at": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "project",
+        "description",
+        "duration",
+        "started_at",
+        "stopped_at"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "oauth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://192.168.1.7:3333/oauth/authorize",
+      "scopes": {
+        "activities:read": "Read your activities",
+        "activities:write": "Write your activities",
+        "projects:read": "Read your projects",
+        "projects:write": "Write your projects"
+      }
+    }
+  }
+}

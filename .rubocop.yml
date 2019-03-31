@@ -1,0 +1,32 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - db/schema.rb
+    - vendor/**/*
+
+Metrics/LineLength:
+  Max: 80
+  IgnoredPatterns: ['^ *#']
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/**/*
+
+Style/MixinUsage:
+  Exclude:
+    - bin/setup
+    - bin/update
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*_spec.rb"
+    - "spec/*_helper.rb"
+    - "spec/support/**/*.rb"
+    - "config/**/*.rb"

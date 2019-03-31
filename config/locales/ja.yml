@@ -1,0 +1,115 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ja:
+  activerecord:
+    models:
+      activity: 'アクティビティ'
+      project: 'プロジェクト'
+    attributes:
+      activity:
+        name: '名前'
+        description: '補足'
+        started_at: '開始日時'
+        stopped_at: '終了日時'
+        duration: '時間'
+      project:
+        name: '名前'
+        color: '色'
+      webhook:
+        target_url: '送信先URL'
+        event: 'イベント'
+    errors:
+      messages:
+        is_invalid: 'は不正な値です。'
+        cannot_be_before_started_at: 'は開始日時より後の日時を指定してください。'
+  user_mailer:
+    password_reset:
+      subject: 'パスワードの再設定が要求されました。'
+      greeting: こんにちは、%{recipient}！
+      instruction: パスワードの再設定が要求されました。
+      instruction_2: 続行するには、下記のURLをクリックしてください。
+      instruction_3: パスワードの再設定を依頼していない場合は、このメールを削除してください。
+  rack_attack:
+    throttled:
+        message: 'リクエストの制限に達しました。'
+        status: 429
+  error_renderer:
+    sign_in_failed:
+      message: 'メールアドレスまたはパスワードが間違っています。'
+      status: 401
+    access_token_invalid:
+      message: '認証に失敗しました。再度ログインし直してください。'
+      status: 401
+    refresh_token_invalid:
+      message: 'リフレッシュトークンが不正または失効しています。再度ログインし直してください。'
+      status: 401
+    current_password_invalid:
+      message: '現在のパスワードが正しくありません。'
+      status: 422
+    password_reset_token_invalid:
+      message: 'リクエストが不正または有効期限が切れています。メールの送信から再試行してください。'
+      status: 401
+    email_not_found:
+      message: 'そのEメールは登録されていません。'
+      status: 404
+  exception_renderer:
+    default:
+      message: '何か問題が発生したようです。再度お試しください。'
+      status: 500
+    argument_error:
+      message: 'パラメータが正しくありません。'
+      status: 422
+    active_record:
+      record_not_found:
+        message: '対象のデータが見つかりません。'
+        status: 404
+      record_invalid:
+        status: 422
+      not_null_violation:
+        message: 'パラメータが不足しています。'
+        status: 400
+    action_controller:
+      parameter_missing:
+        message: 'パラメータが不足しています。'
+        status: 400
+      routing_error:
+        message: 'ページが見つかりません。'
+        status: 404
+    groupdate:
+      error:
+        message: 'パラメータが正しくありません。'
+        status: 422
+    rails_param:
+      param:
+        invalid_parameter_error:
+          message: 'パラメータが正しくありません。'
+          status: 422

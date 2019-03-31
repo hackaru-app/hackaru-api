@@ -1,0 +1,23 @@
+# frozen_string_literal: true
+
+module V1
+  module OAuth
+    class ApplicationsController < ApplicationController
+      def create
+        application = Doorkeeper::Application.create!(application_params)
+        render json: {
+          web_url: ENV.fetch('HACKARU_WEB_URL'),
+          application: application
+        }
+      end
+
+      def application_params
+        params.require(:application).permit(
+          :name,
+          :redirect_uri,
+          :scopes
+        )
+      end
+    end
+  end
+end
