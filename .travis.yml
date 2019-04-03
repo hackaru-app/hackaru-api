@@ -15,8 +15,8 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - docker-compose build
-  - docker-compose run --user='root' --rm api bundle exec rails db:create db:migrate
-  - docker-compose run --user='root' --rm api bundle exec rspec
+  - docker-compose run --user='root' --rm sut bundle exec rails db:create db:migrate
+  - docker-compose run --user='root' --rm sut
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

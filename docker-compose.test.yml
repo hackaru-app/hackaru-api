@@ -1,11 +1,11 @@
 version: '3'
 services:
-  api:
+  sut:
+    build: .
     env_file: .env.test
+    command: bundle exec rspec
     volumes:
       - .:/hackaru
-
-  sidekiq:
-    env_file: .env.test
-    volumes:
-      - .:/hackaru
+    links:
+      - db
+      - redis
