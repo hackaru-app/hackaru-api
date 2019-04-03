@@ -13,10 +13,7 @@ services:
   sidekiq:
     build: .
     image: ktmouk/hackaru-api:latest
-    env_file: .env.production
     command: bundle exec sidekiq
-      -q hackaru-api_production_default
-      -q hackaru-api_production_mailers
     links:
       - db
       - redis
@@ -24,7 +21,6 @@ services:
   api:
     build: .
     image: ktmouk/hackaru-api:latest
-    env_file: .env.production
     command: /bin/sh -c 'rm -f tmp/pids/server.pid && rails s -b 0.0.0.0'
     ports:
       - 3000:3000
