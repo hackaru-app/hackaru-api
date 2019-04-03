@@ -17,5 +17,7 @@ script:
   - docker-compose build
   - docker-compose run --user='root' --rm api bundle exec rails db:create db:migrate
   - docker-compose run --user='root' --rm api bundle exec rspec
+  - ls -l
+  - ls -lR coverage/
 after_script:
-  - ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
