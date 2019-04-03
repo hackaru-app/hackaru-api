@@ -15,8 +15,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - docker-compose build
-  - docker-compose up -d
-  - docker-compose exec api bundle exec rails db:create db:migrate
-  - docker-compose exec api bundle exec rspec
+  - docker-compose run --rm api bundle exec rails db:create db:migrate
+  - docker-compose run --rm api bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $TRAVIS_TEST_RESULT
