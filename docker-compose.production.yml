@@ -1,0 +1,10 @@
+version: '3'
+services:
+  api:
+    env_file: .env.production
+
+  sidekiq:
+    env_file: .env.production
+    command: bundle exec sidekiq
+      -q hackaru-api_production_default
+      -q hackaru-api_production_mailers
