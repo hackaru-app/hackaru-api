@@ -11,33 +11,25 @@ See [ktmouk/hackaru](https://github.com/ktmouk/hackaru)
 
 ## Contributors
 
-1. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
+1. [Fork it](https://github.com/ktmouk/hackaru-api/fork).
 
-2. Clone this repository and checkout.
+2. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
+
+3. Clone forked repository and create new branch.
 ```
-$ git clone https://github.com/ktmouk/hackaru-api.git
-$ cd /hackaru
-$ git checkout -b YOUR_BRANCH
+$ git checkout -b new-feature
 ```
 
-3. Improve code.
+4. Improve codes.
 
-4. Run [RoboCop](https://github.com/rubocop-hq/rubocop) and [Brakeman](https://github.com/presidentbeef/brakeman).
+5. Run [RoboCop](https://github.com/rubocop-hq/rubocop), [Brakeman](https://github.com/presidentbeef/brakeman) and [RSpec](https://github.com/rspec/rspec).
 ```
 $ docker-compose -f docker-compose.test.yml run rubocop rubocop -a
 $ docker-compose -f docker-compose.test.yml run brakeman
-```
-
-5. Run [RSpec](https://github.com/rspec/rspec).
-```
 $ docker-compose -f docker-compose.test.yml run rspec
 ```
 
-6. If has no problem, push your branch! :tada:
-```
-$ git push origin YOUR_BRANCH
-```
-
+6. If has no problem, Create new Pull request!
 
 ## License
 
