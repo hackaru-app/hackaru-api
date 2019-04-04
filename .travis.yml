@@ -15,7 +15,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - docker-compose build
-  - docker-compose run --user='root' --rm sut
+  - docker-compose run --rm sut
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
