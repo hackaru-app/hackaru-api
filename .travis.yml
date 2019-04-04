@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.2 COMPOSE_FILE=docker-compose.yml:docker-compose.test.yml
+  - DOCKER_COMPOSE_VERSION=1.23.2 COMPOSE_FILE=docker-compose.test.yml
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
@@ -15,8 +15,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - docker-compose build
-  - docker-compose run --user='root' --rm api bundle exec rails db:create db:migrate
-  - docker-compose run --user='root' --rm api bundle exec rspec
+  - docker-compose run --rm sut
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

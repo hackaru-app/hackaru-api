@@ -1,11 +1,18 @@
 version: '3'
 services:
-  api:
-    env_file: .env.test
-    volumes:
-      - .:/hackaru
+  db:
+    image: postgres:10.3
 
-  sidekiq:
+  redis:
+    image: redis:4.0
+
+  sut:
+    build: .
     env_file: .env.test
+    command: /bin/sh -c 'bundle exec rails db:create db:migrate && bundle exec rspec'
+    user: root
     volumes:
       - .:/hackaru
+    links:
+      - db
+      - redis
