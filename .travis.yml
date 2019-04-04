@@ -16,6 +16,7 @@ before_script:
 script:
   - docker-compose build
   - docker-compose run --rm rubocop
+  - docker-compose run --rm brakeman
   - docker-compose run --rm sut
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
