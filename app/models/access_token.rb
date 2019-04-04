@@ -9,16 +9,10 @@ class AccessToken
     @exp = exp
   end
 
-
-
-
   def issue
     data = { id: @user.id, email: @user.email }
     JWT.encode({ data: data, exp: Time.now.to_i + @exp }, SECRET, 'HS256')
   end
-
-
-
 
   def self.verify(jwt)
     options = { exp_leeway: 30, algorithm: 'HS256' }
