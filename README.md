@@ -24,9 +24,10 @@ $ git checkout -b new-feature
 
 5. Run [RoboCop](https://github.com/rubocop-hq/rubocop), [Brakeman](https://github.com/presidentbeef/brakeman), and [RSpec](https://github.com/rspec/rspec).
 ```
-$ docker-compose -f docker-compose.test.yml run rubocop rubocop -a
-$ docker-compose -f docker-compose.test.yml run brakeman
-$ docker-compose -f docker-compose.test.yml run rspec
+$ bundle install
+$ bundle exec rubocop -a
+$ bundle exec brakeman
+$ docker-compose -f docker-compose.test.yml run sut
 ```
 
 6. If it has no problem, Create a new Pull request!

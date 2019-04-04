@@ -16,17 +16,3 @@ services:
     links:
       - db
       - redis
-
-  rubocop:
-    build: .
-    env_file: .env.test
-    command: bundle exec rubocop
-    volumes:
-      - .:/hackaru
-
-  brakeman:
-    build: .
-    env_file: .env.test
-    command: bundle exec brakeman --no-pager
-    volumes:
-      - .:/hackaru

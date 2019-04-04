@@ -8,15 +8,16 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - bundle install
 before_script:
   - sudo service postgresql stop
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
+  - bundle exec rubocop
+  - bundle exec brakeman
   - docker-compose build
-  - docker-compose run --rm rubocop
-  - docker-compose run --rm brakeman
   - docker-compose run --rm sut
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
