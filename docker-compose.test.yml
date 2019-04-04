@@ -10,7 +10,6 @@ services:
     build: .
     env_file: .env.test
     command: /bin/sh -c 'bundle exec rails db:create db:migrate && bundle exec rspec'
-    user: root
     volumes:
       - .:/hackaru
     links:
