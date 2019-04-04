@@ -39,6 +39,7 @@ group :development, :test do
   gem 'json_spec'
   gem 'rspec-rails'
   gem 'rswag-specs'
+  gem 'rubocop', require: false
   gem 'simplecov', require: false
   gem 'webmock'
 end
