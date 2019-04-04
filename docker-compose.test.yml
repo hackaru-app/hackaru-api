@@ -16,3 +16,10 @@ services:
     links:
       - db
       - redis
+
+  rubocop:
+    build: .
+    env_file: .env.test
+    command: bundle exec rubocop
+    volumes:
+      - .:/hackaru
