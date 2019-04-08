@@ -1,5 +1,6 @@
 # Hackaru API
 
+[![Build Status](https://travis-ci.org/ktmouk/hackaru-web.svg?branch=master)](https://travis-ci.org/ktmouk/hackaru-web)
 [![Maintainability](https://api.codeclimate.com/v1/badges/95e37cce5262a1c83fa5/maintainability)](https://codeclimate.com/github/ktmouk/hackaru-api/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/95e37cce5262a1c83fa5/test_coverage)](https://codeclimate.com/github/ktmouk/hackaru-api/test_coverage)
 
