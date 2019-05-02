@@ -21,6 +21,11 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     it 'creates an user' do
       expect(User.find_by(email: 'foo@example.com')).to_not be_nil
     end
+
+    it 'add some sample projects' do
+      user = User.find_by(email: 'foo@example.com')
+      expect(user.projects.size).to eq(3)
+    end
   end
 
   describe 'PUT /v1/auth/user' do
