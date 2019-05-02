@@ -13,6 +13,7 @@ module V1
 
       def create
         user = User.create!(user_params)
+        user.add_sample_projects
         sign_refresh_token(*RefreshToken.issue(user))
         render json: user
       end

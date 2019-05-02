@@ -51,6 +51,10 @@ ja:
       messages:
         is_invalid: 'は不正な値です。'
         cannot_be_before_started_at: 'は開始日時より後の日時を指定してください。'
+  sample_projects:
+    - '仕事'
+    - '勉強'
+    - '読書'
   user_mailer:
     password_reset:
       subject: 'パスワードの再設定が要求されました。'

@@ -46,6 +46,10 @@ en:
       instruction: Someone has requested a reset your password.
       instruction_2: You can click the link below if you want reset password.
       instruction_3: If you didn't request this, please remove this email.
+  sample_projects:
+    - 'Work'
+    - 'Study'
+    - 'Reading'
   error_renderer:
     sign_in_failed:
       message: 'Invalid email or password.'
