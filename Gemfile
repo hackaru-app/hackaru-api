@@ -38,7 +38,6 @@ group :development, :test do
   gem 'faker'
   gem 'json_spec'
   gem 'rspec-rails'
-  gem 'rswag-specs'
   gem 'rubocop', require: false
   gem 'simplecov', require: false
   gem 'webmock'
