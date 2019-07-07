@@ -178,4 +178,39 @@ RSpec.describe Activity, type: :model do
       it { is_expected.to be_nil }
     end
   end
+
+  describe '#stop_working_activities' do
+    let(:users) { create_list(:user, 2) }
+
+    around do |e|
+      travel_to('2019-01-01 00:00:00'.to_time) { e.run }
+    end
+
+    context 'when start activity twice' do
+      before do
+        create(:activity, user: users[0], stopped_at: nil)
+        create(:activity, user: users[0], stopped_at: nil)
+      end
+
+      it 'stop first activity' do
+        expect(users[0].activities[0].stopped_at).to eq('2019-01-01 00:00:00')
+      end
+
+      it 'doest not stop second activity' do
+        expect(users[0].activities[1].stopped_at).to be(nil)
+      end
+    end
+
+    context 'when start activity twice but diffrent user' do
+      before do
+        create(:activity, user: users[0], stopped_at: nil)
+        create(:activity, user: users[1], stopped_at: nil)
+      end
+
+      it 'does not stop any activities' do
+        expect(users[0].activities[0].stopped_at).to be(nil)
+        expect(users[1].activities[0].stopped_at).to be(nil)
+      end
+    end
+  end
 end
