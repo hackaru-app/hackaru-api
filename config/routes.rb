@@ -30,5 +30,6 @@ Rails.application.routes.draw do
     resources :activities
     resources :webhooks
     resources :reports, only: :index
+    resources :search, only: :index
   end
 end
