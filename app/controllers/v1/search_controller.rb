@@ -8,7 +8,8 @@ module V1
       param! :q, String
       render json: current_user
         .activities
-        .where('description like ?', "%#{params[:q]}%")
+        .search_by_description(params[:q])
+        .order(created_at: :desc)
         .limit(50)
     end
   end
