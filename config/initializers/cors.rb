@@ -9,7 +9,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins(/^#{ENV.fetch('HACKARU_WEB_URL')}$/)
+    if ENV.fetch('RAILS_ENV') == 'production'
+      origins(/^#{ENV.fetch('HACKARU_WEB_URL')}$/)
+    else
+      origins '*'
+    end
 
     resource '/v1/auth/*',
              headers: :any,
