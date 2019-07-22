@@ -20,6 +20,36 @@ RSpec.describe Activity, type: :model do
       end
     end
 
+    describe 'search_by_description' do
+      subject { Activity.search_by_description(q).count }
+
+      context 'when description matched partially' do
+        let(:q) { 'run' }
+        before { create(:activity, description: 'running') }
+        it { is_expected.to be(1) }
+      end
+
+      context 'when description matched perfectly' do
+        let(:q) { 'running' }
+        before { create(:activity, description: 'running') }
+        it { is_expected.to be(1) }
+      end
+
+      context 'when description does not matched' do
+        let(:q) { 'example' }
+        before { create(:activity, description: 'running') }
+        it { is_expected.to be_zero }
+      end
+
+      context 'when query is empty' do
+        let(:q) { '' }
+        before { create_list(:activity, 3) }
+        it 'returns all activities' do
+          is_expected.to be(3)
+        end
+      end
+    end
+
     describe 'between' do
       let(:now) { Time.now }
       subject { Activity.between(now - 3.days, now - 1.days).size }

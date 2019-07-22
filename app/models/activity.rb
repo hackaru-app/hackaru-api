@@ -14,6 +14,9 @@ class Activity < ApplicationRecord
   before_save :stop_working_activities, unless: -> { stopped_at.present? }
 
   scope :working, -> { where(stopped_at: nil) }
+  scope :search_by_description, lambda { |q|
+    where('description like ?', "%#{q}%")
+  }
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from) if from && to
   }
