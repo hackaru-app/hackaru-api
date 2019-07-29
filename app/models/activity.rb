@@ -11,7 +11,7 @@ class Activity < ApplicationRecord
   validate :stopped_at_cannot_be_before_started_at
 
   before_save :set_duration
-  before_save :stop_working_activities, unless: -> { stopped_at.present? }
+  before_save :stop_other_workings, unless: -> { stopped_at.present? }
 
   scope :working, -> { where(stopped_at: nil) }
   scope :search_by_description, lambda { |q|
@@ -48,7 +48,7 @@ class Activity < ApplicationRecord
     self.duration = stopped_at.present? ? stopped_at - started_at : nil
   end
 
-  def stop_working_activities
-    user.activities.working.update(stopped_at: Time.zone.now)
+  def stop_other_workings
+    user.activities.working.where.not(id: id).update(stopped_at: Time.zone.now)
   end
 end

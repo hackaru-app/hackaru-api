@@ -209,7 +209,7 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  describe '#stop_working_activities' do
+  describe '#stop_other_workings' do
     let(:users) { create_list(:user, 2) }
 
     around do |e|
@@ -240,6 +240,15 @@ RSpec.describe Activity, type: :model do
       it 'does not stop any activities' do
         expect(users[0].activities[0].stopped_at).to be(nil)
         expect(users[1].activities[0].stopped_at).to be(nil)
+      end
+    end
+
+    context 'when update activity but it is still working' do
+      subject { create(:activity, stopped_at: nil) }
+      before { subject.update!(description: 'Review', stopped_at: nil) }
+
+      it 'does not stop activity' do
+        expect(subject.reload.stopped_at).to be(nil)
       end
     end
   end
