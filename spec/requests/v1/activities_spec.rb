@@ -14,6 +14,17 @@ RSpec.describe 'V1::Activities', type: :request do
     end
   end
 
+  describe 'GET /v1/activities/working' do
+    before do
+      get '/v1/activities/working',
+          headers: access_token_header
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe 'POST /v1/activities' do
     let(:user) { create(:user) }
     let(:started_at) { Time.now }

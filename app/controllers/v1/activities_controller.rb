@@ -2,7 +2,7 @@
 
 module V1
   class ActivitiesController < ApplicationController
-    before_action only: :index do
+    before_action only: %i[index working] do
       authenticate_user_or_doorkeeper! 'activities:read'
     end
 
@@ -15,9 +15,13 @@ module V1
       param! :start, Time
       param! :end, Time
       activities = current_user.activities
-      activities = activities.working if params[:working]
+      activities = activities.working if params[:working] # TODO: remove it
       activities = activities.between(params[:start], params[:end])
       render json: activities
+    end
+
+    def working
+      render json: current_user.activities.working
     end
 
     def create
