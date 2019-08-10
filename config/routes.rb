@@ -26,9 +26,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :projects
-    resources :activities
-    resources :webhooks
+    namespace :activities do
+      get :working
+    end
+
+    resources :activities, except: :show
+    resources :projects, except: :show
+    resources :webhooks, except: :show
     resources :reports, only: :index
     resources :search, only: :index
   end

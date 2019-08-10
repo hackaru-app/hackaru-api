@@ -13,10 +13,10 @@ class Activity < ApplicationRecord
   before_save :set_duration
   before_save :stop_other_workings, unless: -> { stopped_at.present? }
 
-  scope :working, -> { where(stopped_at: nil) }
   scope :search_by_description, lambda { |q|
     where('description like ?', "%#{q}%")
   }
+
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from) if from && to
   }
@@ -49,6 +49,11 @@ class Activity < ApplicationRecord
   end
 
   def stop_other_workings
-    user.activities.working.where.not(id: id).update(stopped_at: Time.zone.now)
+    workings = user.activities.where(stopped_at: nil)
+    workings.where.not(id: id).update(stopped_at: Time.zone.now)
+  end
+
+  def self.working
+    find_by(stopped_at: nil)
   end
 end

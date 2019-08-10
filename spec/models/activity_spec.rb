@@ -6,20 +6,6 @@ RSpec.describe Activity, type: :model do
   it_behaves_like 'webhookable'
 
   describe 'scope' do
-    describe 'working' do
-      subject { Activity.working }
-
-      context 'when activity is not stopped' do
-        let(:activity) { create(:activity, stopped_at: nil) }
-        it { is_expected.to include activity }
-      end
-
-      context 'when activity is stopped' do
-        let(:activity) { create(:activity, stopped_at: Time.now) }
-        it { is_expected.not_to include activity }
-      end
-    end
-
     describe 'search_by_description' do
       subject { Activity.search_by_description(q).count }
 
@@ -250,6 +236,20 @@ RSpec.describe Activity, type: :model do
       it 'does not stop activity' do
         expect(subject.reload.stopped_at).to be(nil)
       end
+    end
+  end
+
+  describe '.working' do
+    subject { Activity.working }
+
+    context 'when activity is not stopped' do
+      before { create(:activity, stopped_at: nil) }
+      it { is_expected.not_to be_nil }
+    end
+
+    context 'when activity is stopped' do
+      before { create(:activity, stopped_at: Time.now) }
+      it { is_expected.to be_nil }
     end
   end
 end
