@@ -11,13 +11,9 @@ module V1
     end
 
     def index
-      param! :working, :boolean
       param! :start, Time
       param! :end, Time
-      activities = current_user.activities
-      activities = activities.working if params[:working] # TODO: remove it
-      activities = activities.between(params[:start], params[:end])
-      render json: activities
+      render json: current_user.activities.between(params[:start], params[:end])
     end
 
     def working
