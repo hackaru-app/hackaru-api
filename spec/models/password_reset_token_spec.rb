@@ -3,6 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe PasswordResetToken, type: :model do
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
   describe '#issue' do
     let(:user) { create(:user) }
 
