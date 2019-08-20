@@ -72,16 +72,13 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  describe 'validations' do
-    subject do
-      activity.valid?
-      activity
-    end
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:project).optional }
+  end
 
-    context 'when started_at is empty' do
-      let(:activity) { build(:activity, started_at: nil) }
-      it { expect(subject.errors).to be_include :started_at }
-    end
+  describe 'validations' do
+    it { should validate_presence_of(:started_at) }
   end
 
   describe '#deliver_stopped_webhooks' do
