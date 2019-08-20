@@ -15,11 +15,11 @@ RSpec.describe Webhook, type: :model do
       it { is_expected.to allow_value('http://example.com').for(:target_url) }
       it { is_expected.to allow_value('https://example.com').for(:target_url) }
       it { is_expected.not_to allow_value('invalid').for(:target_url) }
-      it {
-        is_expected.to validate_uniqueness_of(:target_url).scoped_to(
-          %i[user_id event]
-        )
-      }
+
+      it 'validate uniqueness' do
+        scope = %i[user_id event]
+        is_expected.to validate_uniqueness_of(:target_url).scoped_to(scope)
+      end
     end
   end
 

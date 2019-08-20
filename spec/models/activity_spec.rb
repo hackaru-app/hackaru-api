@@ -5,6 +5,19 @@ require 'rails_helper'
 RSpec.describe Activity, type: :model do
   it_behaves_like 'webhookable'
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:project).optional }
+  end
+
+  describe 'validations' do
+    subject { build(:activity) }
+
+    describe 'started_at' do
+      it { should validate_presence_of(:started_at) }
+    end
+  end
+
   describe 'scope' do
     describe 'search_by_description' do
       subject { Activity.search_by_description(q).count }
@@ -70,15 +83,6 @@ RSpec.describe Activity, type: :model do
         it { is_expected.to eq Activity.all }
       end
     end
-  end
-
-  describe 'associations' do
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:project).optional }
-  end
-
-  describe 'validations' do
-    it { should validate_presence_of(:started_at) }
   end
 
   describe '#deliver_stopped_webhooks' do

@@ -11,15 +11,18 @@ RSpec.describe Project, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to allow_value('#ffffff').for(:color) }
-    it { is_expected.to allow_value('#fff').for(:color) }
-    it { is_expected.to allow_value(nil).for(:color) }
-    it { is_expected.not_to allow_value('#gggggg').for(:color) }
+    subject { build(:project) }
 
-    describe 'uniqueness' do
-      subject { build(:project) }
+    describe 'name' do
+      it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
+    end
+
+    describe 'color' do
+      it { is_expected.to allow_value('#ffffff').for(:color) }
+      it { is_expected.to allow_value('#fff').for(:color) }
+      it { is_expected.to allow_value(nil).for(:color) }
+      it { is_expected.not_to allow_value('#gggggg').for(:color) }
     end
   end
 end
