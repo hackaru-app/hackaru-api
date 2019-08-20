@@ -5,43 +5,21 @@ require 'rails_helper'
 RSpec.describe Project, type: :model do
   it_behaves_like 'webhookable'
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:activities).dependent(:nullify) }
+  end
+
   describe 'validations' do
-    subject do
-      project.valid?
-      project
-    end
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to allow_value('#ffffff').for(:color) }
+    it { is_expected.to allow_value('#fff').for(:color) }
+    it { is_expected.to allow_value(nil).for(:color) }
+    it { is_expected.not_to allow_value('#gggggg').for(:color) }
 
-    context 'when name is empty' do
-      let(:project) { build(:project, name: '') }
-      it { expect(subject.errors).to be_include :name }
-    end
-
-    context 'when name is reserved' do
-      let(:user) { create(:user) }
-      let(:project) { build(:project, name: 'Review', user: user) }
-      before { create(:project, name: 'Review', user: user) }
-      it { expect(subject.errors).to be_include :name }
-    end
-
-    context 'when name is not unique but user is different' do
-      let(:project) { build(:project, name: 'Review') }
-      before { create(:project, name: 'Review') }
-      it { is_expected.to be_valid }
-    end
-
-    context 'when color hex is invalid' do
-      let(:project) { build(:project, color: '#gggggg') }
-      it { expect(subject.errors).to be_include :color }
-    end
-
-    context 'when color hex is short format' do
-      let(:project) { build(:project, color: '#fff') }
-      it { is_expected.to be_valid }
-    end
-
-    context 'when color hex is nil' do
-      let(:project) { build(:project, color: nil) }
-      it { is_expected.to be_valid }
+    describe 'uniqueness' do
+      subject { build(:project) }
+      it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
     end
   end
 end
