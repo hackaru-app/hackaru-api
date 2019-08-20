@@ -4,13 +4,26 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Activities', type: :request do
   describe 'GET /v1/activities' do
-    before do
-      get '/v1/activities',
-          headers: access_token_header
+    let(:params) do
+      {
+        start: 1.days.ago,
+        end: Time.now
+      }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(200)
+    before do
+      get '/v1/activities',
+          headers: access_token_header,
+          params: params
+    end
+
+    context 'when params are correctly' do
+      it { expect(response).to have_http_status(200) }
+    end
+
+    context 'when params are missing' do
+      let(:params) { {} }
+      it { expect(response).to have_http_status(422) }
     end
   end
 
