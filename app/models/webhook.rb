@@ -4,6 +4,7 @@ class Webhook < ApplicationRecord
   belongs_to :user
 
   validates :target_url, presence: true
+  validates :target_url, length: { maximum: 1000 }
   validates :target_url, format: /\A#{URI.regexp(%w[http https])}\z/
   validates :target_url, uniqueness: { scope: %i[user_id event] }
 

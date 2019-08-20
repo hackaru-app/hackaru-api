@@ -12,6 +12,7 @@ RSpec.describe Webhook, type: :model do
 
     describe 'target_url' do
       it { is_expected.to validate_presence_of(:target_url) }
+      it { is_expected.to validate_length_of(:target_url).is_at_most(1000) }
       it { is_expected.to allow_value('http://example.com').for(:target_url) }
       it { is_expected.to allow_value('https://example.com').for(:target_url) }
       it { is_expected.not_to allow_value('invalid').for(:target_url) }

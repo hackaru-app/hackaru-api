@@ -16,6 +16,10 @@ RSpec.describe Activity, type: :model do
     describe 'started_at' do
       it { should validate_presence_of(:started_at) }
     end
+
+    describe 'description' do
+      it { is_expected.to validate_length_of(:description).is_at_most(500) }
+    end
   end
 
   describe 'scope' do
