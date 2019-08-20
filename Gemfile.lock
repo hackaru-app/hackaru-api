@@ -207,6 +207,8 @@ GEM
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
+    shoulda-matchers (4.1.2)
+      activesupport (>= 4.2.0)
     sidekiq (5.2.3)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
@@ -272,6 +274,7 @@ DEPENDENCIES
   rails_param
   rspec-rails
   rubocop
+  shoulda-matchers
   sidekiq
   simplecov
   spring

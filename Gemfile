@@ -49,6 +49,7 @@ group :test do
   gem 'faker'
   gem 'json_spec'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'webmock'
 end
