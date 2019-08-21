@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 2019_03_24_125429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "expired_at", null: false
-    t.index ["token"], name: "index_password_reset_tokens_on_token", unique: true
-    t.index ["user_id"], name: "index_password_reset_tokens_on_user_id", unique: true
+    t.index ["token"], name: "index_reset_password_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_reset_password_tokens_on_user_id", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
