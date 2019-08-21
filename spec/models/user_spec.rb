@@ -3,47 +3,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_one(:password_reset_token) }
+    it { is_expected.to have_many(:projects).dependent(:delete_all) }
+    it { is_expected.to have_many(:activities).dependent(:delete_all) }
+    it { is_expected.to have_many(:refresh_tokens).dependent(:delete_all) }
+    it { is_expected.to have_many(:webhooks).dependent(:delete_all) }
+  end
+
   describe 'validations' do
-    subject do
-      user.valid?
-      user
+    subject { build(:user) }
+
+    describe 'email' do
+      it { is_expected.to validate_presence_of(:email) }
+      it { is_expected.to validate_uniqueness_of(:email) }
+      it { is_expected.to validate_length_of(:email).is_at_most(100) }
+      it { is_expected.to allow_value('example@example.com').for(:email) }
+      it { is_expected.not_to allow_value('invalid').for(:email) }
     end
 
-    context 'when email is empty' do
-      let(:user) { build(:user, email: '') }
-      it { expect(subject.errors).to be_include :email }
-    end
-
-    context 'when email is invalid' do
-      let(:user) { build(:user, email: 'yay') }
-      it { expect(subject.errors).to be_include :email }
-    end
-
-    context 'when email is reserved' do
-      let(:user) { create(:user) }
-      let(:user) { build(:user, email: 'foo@bar.com') }
-      before { create(:user, email: 'foo@bar.com') }
-      it { expect(subject.errors).to be_include :email }
-    end
-
-    context 'when password is empty' do
-      let(:user) { build(:user, password: '') }
-      it { expect(subject.errors).to be_include :password }
-    end
-
-    context 'when password is nil' do
-      let(:user) { build(:user, password: nil) }
-      it { expect(subject.errors).to be_include :password }
-    end
-
-    context 'when password is too short' do
-      let(:user) { build(:user, password: 'abcde') }
-      it { expect(subject.errors).to be_include :password }
-    end
-
-    context 'when password is too long' do
-      let(:user) { build(:user, password: 'a' * 51) }
-      it { expect(subject.errors).to be_include :password }
+    describe 'password' do
+      it { is_expected.to have_secure_password }
+      it { is_expected.to validate_length_of(:password).is_at_least(6) }
+      it { is_expected.to validate_length_of(:password).is_at_most(50) }
     end
   end
 

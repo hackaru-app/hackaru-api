@@ -3,48 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe Webhook, type: :model do
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
   describe 'validations' do
-    subject do
-      webhook.valid?
-      webhook
-    end
+    subject { build(:webhook) }
 
-    context 'when target_url is empty' do
-      let(:webhook) { build(:webhook, target_url: '') }
-      it { expect(subject.errors).to be_include :target_url }
-    end
+    describe 'target_url' do
+      it { is_expected.to validate_presence_of(:target_url) }
+      it { is_expected.to validate_length_of(:target_url).is_at_most(1000) }
+      it { is_expected.to allow_value('http://example.com').for(:target_url) }
+      it { is_expected.to allow_value('https://example.com').for(:target_url) }
+      it { is_expected.not_to allow_value('invalid').for(:target_url) }
 
-    context 'when target_url is invalid' do
-      let(:webhook) { build(:webhook, target_url: 'invalid_url') }
-      it { expect(subject.errors).to be_include :target_url }
-    end
-
-    context 'when target_url and event are reserved' do
-      let(:reserved) do
-        create(
-          :webhook,
-          event: 'activity:create',
-          target_url: 'http://example.com'
-        )
-      end
-
-      let(:webhook) do
-        build(
-          :webhook,
-          user: user,
-          event: 'activity:create',
-          target_url: 'http://example.com'
-        )
-      end
-
-      context 'when same user' do
-        let(:user) { reserved.user }
-        it { expect(subject.errors).to be_include :target_url }
-      end
-
-      context 'when different user' do
-        let(:user) { create(:user) }
-        it { is_expected.to be_valid }
+      it 'validate uniqueness' do
+        scope = %i[user_id event]
+        is_expected.to validate_uniqueness_of(:target_url).scoped_to(scope)
       end
     end
   end

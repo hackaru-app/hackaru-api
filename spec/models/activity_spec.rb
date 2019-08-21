@@ -5,6 +5,23 @@ require 'rails_helper'
 RSpec.describe Activity, type: :model do
   it_behaves_like 'webhookable'
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:project).optional }
+  end
+
+  describe 'validations' do
+    subject { build(:activity) }
+
+    describe 'started_at' do
+      it { should validate_presence_of(:started_at) }
+    end
+
+    describe 'description' do
+      it { is_expected.to validate_length_of(:description).is_at_most(500) }
+    end
+  end
+
   describe 'scope' do
     describe 'search_by_description' do
       subject { Activity.search_by_description(q).count }
@@ -69,18 +86,6 @@ RSpec.describe Activity, type: :model do
         before { create_list(:activity, 3) }
         it { is_expected.to eq Activity.all }
       end
-    end
-  end
-
-  describe 'validations' do
-    subject do
-      activity.valid?
-      activity
-    end
-
-    context 'when started_at is empty' do
-      let(:activity) { build(:activity, started_at: nil) }
-      it { expect(subject.errors).to be_include :started_at }
     end
   end
 
