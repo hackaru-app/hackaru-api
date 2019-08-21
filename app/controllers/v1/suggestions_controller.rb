@@ -8,7 +8,7 @@ module V1
 
     def index
       param! :q, String, required: true
-      render json: current_user.activities.suggestions_by(params[:q])
+      render json: current_user.activities.suggestions(params[:q])
     end
   end
 end
