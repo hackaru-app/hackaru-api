@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :project do
     user
-    name { Faker::Job.field }
+    name { Faker::Job.unique.title }
     color { Faker::Color.hex_color }
   end
 end
