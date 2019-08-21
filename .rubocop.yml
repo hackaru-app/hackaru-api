@@ -22,8 +22,7 @@ Naming/FileName:
 
 Style/MixinUsage:
   Exclude:
-    - bin/setup
-    - bin/update
+    - bin/*
 
 Metrics/BlockLength:
   Exclude:
