@@ -19,7 +19,7 @@ class Activity < ApplicationRecord
   }
 
   scope :between, lambda { |from, to|
-    where('started_at <= ? and ? <= stopped_at', to, from) if from && to
+    where('started_at <= ? and ? <= stopped_at', to, from)
   }
 
   after_commit :deliver_stopped_webhooks, on: %i[update]

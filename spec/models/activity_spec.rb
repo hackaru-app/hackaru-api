@@ -78,13 +78,13 @@ RSpec.describe Activity, type: :model do
       context 'when \'from\' parameter is nil' do
         subject { Activity.between(nil, now) }
         before { create_list(:activity, 3) }
-        it { is_expected.to eq Activity.all }
+        it { is_expected.to be_empty }
       end
 
       context 'when \'to\' parameter is nil' do
         subject { Activity.between(now, nil) }
         before { create_list(:activity, 3) }
-        it { is_expected.to eq Activity.all }
+        it { is_expected.to be_empty }
       end
     end
   end
