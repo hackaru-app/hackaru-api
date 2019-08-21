@@ -13,7 +13,10 @@ module V1
     def index
       param! :start, Time, required: true
       param! :end, Time, required: true
-      render json: current_user.activities.between(params[:start], params[:end])
+      render json: current_user
+        .activities
+        .includes(:project)
+        .between(params[:start], params[:end])
     end
 
     def working
