@@ -115,7 +115,8 @@ Doorkeeper.configure do
   optional_scopes 'activities:read',
                   'activities:write',
                   'projects:read',
-                  'projects:write'
+                  'projects:write',
+                  'suggestions:read'
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then

@@ -14,10 +14,6 @@ class Activity < ApplicationRecord
   before_save :set_duration
   before_save :stop_other_workings, unless: -> { stopped_at.present? }
 
-  scope :search_by_description, lambda { |q|
-    where('description like ?', "%#{q}%")
-  }
-
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
@@ -42,6 +38,19 @@ class Activity < ApplicationRecord
 
   def self.working
     find_by(stopped_at: nil)
+  end
+
+  def self.suggestions_by(query)
+    where('description like ?', "%#{query}%")
+      .includes(:project)
+      .select(:description, :project_id)
+      .distinct
+      .map do |activity|
+        Suggestion.new(
+          project: activity.project,
+          description: activity.description
+        )
+      end
   end
 
   private

@@ -34,6 +34,6 @@ Rails.application.routes.draw do
     resources :projects, except: :show
     resources :webhooks, except: :show
     resources :reports, only: :index
-    resources :search, only: :index
+    resources :suggestions, only: :index
   end
 end
