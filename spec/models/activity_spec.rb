@@ -23,37 +23,34 @@ RSpec.describe Activity, type: :model do
   end
 
   describe 'scope' do
-    describe 'search_by_description' do
-      subject { Activity.search_by_description(q).count }
+    describe '.suggestions' do
+      subject { described_class.suggestions('Rev').size }
 
-      context 'when description matched partially' do
-        let(:q) { 'run' }
-        before { create(:activity, description: 'running') }
+      context 'when match activities' do
+        before { create(:activity, description: 'Review') }
         it { is_expected.to be(1) }
       end
 
-      context 'when description matched perfectly' do
-        let(:q) { 'running' }
-        before { create(:activity, description: 'running') }
-        it { is_expected.to be(1) }
-      end
-
-      context 'when description does not matched' do
-        let(:q) { 'example' }
-        before { create(:activity, description: 'running') }
-        it { is_expected.to be_zero }
-      end
-
-      context 'when query is empty' do
-        let(:q) { '' }
-        before { create_list(:activity, 3) }
-        it 'returns all activities' do
-          is_expected.to be(3)
+      context 'when match activities but description and project are same' do
+        let(:project) { create(:project) }
+        before do
+          create_list(
+            :activity, 2,
+            user: project.user,
+            description: 'Review',
+            project: project
+          )
         end
+        it { is_expected.to be(1) }
+      end
+
+      context 'when does not match activities' do
+        before { create(:activity, description: 'Development') }
+        it { is_expected.to be_zero }
       end
     end
 
-    describe 'between' do
+    describe '.between' do
       let(:now) { Time.now }
       subject { Activity.between(now - 3.days, now - 1.days).size }
 
@@ -244,8 +241,15 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe '#to_suggestion' do
+    let(:activity) { build(:activity) }
+    subject { activity.to_suggestion }
+    it { expect(subject.project).to be activity.project }
+    it { expect(subject.description).to be activity.description }
+  end
+
   describe '.working' do
-    subject { Activity.working }
+    subject { described_class.working }
 
     context 'when activity is not stopped' do
       before { create(:activity, stopped_at: nil) }
