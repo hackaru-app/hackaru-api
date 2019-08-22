@@ -8,7 +8,12 @@ module V1
 
     def index
       param! :q, String, required: true
-      render json: current_user.activities.suggestions(params[:q])
+      param! :limit, Integer, range: 0..100, default: 50
+      render json: current_user
+        .activities
+        .search(params[:q])
+        .limit(params[:limit])
+        .to_suggestions
     end
   end
 end

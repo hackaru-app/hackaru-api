@@ -18,12 +18,8 @@ class Activity < ApplicationRecord
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
 
-  scope :suggestions, lambda { |q|
+  scope :search, lambda { |q|
     where('description like ?', "%#{q}%")
-      .includes(:project)
-      .select(:description, :project_id)
-      .distinct
-      .map(&:to_suggestion)
   }
 
   after_commit :deliver_stopped_webhooks, on: %i[update]
@@ -53,6 +49,13 @@ class Activity < ApplicationRecord
 
   def self.working
     find_by(stopped_at: nil)
+  end
+
+  def self.to_suggestions
+    includes(:project)
+      .select(:description, :project_id)
+      .distinct
+      .map(&:to_suggestion)
   end
 
   private
