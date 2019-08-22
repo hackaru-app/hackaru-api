@@ -7,13 +7,13 @@ module V1
     end
 
     def index
-      param! :q, String, required: true
+      param! :q, String, default: ''
       param! :limit, Integer, range: 0..100, default: 50
-      render json: current_user
-        .activities
-        .ransack(params[:q]).result
-        .limit(params[:limit])
-        .to_suggestions
+
+      render json: current_user.activities.suggestions(
+        query: params[:q],
+        limit: params[:limit]
+      )
     end
   end
 end

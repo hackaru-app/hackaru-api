@@ -214,12 +214,53 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  describe '#to_suggestion' do
-    let(:activity) { build(:activity) }
-    subject { activity.to_suggestion }
-    it { is_expected.to be_kind_of Suggestion }
-    it { expect(subject.project).to be activity.project }
-    it { expect(subject.description).to be activity.description }
+  describe '#suggestions' do
+    subject { described_class.suggestions(query: query, limit: limit) }
+    let(:limit) { 50 }
+
+    context 'when matched' do
+      let(:query) { 'Rev' }
+
+      before do
+        create(:activity, description: 'Review1')
+        create(:activity, description: 'Review2')
+        create(:activity, description: 'Development')
+      end
+
+      it 'returns matched suggestions' do
+        expect(subject.first).to be_kind_of Suggestion
+        expect(subject.size).to be(2)
+      end
+
+      it 'returns matched suggestions in descending order of id' do
+        expect(subject[0].description).to eq 'Review2'
+        expect(subject[1].description).to eq 'Review1'
+      end
+    end
+
+    context 'when result size is greater than limit param' do
+      let(:query) { 'Rev' }
+      let(:limit) { 1 }
+
+      before do
+        create(:activity, description: 'Review1')
+        create(:activity, description: 'Review2')
+      end
+
+      it 'limit results' do
+        expect(subject.size).to be(1)
+      end
+    end
+
+    context 'when query is blank' do
+      let(:query) { '' }
+
+      before { create_list(:activity, 3) }
+
+      it 'returns all' do
+        expect(subject.size).to be(3)
+      end
+    end
   end
 
   describe '.working' do
@@ -233,16 +274,6 @@ RSpec.describe Activity, type: :model do
     context 'when activity is stopped' do
       before { create(:activity, stopped_at: Time.now) }
       it { is_expected.to be_nil }
-    end
-  end
-
-  describe '.to_suggestions' do
-    before { create(:activity) }
-    subject { described_class.to_suggestions }
-
-    it 'convert to suggestions' do
-      expect(subject.size).to be(1)
-      expect(subject.first).to be_kind_of Suggestion
     end
   end
 end

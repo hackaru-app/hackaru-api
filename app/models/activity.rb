@@ -43,11 +43,16 @@ class Activity < ApplicationRecord
     )
   end
 
-  def self.to_suggestions
-    includes(:project)
-      .select(:description, :project_id)
-      .distinct
-      .map(&:to_suggestion)
+  def self.suggestions(query:, limit:)
+    ids = ransack(description_cont: query)
+          .result
+          .select('maximum_id')
+          .order('maximum_id desc')
+          .group(:project_id, :description)
+          .limit(limit)
+          .maximum(:id)
+          .values
+    where(id: ids).order(id: :desc).includes(:project).map(&:to_suggestion)
   end
 
   def self.working

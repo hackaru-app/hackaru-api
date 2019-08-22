@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class SuggestionSerializer < ActiveModel::Serializer
-  has_one :project
   attributes :description
-
-  def project
-    object.project
-  end
+  has_one :project
 
   def description
     object.description
+  end
+
+  def project
+    object.project
   end
 end

@@ -16,11 +16,6 @@ RSpec.describe 'V1::Suggestions', type: :request do
       expect(response).to have_http_status(200)
     end
 
-    context 'when params are missing' do
-      let(:params) { {} }
-      it { expect(response).to have_http_status(422) }
-    end
-
     context 'when params are invalid' do
       let(:params) { { q: 'query', limit: 'invalid' } }
       it { expect(response).to have_http_status(422) }
