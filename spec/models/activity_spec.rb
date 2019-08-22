@@ -217,7 +217,7 @@ RSpec.describe Activity, type: :model do
   describe '#to_suggestion' do
     let(:activity) { build(:activity) }
     subject { activity.to_suggestion }
-    it { is_expected.to be_kind_of(Suggestion) }
+    it { is_expected.to be_kind_of Suggestion }
     it { expect(subject.project).to be activity.project }
     it { expect(subject.description).to be activity.description }
   end
@@ -242,7 +242,7 @@ RSpec.describe Activity, type: :model do
 
     it 'convert to suggestions' do
       expect(subject.size).to be(1)
-      expect(subject.first).to be_kind_of(Suggestion)
+      expect(subject.first).to be_kind_of Suggestion
     end
   end
 end
