@@ -18,10 +18,6 @@ class Activity < ApplicationRecord
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
 
-  scope :search, lambda { |q|
-    where('description like ?', "%#{q}%")
-  }
-
   after_commit :deliver_stopped_webhooks, on: %i[update]
 
   def deliver_stopped_webhooks

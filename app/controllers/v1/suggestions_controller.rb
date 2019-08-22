@@ -11,7 +11,7 @@ module V1
       param! :limit, Integer, range: 0..100, default: 50
       render json: current_user
         .activities
-        .search(params[:q])
+        .ransack(params[:q]).result
         .limit(params[:limit])
         .to_suggestions
     end
