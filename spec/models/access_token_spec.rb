@@ -7,7 +7,7 @@ RSpec.describe AccessToken, type: :model do
     let(:user) { create(:user) }
 
     subject do
-      jwt = AccessToken.new(user, 3600).issue
+      jwt = AccessToken.new(user: user, exp: 3600).issue
       JWT.decode(jwt, 'secret', false)
     end
 

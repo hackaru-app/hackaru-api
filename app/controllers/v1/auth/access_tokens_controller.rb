@@ -10,7 +10,7 @@ module V1
         )&.user
         return render_error_by_key :refresh_token_invalid unless user
 
-        response.set_header('X-Access-Token', AccessToken.new(user).issue)
+        response.set_header('X-Access-Token', AccessToken.new(user: user).issue)
         render json: user
       end
     end
