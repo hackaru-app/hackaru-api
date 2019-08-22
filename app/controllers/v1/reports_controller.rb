@@ -11,10 +11,10 @@ module V1
       param! :time_zone, String
 
       render json: Report.new(
-        current_user,
-        params[:start]..params[:end],
-        params[:period],
-        params[:time_zone]
+        user: current_user,
+        range: params[:start]..params[:end],
+        period: params[:period],
+        time_zone: params[:time_zone]
       )
     end
   end

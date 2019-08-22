@@ -6,7 +6,14 @@ RSpec.describe ReportSerializer, type: :serializer do
   describe '#to_json' do
     let(:now) { Time.parse('2019-01-01T01:23:45') }
     let(:project) { create(:project) }
-    let(:report) { Report.new(project.user, range, period) }
+
+    let(:report) do
+      Report.new(
+        user: project.user,
+        range: range,
+        period: period
+      )
+    end
 
     subject do
       serializer = ReportSerializer.new(report)
