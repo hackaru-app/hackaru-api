@@ -13,9 +13,9 @@ module V1
       end
 
       def destroy
-        RefreshToken.verify(
-          request.headers['X-Client-Id'],
-          request.headers['X-Refresh-Token']
+        RefreshToken.fetch(
+          client_id: request.headers['X-Client-Id'],
+          raw: request.headers['X-Refresh-Token']
         )&.revoke
       end
 
