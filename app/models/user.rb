@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :refresh_tokens, dependent: :delete_all
   has_many :webhooks, dependent: :delete_all
 
-  def reset_password(token, password, password_confirmation)
+  def reset_password(token:, password:, password_confirmation:)
     return false if password_reset_token&.expired?
     return false if password_reset_token != token
 

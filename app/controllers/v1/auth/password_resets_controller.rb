@@ -12,9 +12,9 @@ module V1
 
       def update
         User.find(password_reset_params[:id]).reset_password(
-          password_reset_params[:token],
-          password_reset_params[:password],
-          password_reset_params[:password_confirmation]
+          token: password_reset_params[:token],
+          password: password_reset_params[:password],
+          password_confirmation: password_reset_params[:password_confirmation]
         ) || render_error_by_key(:password_reset_token_invalid)
       end
 

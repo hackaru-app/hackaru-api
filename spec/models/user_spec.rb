@@ -73,7 +73,11 @@ RSpec.describe User, type: :model do
 
     context 'raw token and password are valid' do
       it 'change password' do
-        success = user.reset_password('secret', 'changed', 'changed')
+        success = user.reset_password(
+          token: 'secret',
+          password: 'changed',
+          password_confirmation: 'changed'
+        )
         expect(user.password).to eq('changed')
         expect(success).to eq(true)
       end
@@ -81,7 +85,11 @@ RSpec.describe User, type: :model do
 
     context 'raw token is invalid' do
       it 'does not change password' do
-        success = user.reset_password('invalid', 'changed', 'changed')
+        success = user.reset_password(
+          token: 'invalid',
+          password: 'changed',
+          password_confirmation: 'changed'
+        )
         expect(user.password).to eq('unchanged')
         expect(success).to eq(false)
       end
@@ -91,7 +99,11 @@ RSpec.describe User, type: :model do
       let(:expired_at) { Time.now - 1.day }
 
       it 'does not change password' do
-        success = user.reset_password('secret', 'changed', 'changed')
+        success = user.reset_password(
+          token: 'secret',
+          password: 'changed',
+          password_confirmation: 'changed'
+        )
         expect(user.password).to eq('unchanged')
         expect(success).to eq(false)
       end
@@ -99,8 +111,13 @@ RSpec.describe User, type: :model do
 
     context 'password and password confirmation are not same' do
       it 'does not change password' do
-        expect { user.reset_password('secret', 'in', 'valid') }
-          .to raise_error ActiveRecord::RecordInvalid
+        expect do
+          user.reset_password(
+            token: 'secret',
+            password: 'in',
+            password_confirmation: 'valid'
+          )
+        end.to raise_error ActiveRecord::RecordInvalid
       end
     end
   end
