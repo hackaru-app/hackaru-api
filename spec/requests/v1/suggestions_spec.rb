@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Suggestions', type: :request do
   describe 'GET /v1/suggestions' do
-    let(:params) { { q: 'query' } }
+    let(:params) { { q: 'query', limit: 10 } }
 
     before do
       get '/v1/suggestions',
@@ -18,6 +18,11 @@ RSpec.describe 'V1::Suggestions', type: :request do
 
     context 'when params are missing' do
       let(:params) { {} }
+      it { expect(response).to have_http_status(422) }
+    end
+
+    context 'when params are invalid' do
+      let(:params) { { q: 'query', limit: 'invalid' } }
       it { expect(response).to have_http_status(422) }
     end
   end

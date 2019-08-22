@@ -23,33 +23,6 @@ RSpec.describe Activity, type: :model do
   end
 
   describe 'scope' do
-    describe '.suggestions' do
-      subject { described_class.suggestions('Rev').size }
-
-      context 'when match activities' do
-        before { create(:activity, description: 'Review') }
-        it { is_expected.to be(1) }
-      end
-
-      context 'when match activities but description and project are same' do
-        let(:project) { create(:project) }
-        before do
-          create_list(
-            :activity, 2,
-            user: project.user,
-            description: 'Review',
-            project: project
-          )
-        end
-        it { is_expected.to be(1) }
-      end
-
-      context 'when does not match activities' do
-        before { create(:activity, description: 'Development') }
-        it { is_expected.to be_zero }
-      end
-    end
-
     describe '.between' do
       let(:now) { Time.now }
       subject { Activity.between(now - 3.days, now - 1.days).size }
@@ -244,6 +217,7 @@ RSpec.describe Activity, type: :model do
   describe '#to_suggestion' do
     let(:activity) { build(:activity) }
     subject { activity.to_suggestion }
+    it { is_expected.to be_kind_of(Suggestion) }
     it { expect(subject.project).to be activity.project }
     it { expect(subject.description).to be activity.description }
   end
@@ -259,6 +233,16 @@ RSpec.describe Activity, type: :model do
     context 'when activity is stopped' do
       before { create(:activity, stopped_at: Time.now) }
       it { is_expected.to be_nil }
+    end
+  end
+
+  describe '.to_suggestions' do
+    before { create(:activity) }
+    subject { described_class.to_suggestions }
+
+    it 'convert to suggestions' do
+      expect(subject.size).to be(1)
+      expect(subject.first).to be_kind_of(Suggestion)
     end
   end
 end

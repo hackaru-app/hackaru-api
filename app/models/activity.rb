@@ -47,15 +47,15 @@ class Activity < ApplicationRecord
     )
   end
 
-  def self.working
-    find_by(stopped_at: nil)
-  end
-
   def self.to_suggestions
     includes(:project)
       .select(:description, :project_id)
       .distinct
       .map(&:to_suggestion)
+  end
+
+  def self.working
+    find_by(stopped_at: nil)
   end
 
   private
