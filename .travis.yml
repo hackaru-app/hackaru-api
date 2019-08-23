@@ -4,7 +4,7 @@ services:
   - docker
 env:
   - DOCKER_COMPOSE_VERSION=1.23.2 COMPOSE_FILE=docker-compose.test.yml
-  - COMMIT=${TRAVIS_COMMIT::8}
+    COMMIT=${TRAVIS_COMMIT::8}
 before_install:
   # docker-compose
   - sudo rm /usr/local/bin/docker-compose
