@@ -64,5 +64,5 @@ Rails.application.configure do
   config.active_job.queue_name_prefix = "hackaru-api_#{Rails.env}"
 
   # Enable i18n fallbacks
-  config.i18n.fallbacks = true
+  config.i18n.fallbacks = [I18n.default_locale]
 end
