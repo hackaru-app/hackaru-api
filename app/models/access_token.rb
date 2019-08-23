@@ -4,7 +4,7 @@ class AccessToken
   SECRET = ENV.fetch('JWT_SECRET', Rails.application.secret_key_base)
   private_constant :SECRET
 
-  def initialize(user, exp = 10 * 60)
+  def initialize(user:, exp: 10 * 60)
     @user = user
     @exp = exp
   end

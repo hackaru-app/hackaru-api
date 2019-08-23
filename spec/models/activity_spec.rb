@@ -23,37 +23,7 @@ RSpec.describe Activity, type: :model do
   end
 
   describe 'scope' do
-    describe 'search_by_description' do
-      subject { Activity.search_by_description(q).count }
-
-      context 'when description matched partially' do
-        let(:q) { 'run' }
-        before { create(:activity, description: 'running') }
-        it { is_expected.to be(1) }
-      end
-
-      context 'when description matched perfectly' do
-        let(:q) { 'running' }
-        before { create(:activity, description: 'running') }
-        it { is_expected.to be(1) }
-      end
-
-      context 'when description does not matched' do
-        let(:q) { 'example' }
-        before { create(:activity, description: 'running') }
-        it { is_expected.to be_zero }
-      end
-
-      context 'when query is empty' do
-        let(:q) { '' }
-        before { create_list(:activity, 3) }
-        it 'returns all activities' do
-          is_expected.to be(3)
-        end
-      end
-    end
-
-    describe 'between' do
+    describe '.between' do
       let(:now) { Time.now }
       subject { Activity.between(now - 3.days, now - 1.days).size }
 
@@ -244,8 +214,57 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe '#suggestions' do
+    subject { described_class.suggestions(query: query, limit: limit) }
+    let(:limit) { 50 }
+
+    context 'when matched' do
+      let(:query) { 'Rev' }
+
+      before do
+        create(:activity, description: 'Review1')
+        create(:activity, description: 'Review2')
+        create(:activity, description: 'Development')
+      end
+
+      it 'returns matched suggestions' do
+        expect(subject.first).to be_kind_of Suggestion
+        expect(subject.size).to be(2)
+      end
+
+      it 'returns matched suggestions in descending order of id' do
+        expect(subject[0].description).to eq 'Review2'
+        expect(subject[1].description).to eq 'Review1'
+      end
+    end
+
+    context 'when result size is greater than limit param' do
+      let(:query) { 'Rev' }
+      let(:limit) { 1 }
+
+      before do
+        create(:activity, description: 'Review1')
+        create(:activity, description: 'Review2')
+      end
+
+      it 'limit results' do
+        expect(subject.size).to be(1)
+      end
+    end
+
+    context 'when query is blank' do
+      let(:query) { '' }
+
+      before { create_list(:activity, 3) }
+
+      it 'returns all' do
+        expect(subject.size).to be(3)
+      end
+    end
+  end
+
   describe '.working' do
-    subject { Activity.working }
+    subject { described_class.working }
 
     context 'when activity is not stopped' do
       before { create(:activity, stopped_at: nil) }

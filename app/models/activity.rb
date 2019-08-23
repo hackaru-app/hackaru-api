@@ -14,10 +14,6 @@ class Activity < ApplicationRecord
   before_save :set_duration
   before_save :stop_other_workings, unless: -> { stopped_at.present? }
 
-  scope :search_by_description, lambda { |q|
-    where('description like ?', "%#{q}%")
-  }
-
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
@@ -38,6 +34,25 @@ class Activity < ApplicationRecord
   def stop_other_workings
     workings = user.activities.where(stopped_at: nil)
     workings.where.not(id: id).update(stopped_at: Time.zone.now)
+  end
+
+  def to_suggestion
+    Suggestion.new(
+      project: project,
+      description: description
+    )
+  end
+
+  def self.suggestions(query:, limit:)
+    ids = ransack(description_cont: query)
+          .result
+          .select('maximum_id')
+          .order('maximum_id desc')
+          .group(:project_id, :description)
+          .limit(limit)
+          .maximum(:id)
+          .values
+    where(id: ids).order(id: :desc).includes(:project).map(&:to_suggestion)
   end
 
   def self.working

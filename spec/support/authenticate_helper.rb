@@ -2,7 +2,7 @@
 
 module AuthenticateHelper
   def access_token_header(user = create(:user))
-    { 'X-Access-Token': AccessToken.new(user).issue }
+    { 'X-Access-Token': AccessToken.new(user: user).issue }
   end
 
   def refresh_token_header(user = create(:user))

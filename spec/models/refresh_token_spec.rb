@@ -55,40 +55,37 @@ RSpec.describe RefreshToken, type: :model do
     end
   end
 
-  describe '#verify' do
+  describe '#fetch' do
     let(:user) { create(:user) }
+    let(:issued) { RefreshToken.issue(user) }
+
+    subject { RefreshToken.fetch(client_id: client_id, raw: raw) }
 
     context 'when client id and raw are valid' do
-      it 'returns refresh token' do
-        refresh_token, raw = RefreshToken.issue(user)
-        expect(RefreshToken.verify(refresh_token.client_id, raw))
-          .to eql(refresh_token)
-      end
+      let(:refresh_token) { issued[0] }
+      let(:client_id) { refresh_token.client_id }
+      let(:raw) { issued[1] }
+      it { is_expected.to eql(refresh_token) }
     end
 
     context 'when raw is invalid' do
-      it 'returns nil' do
-        refresh_token, = RefreshToken.issue(user)
-        expect(RefreshToken.verify(refresh_token.client_id, 'invalid'))
-          .to be_nil
-      end
+      let(:client_id) { 'invalid' }
+      let(:raw) { issued[1] }
+      it { is_expected.to be_nil }
     end
 
     context 'when refresh token was revoked' do
-      it 'returns nil' do
-        refresh_token, raw = RefreshToken.issue(user)
-        refresh_token.update!(revoked_at: Time.now - 1.day)
-        expect(RefreshToken.verify(refresh_token.client_id, raw))
-          .to be_nil
-      end
+      let(:refresh_token) { issued[0] }
+      let(:client_id) { refresh_token.client_id }
+      let(:raw) { issued[1] }
+      before { refresh_token.update!(revoked_at: Time.now - 1.day) }
+      it { is_expected.to be_nil }
     end
 
     context 'when client id and raw are invalid' do
-      it 'returns nil' do
-        RefreshToken.issue(user)
-        expect(RefreshToken.verify('invalid', 'invalid'))
-          .to be_nil
-      end
+      let(:client_id) { 'invalid' }
+      let(:raw) { 'invalid' }
+      it { is_expected.to be_nil }
     end
   end
 

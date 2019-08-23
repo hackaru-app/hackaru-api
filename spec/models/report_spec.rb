@@ -10,7 +10,12 @@ RSpec.describe Report, type: :model do
     let(:time_zone) { nil }
 
     subject do
-      Report.new(user, range, period, time_zone).summary
+      Report.new(
+        user: user,
+        range: range,
+        period: period,
+        time_zone: time_zone
+      ).summary
     end
 
     context 'when period is hour' do

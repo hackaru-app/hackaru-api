@@ -3,7 +3,7 @@
 class Report
   attr_reader :projects
 
-  def initialize(user, range, period, time_zone = nil)
+  def initialize(user:, range:, period:, time_zone: nil)
     @projects = user.projects
     @range = range
     @period = period

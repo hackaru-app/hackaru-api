@@ -26,7 +26,7 @@ class RefreshToken < ApplicationRecord
     [refresh_token, raw]
   end
 
-  def self.verify(client_id, raw)
+  def self.fetch(client_id:, raw:)
     return nil unless client_id && raw
 
     refresh_token = find_by(client_id: client_id)
