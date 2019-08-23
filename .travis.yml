@@ -27,10 +27,9 @@ script:
   - bundle exec brakeman
   - docker-compose build
   - docker-compose run --rm sut
-  - docker images
-  - docker tag ktmouk/hackaru-api:latest ktmouk/hackaru-api:${COMMIT}
-  - ./trivy --exit-code 0 --severity HIGH --quiet --auto-refresh ktmouk/hackaru-api:${COMMIT}
-  - ./trivy --exit-code 1 --severity CRITICAL --quiet --auto-refresh ktmouk/hackaru-api:${COMMIT}
+  - docker tag ktmouk/hackaru-api_sut:latest ktmouk/hackaru-api_sut:${COMMIT}
+  - ./trivy --exit-code 0 --severity HIGH --quiet --auto-refresh ktmouk/hackaru-api_sut:${COMMIT}
+  - ./trivy --exit-code 1 --severity CRITICAL --quiet --auto-refresh ktmouk/hackaru-api_sut:${COMMIT}
 cache:
   directories:
     - $HOME/.cache/trivy
