@@ -11,11 +11,13 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - bundle install
   # trivy
   - export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
   - wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
   - tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
+  # bundle
+  - gem install bundler:1.16.2
+  - bundle install
 before_script:
   # codeclimate
   - sudo service postgresql stop
