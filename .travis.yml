@@ -17,7 +17,6 @@ before_install:
   - tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
   # bundle
   - gem install bundler:1.16.2
-  - bundle install
 before_script:
   # codeclimate
   - sudo service postgresql stop
