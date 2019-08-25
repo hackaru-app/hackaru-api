@@ -15,7 +15,8 @@
 1. [Fork](https://github.com/ktmouk/hackaru-apu/fork) and clone this repository.
 1. Check out new branch. `git checkout -b new-feature`
 1. Copy env file from the sample file. `cp .env.sample .env.development`
-1. Start dev server. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml`
+1. Setup server. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm api bin/setup`
+1. Start dev server. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
 1. Improve codes.
 1. Run rubocop and brakeman. `bundle exec rubocop && bundle exec brakeman`
 1. Run test. `docker-compose -f docker-compose.test.yml run sut`
