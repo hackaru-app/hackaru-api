@@ -128,7 +128,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     okcomputer (1.17.4)
     parallel (1.17.0)
-    parser (2.6.3.0)
+    parser (2.6.4.0)
       ast (~> 2.4.0)
     pg (1.1.4)
     polyamorous (2.3.0)
