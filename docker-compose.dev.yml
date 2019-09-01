@@ -4,6 +4,7 @@ services:
     env_file: .env.development
     volumes:
       - .:/hackaru
+      - ./tmp/app:/hackaru/tmp
 
   sidekiq:
     env_file: .env.development
@@ -12,6 +13,7 @@ services:
       -q hackaru-api_development_mailers
     volumes:
       - .:/hackaru
+      - ./tmp/sidekiq:/hackaru/tmp
 
   mailcatcher:
     image: schickling/mailcatcher:latest
