@@ -11,10 +11,6 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  # trivy
-  - export VERSION=0.1.6
-  - wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
-  - tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
   # bundle
   - gem install bundler:1.16.2
 before_script:
@@ -29,11 +25,6 @@ script:
   - docker-compose build
   - docker-compose run --rm sut
   - docker tag hackaru-api_sut:latest hackaru-api_sut:${COMMIT}
-  - ./trivy --exit-code 1 --severity HIGH --quiet --auto-refresh hackaru-api_sut:${COMMIT}
-  - ./trivy --exit-code 1 --severity CRITICAL --quiet --auto-refresh hackaru-api_sut:${COMMIT}
-cache:
-  directories:
-    - $HOME/.cache/trivy
 after_script:
   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
