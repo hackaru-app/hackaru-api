@@ -58,10 +58,10 @@ ja:
   user_mailer:
     password_reset:
       subject: 'パスワードの再設定が要求されました。'
-      greeting: こんにちは、%{recipient}！
       instruction: パスワードの再設定が要求されました。
-      instruction_2: 続行するには、下記のURLをクリックしてください。
+      instruction_2: 続行するには、下記のリンクをクリックしてください。
       instruction_3: パスワードの再設定を依頼していない場合は、このメールを削除してください。
+      reset_password: パスワードを再設定
   rack_attack:
     throttled:
         message: 'リクエストの制限に達しました。'
