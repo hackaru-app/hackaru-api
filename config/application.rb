@@ -38,5 +38,7 @@ module HackaruApi
     config.action_controller.allow_forgery_protection = false
 
     config.middleware.use Rack::Attack
+
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
   end
 end

@@ -69,6 +69,8 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
+    css_parser (1.7.0)
+      addressable
     diff-lcs (1.3)
     diffy (3.3.0)
     docile (1.3.2)
@@ -91,6 +93,7 @@ GEM
     groupdate (4.1.2)
       activesupport (>= 4.2)
     hashdiff (1.0.0)
+    htmlentities (4.3.4)
     http_accept_language (2.1.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -133,6 +136,13 @@ GEM
     pg (1.1.4)
     polyamorous (2.3.0)
       activerecord (>= 5.0)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.10.3)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.1)
     puma (4.1.1)
       nio4r (~> 2.0)
@@ -277,6 +287,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   okcomputer
   pg (>= 0.18, < 2.0)
+  premailer-rails
   puma (~> 4.1)
   rack-attack
   rack-cors
@@ -296,7 +307,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.5.5p157
+   ruby 2.6.4p104
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
