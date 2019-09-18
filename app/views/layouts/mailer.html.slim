@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    == stylesheet_link_tag 'mailer'
+
+  body
+    header class="header"
+      == image_tag '/logo-black.png', size: '28x28'
+
+    section class="content"
+      == yield
+
+    footer class="footer"
+      a href="https://hackaru.app" Hackaru
