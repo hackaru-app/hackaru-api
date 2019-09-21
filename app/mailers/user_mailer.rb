@@ -2,10 +2,9 @@
 
 class UserMailer < ApplicationMailer
   def password_reset(user)
-    @user = user
-    @url = generate_password_reset_url(@user)
+    @url = generate_password_reset_url(user)
     subject = I18n.t('user_mailer.password_reset.subject')
-    mail(subject: subject, to: @user.email)
+    mail(subject: subject, to: user.email)
   end
 
   private
