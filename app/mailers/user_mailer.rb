@@ -7,6 +7,11 @@ class UserMailer < ApplicationMailer
     mail(subject: subject, to: user.email)
   end
 
+  def sign_up(user)
+    subject = I18n.t('user_mailer.sign_up.subject')
+    mail(subject: subject, to: user.email)
+  end
+
   private
 
   def generate_password_reset_url(user)

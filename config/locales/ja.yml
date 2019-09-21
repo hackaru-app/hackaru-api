@@ -62,6 +62,8 @@ ja:
       instruction_2: 続行するには、下記のリンクをクリックしてください。
       instruction_3: パスワードの再設定を依頼していない場合は、このメールを削除してください。
       reset_password: パスワードを再設定
+    sign_up:
+      subject: 'アカウント登録が完了しました。'
   rack_attack:
     throttled:
         message: 'リクエストの制限に達しました。'
