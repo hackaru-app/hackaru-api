@@ -12,7 +12,7 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'action_cable/engine'
-# require "sprockets/railtie"
+require 'sprockets/railtie'
 require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -38,5 +38,7 @@ module HackaruApi
     config.action_controller.allow_forgery_protection = false
 
     config.middleware.use Rack::Attack
+
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
   end
 end
