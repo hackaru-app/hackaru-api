@@ -4,20 +4,27 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Auth::Users', type: :request do
   describe 'POST /v1/auth/users' do
+    let(:email) { 'foo@example.com' }
+
     before do
-      post '/v1/auth/users',
-           params: {
-             user: {
-               email: 'foo@example.com',
-               password: 'password'
+      perform_enqueued_jobs do
+        post '/v1/auth/users',
+             params: {
+               user: {
+                 email: email,
+                 password: 'password'
+               }
              }
-           }
+      end
     end
 
     it 'returns http success' do
       expect(response).to have_http_status(200)
-      it { expect(ActionMailer::Base.deliveries.size).to eq(1) }
-      it { expect(ActionMailer::Base.deliveries.last.to.first).to eq(email) }
+    end
+
+    it 'send mail' do
+      expect(ActionMailer::Base.deliveries.size).to eq(1)
+      expect(ActionMailer::Base.deliveries.last.to.first).to eq(email)
     end
 
     it 'creates an user' do
