@@ -4,6 +4,9 @@ body {
   margin: 40px;
   line-height: 1.5;
 }
+a {
+  color: #1aa7ba;
+}
 .title {
   font-size: 21px;
   font-weight: 200;
@@ -11,16 +14,31 @@ body {
 }
 .link-button {
   margin: 20px 0;
-  padding: 15px 20px;
-  justify-content: flex-start;
-  align-items: center;
   display: inline-block;
+  padding: 15px 20px;
   background-color: #1aa7ba;
   line-height: 1;
   border-radius: 3px;
   color: #fff;
   text-decoration: none;
   border: 0;
+}
+.title .is-small {
+  font-size: 16px;
+  font-weight: normal;
+}
+ol.description {
+  margin-bottom: 40px;
+}
+ol li {
+  margin-bottom: 10px;
+}
+ol li a {
+  margin: 0 5px;
+  color: #1aa7ba;
+}
+.icon {
+  margin: 0 5px;
 }
 .footer a {
   color: #9aa5ab;
@@ -39,4 +57,6 @@ body {
   margin-top: 60px;
   padding-top: 50px;
   border-top: 1px #eee solid;
+}
+.description {
 }

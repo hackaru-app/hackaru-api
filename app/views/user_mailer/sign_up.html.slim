@@ -1,15 +1,56 @@
 section
   h1 class="title"
     | Hackaruへようこそ。
-  p
-    | Hackaruを使う準備ができました。勉強や仕事、読書など、あなたの時間を計測してみましょう。
+  p class="description"
+    | Hackaruを使う準備ができました！勉強や仕事、読書など、あなたの時間を計測してみましょう。
+
+  == link_to 'Webサイトを開く', 'https://app.hackaru.app', class: 'link-button'
+
 section class="with-border"
   h1 class="title"
-    | iPhoneやAndroidから使う。
-  p
-    | アプリストアからダウンロードする必要はありません。PWAに対応しているので、ホーム画面に追加するだけで滑らかに使えます。
+    | iPhoneやAndroid から使う。
+  p class="description"
+    | スマートフォンからでも使用できます。PWAに対応しているのでホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。
+
+  == image_tag email_image_url('iphone.png'), size: '500x500'
+
+  h1 class="title"
+    | iPhoneから使う
+  ol class="description"
+    li
+      | Safariで
+      == link_to 'Webサイト', 'https://app.hackaru.app'
+      | を開きます。
+    li
+      | Safariの
+      == image_tag email_image_url('iphone-share-icon.png'), class: 'icon', size: '20x20'
+      | から「ホーム画面に追加」をタップして完了です。
+  h1 class="title is-small"
+    | Androidから使う
+  ol class="description"
+    li
+      | Chromeで
+      == link_to 'Webサイト', 'https://app.hackaru.app'
+      | を開きます。
+    li
+      | Chromeの
+      == image_tag email_image_url('android-share-icon.png'), class: 'icon', size: '20x20'
+      | からメニューを開き「ホーム画面に追加」をタップして完了です。
+
 section class="with-border"
   h1 class="title"
     | デスクトップアプリから使う。
+
   p
-    | Windows、MacOS、Linuxで使えます。自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。
+    | Windows、MacOS、Linux からも使用できます。タスクバー常駐するので、ブラウザを開かなくてもすぐに計測を開始できます。
+    | 自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。
+    br
+
+  p
+    == link_to 'デスクトップ版をダウンロード', 'https://app.hackaru.app'
+
+  p
+    == image_tag email_image_url('desktop.png'), class: 'icon', size: '500x500'
+
+  p
+    | それでは、Hackaruをお楽しみください。
