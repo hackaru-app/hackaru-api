@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
+  track message: false
   track utm_params: true
 
   helper :email
