@@ -16,6 +16,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
     it 'returns http success' do
       expect(response).to have_http_status(200)
+      it { expect(ActionMailer::Base.deliveries.size).to eq(1) }
+      it { expect(ActionMailer::Base.deliveries.last.to.first).to eq(email) }
     end
 
     it 'creates an user' do
