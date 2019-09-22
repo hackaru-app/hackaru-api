@@ -24,7 +24,7 @@ en:
       use_desktop:
         title: 'Use with Desktop app'
         description: 'It can also be used from Windows, MacOS, and Linux.
-          You can start measuring time from the taskbar without opening a browser.
+          You can start measuring time from the task tray without opening a browser.
           If you use the auto-tracking, you can automatically measure the usage time of your favorite apps.'
         download: 'Download desktop app'
         thanks: 'Enjoy using Hackaru! 😉'

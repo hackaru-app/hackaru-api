@@ -22,9 +22,9 @@ ja:
         instruction_2: 'Chromeのメニューを開き「ホーム画面に追加」をタップして完了です。'
         website: 'Webサイト'
       use_desktop:
-        title: 'デスクトップアプリから使う。'
-        description: 'Windows、MacOS、Linux からも使用できます。
-          タスクバー常駐するので、ブラウザを開かなくてもすぐに計測を開始できます。
+        title: 'デスクトップアプリから使う'
+        description: 'Windows、MacOS、Linux で使用できます。
+          タスクトレイに常駐するので、ブラウザを開かなくてもすぐに計測を開始できます。
           自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。'
         download: 'デスクトップ版をダウンロード'
         thanks: 'それでは、Hackaruをお楽しみください！😉'

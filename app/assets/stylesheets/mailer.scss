@@ -8,9 +8,12 @@ a {
   color: #1aa7ba;
 }
 .title {
-  font-size: 21px;
   font-weight: 200;
   margin: 0;
+  font-size: 23px;
+}
+.title.is-small {
+  font-size: 18px;
 }
 .link-button {
   margin: 20px 0;
