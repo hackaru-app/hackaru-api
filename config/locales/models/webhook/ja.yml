@@ -2,5 +2,5 @@ ja:
   activerecord:
     attributes:
       webhook:
-        target_url: 送信先URL
-        event: イベント
+        target_url: '送信先URL'
+        event: 'イベント'
