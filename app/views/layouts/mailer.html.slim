@@ -11,4 +11,4 @@ html
     == yield
 
     footer class="footer"
-      == link_to 'Hackaru', ENV.fetch('HACKARU_WEB_URL')
+      == link_to 'Hackaru', utm_url(ENV.fetch('HACKARU_WEB_URL'))
