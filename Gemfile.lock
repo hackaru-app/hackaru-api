@@ -49,11 +49,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    ahoy_email (1.1.0)
-      actionmailer (>= 5)
-      addressable (>= 2.3.2)
-      nokogiri
-      safely_block (>= 0.1.1)
     arel (9.0.0)
     ast (2.4.0)
     aws-ses (0.6.0)
@@ -82,7 +77,6 @@ GEM
     doorkeeper (5.2.1)
       railties (>= 5)
     doorkeeper-i18n (5.0.3)
-    errbase (0.1.1)
     erubi (1.8.0)
     factory_bot (5.0.2)
       activesupport (>= 4.2.0)
@@ -234,8 +228,6 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     safe_yaml (1.0.5)
-    safely_block (0.2.2)
-      errbase (>= 0.1.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.2.0)
@@ -299,7 +291,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (= 0.10.8)
-  ahoy_email
   aws-ses
   bcrypt
   bootsnap (>= 1.1.0)
