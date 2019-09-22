@@ -11,13 +11,13 @@ en:
         description: You can also use it from your cell phone.
           Because it supports PWA, just add it to the home screen and you can use it like an app downloaded from the store.
       use_iphone:
-        title: How to use with iPhone
+        title: Use with iPhone
         instruction_1: Open %{url} in Safari.
         instruction_2: Tap "Add to home screen" from %{share} of Safari to complete.
         website: Website
         share: share-button
       use_android:
-        title: How to use with Android
+        title: Use with Android
         instruction_1: Open %{url} in Chrome.
         instruction_2: Open the Chrome menu and tap "Add to Home Screen".
         website: Website
