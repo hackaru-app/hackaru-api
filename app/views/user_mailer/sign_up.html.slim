@@ -1,0 +1,53 @@
+section class="content"
+  h1 class="title"
+    == t('.welcome.title')
+  p class=".description"
+    == t('.welcome.description')
+
+  == link_to t('.welcome.open_website'),
+     utm_url(ENV.fetch('HACKARU_WEB_URL')),
+     class: 'link-button'
+
+section class="content"
+  h1 class="title"
+    == t('.use_iphone_or_android.title')
+  p == t('.use_iphone_or_android.description')
+
+  == image_tag email_image_url('iphone.png'), size: '500x500'
+
+  section class="instruction"
+    h1 class="title is-small"
+      == t('.use_iphone.title')
+    ol
+      li
+        == t('.use_iphone.instruction_1',
+            url: link_to(t('.use_iphone.website'),
+              utm_url(ENV.fetch('HACKARU_WEB_URL'))))
+
+      li
+        == t('.use_iphone.instruction_2',
+              share: image_tag(email_image_url('iphone-share-icon.png'),
+                class: 'icon',
+                size: '20x20'))
+
+  section class="instruction"
+    h1 class="title is-small"
+      == t('.use_android.title')
+    ol
+      li
+        == t('.use_android.instruction_1',
+            url: link_to(t('.use_android.website'),
+              utm_url(ENV.fetch('HACKARU_WEB_URL'))))
+
+      li
+        == t('.use_android.instruction_2')
+
+section class="content"
+  h1 class="title"
+    == t('.use_desktop.title')
+
+  p == t('.use_desktop.description')
+  p == link_to t('.use_desktop.download'),
+       'https://github.com/ktmouk/hackaru-desktop'
+  p == image_tag email_image_url('desktop.png'), class: 'icon', size: '500x500'
+  p == t('.use_desktop.thanks')

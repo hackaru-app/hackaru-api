@@ -90,4 +90,7 @@ Rails.application.configure do
     host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
     protocol: 'https'
   }
+
+  # Enable rack attack
+  config.middleware.use Rack::Attack
 end

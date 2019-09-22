@@ -1,0 +1,33 @@
+ja:
+  exception_renderer:
+    default:
+      message: '何か問題が発生したようです。再度お試しください。'
+      status: 500
+    argument_error:
+      message: 'パラメータが正しくありません。'
+      status: 422
+    active_record:
+      record_not_found:
+        message: '対象のデータが見つかりません。'
+        status: 404
+      record_invalid:
+        status: 422
+      not_null_violation:
+        message: 'パラメータが不足しています。'
+        status: 400
+    action_controller:
+      parameter_missing:
+        message: 'パラメータが不足しています。'
+        status: 400
+      routing_error:
+        message: 'ページが見つかりません。'
+        status: 404
+    groupdate:
+      error:
+        message: 'パラメータが正しくありません。'
+        status: 422
+    rails_param:
+      param:
+        invalid_parameter_error:
+          message: 'パラメータが正しくありません。'
+          status: 422

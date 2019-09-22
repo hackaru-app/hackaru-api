@@ -6,4 +6,9 @@ class UserMailerPreview < ActionMailer::Preview
     user = FactoryBot.create(:user)
     UserMailer.password_reset(user)
   end
+
+  def sign_up
+    user = FactoryBot.create(:user)
+    UserMailer.sign_up(user)
+  end
 end

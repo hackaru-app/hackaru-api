@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      project: 'プロジェクト'
+    attributes:
+      project:
+        name: 'プロジェクト名'
+        color: '色'

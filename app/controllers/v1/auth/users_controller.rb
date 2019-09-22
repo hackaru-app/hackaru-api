@@ -15,6 +15,7 @@ module V1
         user = User.create!(user_params)
         user.add_sample_projects
         sign_refresh_token(*RefreshToken.issue(user))
+        UserMailer.sign_up(user).deliver_later
         render json: user
       end
 
