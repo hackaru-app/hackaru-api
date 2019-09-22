@@ -8,7 +8,7 @@ ja:
         open_website: 'Webサイトを開く'
       use_iphone_or_android:
         title: 'iPhoneやAndroidから使う'
-        description: 'スマートフォンからでも使用できます。
+        description: 'スマートフォンでも使用できます。
           PWAに対応しているので、ホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。'
       use_iphone:
         title: 'iPhoneで使う'
