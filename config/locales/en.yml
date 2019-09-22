@@ -48,6 +48,31 @@ en:
       reset_password: Reset password
     sign_up:
       subject: You have signed up successfully
+      welcome:
+        title: Welcome to Hackaru
+        description: Ready to use Hackaru! Let's measure your time, such as studying, working, reading.
+        open_website: Go Website
+      use_iphone_or_android:
+        title: Use with iPhone and Android
+        description: You can also use it from your cell phone.
+          Because it supports PWA, just add it to the home screen and you can use it like an app downloaded from the store.
+      use_iphone:
+        title: How to use with iPhone
+        instruction_1: Open %{url} in Safari.
+        instruction_2: Tap "Add to home screen" from %{share} of Safari to complete.
+        website: Website
+      use_android:
+        title: How to use with Android
+        instruction_1: Open %{url} in Chrome.
+        instruction_2: Open the Chrome menu and tap "Add to Home Screen".
+        website: Website
+      use_desktop:
+        title: Use with Desktop app
+        description: It can also be used from Windows, MacOS, and Linux.
+          You can start measuring time from the taskbar without opening a browser.
+          If you use the auto-tracking, you can automatically measure the usage time of your favorite apps.
+        download: Download desktop app
+        thanks: Enjoy using Hackaru! 😉
   sample_projects:
     - 'Work'
     - 'Study'
