@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    errors:
+      models:
+        activity:
+          attributes:
+            project:
+              is_invalid: is invalid.
+            stopped_at:
+              cannot_be_before_started_at: can not be before started at.

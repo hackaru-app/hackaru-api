@@ -40,5 +40,9 @@ module HackaruApi
     config.middleware.use Rack::Attack
 
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+
+    config.i18n.load_path += Dir[
+      Rails.root.join('config', 'locales', '**', '*.{rb,yml}')
+    ]
   end
 end

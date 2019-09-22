@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      activity: 記録
+    attributes:
+      activity:
+        name: 名前
+        description: 備考
+        started_at: 開始日時
+        stopped_at: 終了日時
+        duration: 時間
+        project: プロジェクト
+    errors:
+      models:
+        activity:
+          attributes:
+            project:
+              is_invalid: は不正な値です。
+            stopped_at:
+              cannot_be_before_started_at: は開始日時より後の日時を指定してください。

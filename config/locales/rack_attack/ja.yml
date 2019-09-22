@@ -1,0 +1,5 @@
+ja:
+  rack_attack:
+    throttled:
+        message: リクエストの制限に達しました。
+        status: 429

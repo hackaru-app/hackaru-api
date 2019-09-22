@@ -1,0 +1,8 @@
+en:
+  user_mailer:
+    password_reset:
+      subject: Reset Password instruction
+      instruction: Someone has requested a reset your password.
+      instruction_2: You can click the link below if you want reset password.
+      instruction_3: If you didn't request this, please remove this email.
+      reset_password: Reset password

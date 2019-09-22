@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザ
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+  sample_projects:
+    - 仕事
+    - 勉強
+    - 読書

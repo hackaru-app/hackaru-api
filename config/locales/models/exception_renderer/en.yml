@@ -1,0 +1,33 @@
+en:
+  exception_renderer:
+    default:
+      message: We're sorry, but something went wrong.
+      status: 500
+    argument_error:
+      message: The request has invalid parameter.
+      status: 422
+    active_record:
+      record_not_found:
+        message: The requested resouce is not exists.
+        status: 404
+      record_invalid:
+        status: 422
+      not_null_violation:
+        message: The request is missing a required parameter.
+        status: 400
+    action_controller:
+      parameter_missing:
+        message: The request is missing a required parameter.
+        status: 400
+      routing_error:
+        message: The requested resouce is not exists.
+        status: 404
+    groupdate:
+      error:
+        message: The request has invalid parameter.
+        status: 422
+    rails_param:
+      param:
+        invalid_parameter_error:
+          message: The request has invalid parameter.
+          status: 422
