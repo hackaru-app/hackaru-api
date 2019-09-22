@@ -79,7 +79,7 @@ ja:
       use_android:
         title: 'Androidで使う'
         instruction_1: Chromeで %{url} を開きます。
-        instruction_2: Chromeの %{menu} を開き「ホーム画面に追加」をタップして完了です。
+        instruction_2: Chromeのメニューを開き「ホーム画面に追加」をタップして完了です。
         website: Webサイト
       use_desktop:
         title: 'デスクトップアプリから使う。'
