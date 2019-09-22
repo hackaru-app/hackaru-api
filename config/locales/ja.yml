@@ -64,6 +64,28 @@ ja:
       reset_password: パスワードを再設定
     sign_up:
       subject: 'アカウント登録が完了しました。'
+      welcome:
+        title: 'Hackaruへようこそ'
+        description: 'Hackaruを使う準備ができました！勉強や仕事、読書など、あなたの時間を計測してみましょう。'
+        open_website: 'Webサイトを開く'
+      use_iphone_or_android:
+        title: 'iPhoneやAndroid から使う'
+        description: スマートフォンからでも使用できます。PWAに対応しているのでホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。
+      use_iphone:
+        title: 'iPhoneで使う'
+        instruction_1: Safariで %{url} を開きます。
+        instruction_2: Safariの %{share} から「ホーム画面に追加」をタップして完了です。
+        website: Webサイト
+      use_android:
+        title: 'Androidで使う'
+        instruction_1: Chromeで %{url} を開きます。
+        instruction_2: Chromeの %{menu} を開き「ホーム画面に追加」をタップして完了です。
+        website: Webサイト
+      use_desktop:
+        title: 'デスクトップアプリから使う。'
+        description: Windows、MacOS、Linux からも使用できます。タスクバー常駐するので、ブラウザを開かなくてもすぐに計測を開始できます。自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。
+        download: デスクトップ版をダウンロード
+        thanks: それでは、Hackaruをお楽しみください。
   rack_attack:
     throttled:
         message: 'リクエストの制限に達しました。'

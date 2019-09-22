@@ -1,56 +1,53 @@
-section
+section class="content"
   h1 class="title"
-    | Hackaruへようこそ。
-  p class="description"
-    | Hackaruを使う準備ができました！勉強や仕事、読書など、あなたの時間を計測してみましょう。
+    == t('.welcome.title')
+  p class=".description"
+    == t('.welcome.description')
 
-  == link_to 'Webサイトを開く', 'https://app.hackaru.app', class: 'link-button'
+  == link_to t('.welcome.open_website'),
+     'https://app.hackaru.app',
+     class: 'link-button'
 
-section class="with-border"
+section class="content"
   h1 class="title"
-    | iPhoneやAndroid から使う。
-  p class="description"
-    | スマートフォンからでも使用できます。PWAに対応しているのでホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。
+    == t('.use_iphone_or_android.title')
+  p == t('.use_iphone_or_android.description')
 
   == image_tag email_image_url('iphone.png'), size: '500x500'
 
+  section class="instruction"
+    h1 class="title"
+      == t('.use_iphone.title')
+    ol
+      li
+        == t('.use_iphone.instruction_1',
+            url: link_to(t('.use_iphone.website'), 'https://app.hackaru.app'))
+
+      li
+        == t('.use_iphone.instruction_2',
+              share: image_tag(email_image_url('iphone-share-icon.png'),
+                class: 'icon',
+                size: '20x20'))
+
+  section class="instruction"
+    h1 class="title"
+      == t('.use_android.title')
+    ol
+      li
+        == t('.use_android.instruction_1',
+            url: link_to(t('.use_android.website'), 'https://app.hackaru.app'))
+
+      li
+        == t('.use_android.instruction_2',
+              menu: image_tag(email_image_url('android-menu-icon.png'),
+               class: 'icon',
+               size: '20x20'))
+
+section class="content"
   h1 class="title"
-    | iPhoneから使う
-  ol class="description"
-    li
-      | Safariで
-      == link_to 'Webサイト', 'https://app.hackaru.app'
-      | を開きます。
-    li
-      | Safariの
-      == image_tag email_image_url('iphone-share-icon.png'), class: 'icon', size: '20x20'
-      | から「ホーム画面に追加」をタップして完了です。
-  h1 class="title is-small"
-    | Androidから使う
-  ol class="description"
-    li
-      | Chromeで
-      == link_to 'Webサイト', 'https://app.hackaru.app'
-      | を開きます。
-    li
-      | Chromeの
-      == image_tag email_image_url('android-share-icon.png'), class: 'icon', size: '20x20'
-      | からメニューを開き「ホーム画面に追加」をタップして完了です。
+    == t('.use_desktop.title')
 
-section class="with-border"
-  h1 class="title"
-    | デスクトップアプリから使う。
-
-  p
-    | Windows、MacOS、Linux からも使用できます。タスクバー常駐するので、ブラウザを開かなくてもすぐに計測を開始できます。
-    | 自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。
-    br
-
-  p
-    == link_to 'デスクトップ版をダウンロード', 'https://app.hackaru.app'
-
-  p
-    == image_tag email_image_url('desktop.png'), class: 'icon', size: '500x500'
-
-  p
-    | それでは、Hackaruをお楽しみください。
+  p == t('.use_desktop.description')
+  p == link_to t('.use_desktop.download'), 'https://app.hackaru.app'
+  p == image_tag email_image_url('desktop.png'), class: 'icon', size: '500x500'
+  p == t('.use_desktop.thanks')
