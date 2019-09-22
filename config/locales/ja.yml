@@ -71,17 +71,18 @@ ja:
       use_iphone_or_android:
         title: 'iPhoneやAndroid から使う'
         description: スマートフォンからでも使用できます。
-          PWAに対応しているのでホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。
+          PWAに対応しているので、ホーム画面に追加するだけでストアからダウンロードしたアプリのように使用できます。
       use_iphone:
         title: 'iPhoneで使う'
         instruction_1: Safariで %{url} を開きます。
         instruction_2: Safariの %{share} から「ホーム画面に追加」をタップして完了です。
         website: Webサイト
+        share: 共有ボタン
       use_android:
         title: 'Androidで使う'
         instruction_1: Chromeで %{url} を開きます。
         instruction_2: Chromeのメニューを開き「ホーム画面に追加」をタップして完了です。
-        website: Webサイト 
+        website: Webサイト
       use_desktop:
         title: 'デスクトップアプリから使う。'
         description: Windows、MacOS、Linux からも使用できます。

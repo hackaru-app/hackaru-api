@@ -61,6 +61,7 @@ en:
         instruction_1: Open %{url} in Safari.
         instruction_2: Tap "Add to home screen" from %{share} of Safari to complete.
         website: Website
+        share: share-button
       use_android:
         title: How to use with Android
         instruction_1: Open %{url} in Chrome.
