@@ -11,4 +11,4 @@ html
     == yield
 
     footer class="footer"
-      a href="https://hackaru.app" Hackaru
+      == link_to 'Hackaru', ENV.fetch('HACKARU_WEB_URL')

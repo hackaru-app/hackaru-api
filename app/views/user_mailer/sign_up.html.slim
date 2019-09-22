@@ -5,7 +5,7 @@ section class="content"
     == t('.welcome.description')
 
   == link_to t('.welcome.open_website'),
-     'https://app.hackaru.app',
+     ENV.fetch('HACKARU_WEB_URL'),
      class: 'link-button'
 
 section class="content"
@@ -21,7 +21,8 @@ section class="content"
     ol
       li
         == t('.use_iphone.instruction_1',
-            url: link_to(t('.use_iphone.website'), 'https://app.hackaru.app'))
+            url: link_to(t('.use_iphone.website'),
+              ENV.fetch('HACKARU_WEB_URL')))
 
       li
         == t('.use_iphone.instruction_2',
@@ -35,7 +36,8 @@ section class="content"
     ol
       li
         == t('.use_android.instruction_1',
-            url: link_to(t('.use_android.website'), 'https://app.hackaru.app'))
+            url: link_to(t('.use_android.website'),
+              ENV.fetch('HACKARU_WEB_URL')))
 
       li
         == t('.use_android.instruction_2')

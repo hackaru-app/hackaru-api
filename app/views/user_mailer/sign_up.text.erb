@@ -2,7 +2,7 @@
 
 <%= t('.welcome.description') %>
 
-<%= 'https://app.hackaru.app' %>
+<%= ENV.fetch('HACKARU_WEB_URL') %>
 
 
 ￣￣￣￣￣
@@ -15,14 +15,14 @@
 ￣￣
 <%= t('.use_iphone.title') %>
 
-  1. <%= t('.use_iphone.instruction_1', url: 'https://app.hackaru.app') %>
+  1. <%= t('.use_iphone.instruction_1', url: ENV.fetch('HACKARU_WEB_URL')) %>
   2. <%= t('.use_iphone.instruction_2', share: t('.use_iphone.share')) %>
 
 
 ￣￣
 <%= t('.use_android.title') %>
 
-  1. <%= t('.use_android.instruction_1',  url: 'https://app.hackaru.app') %>
+  1. <%= t('.use_android.instruction_1',  url: ENV.fetch('HACKARU_WEB_URL')) %>
   2. <%= t('.use_android.instruction_2') %>
 
 
