@@ -3,6 +3,6 @@
 class ApplicationMailer < ActionMailer::Base
   helper :email
 
-  default from: ENV.fetch('SMTP_FROM', 'no-reply@example.com')
+  default from: "Hackaru <#{ENV.fetch('SMTP_FROM', 'no-reply@example.com')}>"
   layout 'mailer'
 end
