@@ -239,6 +239,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sentry-raven (2.11.2)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
     sidekiq (6.0.0)
@@ -321,6 +323,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails
+  sentry-raven
   shoulda-matchers
   sidekiq
   simplecov (>= 0.17.0)
