@@ -90,6 +90,8 @@ Rails.application.configure do
     host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
     protocol: 'https'
   }
+  config.action_mailer.asset_host =
+    "https://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
 
   # Enable rack attack
   config.middleware.use Rack::Attack
