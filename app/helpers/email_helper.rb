@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 module EmailHelper
-  def email_image_url(image, dir = 'app/assets/images')
-    attachments.inline[image] = File.read Rails.root.join("#{dir}/#{image}")
-    attachments[image].url
-  end
-
   def utm_url(url)
     uri = URI.parse(url)
     uri.query = join_utm_params(uri.query)

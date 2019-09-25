@@ -7,23 +7,22 @@ ja:
         description: 'アカウント登録が完了しました。勉強や仕事、読書など、あなたの時間の使い方を計測してみましょう。'
         open_website: 'Webサイトを開く'
       use_iphone_or_android:
-        title: 'iPhoneやAndroidから使う'
-        description: 'スマートフォンからでも使用できます。PWAに対応しているので、ホーム画面に追加すれば、アプリストアからダウンロードしたアプリのように使用できます。'
+        title: 'iPhoneやAndroidで外出先から計測する。'
+        description: 'Hackaruはスマートフォンからでも使用できます。
+          PWAに対応しているため、ホーム画面に追加するだけで使用できます。アプリストアからダウンロードする必要はありません。'
       use_iphone:
-        title: 'iPhoneで使う'
+        title: 'iPhoneにインストール'
         instruction_1: 'Safariで %{url} を開きます。'
         instruction_2: 'Safariの %{share} から「ホーム画面に追加」をタップして完了です。'
         website: 'Webサイト'
         share: '共有ボタン'
       use_android:
-        title: 'Androidで使う'
+        title: 'Androidにインストール'
         instruction_1: 'Chromeで %{url} を開きます。'
         instruction_2: 'Chromeのメニューを開き「ホーム画面に追加」をタップして完了です。'
         website: 'Webサイト'
       use_desktop:
-        title: 'デスクトップアプリから使う'
-        description: 'Windows、MacOS、Linux で使用できます。
-          タスクトレイに常駐するので、ブラウザを開かなくても計測を開始できます。
-          また自動トラッキング機能を使えば、好きなアプリの使用時間を自動で計測できます。'
+        title: 'デスクトップ版で自動で計測する。'
+        description: 'Hackaruはデスクトップ版からでも使用できます。自動計測を使えば、好きなアプリを使用している時間を自動で計測できます。Windows、MacOS、Linux に対応しています。'
         download: 'デスクトップ版をダウンロード'
         thanks: 'それでは、Hackaruをお楽しみください！😉'
