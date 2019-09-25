@@ -8,7 +8,7 @@ en:
         open_website: 'Go Website'
       use_iphone_or_android:
         title: 'Use with iPhone and Android'
-        description: 'You can also use it from your cell phone.
+        description: 'Hackaru can also be used from a smartphone.
           Because it supports PWA, just add it to the home screen and you can use it like an app downloaded from the store.'
       use_iphone:
         title: 'Use with iPhone'
@@ -23,8 +23,8 @@ en:
         website: 'Website'
       use_desktop:
         title: 'Use with Desktop app'
-        description: 'It can also be used from Windows, MacOS, and Linux.
-          You can start measuring time from the task tray without opening a browser.
-          If you use the auto-tracking, you can automatically measure the usage time of your favorite apps.'
+        description: 'Hackaru can also be used from the desktop version.
+          If you use auto-tracking, you can automatically measure the usage time of your favorite apps.
+          It supports Windows, MacOS, and Linux.'
         download: 'Download desktop app'
         thanks: 'Enjoy using Hackaru! 😉'
