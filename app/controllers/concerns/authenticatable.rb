@@ -14,7 +14,7 @@ module Authenticatable
   def authenticate_user!
     @current_user = AccessToken.verify(request.headers['X-Access-Token'])
     render_error_by_key :access_token_invalid unless @current_user
-    Raven.user_context(id: @current_user.id)
+    Raven.user_context(id: @current_user&.id)
   end
 
   def authenticate_user_or_doorkeeper!(*scopes)
