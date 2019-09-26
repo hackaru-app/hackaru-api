@@ -3,6 +3,8 @@
 module Authenticatable
   attr_reader :current_user
 
+  private
+
   def authenticate_doorkeeper!(*scopes)
     doorkeeper_authorize!(*scopes)
     return unless doorkeeper_token.present?
