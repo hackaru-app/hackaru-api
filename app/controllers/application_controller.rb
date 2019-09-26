@@ -4,5 +4,5 @@ class ApplicationController < ActionController::API
   include HttpAcceptLanguage::AutoLocale
   include Authenticatable
   include ErrorRenderable
-  include RavenContext
+  include RavenExtraContext
 end
