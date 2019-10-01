@@ -17,9 +17,7 @@ class ActivityCalendar
     @calendar.event do |e|
       e.dtstart = Icalendar::Values::DateTime.new(activity.started_at)
       e.dtend = Icalendar::Values::DateTime.new(activity.stopped_at)
-      e.summary = Icalendar::Values::Text.new(
-        activity.description || activity.project&.name
-      )
+      e.summary = Icalendar::Values::Text.new(activity.description)
     end
   end
 end
