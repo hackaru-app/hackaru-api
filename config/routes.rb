@@ -30,6 +30,10 @@ Rails.application.routes.draw do
       get :working
     end
 
+    namespace :calendars do
+      resources :activities, only: :index
+    end
+
     resources :activities, except: :show
     resources :projects, except: :show
     resources :webhooks, except: :show
