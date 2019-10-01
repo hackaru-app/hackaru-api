@@ -4,7 +4,7 @@ class ActivityCalendar
   def initialize(activities)
     @calendar = Icalendar::Calendar.new
     @calendar.append_custom_property('X-WR-CALNAME;VALUE=TEXT', 'Hackaru')
-    activities.each { |activity| add_event(activity) }
+    add_events(activities)
   end
 
   def to_ical
@@ -13,11 +13,9 @@ class ActivityCalendar
 
   private
 
-  def add_event(activity)
-    @calendar.event do |e|
-      e.dtstart = Icalendar::Values::DateTime.new(activity.started_at)
-      e.dtend = Icalendar::Values::DateTime.new(activity.stopped_at)
-      e.summary = Icalendar::Values::Text.new(activity.description)
+  def add_events(activities)
+    activities.includes(:project).each do |activity|
+      ActivityEvent.new(activity).add_to_calendar(@calendar)
     end
   end
 end
