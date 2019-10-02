@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
-class ActivityCalendar
-  def initialize(activities)
-    @calendar = Icalendar::Calendar.new
-    @calendar.append_custom_property('X-WR-CALNAME;VALUE=TEXT', 'Hackaru')
-    add_events(activities)
-  end
+class ActivityCalendar < ApplicationRecord
+  has_secure_token :token
+
+  has_many :activities, through: :users
 
   def to_ical
-    @calendar.to_ical
+    calendar = Icalendar::Calendar.new
+    calendar.append_custom_property('X-WR-CALNAME;VALUE=TEXT', 'Hackaru')
+    events.each { |event| event.add_to_calendar(calendar) }
+    calendar.to_ical
   end
 
   private
 
-  def add_events(activities)
-    activities.includes(:project).each do |activity|
-      ActivityEvent.new(activity).add_to_calendar(@calendar)
+  def events
+    activities.includes(:project).map do |activity|
+      ActivityEvent.new(activity)
     end
   end
 end
