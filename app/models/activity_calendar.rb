@@ -3,7 +3,8 @@
 class ActivityCalendar < ApplicationRecord
   has_secure_token :token
 
-  has_many :activities, through: :users
+  belongs_to :user
+  has_many :activities, through: :user
 
   def to_ical
     calendar = Icalendar::Calendar.new

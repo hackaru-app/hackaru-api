@@ -15,6 +15,9 @@ en:
     password_reset_token_invalid:
       message: 'The request is invalid or expired, please request a new one.'
       status: 401
+    activity_calendar_token_invalid:
+      message: 'The url is invalid or expired, please regenerate a url.'
+      status: 401
     email_not_found:
       message: 'The email is not registration.'
       status: 404
