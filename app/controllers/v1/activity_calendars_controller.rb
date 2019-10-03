@@ -2,15 +2,15 @@
 
 module V1
   class ActivityCalendarsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: %i[update destroy]
 
     def update
       calendar = ActivityCalendar.find_or_create_by(user: current_user)
-      render json: { token: calendar.token }
+      render json: { user_id: current_user.id, token: calendar.token }
     end
 
     def show
-      calendar = current_user.activity_calendar
+      calendar = User.find_by(id: params[:user_id])&.activity_calendar
       if calendar&.token == params[:token]
         render plain: calendar.to_ical, content_type: 'text/calendar'
       else
