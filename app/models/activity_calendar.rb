@@ -9,7 +9,7 @@ class ActivityCalendar < ApplicationRecord
   def to_ical
     calendar = Icalendar::Calendar.new
     calendar.append_custom_property('X-WR-CALNAME;VALUE=TEXT', 'Hackaru')
-    events.each { |event| event.add_to_calendar(calendar) }
+    events.each { |event| calendar.add_event(event) }
     calendar.to_ical
   end
 
@@ -17,7 +17,7 @@ class ActivityCalendar < ApplicationRecord
 
   def events
     activities.includes(:project).map do |activity|
-      ActivityEvent.new(activity)
+      ActivityEvent.new(activity).event
     end
   end
 end

@@ -5,12 +5,12 @@ class ActivityEvent
     @activity = activity
   end
 
-  def add_to_calendar(calendar)
-    calendar.event do |e|
-      e.dtstart = Icalendar::Values::DateTime.new(@activity.started_at)
-      e.dtend = Icalendar::Values::DateTime.new(@activity.stopped_at)
-      e.summary = Icalendar::Values::Text.new(summary)
-    end
+  def event
+    event = Icalendar::Event.new
+    event.dtstart = Icalendar::Values::DateTime.new(@activity.started_at)
+    event.dtend = Icalendar::Values::DateTime.new(@activity.stopped_at)
+    event.summary = Icalendar::Values::Text.new(summary)
+    event
   end
 
   private
