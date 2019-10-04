@@ -10,7 +10,7 @@ module V1
     end
 
     def show
-      param! :user_id, String, required: true
+      param! :user_id, Integer, required: true
       param! :token, String, required: true
 
       calendar = ActivityCalendar.find_by(user_id: params[:user_id])
