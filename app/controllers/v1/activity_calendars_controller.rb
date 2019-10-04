@@ -10,12 +10,15 @@ module V1
     end
 
     def show
-      calendar = User.find_by(id: params[:user_id])&.activity_calendar
+      param! :user_id, String, required: true
+      param! :token, String, required: true
+
+      calendar = ActivityCalendar.find_by(user_id: params[:user_id])
       if calendar&.token == params[:token]
-        render plain: calendar.to_ical, content_type: 'text/calendar'
-      else
-        render_error_by_key(:activity_calendar_token_invalid)
+        return render plain: calendar.to_ical, content_type: 'text/calendar'
       end
+
+      render_error_by_key(:activity_calendar_token_invalid)
     end
 
     def destroy
