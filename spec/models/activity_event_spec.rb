@@ -8,12 +8,12 @@ RSpec.describe ActivityEvent, type: :model do
     subject { ActivityEvent.new(activity).event }
 
     it 'has dtstart' do
-      datetime = activity.started_at.strftime('%Y%m%dT%H%M%S')
+      datetime = activity.started_at.strftime('%Y%m%dT%H%M%SZ')
       expect(subject.dtstart.value_ical).to eq datetime
     end
 
     it 'has dtend' do
-      datetime = activity.stopped_at.strftime('%Y%m%dT%H%M%S')
+      datetime = activity.stopped_at.strftime('%Y%m%dT%H%M%SZ')
       expect(subject.dtend.value_ical).to eq datetime
     end
 
