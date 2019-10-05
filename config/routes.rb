@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get :working
     end
 
+    resource :activity_calendar, only: %i[update show destroy]
     resources :activities, except: :show
     resources :projects, except: :show
     resources :webhooks, except: :show

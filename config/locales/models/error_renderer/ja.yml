@@ -15,6 +15,9 @@ ja:
     password_reset_token_invalid:
       message: 'リクエストが不正または有効期限が切れています。メールの送信から再試行してください。'
       status: 401
+    activity_calendar_token_invalid:
+      message: 'URLが不正または有効期限が切れています。URLを再発行してください。'
+      status: 401
     email_not_found:
       message: 'そのメールアドレスは登録されていません。'
       status: 404

@@ -7,4 +7,5 @@ Rails.application.config.filter_parameters += %i[
   password
   password_confirmation
   current_password
+  token
 ]

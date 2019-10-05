@@ -16,6 +16,13 @@ create_table 'activities', force: :cascade do |t|
   t.index ['user_id'], name: 'index_activities_on_user_id'
 end
 
+create_table 'activity_calendars', force: :cascade do |t|
+  t.bigint 'user_id', null: false
+  t.string 'token'
+  t.index ['token'], name: 'index_activity_calendars_on_token', unique: true
+  t.index ['user_id'], name: 'index_activity_calendars_on_user_id', unique: true
+end
+
 create_table 'oauth_access_grants', force: :cascade do |t|
   t.bigint 'resource_owner_id', null: false
   t.bigint 'application_id', null: false
@@ -113,6 +120,7 @@ end
 
 add_foreign_key 'activities', 'projects', on_delete: :nullify
 add_foreign_key 'activities', 'users', on_delete: :cascade
+add_foreign_key 'activity_calendars', 'users', on_delete: :cascade
 add_foreign_key 'oauth_access_grants', 'oauth_applications', column: 'application_id'
 add_foreign_key 'oauth_access_tokens', 'oauth_applications', column: 'application_id'
 add_foreign_key 'password_reset_tokens', 'users', on_delete: :cascade
