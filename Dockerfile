@@ -1,4 +1,4 @@
-FROM ruby:2.6.4-alpine3.10 as builder
+FROM ruby:2.6.5-alpine3.10 as builder
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 RUN apk -U upgrade \
@@ -9,7 +9,7 @@ COPY Gemfile Gemfile.lock $API_DIR/
 RUN bundle install -j4
 
 
-FROM ruby:2.6.4-alpine3.10
+FROM ruby:2.6.5-alpine3.10
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 COPY --from=builder /usr/local/bundle /usr/local/bundle
