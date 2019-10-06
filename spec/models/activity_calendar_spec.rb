@@ -24,6 +24,12 @@ RSpec.describe ActivityCalendar, type: :model do
       end
     end
 
+    context 'when user has activities but activity is not stopped' do
+      let(:activity) { create(:activity, stopped_at: nil) }
+      let(:user) { activity.user }
+      it { is_expected.not_to be_include 'BEGIN:VEVENT' }
+    end
+
     context 'when user does not have activities' do
       let(:user) { create(:user) }
       it { is_expected.not_to be_include 'BEGIN:VEVENT' }

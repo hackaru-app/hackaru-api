@@ -6,6 +6,8 @@ class ActivityEvent
   end
 
   def event
+    return nil unless @activity.stopped_at
+
     event = Icalendar::Event.new
     event.dtstart = to_datetime_value(@activity.started_at)
     event.dtend = to_datetime_value(@activity.stopped_at)

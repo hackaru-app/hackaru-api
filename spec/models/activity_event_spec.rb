@@ -30,5 +30,10 @@ RSpec.describe ActivityEvent, type: :model do
       let(:activity) { create(:activity, description: '', project: nil) }
       it { expect(subject.summary).to eq 'No Project' }
     end
+
+    context 'when activity is not stopped' do
+      let(:activity) { create(:activity, stopped_at: nil) }
+      it { expect(subject).to be_nil }
+    end
   end
 end
