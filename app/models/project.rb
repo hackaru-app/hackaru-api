@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   has_many :activities, dependent: :nullify
 
   validates :name,
-            length: { maximum: 100 },
+            length: { maximum: 191 }
             presence: true,
             uniqueness: { scope: :user_id }
   validates :color,
