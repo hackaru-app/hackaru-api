@@ -16,7 +16,7 @@ RSpec.describe Project, type: :model do
     describe 'name' do
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
-      it { is_expected.to validate_length_of(:name).is_at_most(100) }
+      it { is_expected.to validate_length_of(:name).is_at_most(191) }
     end
 
     describe 'color' do

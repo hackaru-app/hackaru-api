@@ -18,7 +18,7 @@ RSpec.describe Activity, type: :model do
     end
 
     describe 'description' do
-      it { is_expected.to validate_length_of(:description).is_at_most(500) }
+      it { is_expected.to validate_length_of(:description).is_at_most(191) }
     end
   end
 
