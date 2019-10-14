@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    == stylesheet_link_tag asset_url('pdf'), media: :all
+    == stylesheet_link_tag asset_url('c3/c3.min'), media: :all
+    == javascript_include_tag asset_url('c3/c3.min.js'), media: :all
+    == javascript_include_tag asset_url('d3/dist/d3.min.js'), media: :all
+  body
+    header class="header"
+      == image_tag asset_url('logo-black.png'), size: '32x32'
+      p hackaru.app
+
+    h1
+      | 2019/08 - 2019/07
+
+    div id="chart" style="width: 500px; height: 500px"
+
+    javascript:
+      var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+          columns: [
+              ['data1', 30],
+              ['data2', 120],
+          ],
+          type : 'pie',
+        }
+      });

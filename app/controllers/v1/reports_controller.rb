@@ -2,20 +2,26 @@
 
 module V1
   class ReportsController < ApplicationController
-    before_action :authenticate_user!
+    include ActionView::Rendering
 
-    def index
-      param! :start, Time, required: true
-      param! :end, Time, required: true
-      param! :period, String, required: true
-      param! :time_zone, String
+    def show
+      render_pdf :show
+    end
 
-      render json: Report.new(
-        user: current_user,
-        range: params[:start]..params[:end],
-        period: params[:period],
-        time_zone: params[:time_zone]
-      )
+    private
+
+    def render_temp_file(action)
+      Tempfile.open(['pdf', '.html']) do |f|
+        f.write render_to_string(action, formats: [:html])
+        f
+      end
+    end
+
+    def render_pdf(action)
+      file = render_temp_file(action)
+      pdf_data, = Open3.capture3('scripts/pdf.js', "file://#{file.path}")
+      send_data(pdf_data, type: 'application/pdf')
+      file.unlink
     end
   end
 end

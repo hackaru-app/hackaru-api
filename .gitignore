@@ -33,3 +33,6 @@
 
 # MacOS
 .DS_Store
+
+# Yarn
+node_modules
