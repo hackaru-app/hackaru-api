@@ -18,6 +18,7 @@ chdir APP_ROOT do
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
+  system! 'yarn'
 
   puts "\n== Updating database =="
   system! "bin/bundle exec ridgepole -c config/database.yml --apply --env \
