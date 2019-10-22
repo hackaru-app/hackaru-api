@@ -2,20 +2,42 @@ body {
   color: #000;
   background-color: #fff;
   font-size: 16px;
-  padding: 0 30px;
+  padding: 0 40px;
   font-family: 'Noto Sans', sans-serif;
 }
 
 .header {
   display: flex;
-  padding: 20px 0;
+  padding: 30px 0;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 4px solid #eee;
+  border-bottom: 3px solid #eee;
 }
 
-h1 {
-  font-weight: normal;
+.content header {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: flex-end;
+  h1 {
+    font-weight: normal;
+    margin: 0;
+    font-size: 24px;
+    align-items: center;
+    display: flex;
+    margin-right: 20px;
+  }
+  p {
+    color: #666;
+    font-size: 18px;
+    margin: 0;
+  }
+}
+
+#bar-chart {
+  box-sizing: border-box;
+  height: 250px;
+  margin-left: -30px;
 }
 
 #donut-chart {
