@@ -1,25 +1,44 @@
 # frozen_string_literal: true
 
 class Report
-  attr_reader :projects
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  def initialize(user:, range:, period:, time_zone: nil)
-    @projects = user.projects
-    @range = range
-    @period = period
-    @time_zone = time_zone
-  end
+  PERIODS = %w[hour day month].freeze
+
+  attribute :user_id, :integer
+  attribute :date_start, :datetime
+  attribute :date_end, :datetime
+  attribute :period, :string
+  attribute :time_zone, :string
+
+  validates :user_id, presence: true
+  validates :start, presence: true
+  validates :end, presence: true
+  validates :period, inclusion: { in: PERIODS }, presence: true
 
   def summary
-    @projects
+    p user
+    user.projects
       .joins(:activities)
       .group(:id)
       .group_by_period(
-        @period, :started_at,
-        time_zone: @time_zone,
-        permit: %w[hour day month],
-        range: @range
+        period,
+        :started_at,
+        time_zone: time_zone,
+        permit: PERIODS,
+        range: range
       )
       .sum(:duration)
+  end
+
+  private
+
+  def range
+    date_start..date_end
+  end
+
+  def user
+    User.find(user_id)
   end
 end

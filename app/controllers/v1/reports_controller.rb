@@ -6,17 +6,24 @@ module V1
     include ActionController::MimeResponds
 
     def show
-      param! :start, Time, required: true
-      param! :end, Time, required: true
-
-      @start = params[:start]
-      @end = params[:end]
-      @projects = User.find(1).projects # TODO
+      @report = build_report
 
       respond_to do |format|
         format.html { render :show, formats: [:html] }
         format.pdf { render_pdf :show }
       end
+    end
+
+    private
+
+    def build_report
+      Report.new(
+        user_id: 1,
+        date_start: params[:start],
+        date_end: params[:end],
+        period: params[:period],
+        time_zone: params[:time_zone]
+      )
     end
   end
 end

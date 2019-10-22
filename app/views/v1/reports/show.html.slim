@@ -15,20 +15,20 @@ html
       header
         h1 Summary
         p
-          == l(@start, format: '%Y/%m/%d')
+          == l(@report.date_start, format: '%Y/%m/%d')
           span -
-          == l(@end, format: '%Y/%m/%d')
+          == l(@report.date_end, format: '%Y/%m/%d')
 
       div id="bar-chart"
 
       section class="content"
-        ul class="projects"
-          - @projects.each do |project|
-            li
-              div class="project-name"
-                span class="dot" style="background-color: #{project.color}"
-                == project.name
-              span class="duration" 00:12:34
+        / ul class="projects"
+        /   - @projects.each do |project|
+        /     li
+        /       div class="project-name"
+        /         span class="dot" style="background-color: #{project.color}"
+        /         == project.name
+        /       span class="duration" 00:12:34
 
         div id="donut-chart"
 
