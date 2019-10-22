@@ -7,7 +7,8 @@ module V1
 
     def show
       @report = build_report
-
+      @bar_chart = @report.bar_chart
+      @donut_chart = @report.donut_chart
       respond_to do |format|
         format.html { render :show, formats: [:html] }
         format.pdf { render_pdf :show }

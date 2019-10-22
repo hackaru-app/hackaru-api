@@ -17,6 +17,38 @@ class Report
   validates :end, presence: true
   validates :period, inclusion: { in: PERIODS }, presence: true
 
+  def donut_chart
+    {
+      columns: summary.to_a,
+      colors: projects.map(&:id).zip(projects.map(&:color)).to_h
+    }
+  end
+
+  def bar_chart
+    summary = summary_by_period
+    ids = summary.map { |keys| keys[0][0] }.uniq
+
+    columns = ids.map do |id|
+      [id] + summary.select { |keys| keys.first == id }.values.map { |value| value / 3600 }
+    end
+
+    x = summary.map { |keys| keys[0][1].strftime('%b')  }.uniq
+
+    {
+      data: {
+        type: :bar,
+        columns:  columns,
+        colors: projects.map(&:id).zip(projects.map(&:color)).to_h,
+      },
+      axis: {
+        x: {
+          type: :category,
+          categories: x
+        }
+      }
+    }
+  end
+
   def summary
     projects
       .joins(:activities)
