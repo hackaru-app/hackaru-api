@@ -22,13 +22,15 @@ html
       div id="bar-chart"
 
       section class="content"
-        / ul class="projects"
-        /   - @projects.each do |project|
-        /     li
-        /       div class="project-name"
-        /         span class="dot" style="background-color: #{project.color}"
-        /         == project.name
-        /       span class="duration" 00:12:34
+        ul class="projects"
+          - summary = @report.summary
+          - @report.projects.each do |project|
+            li
+              div class="project-name"
+                span class="dot" style="background-color: #{project.color}"
+                == project.name
+              span class="duration"
+                == Time.at(summary[project.id] || 0).strftime("%H:%M:%S")
 
         div id="donut-chart"
 

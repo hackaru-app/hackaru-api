@@ -18,8 +18,14 @@ class Report
   validates :period, inclusion: { in: PERIODS }, presence: true
 
   def summary
-    p user
-    user.projects
+    projects
+      .joins(:activities)
+      .group(:id)
+      .sum(:duration)
+  end
+
+  def summary_by_period
+    projects
       .joins(:activities)
       .group(:id)
       .group_by_period(
@@ -30,6 +36,10 @@ class Report
         range: range
       )
       .sum(:duration)
+  end
+
+  def projects
+    user.projects
   end
 
   private
