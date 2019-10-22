@@ -2,19 +2,18 @@ body {
   color: #000;
   background-color: #fff;
   font-size: 16px;
-  padding: 0 40px;
+  padding: 0 50px;
   font-family: 'Noto Sans', sans-serif;
+  -webkit-print-color-adjust: exact;
 }
-
 .header {
   display: flex;
-  padding: 30px 0;
+  padding: 40px 0;
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid #eee;
 }
-
-.content header {
+.report header {
   margin-top: 40px;
   margin-bottom: 50px;
   display: flex;
@@ -33,14 +32,44 @@ body {
     margin: 0;
   }
 }
-
 #bar-chart {
   box-sizing: border-box;
   height: 250px;
   margin-left: -30px;
+  margin-bottom: 30px;
 }
-
 #donut-chart {
-  width: 250px;
-  height: 250px;
+  width: 230px;
+  height: 230px;
+  flex-shrink: 1;
+}
+.content {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.projects {
+  width: 100%;
+  padding: 0;
+  padding-right: 50px;
+  box-sizing: border-box;
+}
+.project-name {
+  display: flex;
+  align-items: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.projects li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  .duration {
+    color: #666;
+  }
 }
