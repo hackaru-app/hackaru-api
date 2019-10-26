@@ -11,49 +11,32 @@ class Report
   attribute :date_end, :datetime
   attribute :period, :string
   attribute :time_zone, :string
+  attribute :user
 
   validates :user_id, presence: true
   validates :start, presence: true
   validates :end, presence: true
   validates :period, inclusion: { in: PERIODS }, presence: true
 
-  def donut_chart
-    {
-      columns: summary.to_a,
-      colors: projects.map(&:id).zip(projects.map(&:color)).to_h
-    }
-  end
-
-  def bar_chart
-    summary = summary_by_period
-    ids = summary.map { |keys| keys[0][0] }.uniq
-
-    columns = ids.map do |id|
-      [id] + summary.select { |keys| keys.first == id }.values.map { |value| value / 3600 }
-    end
-
-    x = summary.map { |keys| keys[0][1].strftime('%b')  }.uniq
-
-    {
-      data: {
-        type: :bar,
-        columns:  columns,
-        colors: projects.map(&:id).zip(projects.map(&:color)).to_h,
-      },
-      axis: {
-        x: {
-          type: :category,
-          categories: x
-        }
-      }
-    }
-  end
-
   def summary
     projects
       .joins(:activities)
       .group(:id)
       .sum(:duration)
+  end
+
+  def donut_chart
+    { columns: summary.to_a, colors: colors }
+  end
+
+  def bar_chart
+    { columns: bar_chart_columns, colors: colors }
+  end
+
+  def bar_chart_categories
+    summary_by_period.map do |keys|
+      keys[0][1].strftime('%b')
+    end.uniq
   end
 
   def summary_by_period
@@ -65,9 +48,8 @@ class Report
         :started_at,
         time_zone: time_zone,
         permit: PERIODS,
-        range: range
-      )
-      .sum(:duration)
+        range: date_start..date_end
+      ).sum(:duration)
   end
 
   def projects
@@ -76,11 +58,18 @@ class Report
 
   private
 
-  def range
-    date_start..date_end
+  def bar_chart_columns
+    summary = summary_by_period
+    ids = summary.map { |keys| keys[0][0] }.uniq
+    ids.map do |id|
+      values = summary.select { |keys| keys[0] == id }.values
+      [id] + values.map { |value| value / 3600 }
+    end
   end
 
-  def user
-    User.find(user_id)
+  def colors
+    projects.map do |project|
+      [project.id, project.color]
+    end.to_h
   end
 end

@@ -19,7 +19,11 @@ html
           span -
           == l(@report.date_end, format: '%Y/%m/%d')
 
-      div id="bar-chart" data-chart="#{@bar_chart.to_json}"
+      div[
+        id="bar-chart"
+        data-chart="#{@report.bar_chart.to_json}"
+        data-categories="#{@report.bar_chart_categories.to_json}"
+      ]
 
       section class="content"
         - summary = @report.summary
@@ -30,10 +34,11 @@ html
               div class="project-name"
                 span class="dot" style="background-color: #{project.color}"
                 == project.name
+
               span class="duration"
                 == Time.at(summary[project.id] || 0).strftime("%H:%M:%S")
 
-        div id="donut-chart" data-chart="#{@donut_chart.to_json}"
+        div id="donut-chart" data-chart="#{@report.donut_chart.to_json}"
 
   == javascript_include_tag asset_url('c3/c3.min.js'), media: :all
   == javascript_include_tag asset_url('d3/dist/d3.min.js'), media: :all

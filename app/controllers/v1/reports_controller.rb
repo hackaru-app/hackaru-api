@@ -7,8 +7,6 @@ module V1
 
     def show
       @report = build_report
-      @bar_chart = @report.bar_chart
-      @donut_chart = @report.donut_chart
       respond_to do |format|
         format.html { render :show, formats: [:html] }
         format.pdf { render_pdf :show }
@@ -19,7 +17,7 @@ module V1
 
     def build_report
       Report.new(
-        user_id: 1,
+        user: User.find(1),
         date_start: params[:start],
         date_end: params[:end],
         period: params[:period],
