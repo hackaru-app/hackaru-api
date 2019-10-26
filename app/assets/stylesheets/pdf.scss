@@ -1,14 +1,9 @@
-@font-face {
-  font-family: 'Noto Sans JP';
-  src: url(//fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff2) format('woff2')
-}
-
 body {
   color: #000;
   background-color: #fff;
   font-size: 16px;
   padding: 0 50px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
   -webkit-print-color-adjust: exact;
 }
 .header {
