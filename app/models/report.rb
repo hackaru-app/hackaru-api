@@ -4,7 +4,7 @@ class Report
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  PERIODS = %w[hour day month].freeze
+  # PERIODS = %w[hour day month].freeze
 
   attribute :user_id, :integer
   attribute :date_start, :datetime
@@ -16,7 +16,6 @@ class Report
   validates :user_id, presence: true
   validates :start, presence: true
   validates :end, presence: true
-  validates :period, inclusion: { in: PERIODS }, presence: true
 
   def summary
     projects
@@ -47,8 +46,7 @@ class Report
         period,
         :started_at,
         time_zone: time_zone,
-        permit: PERIODS,
-        range: date_start..date_end
+        range: range
       ).sum(:duration)
   end
 
@@ -57,6 +55,18 @@ class Report
   end
 
   private
+
+  def range
+    date_start..date_end
+  end
+
+  def period
+    duration = date_end - date_start
+    return :hour if duration <= 1.day
+    return :day if duration <= 1.month
+    return :month if duration <= 1.year
+    return :year
+  end
 
   def bar_chart_columns
     summary = summary_by_period
