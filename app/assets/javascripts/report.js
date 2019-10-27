@@ -18,12 +18,10 @@ function generateBarChart() {
       x: {
         type: 'category',
         categories: labels
-      }
-    },
-    axis: {
+      },
       y: {
         tick: {
-          format: d => `${d} h`
+          format: d => (d % 1 === 0) ? `${d}h` : ''
         }
       }
     }
