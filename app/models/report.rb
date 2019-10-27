@@ -12,15 +12,16 @@ class Report
   }.freeze
 
   attribute :user_id, :integer
-  attribute :date_start, :datetime
-  attribute :date_end, :datetime
+  attribute :start_date, :datetime
+  attribute :end_date, :datetime
   attribute :period, :string
   attribute :time_zone, :string
   attribute :user
 
   validates :user_id, presence: true
-  validates :start, presence: true
-  validates :end, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :start_date, date: { before: :end_date }
 
   def totals
     data.map do |key, value|
@@ -42,8 +43,8 @@ class Report
   end
 
   def labels
-    dates = [date_start]
-    dates << dates.last + 1.send(period) while dates.last <= date_end
+    dates = [start_date]
+    dates << dates.last + 1.send(period) while dates.last <= end_date
     dates.pop
     dates.map do |date|
       date.strftime(FORMATS[period])
@@ -73,12 +74,12 @@ class Report
         period,
         :started_at,
         time_zone: time_zone,
-        range: date_start..date_end
+        range: start_date..end_date
       ).sum(:duration)
   end
 
   def period
-    duration = date_end - date_start
+    duration = end_date - start_date
     return :hour  if duration <= 1.day
     return :day   if duration <= 1.month
     return :month if duration <= 1.year

@@ -18,8 +18,8 @@ module V1
     def build_report
       Report.new(
         user: User.find(1),
-        date_start: params[:start],
-        date_end: params[:end],
+        start_date: params[:start],
+        end_date: params[:end],
         period: params[:period],
         time_zone: params[:time_zone]
       )

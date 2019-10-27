@@ -33,7 +33,6 @@ RUN apk -U upgrade \
     freetype-dev \
     harfbuzz \
     ca-certificates \
-    ttf-freefont \
     nodejs \
     yarn \
  && addgroup hackaru \

@@ -17,9 +17,9 @@ html
       header
         h1 Summary
         p
-          == l(@report.date_start, format: '%Y/%m/%d')
+          == l(@report.start_date, format: '%F')
           span -
-          == l(@report.date_end, format: '%Y/%m/%d')
+          == l(@report.end_date, format: '%F')
 
       div[
         id="bar-chart"
