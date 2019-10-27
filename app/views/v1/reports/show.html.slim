@@ -23,14 +23,14 @@ html
 
       div[
         id="bar-chart"
-        data-chart="#{@report.bar_chart.to_json}"
-        data-categories="#{@report.bar_chart_categories.to_json}"
+        data-columns="#{@bar_chart.columns.to_json}"
+        data-colors="#{@bar_chart.colors.to_json}"
+        data-labels="#{@bar_chart.labels.to_json}"
       ]
 
       section class="content"
-        - summary = @report.summary
-
         ul class="projects"
+          - totals = @report.totals
           - @report.projects.each do |project|
             li
               div class="project-name"
@@ -38,9 +38,13 @@ html
                 == project.name
 
               span class="duration"
-                == Time.at(summary[project.id] || 0).strftime("%H:%M:%S")
+                == Time.at(totals[project.id]).strftime("%H:%M:%S")
 
-        div id="donut-chart" data-chart="#{@report.donut_chart.to_json}"
+        div[
+          id="donut-chart"
+          data-columns="#{@donut_chart.columns.to_json}"
+          data-colors="#{@donut_chart.colors.to_json}"
+        ]
 
   == javascript_include_tag asset_url('c3/c3.min.js'), media: :all
   == javascript_include_tag asset_url('d3/dist/d3.min.js'), media: :all

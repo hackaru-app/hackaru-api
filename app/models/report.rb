@@ -28,20 +28,6 @@ class Report
     end.to_h
   end
 
-  # def donut_chart
-  #   { columns: summary.to_a, colors: colors }
-  # end
-
-  # def bar_chart
-  #   { columns: bar_chart_columns, colors: colors }
-  # end
-
-  # def bar_chart_categories
-  #   summary_by_period.map do |keys|
-  #     keys[0][1].strftime('%b')
-  #   end.uniq
-  # end
-
   def data
     summary = summary_by_period
     data = projects.map(&:id).map do |id|
@@ -57,9 +43,7 @@ class Report
 
   def labels
     dates = [date_start]
-    while dates.last <= date_end
-      dates << dates.last + 1.send(period)
-    end
+    dates << dates.last + 1.send(period) while dates.last <= date_end
     dates.pop
     dates.map do |date|
       date.strftime(FORMATS[period])
@@ -88,19 +72,4 @@ class Report
 
     :year
   end
-
-  # def bar_chart_columns
-  #   summary = summary_by_period
-  #   ids = summary.map { |keys| keys[0][0] }.uniq
-  #   ids.map do |id|
-  #     values = summary.select { |keys| keys[0] == id }.values
-  #     [id] + values.map { |value| value / 3600 }
-  #   end
-  # end
-
-  # def colors
-  #   projects.map do |project|
-  #     [project.id, project.color]
-  #   end.to_h
-  # end
 end
