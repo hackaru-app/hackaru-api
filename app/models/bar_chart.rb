@@ -53,7 +53,8 @@ class BarChart
     return :hour if duration <= 1.day
     return :day if duration <= 1.month
     return :month if duration <= 1.year
-    return :year
+
+    :year
   end
 
   def bar_chart_columns

@@ -2,15 +2,23 @@
 
 class ReportSerializer < ActiveModel::Serializer
   attributes :projects
-  attributes :summary
+  attributes :totals
+  attributes :labels
+  attributes :data
 
   def projects
     object.projects
   end
 
-  def summary
-    object.summary.map do |key, value|
-      { project_id: key[0], date: key[1], duration: value }
-    end
+  def totals
+    object.totals
+  end
+
+  def labels
+    object.labels
+  end
+
+  def data
+    object.data
   end
 end

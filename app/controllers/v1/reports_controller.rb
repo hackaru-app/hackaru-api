@@ -2,15 +2,17 @@
 
 module V1
   class ReportsController < ApplicationController
-    include PdfRenderable
-    include ActionController::MimeResponds
+    # include PdfRenderable
+    # include ActionController::MimeResponds
 
     def show
       @report = build_report
-      respond_to do |format|
-        format.html { render :show, formats: [:html] }
-        format.pdf { render_pdf :show }
-      end
+      render json: @report
+      # respond_to do |format|
+      #   format.html { render :show, formats: [:html] }
+      #   format.pdf { render_pdf :show }
+      #   format.json { render json: @report }
+      # end
     end
 
     private
