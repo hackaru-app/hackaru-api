@@ -30,7 +30,7 @@ class Report
 
   def data
     summary = summary_by_period
-    data = projects.map(&:id).map do |id|
+    projects.map(&:id).map do |id|
       values = summary.select { |keys| keys[0] == id }.values
       values = labels.map { 0 } if values.empty?
       [id, values]
@@ -43,9 +43,7 @@ class Report
 
   def labels
     dates = [date_start]
-    while dates.last <= date_end
-      dates << dates.last + 1.send(period)
-    end
+    dates << dates.last + 1.send(period) while dates.last <= date_end
     dates.pop
     dates.map do |date|
       date.strftime(FORMATS[period])
@@ -67,7 +65,8 @@ class Report
   private
 
   def summary_by_period
-    @summary_by_period ||= projects
+    @summary_by_period ||=
+      projects
       .joins(:activities)
       .group(:id)
       .group_by_period(
