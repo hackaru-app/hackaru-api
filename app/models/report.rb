@@ -43,17 +43,31 @@ class Report
 
   def labels
     dates = [date_start]
-    dates << dates.last + 1.send(period) while dates.last <= date_end
+    while dates.last <= date_end
+      dates << dates.last + 1.send(period)
+    end
     dates.pop
     dates.map do |date|
       date.strftime(FORMATS[period])
     end
   end
 
+  def colors
+    projects.map do |project|
+      [project.id, project.color]
+    end.to_h
+  end
+
+  def bar_chart_data
+    data.map do |id, values|
+      [id] + values.map { |value| value / 3600 }
+    end
+  end
+
   private
 
   def summary_by_period
-    projects
+    @summary_by_period ||= projects
       .joins(:activities)
       .group(:id)
       .group_by_period(

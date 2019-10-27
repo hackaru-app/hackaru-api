@@ -23,9 +23,9 @@ html
 
       div[
         id="bar-chart"
-        data-columns="#{@bar_chart.columns.to_json}"
-        data-colors="#{@bar_chart.colors.to_json}"
-        data-labels="#{@bar_chart.labels.to_json}"
+        data-columns="#{@report.bar_chart_data.to_json}"
+        data-colors="#{@report.colors.to_json}"
+        data-labels="#{@report.labels.to_json}"
       ]
 
       section class="content"
@@ -40,10 +40,10 @@ html
               span class="duration"
                 == Time.at(totals[project.id]).strftime("%H:%M:%S")
 
-        div[
+        div [
           id="donut-chart"
-          data-columns="#{@donut_chart.columns.to_json}"
-          data-colors="#{@donut_chart.colors.to_json}"
+          data-columns="#{@report.totals.to_a.to_json}"
+          data-colors="#{@report.colors.to_json}"
         ]
 
   == javascript_include_tag asset_url('c3/c3.min.js'), media: :all

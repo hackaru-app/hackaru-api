@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 class ReportSerializer < ActiveModel::Serializer
-  attributes :projects
   attributes :totals
+  attributes :colors
   attributes :labels
   attributes :data
 
-  def projects
-    object.projects
-  end
-
   def totals
     object.totals
+  end
+
+  def colors
+    object.colors
   end
 
   def labels
