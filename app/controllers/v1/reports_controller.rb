@@ -5,8 +5,11 @@ module V1
     include PdfRenderable
     include ActionController::MimeResponds
 
+    before_action :authenticate_user!, only: :show
+
     def show
       @report = build_report
+      @report.valid!
       respond_to do |format|
         format.html { render :show, formats: [:html] }
         format.pdf { render_pdf :show }
@@ -17,7 +20,7 @@ module V1
 
     def build_report
       Report.new(
-        user: User.find(1),
+        user: current_user,
         start_date: params[:start],
         end_date: params[:end],
         period: params[:period],

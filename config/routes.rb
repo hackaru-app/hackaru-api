@@ -34,9 +34,7 @@ Rails.application.routes.draw do
     resources :activities, except: :show
     resources :projects, except: :show
     resources :webhooks, except: :show
-    resource :report, only: :show, defaults: { format: :json } do
-      get :pdf_content
-    end
+    resource :report, only: :show, defaults: { format: :json }
     resources :suggestions, only: :index
   end
 end

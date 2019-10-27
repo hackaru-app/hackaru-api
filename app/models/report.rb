@@ -3,6 +3,7 @@
 class Report
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ValidationRaisable
 
   FORMATS = {
     hour: '%H',
@@ -18,7 +19,7 @@ class Report
   attribute :time_zone, :string
   attribute :user
 
-  validates :user_id, presence: true
+  validates :user, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :start_date, date: { before: :end_date }
