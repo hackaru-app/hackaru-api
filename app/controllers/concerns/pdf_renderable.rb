@@ -2,7 +2,6 @@
 
 module PdfRenderable
   extend ActiveSupport::Concern
-  include ActionView::Rendering
 
   private
 

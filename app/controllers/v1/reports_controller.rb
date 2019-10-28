@@ -10,8 +10,10 @@ module V1
     def show
       @report = build_report
       @report.valid!
+
       respond_to do |format|
         format.html { render :show, formats: [:html] }
+        format.json { render json: @report }
         format.pdf { render_pdf :show }
       end
     end
