@@ -12,16 +12,15 @@ class Report
     year: '%Y'
   }.freeze
 
-  attribute :user_id, :integer
   attribute :start_date, :datetime
   attribute :end_date, :datetime
-  attribute :period, :string
   attribute :time_zone, :string
   attribute :user
 
   validates :user, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validates :time_zone, presence: true
   validates :start_date, date: { before: :end_date }
 
   def totals
