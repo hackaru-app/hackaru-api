@@ -22,6 +22,9 @@ en:
       routing_error:
         message: 'The requested resouce is not exists.'
         status: 404
+      unknown_format:
+        message: 'The requested resouce is not exists.'
+        status: 404
     groupdate:
       error:
         message: 'The request has invalid parameter.'

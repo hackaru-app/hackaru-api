@@ -9,8 +9,6 @@ module V1
 
     def show
       @report = build_report
-      @report.valid!
-
       respond_to do |format|
         format.html { render :show, formats: [:html] }
         format.json { render json: @report }
@@ -21,13 +19,14 @@ module V1
     private
 
     def build_report
-      Report.new(
+      report = Report.new(
         user: current_user,
         start_date: params[:start],
         end_date: params[:end],
-        period: params[:period],
         time_zone: params[:time_zone]
       )
+      report.valid!
+      report
     end
   end
 end
