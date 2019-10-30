@@ -21,7 +21,7 @@ function generateBarChart() {
       },
       y: {
         tick: {
-          format: d => (d % 1 === 0) ? `${d}h` : ''
+          format: d => (d % 1 === 0 ? `${d}h` : '')
         }
       }
     }
@@ -36,12 +36,12 @@ function generateDonut() {
   c3.generate({
     bindto: '#donut-chart',
     data: {
-      type : 'donut',
+      type: 'donut',
       columns: columns,
       colors: colors
     },
     donut: {
-      padAngle: .015,
+      padAngle: 0.015,
       label: {
         show: false
       }

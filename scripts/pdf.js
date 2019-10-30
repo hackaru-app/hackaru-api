@@ -2,7 +2,7 @@
 
 const puppeteer = require('puppeteer');
 
-(async () => {
+async function exportPdf() {
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/chromium-browser',
     args: ['--no-sandbox']
@@ -17,4 +17,6 @@ const puppeteer = require('puppeteer');
   process.stdout.write(data);
 
   await browser.close();
-})();
+}
+
+exportPdf();
