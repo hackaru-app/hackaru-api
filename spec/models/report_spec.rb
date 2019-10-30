@@ -43,7 +43,7 @@ RSpec.describe Report, type: :model do
   end
 
   describe '#data' do
-    let(:now) { Time.new(2019, 1, 1, 0, 0, 0) }
+    let(:now) { Time.parse('2019-01-01T00:00:00') }
     let(:user) { create(:user) }
 
     subject do
@@ -363,7 +363,7 @@ RSpec.describe Report, type: :model do
   end
 
   describe '#labels' do
-    let(:now) { Time.new(2019, 1, 1, 0, 0, 0) }
+    let(:now) { Time.parse('2019-01-01T00:00:00') }
 
     subject do
       Report.new(
