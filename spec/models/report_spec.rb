@@ -80,8 +80,8 @@ RSpec.describe Report, type: :model do
 
       it 'returns data correctly' do
         is_expected.to eq [
-          [projects[0].id, [0, 0, 10800, 0, 0, 0, 0]],
-          [projects[1].id, [0, 0, 0, 0, 10800, 0, 0]],
+          [projects[0].id, [0, 0, 10_800, 0, 0, 0, 0]],
+          [projects[1].id, [0, 0, 0, 0, 10_800, 0, 0]]
         ].to_h
       end
     end
@@ -111,8 +111,8 @@ RSpec.describe Report, type: :model do
 
       it 'returns data correctly' do
         is_expected.to eq [
-          [projects[0].id, [0, 0, 259200, 0, 0, 0, 0]],
-          [projects[1].id, [0, 0, 0, 0, 259200, 0, 0]],
+          [projects[0].id, [0, 0, 259_200, 0, 0, 0, 0]],
+          [projects[1].id, [0, 0, 0, 0, 259_200, 0, 0]]
         ].to_h
       end
     end
@@ -142,8 +142,8 @@ RSpec.describe Report, type: :model do
 
       it 'returns data correctly' do
         is_expected.to eq [
-          [projects[0].id, [0, 0, 8035200, 0, 0, 0, 0]],
-          [projects[1].id, [0, 0, 0, 0, 8035200, 0, 0]],
+          [projects[0].id, [0, 0, 8_035_200, 0, 0, 0, 0]],
+          [projects[1].id, [0, 0, 0, 0, 8_035_200, 0, 0]]
         ].to_h
       end
     end
@@ -173,8 +173,8 @@ RSpec.describe Report, type: :model do
 
       it 'returns data correctly' do
         is_expected.to eq [
-          [projects[0].id, [0, 0, 94608000, 0, 0, 0, 0]],
-          [projects[1].id, [0, 0, 0, 0, 94608000, 0, 0]],
+          [projects[0].id, [0, 0, 94_608_000, 0, 0, 0, 0]],
+          [projects[1].id, [0, 0, 0, 0, 94_608_000, 0, 0]]
         ].to_h
       end
     end
@@ -218,7 +218,7 @@ RSpec.describe Report, type: :model do
       let(:end_date) { now + 6.days }
 
       it 'returns empty' do
-        is_expected.to eq ({})
+        is_expected.to eq({})
       end
     end
   end
@@ -260,8 +260,8 @@ RSpec.describe Report, type: :model do
 
       it 'returns totals correctly' do
         is_expected.to eq [
-          [projects[0].id, 21600],
-          [projects[1].id, 32400],
+          [projects[0].id, 21_600],
+          [projects[1].id, 32_400]
         ].to_h
       end
     end
@@ -300,7 +300,7 @@ RSpec.describe Report, type: :model do
 
     context 'when user does not have project' do
       it 'returns empty' do
-        is_expected.to eq ({})
+        is_expected.to eq({})
       end
     end
   end
@@ -323,14 +323,14 @@ RSpec.describe Report, type: :model do
         projects = create_list(:project, 2, user: user)
         is_expected.to eq [
           [projects[0].id, projects[0].color],
-          [projects[1].id, projects[1].color],
+          [projects[1].id, projects[1].color]
         ].to_h
       end
     end
 
     context 'when user does not have projects' do
       it 'returns empty' do
-        is_expected.to eq ({})
+        is_expected.to eq({})
       end
     end
   end
@@ -377,10 +377,10 @@ RSpec.describe Report, type: :model do
     context 'when range is hourly' do
       let(:end_date) { now + 23.hours }
       it 'returns hourly labels' do
-        is_expected.to eq [
-          '00', '01', '02', '03', '04', '05', '06', '07', '08', '09',
-          '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-          '20', '21', '22', '23'
+        is_expected.to eq %w[
+          00 01 02 03 04 05 06 07 08 09
+          10 11 12 13 14 15 16 17 18 19
+          20 21 22 23
         ]
       end
     end
@@ -388,16 +388,16 @@ RSpec.describe Report, type: :model do
     context 'when range is daily' do
       let(:end_date) { now + 5.days }
       it 'returns daily labels' do
-        is_expected.to eq ['01', '02', '03', '04', '05', '06']
+        is_expected.to eq %w[01 02 03 04 05 06]
       end
     end
 
     context 'when range is monthly' do
       let(:end_date) { now + 11.months }
       it 'returns monthly labels' do
-        is_expected.to eq [
-          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        is_expected.to eq %w[
+          Jan Feb Mar Apr May Jun
+          Jul Aug Sep Oct Nov Dec
         ]
       end
     end
@@ -405,7 +405,7 @@ RSpec.describe Report, type: :model do
     context 'when range is yearly' do
       let(:end_date) { now + 2.years }
       it 'returns yearly labels' do
-        is_expected.to eq ['2019', '2020', '2021']
+        is_expected.to eq %w[2019 2020 2021]
       end
     end
 
