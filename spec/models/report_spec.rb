@@ -363,19 +363,20 @@ RSpec.describe Report, type: :model do
   end
 
   describe '#labels' do
-    let(:now) { Time.parse('2019-01-01T00:00:00') }
+    let(:start_date) { Time.parse('2019-01-01T00:00:00') }
+    let(:time_zone) { 'UTC' }
 
     subject do
       Report.new(
         user: create(:user),
-        time_zone: 'UTC',
-        start_date: now,
+        time_zone: time_zone,
+        start_date: start_date,
         end_date: end_date
       ).labels
     end
 
     context 'when range is hourly' do
-      let(:end_date) { now + 23.hours }
+      let(:end_date) { start_date + 23.hours }
       it 'returns hourly labels' do
         is_expected.to eq %w[
           00 01 02 03 04 05 06 07 08 09
@@ -386,14 +387,14 @@ RSpec.describe Report, type: :model do
     end
 
     context 'when range is daily' do
-      let(:end_date) { now + 5.days }
+      let(:end_date) { start_date + 5.days }
       it 'returns daily labels' do
         is_expected.to eq %w[01 02 03 04 05 06]
       end
     end
 
     context 'when range is monthly' do
-      let(:end_date) { now + 11.months }
+      let(:end_date) { start_date + 11.months }
       it 'returns monthly labels' do
         is_expected.to eq %w[
           Jan Feb Mar Apr May Jun
@@ -403,16 +404,29 @@ RSpec.describe Report, type: :model do
     end
 
     context 'when range is yearly' do
-      let(:end_date) { now + 2.years }
+      let(:end_date) { start_date + 2.years }
       it 'returns yearly labels' do
         is_expected.to eq %w[2019 2020 2021]
       end
     end
 
     context 'when range is minutely' do
-      let(:end_date) { now + 3.minutes }
+      let(:end_date) { start_date + 3.minutes }
       it 'returns hours label' do
         is_expected.to eq ['00']
+      end
+    end
+
+    context 'when range has leap day' do
+      let(:start_date) { Time.parse('2018-12-31T15:00:00') }
+      let(:end_date) { Time.parse('2019-12-31T14:59:59') }
+      let(:time_zone) { 'Asia/Tokyo' }
+
+      it 'returns monthly labels' do
+        is_expected.to eq %w[
+          Jan Feb Mar Apr May Jun
+          Jul Aug Sep Oct Nov Dec
+        ]
       end
     end
   end
