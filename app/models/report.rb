@@ -43,8 +43,10 @@ class Report
   end
 
   def labels
-    dates = [start_date]
-    dates << dates.last + 1.send(period) while dates.last <= end_date
+    dates = [set_time_zone(start_date)]
+    while dates.last <= set_time_zone(end_date)
+      dates << dates.last + 1.send(period)
+    end
     dates.pop
     dates.map do |date|
       date.strftime(FORMATS[period])
@@ -65,6 +67,10 @@ class Report
 
   private
 
+  def set_time_zone(time)
+    time.in_time_zone(time_zone)
+  end
+
   def summary_by_period
     @summary_by_period ||=
       projects
@@ -79,11 +85,10 @@ class Report
   end
 
   def period
-    duration = end_date - start_date
-    return :hour  if duration <= 1.day
-    return :day   if duration <= 1.month
-    return :month if duration <= 1.year
-
+    [:hour, :day, :month, :year].each_cons(2) do |periods|
+      out_of_date = set_time_zone(start_date) + 1.send(periods.last)
+      return periods.first if set_time_zone(end_date) < out_of_date
+    end
     :year
   end
 end
