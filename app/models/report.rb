@@ -5,6 +5,13 @@ class Report
   include ActiveModel::Attributes
   include ValidationRaisable
 
+  PERIODS = [
+    :hour,
+    :day,
+    :month,
+    :year
+  ].freeze
+
   FORMATS = {
     hour: '%H',
     day: '%d',
@@ -79,16 +86,16 @@ class Report
       .group_by_period(
         period,
         :started_at,
+        permit: PERIODS,
         time_zone: time_zone,
         range: start_date..end_date
       ).sum(:duration)
   end
 
   def period
-    [:hour, :day, :month, :year].each_cons(2) do |periods|
+    PERIODS.each_cons(2) do |periods|
       out_of_date = set_time_zone(start_date) + 1.send(periods.last)
       return periods.first if set_time_zone(end_date) < out_of_date
-    end
-    :year
+    end || PERIODS.last
   end
 end
