@@ -417,12 +417,25 @@ RSpec.describe Report, type: :model do
       end
     end
 
-    context 'when range has leap day' do
-      let(:start_date) { Time.parse('2018-12-31T15:00:00') }
-      let(:end_date) { Time.parse('2019-12-31T14:59:59') }
+    context 'when time_zone is not UTC' do
+      let(:start_date) { Time.parse('2019-01-01T15:00:00') }
+      let(:end_date) { Time.parse('2019-01-02T14:59:59') }
       let(:time_zone) { 'Asia/Tokyo' }
 
-      it 'returns monthly labels' do
+      it 'returns labels correctly' do
+        is_expected.to eq %w[
+          00 01 02 03 04 05 06 07 08 09
+          10 11 12 13 14 15 16 17 18 19
+          20 21 22 23
+        ]
+      end
+    end
+
+    context 'when range has leap day' do
+      let(:start_date) { Time.parse('2020-01-01T00:00:00') }
+      let(:end_date) { Time.parse('2020-12-31T23:59:59') }
+
+      it 'returns labels correctly' do
         is_expected.to eq %w[
           Jan Feb Mar Apr May Jun
           Jul Aug Sep Oct Nov Dec
