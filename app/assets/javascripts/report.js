@@ -1,56 +1,40 @@
-function generateBarChart() {
-  const element = document.getElementById('bar-chart');
-  const columns = JSON.parse(element.dataset.columns);
-  const colors = JSON.parse(element.dataset.colors);
-  const labels = JSON.parse(element.dataset.labels);
-
-  c3.generate({
-    bindto: '#bar-chart',
-    data: {
-      type: 'bar',
-      columns: columns,
-      colors: colors
+c3.generate({
+  bindto: '#bar-chart',
+  data: {
+    type: 'bar',
+    columns: gon.bar_chart_data,
+    colors: gon.colors
+  },
+  legend: {
+    show: false
+  },
+  axis: {
+    x: {
+      type: 'category',
+      categories: gon.labels
     },
-    legend: {
-      show: false
-    },
-    axis: {
-      x: {
-        type: 'category',
-        categories: labels
-      },
-      y: {
-        tick: {
-          format: d => (d % 1 === 0 ? `${d}h` : '')
-        }
+    y: {
+      tick: {
+        format: d => (d % 1 === 0 ? `${d}h` : '')
       }
     }
-  });
-}
+  }
+});
 
-function generateDonut() {
-  const element = document.getElementById('donut-chart');
-  const columns = JSON.parse(element.dataset.columns);
-  const colors = JSON.parse(element.dataset.colors);
-
-  c3.generate({
-    bindto: '#donut-chart',
-    data: {
-      type: 'donut',
-      columns: columns,
-      colors: colors
-    },
-    donut: {
-      padAngle: 0.015,
-      label: {
-        show: false
-      }
-    },
-    legend: {
+c3.generate({
+  bindto: '#donut-chart',
+  data: {
+    type: 'donut',
+    columns: gon.totals,
+    colors: gon.colors
+  },
+  donut: {
+    padAngle: 0.015,
+    label: {
       show: false
     }
-  });
-}
-
-generateBarChart();
-generateDonut();
+  },
+  legend: {
+    show: false
+  }
+});

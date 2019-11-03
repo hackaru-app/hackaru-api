@@ -21,12 +21,7 @@ html
           span -
           == l(@report.end_date, format: '%F')
 
-      div[
-        id="bar-chart"
-        data-columns="#{@report.bar_chart_data.to_json}"
-        data-colors="#{@report.colors.to_json}"
-        data-labels="#{@report.labels.to_json}"
-      ]
+      div id="bar-chart"
 
       section class="content"
         ul class="projects"
@@ -40,12 +35,9 @@ html
               span class="duration"
                 == Time.at(totals[project.id]).strftime("%H:%M:%S")
 
-        div [
-          id="donut-chart"
-          data-columns="#{@report.totals.to_a.to_json}"
-          data-colors="#{@report.colors.to_json}"
-        ]
+        div id="donut-chart"
 
+  == Gon::Base.render_data
   == javascript_include_tag asset_url('c3/c3.min.js'), media: :all
   == javascript_include_tag asset_url('d3/dist/d3.min.js'), media: :all
   == javascript_include_tag asset_url('report.js'), media: :all
