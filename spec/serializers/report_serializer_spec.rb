@@ -49,7 +49,7 @@ RSpec.describe ReportSerializer, type: :serializer do
           04
         ],
         data: [
-          [project.id, [86400, 0, 0, 0]]
+          [project.id, [86_400, 0, 0, 0]]
         ].to_h,
         totals: [
           [project.id, 86_400]
