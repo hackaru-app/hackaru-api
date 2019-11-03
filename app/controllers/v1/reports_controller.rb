@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ReportsController < ApplicationController
+  class ReportsController < HtmlApplicationController
     include PdfRenderable
     include ActionController::MimeResponds
 
@@ -9,10 +9,8 @@ module V1
 
     def show
       @report = build_report
-      push_show_vars @report
-
       respond_to do |format|
-        format.html { render :show, formats: [:html] }
+        format.html { render_html }
         format.json { render json: @report }
         format.pdf { render_pdf :show }
       end
@@ -20,13 +18,14 @@ module V1
 
     private
 
-    def push_show_vars(report)
+    def render_html
       gon.push(
-        bar_chart_data: report.bar_chart_data,
-        totals: report.totals.to_a,
-        colors: report.colors,
-        labels: report.labels
+        bar_chart_data: @report.bar_chart_data,
+        totals: @report.totals.to_a,
+        colors: @report.colors,
+        labels: @report.labels
       )
+      render :show, formats: [:html]
     end
 
     def build_report
