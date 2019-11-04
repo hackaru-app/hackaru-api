@@ -14,7 +14,7 @@ RSpec.describe Activity, type: :model do
     subject { build(:activity) }
 
     it { is_expected.to validate_presence_of(:started_at) }
-    it { is_expected.to validate_length_of(:description).is_at_most(500) }
+    it { is_expected.to validate_length_of(:description).is_at_most(191) }
 
     describe 'stopped_at' do
       let(:started_at) { Time.now }

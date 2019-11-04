@@ -6,7 +6,7 @@ class Activity < ApplicationRecord
   belongs_to :user
   belongs_to :project, optional: true
 
-  validates :description, length: { maximum: 500 }
+  validates :description, length: { maximum: 191 }
   validates :started_at, presence: true
   validates :started_at,
             date: { before_or_equal_to: :stopped_at }, if: :stopped?
