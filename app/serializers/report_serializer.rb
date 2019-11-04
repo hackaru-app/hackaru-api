@@ -4,7 +4,7 @@ class ReportSerializer < ActiveModel::Serializer
   attributes :projects
   attributes :totals
   attributes :labels
-  attributes :data
+  attributes :sums
 
   def projects
     object.projects
@@ -18,7 +18,7 @@ class ReportSerializer < ActiveModel::Serializer
     object.labels
   end
 
-  def data
-    object.data
+  def sums
+    object.sums
   end
 end

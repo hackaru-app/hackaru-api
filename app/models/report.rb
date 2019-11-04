@@ -31,15 +31,14 @@ class Report
   validates :start_date, date: { before: :end_date }
 
   def totals
-    data.map do |key, value|
+    sums.map do |key, value|
       [key, value.sum]
     end.to_h
   end
 
-  def data
-    summary = summary_by_period
+  def sums
     projects.map(&:id).map do |id|
-      values = summary.select { |keys| keys[0] == id }.values
+      values = group_by_period.select { |keys| keys[0] == id }.values
       values = labels.map { 0 } if values.empty?
       [id, values]
     end.to_h
@@ -67,7 +66,7 @@ class Report
   end
 
   def bar_chart_data
-    data.map do |id, values|
+    sums.map do |id, values|
       [id] + values.map { |value| value / 3600 }
     end
   end
@@ -78,8 +77,8 @@ class Report
     time.in_time_zone(time_zone)
   end
 
-  def summary_by_period
-    @summary_by_period ||=
+  def group_by_period
+    @group_by_period ||=
       projects
       .joins(:activities)
       .group(:id)

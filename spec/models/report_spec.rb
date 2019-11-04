@@ -42,7 +42,7 @@ RSpec.describe Report, type: :model do
     end
   end
 
-  describe '#data' do
+  describe '#sums' do
     let(:now) { Time.parse('2019-01-01T00:00:00') }
     let(:user) { create(:user) }
 
@@ -52,7 +52,7 @@ RSpec.describe Report, type: :model do
         time_zone: 'UTC',
         start_date: now,
         end_date: end_date
-      ).data
+      ).sums
     end
 
     context 'when range is hourly' do
@@ -78,7 +78,7 @@ RSpec.describe Report, type: :model do
         )
       end
 
-      it 'returns data correctly' do
+      it 'returns sums correctly' do
         is_expected.to eq [
           [projects[0].id, [0, 0, 10_800, 0, 0, 0, 0]],
           [projects[1].id, [0, 0, 0, 0, 10_800, 0, 0]]
@@ -109,7 +109,7 @@ RSpec.describe Report, type: :model do
         )
       end
 
-      it 'returns data correctly' do
+      it 'returns sums correctly' do
         is_expected.to eq [
           [projects[0].id, [0, 0, 259_200, 0, 0, 0, 0]],
           [projects[1].id, [0, 0, 0, 0, 259_200, 0, 0]]
@@ -140,7 +140,7 @@ RSpec.describe Report, type: :model do
         )
       end
 
-      it 'returns data correctly' do
+      it 'returns sums correctly' do
         is_expected.to eq [
           [projects[0].id, [0, 0, 8_035_200, 0, 0, 0, 0]],
           [projects[1].id, [0, 0, 0, 0, 8_035_200, 0, 0]]
@@ -171,7 +171,7 @@ RSpec.describe Report, type: :model do
         )
       end
 
-      it 'returns data correctly' do
+      it 'returns sums correctly' do
         is_expected.to eq [
           [projects[0].id, [0, 0, 94_608_000, 0, 0, 0, 0]],
           [projects[1].id, [0, 0, 0, 0, 94_608_000, 0, 0]]
@@ -182,7 +182,7 @@ RSpec.describe Report, type: :model do
     context 'when user has project but activities are empty' do
       let(:end_date) { now + 6.days }
 
-      it 'returns data correctly' do
+      it 'returns sums correctly' do
         project = create(:project, user: user)
         is_expected.to eq [[project.id, [0, 0, 0, 0, 0, 0, 0]]].to_h
       end
