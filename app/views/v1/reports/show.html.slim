@@ -33,7 +33,7 @@ html
                 == project.name
 
               span class="duration"
-                == Time.at(totals[project.id]).strftime("%H:%M:%S")
+                == hhmmss(totals[project.id])
 
         div id="donut-chart"
 
