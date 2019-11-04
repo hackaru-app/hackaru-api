@@ -66,17 +66,21 @@ class Report
     end
   end
 
+  def start_date
+    super&.in_time_zone(time_zone)
+  end
+
+  def end_date
+    super&.in_time_zone(time_zone)
+  end
+
   private
 
   def series
-    dates = [in_time_zone(start_date)]
-    dates << dates.last + 1.send(period) while dates.last <= in_time_zone(end_date)
+    dates = [start_date]
+    dates << dates.last + 1.send(period) while dates.last <= end_date
     dates.pop
     dates
-  end
-
-  def in_time_zone(time)
-    time.in_time_zone(time_zone)
   end
 
   def group_by_period
@@ -94,8 +98,8 @@ class Report
 
   def period
     PERIODS.each_cons(2) do |periods|
-      out_of_date = in_time_zone(start_date) + 1.send(periods.last)
-      return periods.first if in_time_zone(end_date) < out_of_date
+      out_of_date = start_date + 1.send(periods.last)
+      return periods.first if end_date < out_of_date
     end || PERIODS.last
   end
 end

@@ -362,6 +362,52 @@ RSpec.describe Report, type: :model do
     end
   end
 
+  describe '#start_date' do
+    let(:start_date) { Time.parse('2019-01-01T00:00:00') }
+
+    subject do
+      Report.new(
+        user: create(:user),
+        time_zone: time_zone,
+        start_date: start_date,
+        end_date: start_date + 1.day
+      ).start_date
+    end
+
+    context 'when time_zone is UTC' do
+      let(:time_zone) { 'UTC' }
+      it { is_expected.to eq start_date.in_time_zone('UTC') }
+    end
+
+    context 'when time_zone is not UTC' do
+      let(:time_zone) { 'Asia/Tokyo' }
+      it { is_expected.to eq start_date.in_time_zone('Asia/Tokyo') }
+    end
+  end
+
+  describe '#end_date' do
+    let(:end_date) { Time.parse('2019-01-01T00:00:00') }
+
+    subject do
+      Report.new(
+        user: create(:user),
+        time_zone: time_zone,
+        start_date: end_date - 1.day,
+        end_date: end_date
+      ).end_date
+    end
+
+    context 'when time_zone is UTC' do
+      let(:time_zone) { 'UTC' }
+      it { is_expected.to eq end_date.in_time_zone('UTC') }
+    end
+
+    context 'when time_zone is not UTC' do
+      let(:time_zone) { 'Asia/Tokyo' }
+      it { is_expected.to eq end_date.in_time_zone('Asia/Tokyo') }
+    end
+  end
+
   describe '#labels' do
     let(:start_date) { Time.parse('2019-01-01T00:00:00') }
     let(:time_zone) { 'UTC' }
