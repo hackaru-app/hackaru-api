@@ -5,11 +5,11 @@ class Report
   include ActiveModel::Attributes
   include ValidationRaisable
 
-  PERIODS = [
-    :hour,
-    :day,
-    :month,
-    :year
+  PERIODS = %i[
+    hour
+    day
+    month
+    year
   ].freeze
 
   FORMATS = {
@@ -49,12 +49,7 @@ class Report
   end
 
   def labels
-    dates = [set_time_zone(start_date)]
-    while dates.last <= set_time_zone(end_date)
-      dates << dates.last + 1.send(period)
-    end
-    dates.pop
-    dates.map do |date|
+    series.map do |date|
       date.strftime(FORMATS[period])
     end
   end
@@ -73,7 +68,14 @@ class Report
 
   private
 
-  def set_time_zone(time)
+  def series
+    dates = [in_time_zone(start_date)]
+    dates << dates.last + 1.send(period) while dates.last <= in_time_zone(end_date)
+    dates.pop
+    dates
+  end
+
+  def in_time_zone(time)
     time.in_time_zone(time_zone)
   end
 
@@ -85,7 +87,6 @@ class Report
       .group_by_period(
         period,
         :started_at,
-        permit: PERIODS,
         time_zone: time_zone,
         range: start_date..end_date
       ).sum(:duration)
@@ -93,8 +94,8 @@ class Report
 
   def period
     PERIODS.each_cons(2) do |periods|
-      out_of_date = set_time_zone(start_date) + 1.send(periods.last)
-      return periods.first if set_time_zone(end_date) < out_of_date
+      out_of_date = in_time_zone(start_date) + 1.send(periods.last)
+      return periods.first if in_time_zone(end_date) < out_of_date
     end || PERIODS.last
   end
 end
