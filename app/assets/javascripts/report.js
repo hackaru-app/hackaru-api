@@ -29,7 +29,6 @@ c3.generate({
     colors: gon.colors
   },
   donut: {
-    padAngle: 0.015,
     label: {
       show: false
     }
