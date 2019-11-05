@@ -9,13 +9,13 @@ RSpec.describe DurationHelper, type: :helper do
     subject { hhmmss(value) }
 
     context 'when value is not zero' do
-      let(:value) { 120131 }
-      it { is_expected.to eq '33:22:11'}
+      let(:value) { 120_131 }
+      it { is_expected.to eq '33:22:11' }
     end
 
     context 'when value is zero' do
       let(:value) { 0 }
-      it { is_expected.to eq '00:00:00'}
+      it { is_expected.to eq '00:00:00' }
     end
   end
 end

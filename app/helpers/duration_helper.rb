@@ -3,10 +3,10 @@
 module DurationHelper
   def hhmmss(value)
     format(
-      '%02d:%02d:%02d',
-      value / 60 / 60,
-      value / 60 % 60,
-      value % 60
+      '%<hours>02d:%<minutes>02d:%<seconds>02d',
+      hours: value / 60 / 60,
+      minutes: value / 60 % 60,
+      seconds: value % 60
     )
   end
 end
