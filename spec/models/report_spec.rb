@@ -489,4 +489,45 @@ RSpec.describe Report, type: :model do
       end
     end
   end
+
+  describe '#bar_chart_data' do
+    let(:now) { Time.parse('2019-01-01T00:00:00') }
+    let(:user) { create(:user) }
+    let(:projects) { create_list(:project, 2, user: user) }
+
+    subject do
+      Report.new(
+        user: user,
+        time_zone: 'UTC',
+        start_date: now,
+        end_date: now + 6.days
+      ).bar_chart_data
+    end
+
+    before do
+      create_list(
+        :activity,
+        3,
+        started_at: now + 2.days,
+        stopped_at: now + 3.days,
+        user: user,
+        project: projects[0]
+      )
+      create_list(
+        :activity,
+        3,
+        started_at: now + 4.days,
+        stopped_at: now + 5.days,
+        user: user,
+        project: projects[1]
+      )
+    end
+
+    it 'returns data correctly' do
+      is_expected.to eq [
+        [projects[0].id, 0, 0, 72, 0, 0, 0, 0],
+        [projects[1].id, 0, 0, 0, 0, 72, 0, 0]
+      ]
+    end
+  end
 end
