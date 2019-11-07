@@ -1,0 +1,85 @@
+body {
+  color: #000;
+  background-color: #fff;
+  font-size: 16px;
+  padding: 0 50px;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  -webkit-print-color-adjust: exact;
+}
+.header {
+  display: flex;
+  padding: 40px 0;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #eee;
+}
+.report header {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: flex-end;
+  h1 {
+    font-weight: normal;
+    margin: 0;
+    font-size: 26px;
+    align-items: center;
+    display: flex;
+    margin-right: 20px;
+  }
+  p {
+    color: #666;
+    font-size: 18px;
+    margin: 0;
+    span {
+      margin: 0 5px;
+    }
+  }
+}
+#bar-chart {
+  box-sizing: border-box;
+  height: 250px;
+  margin-left: -30px;
+  margin-bottom: 20px;
+}
+#donut-chart {
+  width: 250px;
+  height: 250px;
+  flex-shrink: 1;
+}
+.content {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.projects {
+  width: 100%;
+  padding: 0;
+  padding-right: 60px;
+  box-sizing: border-box;
+}
+.project-name {
+  display: flex;
+  align-items: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.projects li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  .duration {
+    color: #666;
+  }
+}
+.c3-axis-y text,
+.c3-axis-x text {
+  font-family: 'Roboto';
+}
+.c3-chart-arc path {
+  stroke-width: 2px;
+}

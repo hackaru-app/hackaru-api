@@ -1,3 +1,4 @@
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Build Status](https://travis-ci.org/ktmouk/hackaru-api.svg?branch=master)](https://travis-ci.org/ktmouk/hackaru-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/95e37cce5262a1c83fa5/maintainability)](https://codeclimate.com/github/ktmouk/hackaru-api/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/95e37cce5262a1c83fa5/test_coverage)](https://codeclimate.com/github/ktmouk/hackaru-api/test_coverage)

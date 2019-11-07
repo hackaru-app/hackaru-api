@@ -13,12 +13,41 @@ RSpec.describe Activity, type: :model do
   describe 'validations' do
     subject { build(:activity) }
 
-    describe 'started_at' do
-      it { should validate_presence_of(:started_at) }
-    end
+    it { is_expected.to validate_presence_of(:started_at) }
+    it { is_expected.to validate_length_of(:description).is_at_most(191) }
 
-    describe 'description' do
-      it { is_expected.to validate_length_of(:description).is_at_most(191) }
+    describe 'stopped_at' do
+      let(:started_at) { Time.now }
+
+      subject do
+        activity = build(
+          :activity,
+          started_at: started_at,
+          stopped_at: stopped_at
+        )
+        activity.valid?
+        activity
+      end
+
+      context 'when started_at < stopped_at' do
+        let(:stopped_at) { Time.now.tomorrow }
+        it { is_expected.to be_valid }
+      end
+
+      context 'when started_at = stopped_at' do
+        let(:stopped_at) { started_at }
+        it { is_expected.to be_valid }
+      end
+
+      context 'when started_at > stopped_at' do
+        let(:stopped_at) { 1.day.ago }
+        it { expect(subject.errors).to be_include :started_at }
+      end
+
+      context 'when stopped_at is nil' do
+        let(:stopped_at) { nil }
+        it { is_expected.to be_valid }
+      end
     end
   end
 
@@ -104,40 +133,6 @@ RSpec.describe Activity, type: :model do
     context 'when user does not have this project' do
       let(:project) { create(:project) }
       it { expect(subject.errors).to be_include :project }
-    end
-  end
-
-  describe '#stopped_at_cannot_be_before_started_at' do
-    let(:started_at) { Time.now }
-
-    subject do
-      activity = build(
-        :activity,
-        started_at: started_at,
-        stopped_at: stopped_at
-      )
-      activity.valid?
-      activity
-    end
-
-    context 'when started_at < stopped_at' do
-      let(:stopped_at) { Time.now.tomorrow }
-      it { is_expected.to be_valid }
-    end
-
-    context 'when started_at = stopped_at' do
-      let(:stopped_at) { started_at }
-      it { is_expected.to be_valid }
-    end
-
-    context 'when started_at > stopped_at' do
-      let(:stopped_at) { 1.day.ago }
-      it { expect(subject.errors).to be_include :stopped_at }
-    end
-
-    context 'when stopped_at is nil' do
-      let(:stopped_at) { nil }
-      it { is_expected.to be_valid }
     end
   end
 
