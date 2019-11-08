@@ -23,6 +23,9 @@ COPY --from=bundler \
 COPY --from=node \
     /hackaru/node_modules \
     /hackaru/node_modules
+COPY --from=node \
+    /usr/local/bin/node \
+    /usr/local/bin/node
 RUN apk -U upgrade \
  && apk add --update --no-cache \
     tzdata \
@@ -33,7 +36,6 @@ RUN apk -U upgrade \
     freetype-dev \
     harfbuzz \
     ca-certificates \
-    nodejs \
     yarn \
  && addgroup hackaru \
  && adduser -s /bin/sh -D -G hackaru hackaru \
