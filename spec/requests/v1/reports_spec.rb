@@ -23,19 +23,19 @@ RSpec.describe 'V1::Reports', type: :request do
     context 'when extension is empty' do
       let(:extension) { '' }
       it { expect(response).to have_http_status(200) }
-      it { expect(response.content_type).to eq('application/json') }
+      it { expect(response.content_type).to include('application/json') }
     end
 
     context 'when extension is html' do
       let(:extension) { '.html' }
       it { expect(response).to have_http_status(200) }
-      it { expect(response.content_type).to eq('text/html') }
+      it { expect(response.content_type).to include('text/html') }
     end
 
     context 'when extension is pdf' do
       let(:extension) { '.pdf' }
       it { expect(response).to have_http_status(200) }
-      it { expect(response.content_type).to eq('application/pdf') }
+      it { expect(response.content_type).to include('application/pdf') }
     end
 
     context 'when extension is missing' do

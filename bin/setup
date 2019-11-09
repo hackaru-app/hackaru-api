@@ -20,6 +20,9 @@ chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
   system! 'yarn'
 
+  puts "\n== Run webpack =="
+  system! "RAILS_ENV=#{ENV.fetch('RAILS_ENV')} bin/webpack"
+
   # puts "\n== Copying sample files =="
   # unless File.exist?('config/database.yml')
   #   cp 'config/database.yml.sample', 'config/database.yml'
