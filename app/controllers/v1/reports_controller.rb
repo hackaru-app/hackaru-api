@@ -24,6 +24,7 @@ module V1
       gon.push(
         bar_chart_data: @report.bar_chart_data,
         totals: @report.totals.to_a,
+        groups: @report.projects.map(&:id),
         colors: @report.colors,
         labels: @report.labels
       )

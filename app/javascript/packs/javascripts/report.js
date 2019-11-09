@@ -6,7 +6,8 @@ c3.generate({
   data: {
     type: 'bar',
     columns: gon.bar_chart_data,
-    colors: gon.colors
+    colors: gon.colors,
+    groups: [gon.groups]
   },
   legend: {
     show: false
