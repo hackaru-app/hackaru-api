@@ -1,3 +1,6 @@
+import c3 from 'c3';
+import 'd3';
+
 c3.generate({
   bindto: '#bar-chart',
   data: {

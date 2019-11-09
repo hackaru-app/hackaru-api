@@ -1,10 +1,25 @@
 version: '3'
 services:
   api:
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: webpack
     env_file: .env.development
     volumes:
       - .:/hackaru
       - ./tmp/app:/hackaru/tmp
+      - /hackaru/node_modules
+
+  webpack:
+    build: .
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    env_file: .env.development
+    command: bin/webpack-dev-server
+    volumes:
+      - .:/hackaru
+      - /hackaru/node_modules
+    ports:
+      - 3035:3035
 
   sidekiq:
     env_file: .env.development
@@ -14,6 +29,7 @@ services:
     volumes:
       - .:/hackaru
       - ./tmp/sidekiq:/hackaru/tmp
+      - /hackaru/node_modules
 
   mailcatcher:
     image: schickling/mailcatcher:latest

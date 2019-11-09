@@ -23,6 +23,9 @@ COPY --from=bundler \
 COPY --from=node \
     /hackaru/node_modules \
     /hackaru/node_modules
+COPY --from=node \
+    /usr/local/bin/node \
+    /usr/local/bin/node
 RUN apk -U upgrade \
  && apk add --update --no-cache \
     tzdata \
@@ -33,11 +36,11 @@ RUN apk -U upgrade \
     freetype-dev \
     harfbuzz \
     ca-certificates \
-    nodejs \
     yarn \
  && addgroup hackaru \
  && adduser -s /bin/sh -D -G hackaru hackaru \
  && chown hackaru:hackaru $API_DIR
 COPY --chown=hackaru:hackaru . $API_DIR
 USER hackaru
+RUN /hackaru/bin/webpack
 CMD ["rails", "s", "-b", "0.0.0.0"]
