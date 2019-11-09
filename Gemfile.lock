@@ -82,8 +82,6 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.5)
-    css_parser (1.7.0)
-      addressable
     date_validator (0.9.0)
       activemodel
       activesupport
@@ -113,7 +111,6 @@ GEM
     groupdate (4.2.0)
       activesupport (>= 5)
     hashdiff (1.0.0)
-    htmlentities (4.3.4)
     http_accept_language (2.1.1)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
@@ -158,13 +155,6 @@ GEM
     pg (1.1.4)
     polyamorous (2.3.0)
       activerecord (>= 5.0)
-    premailer (1.11.1)
-      addressable
-      css_parser (>= 1.6.0)
-      htmlentities (>= 4.0.0)
-    premailer-rails (1.10.3)
-      actionmailer (>= 3)
-      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.1)
     puma (4.2.1)
       nio4r (~> 2.0)
@@ -334,7 +324,6 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.3)
   okcomputer
   pg (>= 0.18, < 2.0)
-  premailer-rails
   puma (~> 4.2)
   rack-attack
   rack-cors
