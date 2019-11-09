@@ -1,6 +1,11 @@
 import c3 from 'c3';
 import 'd3';
 
+function getTickFormat(seconds) {
+  const hours = seconds / 3600;
+  return hours % 0.5 === 0 ? `${hours}h` : '';
+}
+
 c3.generate({
   bindto: '#bar-chart',
   data: {
@@ -19,7 +24,7 @@ c3.generate({
     },
     y: {
       tick: {
-        format: d => (d % 1 === 0 ? `${d}h` : '')
+        format: getTickFormat
       }
     }
   }
