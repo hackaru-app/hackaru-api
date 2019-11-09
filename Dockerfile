@@ -42,4 +42,5 @@ RUN apk -U upgrade \
  && chown hackaru:hackaru $API_DIR
 COPY --chown=hackaru:hackaru . $API_DIR
 USER hackaru
+RUN /hackaru/bin/webpack
 CMD ["rails", "s", "-b", "0.0.0.0"]
