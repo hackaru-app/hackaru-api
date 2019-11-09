@@ -61,9 +61,7 @@ class Report
   end
 
   def bar_chart_data
-    sums.map do |id, values|
-      [id] + values.map { |value| value / 3600 }
-    end
+    sums.to_a.map(&:flatten)
   end
 
   def start_date
