@@ -525,8 +525,8 @@ RSpec.describe Report, type: :model do
 
     it 'returns data correctly' do
       is_expected.to eq [
-        [projects[0].id, 0, 0, 72, 0, 0, 0, 0],
-        [projects[1].id, 0, 0, 0, 0, 72, 0, 0]
+        [projects[0].id, 0, 0, 259_200, 0, 0, 0, 0],
+        [projects[1].id, 0, 0, 0, 0, 259_200, 0, 0]
       ]
     end
   end
