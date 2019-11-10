@@ -22,7 +22,8 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -57,6 +58,13 @@ Rails.application.configure do
   config.active_job.queue_name_prefix = "hackaru-api_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :ses
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
+    protocol: 'https'
+  }
+  config.action_mailer.asset_host =
+    "https://#{ENV.fetch('SMTP_ASSET_HOST', 'https://localhost:3000')}"
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -84,14 +92,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  config.action_mailer.delivery_method = :ses
-  config.action_mailer.default_url_options = {
-    host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
-    protocol: 'https'
-  }
-  config.action_mailer.asset_host =
-    "https://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
 
   # Enable rack attack
   config.middleware.use Rack::Attack

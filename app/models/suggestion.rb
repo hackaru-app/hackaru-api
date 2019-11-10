@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Suggestion
-  attr_reader :project, :description
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  def initialize(project:, description:)
-    @project = project
-    @description = description
-  end
+  attribute :project
+  attribute :description, :string
 end

@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    == stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Noto+Sans+JP', media: :all
+    == stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:400,700', media: :all
+    == stylesheet_link_tag asset_pack_url('stylesheets/pdf.css'), media: :all
+
+  body
+    header class="header"
+      == image_tag asset_pack_url('media/images/logo-black.png'), size: '32x32'
+      p hackaru.app
+
+    section class="report"
+      header
+        h1 Summary
+        p
+          == l(@report.start_date, format: '%F')
+          span -
+          == l(@report.end_date, format: '%F')
+
+      div id="bar-chart"
+
+      section class="content"
+        ul class="projects"
+          - totals = @report.totals
+          - @report.projects.each do |project|
+            li
+              div class="project-name"
+                span class="dot" style="background-color: #{project.color}"
+                == project.name
+
+              span class="duration"
+                == hhmmss(totals[project.id])
+
+        div id="donut-chart"
+
+  == Gon::Base.render_data
+  == javascript_include_tag asset_pack_url('javascripts/report.js'), media: :all
