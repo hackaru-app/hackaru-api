@@ -6,13 +6,14 @@ class Activity < ApplicationRecord
   belongs_to :user
   belongs_to :project, optional: true
 
-  validates :started_at, presence: true
   validates :description, length: { maximum: 191 }
+  validates :started_at, presence: true
+  validates :started_at,
+            date: { before_or_equal_to: :stopped_at }, if: :stopped?
   validate :project_is_invalid
-  validate :stopped_at_cannot_be_before_started_at
 
   before_save :set_duration
-  before_save :stop_other_workings, unless: -> { stopped_at.present? }
+  before_save :stop_other_workings, unless: :stopped?
 
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from)
@@ -61,15 +62,14 @@ class Activity < ApplicationRecord
 
   private
 
-  def project_is_invalid
-    return if project_id.nil? || user.projects.exists?(id: project_id)
-
-    errors.add(:project, :is_invalid)
+  def stopped?
+    stopped_at.present?
   end
 
-  def stopped_at_cannot_be_before_started_at
-    return if started_at.nil? || stopped_at.nil? || stopped_at >= started_at
+  def project_is_invalid
+    return if project_id.nil?
+    return if user.projects.exists?(id: project_id)
 
-    errors.add(:stopped_at, :cannot_be_before_started_at)
+    errors.add(:project, :is_invalid)
   end
 end

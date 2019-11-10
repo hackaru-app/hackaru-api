@@ -1,4 +1,4 @@
-# rails
+# Rails
 .bundle
 vendor/bundle
 log
@@ -6,5 +6,9 @@ tmp
 .byebug_history
 coverage
 
-# env
+# Dotenv
 .env*
+
+# Yarn
+node_modules
+yarn-error.log

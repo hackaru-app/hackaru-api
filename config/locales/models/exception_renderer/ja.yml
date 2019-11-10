@@ -22,6 +22,9 @@ ja:
       routing_error:
         message: 'ページが見つかりません。'
         status: 404
+      unknown_format:
+        message: 'ページが見つかりません。'
+        status: 404
     groupdate:
       error:
         message: 'パラメータが正しくありません。'

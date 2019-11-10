@@ -16,5 +16,3 @@ ja:
           attributes:
             project:
               is_invalid: 'は不正な値です。'
-            stopped_at:
-              cannot_be_before_started_at: 'は開始日時より後の日時を指定してください。'

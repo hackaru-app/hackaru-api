@@ -2,11 +2,11 @@ doctype html
 html
   head
     meta http-equiv="Content-Type" content="text/html; charset=utf-8"
-    == stylesheet_link_tag 'mailer'
+    == stylesheet_pack_tag 'stylesheets/mailer'
 
   body
     header class="header"
-      == image_tag 'logo-black.png', size: '28x28'
+      == image_pack_tag 'logo.png', size: '28x28'
 
     == yield
 
