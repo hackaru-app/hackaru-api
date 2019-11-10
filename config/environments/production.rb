@@ -94,5 +94,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Enable rack attack
-  config.middleware.use Rack::Attack
+  Rack::Attack.enabled = true
 end

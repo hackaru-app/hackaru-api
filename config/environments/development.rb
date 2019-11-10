@@ -67,5 +67,5 @@ Rails.application.configure do
   config.i18n.fallbacks = [I18n.default_locale]
 
   # Enable rack attack
-  config.middleware.use Rack::Attack
+  Rack::Attack.enabled = true
 end
