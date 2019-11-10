@@ -47,4 +47,7 @@ Rails.application.configure do
 
   # Use test queue.
   config.active_job.queue_adapter = :test
+
+  # Disable rack attack
+  Rack::Attack.enabled = false
 end
