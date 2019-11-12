@@ -16,8 +16,8 @@ services:
     env_file: .env.development
     command: bin/webpack-dev-server
     volumes:
-      - .:/hackaru
-      - /hackaru/node_modules
+      - ./app/javascript:/hackaru/app/javascript
+      - ./public/:/hackaru/public
     ports:
       - 3035:3035
 
