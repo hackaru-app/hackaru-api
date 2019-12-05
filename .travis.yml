@@ -1,35 +1,34 @@
 jobs:
   include:
-    # - stage: lint
-    #   language: ruby
-    #   cache: bundler
-    #   script:
-    #     - bundle exec rubocop
-    #     - bundle exec brakeman
-    #     - bundle exec slim-lint app/views
+    - stage: lint
+      language: ruby
+      cache: bundler
+      script:
+        - bundle exec rubocop
+        - bundle exec brakeman
+        - bundle exec slim-lint app/views
 
-    # - stage: test
-    #   language: minimal
-    #   env:
-    #     - COMPOSE_FILE=docker-compose.test.yml
-    #   services:
-    #     - docker
-    #   before_script:
-    #     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    #     - chmod +x ./cc-test-reporter
-    #     - ./cc-test-reporter before-build
-    #   script:
-    #     - docker-compose run --rm sut
-    #   after_script:
-    #     - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
-    #     - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - stage: test
+      language: minimal
+      env:
+        - COMPOSE_FILE=docker-compose.test.yml
+      services:
+        - docker
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script:
+        - docker-compose run --rm sut
+      after_script:
+        - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
     - stage: push
       language: minimal
-      # if: tag =~ ^v AND branch = master
+      if: tag =~ ^v AND branch = master
       env:
         - IMAGE_NAME=ktmouk/hackaru-api
-        - EXAMPLE_TAG=v1.6.3
       services:
         - docker
       script:
@@ -37,9 +36,9 @@ jobs:
         - |
           TAGS=(
             "latest" \
-            "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1/')" \
-            "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2/')" \
-            "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1/')" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2/')" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')" \
           )
           for TAG in ${TAGS[@]}; do
             docker build . -t "$IMAGE_NAME:$TAG"
