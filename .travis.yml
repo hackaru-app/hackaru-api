@@ -42,5 +42,5 @@ jobs:
           )
           for TAG in $TAGS[@]; do
             docker build . -t ${IMAGE_NAME}:${TAG}
-            docker push ${IMAGE_NAME}:${TAG}
+            echo $TAG
           done
