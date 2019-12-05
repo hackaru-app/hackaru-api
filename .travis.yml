@@ -8,6 +8,7 @@ jobs:
         - bundle exec brakeman
 
     - stage: test
+      language: minimal
       env:
         - COMPOSE_FILE=docker-compose.test.yml
       services:
