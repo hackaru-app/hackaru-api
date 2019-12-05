@@ -8,6 +8,20 @@ jobs:
         - bundle exec brakeman
         - bundle exec slim-lint app/views
 
+    - stage: build
+      language: minimal
+      cache:
+        directories:
+          - docker_images
+      services:
+        - docker
+      before_install:
+        - docker load -i docker_images/images.tar || true
+      script:
+        - docker-compose build
+      before_cache:
+        - docker save -o docker_images/images.tar $(docker images -a -q)
+
     - stage: test
       language: minimal
       cache:
@@ -23,9 +37,8 @@ jobs:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
-      script: docker-compose run --rm sut
+      script:
+        - docker-compose run --rm sut
       after_script:
         - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-      before_cache:
-        - docker save -o docker_images/images.tar $(docker images -a -q)
