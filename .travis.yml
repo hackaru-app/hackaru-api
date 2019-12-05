@@ -1,30 +1,46 @@
-sudo: required
-language: ruby
-services:
-  - docker
-env:
-  - DOCKER_COMPOSE_VERSION=1.23.2 COMPOSE_FILE=docker-compose.test.yml
-    COMMIT=${TRAVIS_COMMIT::8}
-before_install:
-  # docker-compose
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  # bundle
-  - gem install bundler:1.16.2
-before_script:
-  # codeclimate
-  - sudo service postgresql stop
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-script:
-  - bundle exec rubocop
-  - bundle exec brakeman
-  - docker-compose build
-  - docker-compose run --rm sut
-  - docker tag hackaru-api_sut:latest hackaru-api_sut:${COMMIT}
-after_script:
-  - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+jobs:
+  include:
+    - stage: lint
+      language: ruby
+      cache: bundler
+      script:
+        - bundle exec rubocop
+        - bundle exec brakeman
+        - bundle exec slim-lint app/views
+
+    - stage: test
+      language: minimal
+      env:
+        - COMPOSE_FILE=docker-compose.test.yml
+      services:
+        - docker
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script:
+        - docker-compose run --rm sut
+      after_script:
+        - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+    - stage: push
+      language: minimal
+      if: tag =~ ^v AND branch = master
+      env:
+        - IMAGE_NAME=ktmouk/hackaru-api
+      services:
+        - docker
+      script:
+        - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+        - |
+          TAGS=(
+            "latest" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1/')" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2/')" \
+            "$(echo "$TRAVIS_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')" \
+          )
+          for TAG in ${TAGS[@]}; do
+            docker build . -t "$IMAGE_NAME:$TAG"
+            docker push "$IMAGE_NAME:$TAG"
+          done
