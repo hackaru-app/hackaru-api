@@ -29,18 +29,19 @@ jobs:
       # if: tag =~ ^v AND branch = master
       env:
         - IMAGE_NAME=ktmouk/hackaru-api
-        - EXAMPLE_TAG=1.6.3
+        - EXAMPLE_TAG=v1.6.3
       services:
         - docker
       script:
         - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
         - |
-          TAGS=(latest \
+          TAGS=(
+            "latest" \
             "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1/')" \
             "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2/')" \
-            "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')"
+            "$(echo "$EXAMPLE_TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')" \
           )
-          for TAG in $TAGS[@]; do
-            docker build . -t ${IMAGE_NAME}:${TAG}
-            echo $TAG
+          for TAG in ${TAGS[@]}; do
+            docker build . -t "$IMAGE_NAME:$TAG"
+            docker push "$IMAGE_NAME:$TAG"
           done
