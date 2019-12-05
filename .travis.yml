@@ -6,6 +6,7 @@ jobs:
       script:
         - bundle exec rubocop
         - bundle exec brakeman
+        - bundle exec slim-lint app/views
 
     - stage: test
       language: minimal
