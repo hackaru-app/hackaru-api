@@ -8,20 +8,6 @@ jobs:
         - bundle exec brakeman
         - bundle exec slim-lint app/views
 
-    - stage: build
-      language: minimal
-      cache:
-        directories:
-          - docker_images
-      services:
-        - docker
-      before_install:
-        - docker load -i docker_images/images.tar || true
-      script:
-        - docker-compose build
-      before_cache:
-        - docker save -o docker_images/images.tar $(docker images -a -q)
-
     - stage: test
       language: minimal
       cache:
@@ -42,3 +28,31 @@ jobs:
       after_script:
         - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+      before_cache:
+        - docker save -o docker_images/images.tar $(docker images -a -q)
+
+    - stage: push
+      language: minimal
+      # if: tag =~ ^v AND branch = master
+      cache:
+        directories:
+          - docker_images
+      env:
+        - IMAGE_NAME=ktmouk/hackaru-api
+        - TAG=1.6.3
+      services:
+        - docker
+      before_install:
+        - docker load -i docker_images/images.tar || true
+      script:
+        - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+        - |
+          TAGS=(latest \
+            "$(echo "$TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1/')" \
+            "$(echo "$TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2/')" \
+            "$(echo "$TAG" | sed -E 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3/')"
+          )
+          for TAG in $TAGS[@]; do
+            docker build . -t ${IMAGE_NAME}:${TAG}
+            echo "${IMAGE_NAME}:${TAG}"
+          done
