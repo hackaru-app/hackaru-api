@@ -1,5 +1,7 @@
 # TEMP: https://github.com/sds/slim-lint/pull/109
 linters:
+  LineLength:
+    enabled: false
   RuboCop:
     enabled: true
     ignored_cops:
