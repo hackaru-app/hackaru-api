@@ -1,37 +1,3 @@
-# TEMP: https://github.com/sds/slim-lint/pull/109
 linters:
   LineLength:
     enabled: false
-  RuboCop:
-    enabled: true
-    ignored_cops:
-      - Layout/ArgumentAlignment
-      - Layout/ArrayAlignment
-      - Layout/BlockAlignment
-      - Layout/EmptyLineAfterGuardClause
-      - Layout/EndAlignment
-      - Layout/FirstArrayElementIndentation
-      - Layout/FirstParameterIndentation
-      - Layout/HashAlignment
-      - Layout/IndentationConsistency
-      - Layout/IndentationWidth
-      - Layout/InitialIndentation
-      - Layout/MultilineArrayBraceLayout
-      - Layout/MultilineAssignmentLayout
-      - Layout/MultilineHashBraceLayout
-      - Layout/MultilineMethodCallBraceLayout
-      - Layout/MultilineMethodCallIndentation
-      - Layout/MultilineMethodDefinitionBraceLayout
-      - Layout/MultilineOperationIndentation
-      - Layout/ParameterAlignment
-      - Layout/TrailingEmptyLines
-      - Layout/TrailingWhitespace
-      - Lint/Void
-      - Metrics/BlockLength
-      - Metrics/BlockNesting
-      - Metrics/LineLength
-      - Naming/FileName
-      - Style/FrozenStringLiteralComment
-      - Style/IfUnlessModifier
-      - Style/Next
-      - Style/WhileUntilModifier
