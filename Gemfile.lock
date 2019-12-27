@@ -109,7 +109,7 @@ GEM
       i18n (>= 0.7)
       multi_json
       request_store (>= 1.0)
-    groupdate (4.2.0)
+    groupdate (4.3.0)
       activesupport (>= 5)
     hashdiff (1.0.0)
     http_accept_language (2.1.1)
