@@ -72,6 +72,15 @@ class Report
     super&.in_time_zone(time_zone)
   end
 
+  def activities
+    user.activities
+      .joins(:project)
+      .between(start_date, end_date)
+      .group(:project_id, :name, :color, :description)
+      .order(project_id: :desc)
+      .select(:project_id, :name, :color, :description, 'SUM(duration) as duration')
+  end
+
   private
 
   def series

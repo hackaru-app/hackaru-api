@@ -40,23 +40,14 @@ html
       header class="content-header"
         h1 class="title" Timers
 
-      article class="activity"
-        div class="activity-name"
-          span class="dot" style="background: red"
-          h1 データベースの構築
-        time 01:23:45
-
-      article class="activity"
-        div class="activity-name"
-          span class="dot" style="background: red"
-          h1 データベースの構築
-        time 01:23:45
-
-      article class="activity"
-        div class="activity-name"
-          span class="dot" style="background: red"
-          h1 データベースの構築
-        time 01:23:45
+      - @report.activities.each do |activity|
+        article class="activity"
+          div class="activity-name"
+            span class="dot" style="background: #{activity.color}"
+            h1
+              == activity.description.present? ? activity.description : 'No Description'
+          time
+            == hhmmss(activity.duration)
 
   == Gon::Base.render_data
   == javascript_include_tag asset_pack_url('javascripts/report.js'), media: :all
