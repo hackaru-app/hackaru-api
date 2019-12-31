@@ -9,28 +9,31 @@ body {
   font-family: 'Roboto', 'Noto Sans JP', sans-serif;
   -webkit-print-color-adjust: exact;
 }
+.page {
+  page-break-after: always;
+  padding: 40px 0;
+}
 .header {
   display: flex;
-  padding: 40px 0;
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid #eee;
+  padding-bottom: 40px;
+}
+.title {
+  font-weight: normal;
+  margin: 0;
+  font-size: 26px;
+  align-items: center;
+  display: flex;
+  margin-right: 20px;
 }
 .report header {
   margin-top: 40px;
   margin-bottom: 50px;
   display: flex;
   align-items: flex-end;
-  h1 {
-    font-weight: normal;
-    margin: 0;
-    font-size: 26px;
-    align-items: center;
-    display: flex;
-    margin-right: 20px;
-  }
   p {
-    color: #666;
     font-size: 18px;
     margin: 0;
     span {
@@ -75,9 +78,6 @@ body {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  .duration {
-    color: #666;
-  }
 }
 .c3-axis-y text,
 .c3-axis-x text {
@@ -85,4 +85,29 @@ body {
 }
 .c3-chart-arc path {
   stroke-width: 0;
+}
+.content-header {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+.activity {
+  border-top: 1px #eee solid;
+  display: flex;
+  height: 65px;
+  padding-left: 10px;
+  align-items: center;
+  justify-content: space-between;
+  &:last-child {
+    border-bottom: 1px #eee solid;
+  }
+  h1 {
+    font-weight: normal;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+  }
+}
+.activity-name {
+  display: flex;
+  align-items: center;
 }
