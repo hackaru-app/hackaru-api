@@ -36,18 +36,20 @@ html
 
           div id="donut-chart"
 
-    section class="page"
-      header class="content-header"
-        h1 class="title" Timers
+    - activities = @report.activities
+    - if activities.present?
+      section class="page"
+        header class="content-header"
+          h1 class="title" Timers
 
-      - @report.activities.each do |activity|
-        article class="activity"
-          div class="activity-name"
-            span class="dot" style="background: #{activity.color}"
-            h1
-              == activity.description.present? ? activity.description : 'No Description'
-          time
-            == hhmmss(activity.duration)
+        - activities.each do |activity|
+          article class="activity"
+            div class="activity-name"
+              span class="dot" style="background-color: #{activity.color}"
+              h1
+                == activity.description.present? ? activity.description : activity.name
+            time
+              == hhmmss(activity.duration)
 
   == Gon::Base.render_data
   == javascript_include_tag asset_pack_url('javascripts/report.js'), media: :all

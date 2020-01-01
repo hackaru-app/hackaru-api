@@ -1,17 +1,19 @@
 @import '~normalize.css/normalize';
 @import '~c3/c3.min';
 
+@page {
+  margin: 45px 0;
+}
 body {
   color: #000;
   background-color: #fff;
   font-size: 16px;
-  padding: 0 50px;
+  padding: 0 55px;
   font-family: 'Roboto', 'Noto Sans JP', sans-serif;
   -webkit-print-color-adjust: exact;
 }
 .page {
   page-break-after: always;
-  padding: 40px 0;
 }
 .header {
   display: flex;
@@ -19,6 +21,7 @@ body {
   align-items: center;
   border-bottom: 3px solid #eee;
   padding-bottom: 40px;
+  margin-bottom: 40px;
 }
 .title {
   font-weight: normal;
@@ -28,8 +31,8 @@ body {
   display: flex;
   margin-right: 20px;
 }
-.report header {
-  margin-top: 40px;
+.content-header {
+  margin-top: 25px;
   margin-bottom: 50px;
   display: flex;
   align-items: flex-end;
@@ -86,28 +89,25 @@ body {
 .c3-chart-arc path {
   stroke-width: 0;
 }
-.content-header {
-  margin-top: 30px;
-  margin-bottom: 50px;
-}
 .activity {
-  border-top: 1px #eee solid;
+  border-bottom: 1px #eee solid;
   display: flex;
   height: 60px;
   padding-left: 10px;
   align-items: center;
   justify-content: space-between;
+  page-break-inside: avoid;
   &:last-child {
     border-bottom: 1px #eee solid;
   }
+}
+.activity-name {
+  display: flex;
+  align-items: center;
   h1 {
     font-weight: normal;
     font-size: 16px;
     padding: 0;
     margin: 0;
   }
-}
-.activity-name {
-  display: flex;
-  align-items: center;
 }
