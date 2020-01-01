@@ -2,7 +2,8 @@
 @import '~c3/c3.min';
 
 @page {
-  margin: 45px 0;
+  margin: 50px 0;
+  margin-bottom: 60px;
 }
 body {
   color: #000;
@@ -93,7 +94,6 @@ body {
   border-bottom: 1px #eee solid;
   display: flex;
   height: 60px;
-  padding-left: 10px;
   align-items: center;
   justify-content: space-between;
   page-break-inside: avoid;
