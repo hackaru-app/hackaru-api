@@ -1,37 +1,44 @@
 @import '~normalize.css/normalize';
 @import '~c3/c3.min';
 
+@page {
+  margin: 50px 0;
+  margin-bottom: 60px;
+}
 body {
   color: #000;
   background-color: #fff;
-  font-size: 16px;
-  padding: 0 50px;
+  font-size: 14px;
+  padding: 0 55px;
   font-family: 'Roboto', 'Noto Sans JP', sans-serif;
   -webkit-print-color-adjust: exact;
 }
+.page {
+  page-break-after: always;
+}
 .header {
   display: flex;
-  padding: 40px 0;
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid #eee;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
 }
-.report header {
-  margin-top: 40px;
+.title {
+  font-weight: normal;
+  margin: 0;
+  font-size: 24px;
+  align-items: center;
+  display: flex;
+  margin-right: 20px;
+}
+.content-header {
+  margin-top: 25px;
   margin-bottom: 50px;
   display: flex;
   align-items: flex-end;
-  h1 {
-    font-weight: normal;
-    margin: 0;
-    font-size: 26px;
-    align-items: center;
-    display: flex;
-    margin-right: 20px;
-  }
   p {
-    color: #666;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
     span {
       margin: 0 5px;
@@ -68,6 +75,7 @@ body {
   width: 8px;
   height: 8px;
   display: block;
+  flex-shrink: 0;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -75,9 +83,6 @@ body {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  .duration {
-    color: #666;
-  }
 }
 .c3-axis-y text,
 .c3-axis-x text {
@@ -85,4 +90,32 @@ body {
 }
 .c3-chart-arc path {
   stroke-width: 0;
+}
+.activity {
+  border-bottom: 1px #eee solid;
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  page-break-inside: avoid;
+  &:last-child {
+    border-bottom: 1px #eee solid;
+  }
+}
+.activity-name {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  h1 {
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 30px;
+  }
 }

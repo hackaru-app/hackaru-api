@@ -530,4 +530,56 @@ RSpec.describe Report, type: :model do
       ]
     end
   end
+
+  describe '#activities' do
+    let(:now) { Time.now }
+    let(:user) { create(:user) }
+
+    subject do
+      Report.new(
+        user: user,
+        time_zone: 'UTC',
+        start_date: now,
+        end_date: now + 1.day
+      ).activities
+    end
+
+    context 'when user has activities' do
+      let(:projects) { create_list(:project, 2, user: user) }
+
+      before do
+        create_list(
+          :activity,
+          3,
+          started_at: now,
+          stopped_at: now + 1.hours,
+          description: 'example1',
+          user: user,
+          project: projects[0]
+        )
+        create_list(
+          :activity,
+          3,
+          started_at: now,
+          stopped_at: now + 1.hours,
+          description: 'example2',
+          user: user,
+          project: projects[1]
+        )
+      end
+
+      it 'returns activities correctly' do
+        expect(subject[0].description).to eq 'example1'
+        expect(subject[0].duration).to eq 10_800
+        expect(subject[1].description).to eq 'example2'
+        expect(subject[1].duration).to eq 10_800
+      end
+    end
+
+    context 'when user does not have activities' do
+      it 'returns empty' do
+        expect(subject).to eq []
+      end
+    end
+  end
 end
