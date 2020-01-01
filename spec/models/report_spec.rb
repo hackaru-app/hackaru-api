@@ -570,9 +570,9 @@ RSpec.describe Report, type: :model do
 
       it 'returns activities correctly' do
         expect(subject[0].description).to eq 'example1'
-        expect(subject[0].duration).to eq 10800
+        expect(subject[0].duration).to eq 10_800
         expect(subject[1].description).to eq 'example2'
-        expect(subject[1].duration).to eq 10800
+        expect(subject[1].duration).to eq 10_800
       end
     end
 

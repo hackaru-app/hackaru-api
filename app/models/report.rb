@@ -73,12 +73,16 @@ class Report
   end
 
   def activities
-    user.activities
-      .joins(:project)
-      .between(start_date, end_date)
-      .group(:project_id, :name, :color, :description)
-      .order(:project_id, 'duration DESC')
-      .select(:project_id, :name, :color, :description, 'SUM(duration) as duration')
+    user.activities.joins(:project).between(start_date, end_date)
+        .group(:project_id, :name, :color, :description)
+        .order(:project_id, 'SUM(duration) DESC')
+        .select(
+          :project_id,
+          :name,
+          :color,
+          :description,
+          'SUM(duration) as duration'
+        )
   end
 
   private
