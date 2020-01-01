@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-alpine3.10 as bundler
+FROM ruby:2.7.0-alpine3.10 as bundler
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 RUN apk -U upgrade \
@@ -14,7 +14,7 @@ WORKDIR $API_DIR
 COPY package.json yarn.lock $API_DIR/
 RUN yarn
 
-FROM ruby:2.6.5-alpine3.10
+FROM ruby:2.7.0-alpine3.10
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 COPY --from=bundler \
