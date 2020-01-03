@@ -5,10 +5,11 @@ html
     == stylesheet_pack_tag 'stylesheets/mailer'
 
   body
-    header class="header"
-      == image_pack_tag 'logo.png', size: '28x28'
+    section class="wrapper"
+      header class="header"
+        == image_pack_tag 'logo.png', size: '28x28'
 
-    == yield
+      == yield
 
-    footer class="footer"
-      == link_to 'Hackaru', utm_url(ENV.fetch('HACKARU_WEB_URL'))
+      footer class="footer"
+        == link_to 'Hackaru', utm_url(ENV.fetch('HACKARU_WEB_URL'))
