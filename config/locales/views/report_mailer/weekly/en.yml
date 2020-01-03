@@ -1,0 +1,4 @@
+en:
+  report_mailer:
+    weekly:
+      subject: 'Weekly Report'

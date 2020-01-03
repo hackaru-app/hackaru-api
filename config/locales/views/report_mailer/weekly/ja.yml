@@ -1,0 +1,4 @@
+ja:
+  report_mailer:
+    weekly:
+      subject: '週間レポート'
