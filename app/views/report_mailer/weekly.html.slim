@@ -1,2 +1,42 @@
 section class="content"
-  h1 class="title" == 'OK'
+  header class="content-header"
+    h1 class="title"
+      == '週間レポート'
+    p
+      == l(@report.start_date, format: '%F')
+      span -
+      == l(@report.end_date, format: '%F')
+
+  div id="bar-chart"
+
+  section class="details"
+    ul class="projects"
+      - totals = @report.totals
+      - @report.projects.each do |project|
+        li
+          div class="project-name"
+            span class="dot" style="background-color: #{project.color}"
+            span class="name" == project.name
+
+          span class="duration"
+            == hhmmss(totals[project.id])
+
+    div id="donut-chart"
+
+section class="content"
+  - activities = @report.activities
+  - if activities.present?
+    header class="content-header"
+      h1 class="title" 計測一覧
+
+    - activities.each do |activity|
+      article class="activity"
+        div class="activity-name"
+          span class="dot" style="background-color: #{activity.color}"
+          h1
+            == activity.description.present? ? activity.description : activity.name
+        time class="duration"
+          == hhmmss(activity.duration)
+
+  == Gon::Base.render_data
+  == javascript_include_tag asset_pack_url('javascripts/mailer-report.js'), media: :all

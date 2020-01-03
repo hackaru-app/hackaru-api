@@ -1,6 +1,8 @@
 @import '~normalize.css/normalize';
 
 body {
+  display: flex;
+  justify-content: center;
   color: #333c4f;
   background-color: #fff;
   font-size: 16px;
@@ -14,8 +16,13 @@ a {
 }
 .wrapper {
   background-color: #fff;
-  padding: 50px;
+  padding: 55px;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 1px 5px #00000010;
+  max-width: 600px;
+  min-width: 0;
+  width: 600px;
 }
 .title {
   font-weight: normal;
@@ -23,7 +30,7 @@ a {
   font-size: 23px;
 }
 .title.is-small {
-  font-size: 20px;
+  font-size: 18px;
 }
 .link-button {
   margin: 20px 0;
@@ -37,27 +44,163 @@ a {
   border: 0;
 }
 .instruction {
-  margin-top: 50px;
+  margin-top: 20px;
+  background-color: #fafafa;
+  padding: 30px;
+  border-radius: 5px;
   .icon {
     margin: 0 5px;
   }
-  ol li {
-    margin-bottom: 5px;
+  ol {
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    list-style-position: inside;
   }
+  ol li {
+    margin-top: 5px;
+  }
+}
+.footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .footer a {
   color: #9aa5ab;
-  font-size: 14px;
   text-decoration: none;
 }
 .content {
-  border-top: 1px #eee solid;
   margin-top: 20px;
-  padding: 70px 0;
-  padding-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  border-bottom: 1px #f0f1f2 solid;
 }
 .with-border {
   margin-top: 60px;
   padding-top: 50px;
   border-top: 1px #eee solid;
+}
+
+// report
+@import '~c3/c3.min';
+
+#bar-chart {
+  box-sizing: border-box;
+  height: 180px;
+  margin-left: -25px;
+  margin-top: 50px;
+}
+.content-header {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  h1 {
+    margin-right: 10px;
+  }
+  p {
+    font-size: 18px;
+    margin: 0;
+    color: #666;
+    margin-top: 5px;
+    span {
+      margin: 0 5px;
+    }
+  }
+}
+.details {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  margin-top: 50px;
+}
+.projects {
+  padding: 0;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 300px;
+}
+.project-name {
+  display: flex;
+  align-items: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.projects li {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  border-bottom: 1px #f5f5f5 solid;
+  overflow: hidden;
+}
+.project-name {
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;;
+}
+.project-name .name {
+    display: inline;
+justify-content: space-between;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.c3-axis-y text,
+.c3-axis-x text {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, sans-serif;
+}
+.c3-chart-arc path {
+  stroke-width: 0;
+}
+.duration {
+  color: #666;
+  margin-left: 20px;
+}
+#donut-chart {
+  flex-shrink: 0;
+  display: flex;
+  margin-left: 40px;
+  justify-content: flex-end;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.activity {
+  border-bottom: 1px #f5f5f5 solid;
+  display: flex;
+  height: 55px;
+  align-items: center;
+  justify-content: space-between;
+  page-break-inside: avoid;
+  &:last-child {
+    border-bottom: 1px #f5f5f5 solid;
+  }
+}
+.activity-name {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  h1 {
+    font-weight: normal;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 30px;
+  }
 }

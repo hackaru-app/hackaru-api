@@ -4,6 +4,7 @@
 class ReportMailerPreview < ActionMailer::Preview
   def weekly
     user = FactoryBot.create(:user)
+    FactoryBot.create_list(:activity, 3, user: user)
     ReportMailer.weekly(user)
   end
 end
