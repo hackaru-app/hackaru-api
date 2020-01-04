@@ -1,4 +1,6 @@
 ja:
   report_mailer:
     weekly:
-      subject: '週間レポート'
+      subject: '週次レポート'
+      title: '週次レポート'
+      timers: '計測一覧'
