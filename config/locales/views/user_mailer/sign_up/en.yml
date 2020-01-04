@@ -3,7 +3,7 @@ en:
     sign_up:
       subject: 'You have signed up successfully'
       welcome:
-        title: 'Welcome to Hackaru!'
+        title: 'Welcome to Hackaru!🎉'
         description: 'You have signed up successfully. Let''s measure your time, such as studying, working, reading.'
         open_website: 'Go Website'
       use_iphone_or_android:

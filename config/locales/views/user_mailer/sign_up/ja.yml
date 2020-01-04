@@ -3,7 +3,7 @@ ja:
     sign_up:
       subject: 'アカウント登録が完了しました。'
       welcome:
-        title: 'Hackaruへようこそ！'
+        title: 'Hackaruへようこそ！🎉'
         description: 'アカウント登録が完了しました。勉強や仕事、読書など、あなたの時間の使い方を計測してみましょう。'
         open_website: 'Webサイトを開く'
       use_iphone_or_android:
