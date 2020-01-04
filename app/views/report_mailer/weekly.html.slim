@@ -12,32 +12,31 @@ section class="content"
 
   div id="bar-chart"
 
-  section class="details"
-    ul class="projects"
+  section class="projects"
+    ul class="dot-list"
       - totals = @report.totals
       - @report.projects.each do |project|
         li
-          div class="project-name"
+          div class="name"
             span class="dot" style="background-color: #{project.color}"
-            span class="name" == project.name
+            == project.name
 
-          span class="duration"
+          time class="duration"
             == hhmmss(totals[project.id])
 
     div id="donut-chart"
 
 section class="content"
-  - activities = @report.activities
-  - if activities.present?
-    header class="content-header"
-      h1 class="title" 計測一覧
+  header class="content-header"
+    h1 class="title" 計測一覧
 
-    - activities.each do |activity|
-      article class="activity"
-        div class="activity-name"
+  ul class="dot-list"
+    - @report.activities.each do |activity|
+      li
+        div class="name"
           span class="dot" style="background-color: #{activity.color}"
-          h1
-            == activity.description.present? ? activity.description : activity.name
+          == activity.description.present? ? activity.description : activity.name
+
         time class="duration"
           == hhmmss(activity.duration)
 

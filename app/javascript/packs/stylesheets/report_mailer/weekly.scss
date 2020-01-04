@@ -19,62 +19,51 @@
     }
   }
 }
-.details {
+.projects {
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
   margin-top: 50px;
 }
-.projects {
+.dot-list {
   padding: 0;
   box-sizing: border-box;
   flex: 1;
   min-width: 300px;
 }
-.project-name {
+.dot-list li {
+  height: 40px;
   display: flex;
   align-items: center;
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  display: block;
-  flex-shrink: 0;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-.projects li {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  display: flex;
-  border-bottom: 1px $border solid;
+  flex-direction: row;
   overflow: hidden;
-}
-.project-name {
-
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  width: 100%;;
-}
-.project-name .name {
-    display: inline;
-justify-content: space-between;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    flex-shrink: 0;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .name {
+    display: inline-block;
+    flex: 1;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .duration {
+    color: $text-light;
+    margin-left: 20px;
+  }
 }
 .c3-axis-y text,
 .c3-axis-x text {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, sans-serif;
+  font-family: $font-family;
 }
 .c3-chart-arc path {
   stroke-width: 0;
-}
-.duration {
-  color: #666;
-  margin-left: 20px;
 }
 #bar-chart {
   box-sizing: border-box;
@@ -90,32 +79,4 @@ justify-content: space-between;
   width: 150px;
   height: 150px;
   margin-bottom: 20px;
-}
-.activity {
-  border-bottom: 1px #f5f5f5 solid;
-  display: flex;
-  height: 55px;
-  align-items: center;
-  justify-content: space-between;
-  page-break-inside: avoid;
-  &:last-child {
-    border-bottom: 1px #f5f5f5 solid;
-  }
-}
-.activity-name {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  h1 {
-    font-weight: normal;
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-    display: inline;
-    margin: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    padding-right: 30px;
-  }
 }
