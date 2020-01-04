@@ -15,7 +15,7 @@ html
       footer class="footer"
         == link_to 'hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
         span ・
-        == link_to '配信設定', utm_url(ENV.fetch('HACKARU_WEB_URL'))
+        == link_to t('.unsubscribe'), utm_url(ENV.fetch('HACKARU_WEB_URL'))
 
   javascript:
     feather.replace()
