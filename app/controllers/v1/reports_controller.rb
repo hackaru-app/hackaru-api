@@ -12,7 +12,7 @@ module V1
       set_show_variables
 
       respond_to do |format|
-        format.html { render :show, formats: [:html] }
+        format.html { render :show, formats: [:html], layout: 'pdf' }
         format.json { render json: @report }
         format.pdf { render_pdf :show }
       end
