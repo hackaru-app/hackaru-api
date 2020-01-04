@@ -14,9 +14,13 @@ body {
 a {
   color: $text-primary;
 }
+.header {
+  margin-bottom: 10px;
+}
 .wrapper {
   background-color: $white;
   padding: 55px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 1px 5px $shadow;
@@ -28,12 +32,9 @@ a {
   font-weight: normal;
   margin: 0;
   font-size: 23px;
-  &.is-small {
-    font-size: 18px;
-  }
 }
 .link-button {
-  margin: 20px 0;
+  margin-top: 25px;
   display: inline-block;
   padding: 15px 20px;
   background-color: $cyan;
@@ -44,7 +45,6 @@ a {
   border: 0;
 }
 .footer {
-  margin-top: 20px;
   display: flex;
   span {
     color: $grey-ccc;
@@ -56,7 +56,7 @@ a {
   }
 }
 .content {
-  margin-top: 20px;
   padding: 40px 0;
+  margin-bottom: 20px;
   border-bottom: 1px $border solid;
 }
