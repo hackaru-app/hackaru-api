@@ -1,7 +1,7 @@
 @import '../modules/main';
 @import '~c3/c3.min';
 
-.content-header {
+.header {
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -30,6 +30,7 @@
   box-sizing: border-box;
   flex: 1;
   min-width: 300px;
+  margin-left: 5px;
 }
 .dot-list li {
   height: 40px;
@@ -54,7 +55,6 @@
     overflow: hidden;
   }
   .duration {
-    color: $text-light;
     margin-left: 20px;
   }
 }
@@ -68,7 +68,7 @@
 #bar-chart {
   box-sizing: border-box;
   height: 180px;
-  margin-left: -25px;
+  margin-left: -20px;
   margin-top: 50px;
 }
 #donut-chart {
@@ -79,4 +79,8 @@
   width: 150px;
   height: 150px;
   margin-bottom: 20px;
+}
+.activities {
+  padding-top: 10px;
+  padding-bottom: 120px;
 }

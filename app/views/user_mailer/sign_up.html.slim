@@ -28,10 +28,7 @@ section class="content"
               utm_url(ENV.fetch('HACKARU_WEB_URL'))))
 
       li
-        == t('.use_iphone.instruction_2',
-              share: image_pack_tag('iphone-share-icon.png',
-                class: 'icon',
-                size: '20x20'))
+        == t('.use_iphone.instruction_2', share: '<i data-feather="share"></i>')
 
   section class="instruction"
     h1 class="title is-small"

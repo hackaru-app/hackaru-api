@@ -29,9 +29,16 @@ a {
   width: 600px;
 }
 .title {
+  display: flex;
+  align-items: center;
   font-weight: normal;
   margin: 0;
-  font-size: 23px;
+  font-size: 22px;
+  .feather {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }
 }
 .link-button {
   margin-top: 25px;

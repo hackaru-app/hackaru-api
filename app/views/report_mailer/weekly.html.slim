@@ -2,9 +2,10 @@ head
   == stylesheet_pack_tag 'stylesheets/report_mailer/weekly'
 
 section class="content"
-  header class="content-header"
+  header class="header"
     h1 class="title"
-      == '週間レポート'
+      i data-feather="bar-chart"
+      | 週間レポート
     p
       == l(@report.start_date, format: '%F')
       span -
@@ -28,9 +29,11 @@ section class="content"
 
 section class="content"
   header class="content-header"
-    h1 class="title" 計測一覧
+    h1 class="title"
+      i data-feather="clock"
+      | 計測一覧
 
-  ul class="dot-list"
+  ul class="dot-list activities"
     - @report.activities.each do |activity|
       li
         div class="name"
