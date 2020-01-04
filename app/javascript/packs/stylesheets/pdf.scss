@@ -36,10 +36,12 @@ body {
   margin-top: 25px;
   margin-bottom: 50px;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
   p {
     font-size: 16px;
     margin: 0;
+    margin-top: 10px;
+    color: #666;
     span {
       margin: 0 5px;
     }
@@ -80,8 +82,10 @@ body {
   margin-right: 15px;
 }
 .projects li {
-  padding: 10px 0;
+  height: 50px;
+  align-items: center;
   display: flex;
+  border-bottom: 1px #eee solid;
   justify-content: space-between;
 }
 .c3-axis-y text,
