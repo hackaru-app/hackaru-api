@@ -14,7 +14,9 @@ section class="content"
   div id="bar-chart"
 
   section class="projects"
-    ul class="dot-list"
+    div id="donut-chart"
+
+    ul class="dot-list project-list"
       - totals = @report.totals
       - @report.projects.each do |project|
         li
@@ -25,15 +27,13 @@ section class="content"
           time class="duration"
             == hhmmss(totals[project.id])
 
-    div id="donut-chart"
-
 section class="content"
   header class="content-header"
     h1 class="title"
       i data-feather="clock"
       = t('.timers')
 
-  ul class="dot-list activities"
+  ul class="dot-list activity-list"
     - @report.activities.each do |activity|
       li
         div class="name"
