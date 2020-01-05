@@ -4,7 +4,7 @@ ruby:
     totals: report.totals.to_a,
     groups: report.projects.map(&:id),
     colors: report.colors,
-    labels: report.labels,
+    labels: report.labels
   }
 
 div id="bar-chart" data-json="#{data.to_json}"
