@@ -11,10 +11,10 @@ section class="content"
       span -
       == l(@report.end_date, format: '%F')
 
-  div id="bar-chart"
+  = render 'shared/bar_chart', report: @report
 
   section class="projects"
-    div id="donut-chart"
+    = render 'shared/donut_chart', report: @report
 
     ul class="dot-list project-list"
       - totals = @report.totals
@@ -42,6 +42,3 @@ section class="content"
 
         time class="duration"
           == hhmmss(activity.duration)
-
-  == Gon::Base.render_data
-  == javascript_pack_tag 'javascripts/report_mailer/weekly'

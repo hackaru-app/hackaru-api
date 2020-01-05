@@ -14,7 +14,7 @@ section class="page"
         span -
         == l(@report.end_date, format: '%F')
 
-    div id="bar-chart"
+    = render 'shared/bar_chart', report: @report
 
     section class="content"
       ul class="projects"
@@ -28,7 +28,7 @@ section class="page"
             span class="duration"
               == hhmmss(totals[project.id])
 
-      div id="donut-chart"
+      = render 'shared/donut_chart', report: @report
 
 - activities = @report.activities
 - if activities.present?
@@ -44,6 +44,3 @@ section class="page"
             == activity.description.present? ? activity.description : activity.name
         time
           == hhmmss(activity.duration)
-
-== Gon::Base.render_data
-== javascript_include_tag asset_pack_url('javascripts/v1/reports/show.js'), media: :all

@@ -9,8 +9,6 @@ module V1
 
     def show
       @report = build_report
-      set_show_variables
-
       respond_to do |format|
         format.html { render :show, formats: [:html], layout: 'pdf' }
         format.json { render json: @report }
@@ -19,16 +17,6 @@ module V1
     end
 
     private
-
-    def set_show_variables
-      gon.push(
-        bar_chart_data: @report.bar_chart_data,
-        totals: @report.totals.to_a,
-        groups: @report.projects.map(&:id),
-        colors: @report.colors,
-        labels: @report.labels
-      )
-    end
 
     def build_report
       report = Report.new(
