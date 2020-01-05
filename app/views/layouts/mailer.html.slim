@@ -3,9 +3,10 @@ html
   head
     meta http-equiv="Content-Type" content="text/html; charset=utf-8"
     == stylesheet_pack_tag 'stylesheets/layouts/mailer'
-    script src="https://unpkg.com/feather-icons"
 
   body
+    == render 'shared/feather-icon'
+
     section class="wrapper"
       header class="logo-header"
         == image_pack_tag 'logo.png', size: '28x28'
@@ -16,6 +17,3 @@ html
         == link_to 'hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
         span ・
         == link_to t('.unsubscribe'), utm_url(ENV.fetch('HACKARU_WEB_URL'))
-
-  javascript:
-    feather.replace()
