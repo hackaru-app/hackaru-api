@@ -3,25 +3,27 @@
 # Preview all emails at http://localhost:3000/rails/mailers/report_mailer
 class ReportMailerPreview < ActionMailer::Preview
   def weekly
-    user = FactoryBot.create(:user)
-    create_activities(user, Date.today.prev_week)
-    ReportMailer.weekly(user)
+    title = I18n.t('jobs.report_mailer_job.week.title')
+    range = Date.today.prev_week.all_week
+    report(title, range)
   end
 
   def monthly
-    user = FactoryBot.create(:user)
-    create_activities(user, Date.today.prev_month)
-    ReportMailer.monthly(user)
+    title = I18n.t('jobs.report_mailer_job.month.title')
+    range = Date.today.prev_month.all_month
+    report(title, range)
   end
 
   private
 
-  def create_activities(user, started_at)
+  def report(title, range)
+    user = FactoryBot.create(:user)
     FactoryBot.create_list(
       :activity, 3,
       user: user,
-      started_at: started_at,
-      stopped_at: started_at + 1.hours
+      started_at: range.begin,
+      stopped_at: range.begin + 1.hours
     )
+    ReportMailer.report(user, title, range)
   end
 end

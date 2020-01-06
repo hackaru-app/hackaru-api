@@ -1,5 +1,0 @@
-ja:
-  report_mailer:
-    monthly:
-      subject: '月次レポート'
-      title: '月次レポート'

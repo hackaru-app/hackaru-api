@@ -1,13 +1,13 @@
-<%= title %>
+<%= @title %>
 <%= l(@report.start_date, format: '%F') %> - <%= l(@report.end_date, format: '%F') %>
 
 --
 
-Projects
+<%= t('.projects') %>
 
 <% totals = @report.totals %>
 <% @report.projects.each do |project| %>
-- <%= project.name %>: <%= totals[project.id] %>
+- <%= project.name %>: <%= hhmmss(totals[project.id]) %>
 <% end %>
 
 --

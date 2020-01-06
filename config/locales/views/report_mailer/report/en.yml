@@ -1,0 +1,5 @@
+en:
+  report_mailer:
+    report:
+      projects: 'Total for each project'
+      timers: 'Timers'
