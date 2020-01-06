@@ -1,0 +1,5 @@
+en:
+  report_mailer:
+    monthly:
+      subject: 'Monthly Report'
+      title: 'Monthly Report'

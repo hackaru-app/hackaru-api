@@ -4,13 +4,24 @@
 class ReportMailerPreview < ActionMailer::Preview
   def weekly
     user = FactoryBot.create(:user)
-    prev_week = Date.today.prev_week
+    create_activities(user, Date.today.prev_week)
+    ReportMailer.weekly(user)
+  end
+
+  def monthly
+    user = FactoryBot.create(:user)
+    create_activities(user, Date.today.prev_month)
+    ReportMailer.monthly(user)
+  end
+
+  private
+
+  def create_activities(user, started_at)
     FactoryBot.create_list(
       :activity, 3,
       user: user,
-      started_at: prev_week + 1.hours,
-      stopped_at: prev_week + 2.hours
+      started_at: started_at,
+      stopped_at: started_at + 1.hours
     )
-    ReportMailer.weekly(user)
   end
 end

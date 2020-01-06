@@ -1,5 +1,5 @@
 ja:
-  shared:
-    report_mailer:
+  report_mailer:
+    weekly:
       subject: '週次レポート'
       title: '週次レポート'

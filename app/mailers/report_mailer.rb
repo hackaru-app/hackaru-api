@@ -9,6 +9,12 @@ class ReportMailer < ApplicationMailer
     mail(subject: subject, to: user.email)
   end
 
+  def monthly(user)
+    @report = build_report(user, Date.today.prev_month.all_month)
+    subject = I18n.t('report_mailer.monthly.subject')
+    mail(subject: subject, to: user.email)
+  end
+
   private
 
   def build_report(user, range)
