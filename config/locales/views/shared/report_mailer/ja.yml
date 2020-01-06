@@ -1,0 +1,4 @@
+ja:
+  shared:
+    report_mailer:
+      timers: '計測一覧'

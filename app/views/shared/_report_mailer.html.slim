@@ -1,0 +1,44 @@
+head
+  == stylesheet_pack_tag 'stylesheets/report_mailer/weekly'
+
+section class="content"
+  header class="header"
+    h1 class="title"
+      i data-feather="bar-chart"
+      = title
+    p
+      == l(@report.start_date, format: '%F')
+      span -
+      == l(@report.end_date, format: '%F')
+
+  = render 'shared/bar_chart', report: @report
+
+  section class="projects"
+    = render 'shared/donut_chart', report: @report
+
+    ul class="dot-list project-list"
+      - totals = @report.totals
+      - @report.projects.each do |project|
+        li
+          div class="name"
+            span class="dot" style="background-color: #{project.color}"
+            == project.name
+
+          time class="duration"
+            == hhmmss(totals[project.id])
+
+section class="content"
+  header class="content-header"
+    h1 class="title"
+      i data-feather="clock"
+      = t('.timers')
+
+  ul class="dot-list activity-list"
+    - @report.activities.each do |activity|
+      li
+        div class="name"
+          span class="dot" style="background-color: #{activity.color}"
+          == activity.description.present? ? activity.description : activity.name
+
+        time class="duration"
+          == hhmmss(activity.duration)

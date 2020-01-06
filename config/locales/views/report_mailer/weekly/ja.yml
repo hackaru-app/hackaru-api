@@ -1,6 +1,5 @@
 ja:
-  report_mailer:
-    weekly:
+  shared:
+    report_mailer:
       subject: '週次レポート'
       title: '週次レポート'
-      timers: '計測一覧'

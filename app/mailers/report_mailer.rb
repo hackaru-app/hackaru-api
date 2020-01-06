@@ -4,9 +4,8 @@ class ReportMailer < ApplicationMailer
   add_template_helper(DurationHelper)
 
   def weekly(user)
-    range = Date.today.prev_week.all_week
-    @report = build_report(user, range)
-    subject = I18n.t('report_mailer.weekly.subject', start: range.begin)
+    @report = build_report(user, Date.today.prev_week.all_week)
+    subject = I18n.t('report_mailer.weekly.subject')
     mail(subject: subject, to: user.email)
   end
 
