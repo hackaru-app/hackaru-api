@@ -10,11 +10,9 @@ class Activity < ApplicationRecord
   validates :started_at, presence: true
   validates :started_at,
             date: { before_or_equal_to: :stopped_at }, if: :stopped?
-  validates :duration, presence: true, if: :stopped?
-  validates :duration, absence: true, unless: :stopped?
   validate :project_is_invalid
 
-  before_validation :set_duration
+  before_save :set_duration
   before_save :stop_other_workings, unless: :stopped?
 
   scope :between, lambda { |from, to|
@@ -67,7 +65,7 @@ class Activity < ApplicationRecord
   private
 
   def calc_duration
-    stopped_at && started_at ? stopped_at - started_at : nil
+    stopped_at ? stopped_at - started_at : nil
   end
 
   def stopped?
