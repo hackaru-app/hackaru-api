@@ -7,10 +7,10 @@ RSpec.describe ReportMailer, type: :mailer do
     let(:user) { create(:user) }
 
     subject do
-      UserMailer.report(
+      ReportMailer.report(
         user,
         'title',
-        Date.today.all_weeks
+        Date.today.all_week
       )
     end
 
