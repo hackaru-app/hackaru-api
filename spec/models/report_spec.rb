@@ -576,6 +576,29 @@ RSpec.describe Report, type: :model do
       end
     end
 
+    context 'when user has activities but out of range' do
+      before do
+        create(
+          :activity,
+          started_at: now - 1.day,
+          stopped_at: now,
+          description: 'example1',
+          user: user
+        )
+        create(
+          :activity,
+          started_at: now + 2.days,
+          stopped_at: now + 3.days,
+          description: 'example1',
+          user: user
+        )
+      end
+
+      it 'returns empty' do
+        expect(subject).to eq []
+      end
+    end
+
     context 'when user does not have activities' do
       it 'returns empty' do
         expect(subject).to eq []
