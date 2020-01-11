@@ -67,7 +67,7 @@ class Activity < ApplicationRecord
   private
 
   def calc_duration
-    (stopped_at && started_at) ? stopped_at - started_at : nil
+    stopped_at && started_at ? stopped_at - started_at : nil
   end
 
   def stopped?
