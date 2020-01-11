@@ -19,6 +19,8 @@ class Activity < ApplicationRecord
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
 
+  scope :stopped, -> { where.not(duration: nil) }
+
   after_commit :deliver_stopped_webhooks, on: %i[update]
 
   def deliver_stopped_webhooks
