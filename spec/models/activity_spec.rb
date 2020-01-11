@@ -163,6 +163,12 @@ RSpec.describe Activity, type: :model do
       before { activity.update(stopped_at: nil) }
       it { is_expected.to be_nil }
     end
+
+    context 'when stopped_at change to defined' do
+      let(:stopped_at) { nil }
+      before { activity.update(stopped_at: started_at.tomorrow) }
+      it { is_expected.to eq(60 * 60 * 24) }
+    end
   end
 
   describe '#stop_other_workings' do

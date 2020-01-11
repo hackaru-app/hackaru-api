@@ -599,6 +599,23 @@ RSpec.describe Report, type: :model do
       end
     end
 
+    context 'when user has working activities' do
+      before do
+        create(
+          :activity,
+          started_at: now,
+          stopped_at: nil,
+          duration: nil,
+          description: 'example1',
+          user: user
+        )
+      end
+
+      it 'returns empty' do
+        expect(subject).to eq []
+      end
+    end
+
     context 'when user does not have activities' do
       it 'returns empty' do
         expect(subject).to eq []

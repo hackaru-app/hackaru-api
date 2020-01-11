@@ -10,9 +10,11 @@ class Activity < ApplicationRecord
   validates :started_at, presence: true
   validates :started_at,
             date: { before_or_equal_to: :stopped_at }, if: :stopped?
+  validates :duration, presence: true, if: :stopped?
+  validates :duration, absence: true, unless: :stopped?
   validate :project_is_invalid
 
-  before_save :set_duration
+  before_validation :set_duration
   before_save :stop_other_workings, unless: :stopped?
 
   scope :between, lambda { |from, to|
@@ -25,13 +27,13 @@ class Activity < ApplicationRecord
 
   def deliver_stopped_webhooks
     prevs = previous_changes[:stopped_at]
-    return unless stopped_at.present? && prevs.present? && prevs.first.nil?
+    return unless stopped_at && prevs && prevs.first.nil?
 
     deliver_webhooks 'stopped'
   end
 
   def set_duration
-    self.duration = stopped_at.present? ? stopped_at - started_at : nil
+    self.duration = calc_duration
   end
 
   def stop_other_workings
@@ -63,6 +65,10 @@ class Activity < ApplicationRecord
   end
 
   private
+
+  def calc_duration
+    (stopped_at && started_at) ? stopped_at - started_at : nil
+  end
 
   def stopped?
     stopped_at.present?
