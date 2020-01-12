@@ -3,8 +3,9 @@
 class ReportMailerJob < ApplicationJob
   queue_as :low
 
-  def perform(period, today = Date.today)
-    range = build_range(period, today)
+  def perform(*args)
+    period = args[0][:period]
+    range = build_range(period)
     target_users(range).each do |user|
       send_mail(user, period, range)
     end
@@ -12,8 +13,8 @@ class ReportMailerJob < ApplicationJob
 
   private
 
-  def build_range(period, today)
-    today
+  def build_range(period)
+    Date.today
       .public_send("prev_#{period}")
       .public_send("all_#{period}")
   end
