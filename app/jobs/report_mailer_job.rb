@@ -4,7 +4,7 @@ class ReportMailerJob < ApplicationJob
   queue_as :low
 
   def perform(*args)
-    period = args[0][:period]
+    period = args[0]['period']
     range = build_range(period)
     target_users(range).each do |user|
       send_mail(user, period, range)
