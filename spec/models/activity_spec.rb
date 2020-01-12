@@ -86,6 +86,35 @@ RSpec.describe Activity, type: :model do
         it { is_expected.to be_empty }
       end
     end
+
+    describe '.stopped' do
+      let(:now) { Time.now }
+      subject { Activity.stopped.size }
+
+      context 'when activities are stopped' do
+        before do
+          create_list(
+            :activity,
+            3,
+            started_at: now,
+            stopped_at: now.tomorrow
+          )
+        end
+        it { is_expected.to eq 3 }
+      end
+
+      context 'when activities are not stopped' do
+        before do
+          create_list(
+            :activity,
+            3,
+            started_at: now,
+            stopped_at: nil
+          )
+        end
+        it { is_expected.to be_zero }
+      end
+    end
   end
 
   describe '#deliver_stopped_webhooks' do
@@ -162,6 +191,12 @@ RSpec.describe Activity, type: :model do
       let(:stopped_at) { started_at.tomorrow }
       before { activity.update(stopped_at: nil) }
       it { is_expected.to be_nil }
+    end
+
+    context 'when stopped_at change to defined' do
+      let(:stopped_at) { nil }
+      before { activity.update(stopped_at: started_at.tomorrow) }
+      it { is_expected.to eq(60 * 60 * 24) }
     end
   end
 
