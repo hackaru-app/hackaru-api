@@ -18,8 +18,8 @@ RSpec.describe ReportMailer, type: :mailer do
       expect(subject.to.first).to eq(user.email)
     end
 
-    it 'has title is correctly' do
-      expect(subject.to.first.subject).to eq 'title'
+    it 'has subject is correctly' do
+      expect(subject.subject).to eq 'title'
     end
   end
 end
