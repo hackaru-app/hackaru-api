@@ -1,8 +1,6 @@
 @import '../modules/main';
 
 body {
-  display: flex;
-  justify-content: center;
   color: $text;
   font-size: $font-size;
   padding: 40px;
@@ -20,12 +18,12 @@ a {
   background-color: $white;
   padding: 55px;
   padding-bottom: 40px;
+  margin-bottom: 40px;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   box-shadow: 0 1px 5px $shadow;
-  max-width: 600px;
-  min-width: 0;
-  width: 600px;
+  width: 100%;
 }
 .title {
   display: flex;
