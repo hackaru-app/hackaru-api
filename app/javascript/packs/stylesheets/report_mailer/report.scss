@@ -58,35 +58,7 @@
     color: $text-light;
   }
 }
-.c3-axis-y text,
-.c3-axis-x text {
-  font-family: $font-family;
-}
-.c3-chart-arc path {
-  stroke-width: 0;
-}
-#bar-chart {
-  box-sizing: border-box;
-  height: 180px;
-  margin-left: -20px;
-  margin-top: 50px;
-}
-#donut-chart {
-  align-self: center;
-  align-content: center;
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
-  margin-left: 35px;
-  order: 1;
-}
 .activity-list {
   padding-top: 10px;
   padding-bottom: 70px;
-}
-@include mq(small) {
-  #donut-chart {
-    margin-left: 0;
-    order: 0;
-  }
 }
