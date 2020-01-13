@@ -32,10 +32,10 @@ a {
   font-weight: normal;
   margin: 0;
   font-size: 22px;
-  .feather {
+  .icon {
     margin-right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 }
 .link-button {
@@ -55,7 +55,7 @@ a {
     margin: 0 5px;
   }
   a {
-    color: $text-lighter;
+    color: $text-light;
     text-decoration: none;
   }
 }

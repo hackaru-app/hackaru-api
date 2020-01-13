@@ -4,7 +4,7 @@ head
 section class="content"
   header class="header"
     h1 class="title"
-      i data-feather="bar-chart"
+      == image_pack_tag 'bar-chart-icon.png', class: 'icon'
       = @title
     p
       == l(@report.start_date, format: '%F')
