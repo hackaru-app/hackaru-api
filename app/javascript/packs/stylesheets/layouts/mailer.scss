@@ -19,14 +19,11 @@ a {
   padding: 55px;
   padding-bottom: 40px;
   margin-bottom: 40px;
-  display: flex;
   box-sizing: border-box;
-  flex-direction: column;
   box-shadow: 0 1px 5px $shadow;
   width: 100%;
 }
 .title {
-  display: flex;
   align-items: center;
   font-weight: normal;
   margin: 0;
@@ -49,7 +46,6 @@ a {
   border: 0;
 }
 .footer {
-  display: flex;
   span {
     color: $grey-ccc;
     margin: 0 5px;

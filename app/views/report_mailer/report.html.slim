@@ -14,8 +14,6 @@ section class="content"
   = render 'shared/bar_chart', report: @report
 
   section class="projects"
-    = render 'shared/donut_chart', report: @report
-
     ul class="dot-list project-list"
       - totals = @report.totals
       - @report.projects.each do |project|

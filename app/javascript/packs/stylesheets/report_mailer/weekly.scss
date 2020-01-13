@@ -3,9 +3,6 @@
 
 .header {
   margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   h1 {
     margin-right: 10px;
   }
@@ -20,39 +17,34 @@
   }
 }
 .projects {
-  display: flex;
-  justify-content: space-between;
   margin-top: 40px;
 }
 .dot-list {
   padding: 0;
   box-sizing: border-box;
-  flex: 1;
-  margin-left: 5px;
 }
 .dot-list li {
-  height: 40px;
-  display: flex;
+  vertical-align: baseline;
   align-items: center;
-  flex-direction: row;
   overflow: hidden;
   .dot {
     width: 8px;
     height: 8px;
     display: inline-block;
-    flex-shrink: 0;
     border-radius: 50%;
     margin-right: 15px;
   }
   .name {
-    display: inline-block;
-    flex: 1;
-    justify-content: space-between;
+    float: left;
+    display: block;
+    height: 35px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
   .duration {
+    float: right;
+    display: block;
     margin-left: 20px;
     color: $text-light;
   }
@@ -71,8 +63,6 @@
   margin-top: 50px;
 }
 #donut-chart {
-  flex-shrink: 0;
-  display: flex;
   align-self: center;
   align-content: center;
   width: 150px;
@@ -88,9 +78,6 @@
 
 @include mq(small) {
   .projects {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
   #donut-chart {
     margin-left: 0;
