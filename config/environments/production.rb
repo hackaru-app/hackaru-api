@@ -74,7 +74,7 @@ Rails.application.configure do
     user_name: ENV.fetch('SMTP_USER_NAME', nil),
     password: ENV.fetch('SMTP_PASSWORD', nil),
     authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain'),
-    enable_starttls_auto: ENV.fetch('SMTP_ENABLE_STARTTLE_AUTO', true)
+    enable_starttls_auto: ENV.fetch('SMTP_ENABLE_STARTTLS_AUTO', true)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
