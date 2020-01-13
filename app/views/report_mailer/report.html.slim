@@ -11,7 +11,7 @@ section class="content"
       span -
       == l(@report.end_date, format: '%F')
 
-  = render 'shared/bar_chart', report: @report
+  == render 'shared/css_bar_chart', report: @report
 
   section class="projects"
     ul class="dot-list project-list"

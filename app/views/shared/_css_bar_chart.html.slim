@@ -1,0 +1,19 @@
+ruby:
+  sums_by_date = report.sums.values.transpose
+  colors = report.colors.to_h.values
+  labels = report.labels
+  max_sum = sums_by_date.map(&:sum).max
+
+div class="bar-chart-container"
+  - sums_by_date.each_with_index do |sums, date_index|
+    div class="date" style="width: #{100.0 / sums_by_date.count}%"
+
+      - height = 100 - sums.sum * 1.00 / max_sum * 100
+      div class="bar" style="height: #{height}%; background-color: white;"
+
+      - sums.each_with_index do |sum, sum_index|
+        - height = sum * 1.00 / max_sum * 100
+        div class="bar" style="height: #{height}%; background-color: #{colors[sum_index]};"
+
+      span class="label"
+        = labels[date_index]
