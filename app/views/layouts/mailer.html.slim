@@ -7,13 +7,14 @@ html
   body
     == render 'shared/feather_icon'
 
-    section class="wrapper"
-      header class="logo-header"
-        == image_pack_tag 'logo.png', size: '28x28'
+    section class="body-wrapper"
+      section class="wrapper"
+        header class="logo-header"
+          == image_pack_tag 'logo.png', size: '28x28'
 
-      == yield
+        == yield
 
-      footer class="footer"
-        == link_to 'hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
-        span ・
-        == link_to t('.unsubscribe'), utm_url(ENV.fetch('HACKARU_WEB_URL'))
+        footer class="footer"
+          == link_to 'hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
+          span ・
+          == link_to t('.unsubscribe'), utm_url(ENV.fetch('HACKARU_WEB_URL'))

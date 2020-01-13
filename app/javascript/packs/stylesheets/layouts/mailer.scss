@@ -3,9 +3,11 @@
 body {
   color: $text;
   font-size: $font-size;
-  padding: 40px;
   line-height: $line-height;
   font-family: $font-family;
+}
+.body-wrapper {
+  padding: 40px;
   background-color: $grey-f5f5f5;
 }
 a {
@@ -20,8 +22,10 @@ a {
   padding-bottom: 40px;
   margin-bottom: 40px;
   box-sizing: border-box;
-  box-shadow: 0 1px 5px $shadow;
+  border-bottom: 3px solid $border;
   width: 100%;
+  margin: 0 auto;
+  max-width: 650px;
 }
 .title {
   align-items: center;
