@@ -36,11 +36,23 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.asset_host = 'http://localhost:3000'
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.delivery_method = ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp')
+
+  config.action_mailer.asset_host =
+    "http://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
+
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
+    protocol: 'http'
+  }
   config.action_mailer.smtp_settings = {
-    address: 'mailcatcher',
-    port: 1025
+    address: ENV.fetch('SMTP_ADDRESS', 'mailcatcher'),
+    port: ENV.fetch('SMTP_PORT', '1025'),
+    domain: ENV.fetch('SMTP_DOMAIN', nil),
+    user_name: ENV.fetch('SMTP_USER_NAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
+    authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain'),
+    enable_starttls_auto: ENV.fetch('SMTP_ENABLE_STARTTLE_AUTO', true)
   }
 
   # Print deprecation notices to the Rails logger.
