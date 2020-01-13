@@ -11,9 +11,6 @@ section class="content"
       span -
       == l(@report.end_date, format: '%F')
 
-  p class="web-link"
-    = link_to t('.website'), utm_url(ENV.fetch('HACKARU_WEB_URL'))
-
   == render 'shared/css_bar_chart', report: @report
 
   section class="projects"
