@@ -1,4 +1,4 @@
 ja:
   layouts:
     mailer:
-      unsubscribe: '配信停止'
+      notification: '配信設定'
