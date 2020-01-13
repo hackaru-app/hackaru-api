@@ -1,6 +1,7 @@
 @import '../modules/main';
 
 .header {
+  float: left;
   margin-bottom: 30px;
   h1 {
     margin-right: 10px;
@@ -14,6 +15,15 @@
       margin: 0 5px;
     }
   }
+}
+.web-link a {
+  display: block;
+  border: 1px $border solid;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  float: right;
+  margin: 0;
 }
 .projects {
   margin-top: 40px;
