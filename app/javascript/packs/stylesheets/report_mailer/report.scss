@@ -1,5 +1,4 @@
 @import '../modules/main';
-@import '~c3/c3.min';
 
 .header {
   margin-bottom: 30px;
@@ -74,39 +73,6 @@
 .activity-list {
   padding-top: 10px;
   padding-bottom: 70px;
-}
-.bar-chart-container {
-  width: 100%;
-  height: 150px;
-  padding-top: 10px;
-  padding-bottom: 40px;
-}
-.bar-chart-container .date {
-  float: left;
-  height: 100%;
-  box-sizing: border-box;
-  border-right: 1px solid $border;
-  border-bottom: 1px solid $border;
-  &:last-child {
-    border-right: 0;
-  }
-}
-.bar-chart-container .bars {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.bar-chart-container .bar {
-  top: 0;
-  width: 65%;
-  margin: 0 auto;
-}
-.bar-chart-container .label {
-  margin-top: 5px;
-  display: block;
-  text-align: center;
-  width: 100%;
-  font-size: 12px;
 }
 @include mq(small) {
   #donut-chart {

@@ -1,8 +1,11 @@
+head
+  == stylesheet_pack_tag 'stylesheets/shared/css_bar_chart'
+
 ruby:
   sums_by_date = report.sums.values.transpose
+  max_sum = sums_by_date.map(&:sum).max
   colors = report.colors.to_h.values
   labels = report.labels
-  max_sum = sums_by_date.map(&:sum).max
 
 div class="bar-chart-container"
   - sums_by_date.each_with_index do |sums, date_index|
