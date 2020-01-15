@@ -9,10 +9,12 @@ class User < ApplicationRecord
             length: { maximum: 191 },
             format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { in: 6..50 }, allow_nil: true
+  validates :user_setting, presence: true
 
   with_options dependent: :delete do
     has_one :password_reset_token
     has_one :activity_calendar
+    has_one :user_setting
   end
 
   with_options dependent: :delete_all do
