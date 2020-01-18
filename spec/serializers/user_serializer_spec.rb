@@ -14,7 +14,9 @@ RSpec.describe UserSerializer, type: :serializer do
     it 'returns json' do
       is_expected.to be_json_eql({
         id: user.id,
-        email: user.email
+        email: user.email,
+        receive_week_report: user.receive_week_report,
+        receive_month_report: user.receive_month_report
       }.to_json)
     end
   end
