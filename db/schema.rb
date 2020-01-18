@@ -112,20 +112,13 @@ ActiveRecord::Schema.define(version: 2020_01_18_084353) do
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
-  create_table "user_settings", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.boolean "receive_weekly_report", default: true, null: false
-    t.boolean "receive_monthly_report", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_user_settings_on_user_id", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "password_digest", default: "", null: false
     t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "receive_week_report", default: true, null: false
+    t.boolean "receive_month_report", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -147,6 +140,5 @@ ActiveRecord::Schema.define(version: 2020_01_18_084353) do
   add_foreign_key "password_reset_tokens", "users", on_delete: :cascade
   add_foreign_key "projects", "users", on_delete: :cascade
   add_foreign_key "refresh_tokens", "users", on_delete: :cascade
-  add_foreign_key "user_settings", "users", on_delete: :cascade
   add_foreign_key "webhooks", "users", on_delete: :cascade
 end

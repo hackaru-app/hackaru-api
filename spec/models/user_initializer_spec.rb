@@ -23,10 +23,5 @@ RSpec.describe UserInitializer, type: :model do
     it 'has projects' do
       expect(subject.projects.size).to eq(3)
     end
-
-    it 'has user_setting' do
-      expect(subject.user_setting.receive_weekly_report).to eq(true)
-      expect(subject.user_setting.receive_monthly_report).to eq(true)
-    end
   end
 end
