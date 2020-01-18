@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe UserSettings, type: :model do
+RSpec.describe UserSetting, type: :model do
   describe 'associations' do
     it { is_expected.to belongs_to(:user) }
   end

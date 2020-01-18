@@ -126,13 +126,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  describe '#add_sample_projects' do
-    let(:user) { build(:user) }
-    before { user.add_sample_projects }
-
-    it 'add sample projects' do
-      expect(user.projects.size).to eq(3)
-    end
-  end
 end

@@ -35,13 +35,4 @@ class User < ApplicationRecord
     password_reset_token.destroy!
     true
   end
-
-  def add_sample_projects
-    names = I18n.t('sample_projects')
-    projects << [
-      Project.new(color: '#4ab8b8', name: names[0]),
-      Project.new(color: '#a1c45a', name: names[1]),
-      Project.new(color: '#f95959', name: names[2])
-    ]
-  end
 end
