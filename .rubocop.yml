@@ -1,25 +1,24 @@
 AllCops:
   TargetRubyVersion: 2.3
   Exclude:
+    - db/schema.rb
     - vendor/**/*
     - node_modules/**/*
 
 Metrics/LineLength:
   Max: 80
   IgnoredPatterns: ['^ *#']
-  Exclude:
-    - Schemafile
 
 Style/Documentation:
   Enabled: false
 
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/**/*
+
 Metrics/MethodLength:
   Exclude:
-    - Schemafile
-
-Naming/FileName:
-  Exclude:
-    - Schemafile
+    - db/migrate/**/*
 
 Style/MixinUsage:
   Exclude:
