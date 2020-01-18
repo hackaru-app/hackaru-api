@@ -17,7 +17,7 @@ RSpec.describe UserInitializer, type: :model do
     end
 
     it 'has password' do
-      expect(user.password).to eq('password')
+      expect(subject.password).to eq('password')
     end
 
     it 'has projects' do

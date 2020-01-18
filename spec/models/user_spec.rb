@@ -47,6 +47,11 @@ RSpec.describe User, type: :model do
       it { expect(User.exists?(id: user.id)).to be_falsey }
     end
 
+    context 'when user has user_setting' do
+      let(:user) { create(:user_setting).user }
+      it { expect(User.exists?(id: user.id)).to be_falsey }
+    end
+
     context 'when user has any password_reset_token' do
       let(:user) { create(:password_reset_token).user }
       it { expect(User.exists?(id: user.id)).to be_falsey }
