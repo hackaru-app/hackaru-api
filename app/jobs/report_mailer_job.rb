@@ -5,9 +5,8 @@ class ReportMailerJob < ApplicationJob
 
   def perform(*args)
     period = args[0]['period']
-    range = build_range(period)
-    target_users(range).each do |user|
-      send_mail(user, period, range)
+    target_users(period).each do |user|
+      send_mail(user, period)
     end
   end
 
@@ -19,7 +18,8 @@ class ReportMailerJob < ApplicationJob
         .public_send("all_#{period}")
   end
 
-  def send_mail(user, period, range)
+  def send_mail(user, period)
+    range = build_range(period)
     scope = "jobs.report_mailer_job.#{period}"
     ReportMailer.report(
       user,
@@ -29,8 +29,9 @@ class ReportMailerJob < ApplicationJob
     ).deliver_later
   end
 
-  def target_users(range)
-    User.select do |user|
+  def target_users(period)
+    range = build_range(period)
+    User.where("receive_#{period}_report": true).select do |user|
       user.activities.stopped.where(started_at: range).present?
     end
   end

@@ -19,8 +19,8 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when period is week' do
-      let(:user) { create(:user) }
       let(:args) { [{ 'period' => 'week' }] }
+      let(:user) { create(:user, receive_week_report: true) }
 
       before do
         create(
@@ -40,9 +40,51 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when period is month' do
-      let(:user) { create(:user) }
+    context 'when period is week but user does not want receive' do
+      let(:args) { [{ 'period' => 'week' }] }
+      let(:user) { create(:user, receive_week_report: false) }
+
+      before do
+        create(
+          :activity,
+          user: user,
+          started_at: today.prev_week + 1.day,
+          stopped_at: today.prev_week + 2.days
+        )
+        perform_enqueued_jobs do
+          ReportMailerJob.new.perform(*args)
+        end
+      end
+
+      it 'does not send mail to user' do
+        expect(subject.size).to be_zero
+      end
+    end
+
+    context 'when period is month but user does not want receive' do
       let(:args) { [{ 'period' => 'month' }] }
+      let(:user) { create(:user, receive_month_report: false) }
+
+      before do
+        create(
+          :activity,
+          user: user,
+          started_at: today.prev_month + 1.day,
+          stopped_at: today.prev_month + 2.days
+        )
+        perform_enqueued_jobs do
+          ReportMailerJob.new.perform(*args)
+        end
+      end
+
+      it 'does not send mail to user' do
+        expect(subject.size).to be_zero
+      end
+    end
+
+    context 'when period is month' do
+      let(:args) { [{ 'period' => 'month' }] }
+      let(:user) { create(:user, receive_month_report: true) }
 
       before do
         create(
@@ -63,8 +105,8 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when target user is multiple' do
-      let(:users) { create_list(:user, 2) }
       let(:args) { [{ 'period' => 'week' }] }
+      let(:users) { create_list(:user, 2, receive_week_report: true) }
 
       before do
         create(
@@ -92,7 +134,7 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when user does not have activities' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, receive_week_report: true) }
       let(:args) { [{ 'period' => 'week' }] }
 
       before do
@@ -107,7 +149,7 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when user has activities but working' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, receive_week_report: true) }
       let(:args) { [{ 'period' => 'week' }] }
 
       before do
