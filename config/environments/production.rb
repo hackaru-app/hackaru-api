@@ -58,7 +58,8 @@ Rails.application.configure do
   config.active_job.queue_name_prefix = "hackaru-api_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp')
+  config.action_mailer.delivery_method =
+    ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp')
 
   config.action_mailer.asset_host =
     "https://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
