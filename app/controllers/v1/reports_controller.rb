@@ -5,7 +5,7 @@ module V1
     include PdfRenderable
     include ActionController::MimeResponds
 
-    before_action :authenticate_user!, only: :show
+    before_action :authenticate_user!
 
     def show
       @report = build_report

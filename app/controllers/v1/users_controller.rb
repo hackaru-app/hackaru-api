@@ -2,8 +2,10 @@
 
 module V1
   class UsersController < ApplicationController
-    before_action only: %i[update] do
-      authenticate_user!
+    before_action :authenticate_user!
+
+    def show
+      render json: current_user
     end
 
     def update
