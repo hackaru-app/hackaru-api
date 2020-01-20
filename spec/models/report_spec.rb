@@ -379,7 +379,7 @@ RSpec.describe Report, type: :model do
       it { is_expected.to eq start_date.in_time_zone('UTC') }
     end
 
-    context 'when time_zone is not UTC' do
+    context 'when time_zone is Asia/Tokyo' do
       let(:time_zone) { 'Asia/Tokyo' }
       it { is_expected.to eq start_date.in_time_zone('Asia/Tokyo') }
     end
@@ -402,7 +402,7 @@ RSpec.describe Report, type: :model do
       it { is_expected.to eq end_date.in_time_zone('UTC') }
     end
 
-    context 'when time_zone is not UTC' do
+    context 'when time_zone is Asia/Tokyo' do
       let(:time_zone) { 'Asia/Tokyo' }
       it { is_expected.to eq end_date.in_time_zone('Asia/Tokyo') }
     end

@@ -17,6 +17,7 @@ module V1
 
     def user_params
       params.require(:user).permit(
+        :time_zone,
         :receive_week_report,
         :receive_month_report
       )

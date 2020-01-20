@@ -44,7 +44,8 @@ module V1
         params.require(:user).permit(
           :email,
           :password,
-          :password_confirmation
+          :password_confirmation,
+          :time_zone
         )
       end
     end

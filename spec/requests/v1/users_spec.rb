@@ -11,14 +11,8 @@ RSpec.describe 'V1::Users', type: :request do
           headers: access_token_header(user)
     end
 
-    context 'when params are correctly' do
-      it { expect(response).to have_http_status(200) }
-      it { expect(user.reload.receive_week_report).to be(true) }
-      it { expect(user.reload.receive_month_report).to be(true) }
-    end
-
-    context 'when params are correctly' do
-      it { expect(response).to have_http_status(200) }
+    it 'returns http success' do
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -27,6 +21,7 @@ RSpec.describe 'V1::Users', type: :request do
     let(:params) do
       {
         user: {
+          time_zone: 'UTC',
           receive_week_report: true,
           receive_month_report: true
         }
@@ -41,6 +36,7 @@ RSpec.describe 'V1::Users', type: :request do
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(200) }
+      it { expect(user.reload.time_zone).to eq('UTC') }
       it { expect(user.reload.receive_week_report).to be(true) }
       it { expect(user.reload.receive_month_report).to be(true) }
     end

@@ -9,6 +9,7 @@ class User < ApplicationRecord
             length: { maximum: 191 },
             format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { in: 6..50 }, allow_nil: true
+  validates :time_zone, presence: true, inclusion: { in: :time_zones }
 
   with_options dependent: :delete do
     has_one :password_reset_token
@@ -32,5 +33,11 @@ class User < ApplicationRecord
     )
     password_reset_token.destroy!
     true
+  end
+
+  private
+
+  def time_zones
+    ActiveSupport::TimeZone::MAPPING.to_a.flatten
   end
 end

@@ -27,6 +27,11 @@ RSpec.describe User, type: :model do
       it { is_expected.to validate_length_of(:password).is_at_least(6) }
       it { is_expected.to validate_length_of(:password).is_at_most(50) }
     end
+
+    describe 'time_zone' do
+      let(:array) { ActiveSupport::TimeZone::MAPPING.to_a.flatten }
+      it { is_expected.to validate_inclusion_of(:time_zone).in_array(array) }
+    end
   end
 
   describe '#destroy' do
