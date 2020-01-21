@@ -15,4 +15,4 @@ html
         footer class="footer"
           == link_to 'Hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
           span ・
-          == link_to t('.notification'), utm_url(ENV.fetch('HACKARU_WEB_URL'))
+          == link_to t('.notification'), utm_url("#{ENV.fetch('HACKARU_WEB_URL')}/settings/notifications")
