@@ -19,17 +19,19 @@ class Activity < ApplicationRecord
     where('started_at <= ? and ? <= stopped_at', to, from)
   }
 
+  scope :stopped, -> { where.not(duration: nil) }
+
   after_commit :deliver_stopped_webhooks, on: %i[update]
 
   def deliver_stopped_webhooks
     prevs = previous_changes[:stopped_at]
-    return unless stopped_at.present? && prevs.present? && prevs.first.nil?
+    return unless stopped_at && prevs && prevs.first.nil?
 
     deliver_webhooks 'stopped'
   end
 
   def set_duration
-    self.duration = stopped_at.present? ? stopped_at - started_at : nil
+    self.duration = calc_duration
   end
 
   def stop_other_workings
@@ -61,6 +63,10 @@ class Activity < ApplicationRecord
   end
 
   private
+
+  def calc_duration
+    stopped_at ? stopped_at - started_at : nil
+  end
 
   def stopped?
     stopped_at.present?
