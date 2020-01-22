@@ -59,7 +59,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method =
-    ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp')
+    ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp').to_sym
 
   config.action_mailer.asset_host =
     "https://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
