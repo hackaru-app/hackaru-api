@@ -27,6 +27,7 @@
   vertical-align: baseline;
   align-items: center;
   overflow: hidden;
+  padding: 10px 0;
   .dot {
     width: 8px;
     height: 8px;
@@ -37,7 +38,6 @@
   .name {
     float: left;
     display: block;
-    height: 35px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -47,9 +47,14 @@
     display: block;
     margin-left: 20px;
     color: $text-light;
+    font-family: $font-family-duration;
   }
 }
 .activity-list {
   padding-top: 10px;
   padding-bottom: 70px;
+}
+.activity-list li {
+  padding: 15px 0;
+  border-bottom: 1px $border solid;
 }
