@@ -25,8 +25,7 @@
   p {
     font-size: 16px;
     margin: 0;
-    margin-top: 10px;
-    color: #666;
+    margin-top: 15px;
     span {
       margin: 0 5px;
     }
@@ -67,10 +66,9 @@
   margin-right: 15px;
 }
 .projects li {
-  height: 50px;
+  height: 40px;
   align-items: center;
   display: flex;
-  border-bottom: 1px $border-dark solid;
   justify-content: space-between;
 }
 .c3-axis-y text,
