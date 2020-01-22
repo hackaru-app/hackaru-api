@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
       get :working
     end
 
+    resource :user, only: %i[update show]
     resource :activity_calendar, only: %i[update show destroy]
     resources :activities, except: :show
     resources :projects, except: :show

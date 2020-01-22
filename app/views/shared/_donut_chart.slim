@@ -1,0 +1,9 @@
+ruby:
+  data = {
+    totals: report.totals.to_a,
+    colors: report.colors
+  }
+
+div id="donut-chart" data-json="#{data.to_json}"
+
+== javascript_include_tag asset_pack_url('javascripts/shared/donut-chart.js'), media: :all

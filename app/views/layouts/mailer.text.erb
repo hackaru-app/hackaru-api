@@ -1,6 +1,5 @@
-￣￣￣￣￣
-
 <%= yield %>
+--
 
-￣￣￣￣￣
-Hackaru - <%= ENV.fetch('HACKARU_WEB_URL') %>
+- Hackaru: <%= ENV.fetch('HACKARU_WEB_URL') %>
+- <%= t('.notification') %>: <%= "#{ENV.fetch('HACKARU_WEB_URL')}/settings/notifications" %>

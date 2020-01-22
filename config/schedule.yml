@@ -1,0 +1,11 @@
+weekly_report_mailer_job:
+  cron: '0 9 * * 0'
+  class: 'ReportMailerJob'
+  args:
+    period: 'week'
+
+monthly_report_mailer_job:
+  cron: '0 9 1 * *'
+  class: 'ReportMailerJob'
+  args:
+    period: 'month'

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { is_expected.to have_one(:password_reset_token) }
+    it { is_expected.to have_one(:password_reset_token).dependent(:delete) }
     it { is_expected.to have_many(:projects).dependent(:delete_all) }
     it { is_expected.to have_many(:activities).dependent(:delete_all) }
     it { is_expected.to have_many(:refresh_tokens).dependent(:delete_all) }
@@ -26,6 +26,11 @@ RSpec.describe User, type: :model do
       it { is_expected.to have_secure_password }
       it { is_expected.to validate_length_of(:password).is_at_least(6) }
       it { is_expected.to validate_length_of(:password).is_at_most(50) }
+    end
+
+    describe 'time_zone' do
+      let(:array) { ActiveSupport::TimeZone::MAPPING.to_a.flatten }
+      it { is_expected.to validate_inclusion_of(:time_zone).in_array(array) }
     end
   end
 
@@ -119,15 +124,6 @@ RSpec.describe User, type: :model do
           )
         end.to raise_error ActiveRecord::RecordInvalid
       end
-    end
-  end
-
-  describe '#add_sample_projects' do
-    let(:user) { build(:user) }
-    before { user.add_sample_projects }
-
-    it 'add sample projects' do
-      expect(user.projects.size).to eq(3)
     end
   end
 end

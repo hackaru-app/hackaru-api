@@ -1,0 +1,5 @@
+ja:
+  report_mailer:
+    report:
+      projects: 'プロジェクトの集計'
+      timers: '計測一覧'

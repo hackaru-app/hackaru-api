@@ -1,12 +1,15 @@
+head
+  == stylesheet_pack_tag 'stylesheets/user_mailer/sign_up'
+
 section class="content"
   h1 class="title"
     == t('.welcome.title')
-  p class=".description"
+  p
     == t('.welcome.description')
-
-  == link_to t('.welcome.open_website'),
-     utm_url(ENV.fetch('HACKARU_WEB_URL')),
-     class: 'link-button'
+    br
+    == link_to t('.welcome.open_website'),
+      utm_url(ENV.fetch('HACKARU_WEB_URL')),
+      class: 'link-button'
 
 section class="content"
   h1 class="title"
@@ -25,10 +28,7 @@ section class="content"
               utm_url(ENV.fetch('HACKARU_WEB_URL'))))
 
       li
-        == t('.use_iphone.instruction_2',
-              share: image_pack_tag('iphone-share-icon.png',
-                class: 'icon',
-                size: '20x20'))
+        == t('.use_iphone.instruction_2', share: image_pack_tag('share-icon.png', class: 'icon'))
 
   section class="instruction"
     h1 class="title is-small"

@@ -5,30 +5,18 @@ module V1
     include PdfRenderable
     include ActionController::MimeResponds
 
-    before_action :authenticate_user!, only: :show
+    before_action :authenticate_user!
 
     def show
       @report = build_report
-      set_show_variables
-
       respond_to do |format|
-        format.html { render :show, formats: [:html] }
+        format.html { render :show, formats: [:html], layout: 'pdf' }
         format.json { render json: @report }
         format.pdf { render_pdf :show }
       end
     end
 
     private
-
-    def set_show_variables
-      gon.push(
-        bar_chart_data: @report.bar_chart_data,
-        totals: @report.totals.to_a,
-        groups: @report.projects.map(&:id),
-        colors: @report.colors,
-        labels: @report.labels
-      )
-    end
 
     def build_report
       report = Report.new(

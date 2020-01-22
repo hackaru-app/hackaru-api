@@ -6,13 +6,17 @@ function getTickFormat(seconds) {
   return hours % 0.5 === 0 ? `${hours}h` : '';
 }
 
+const data = JSON.parse(
+  document.getElementById('bar-chart').dataset.json
+);
+
 c3.generate({
   bindto: '#bar-chart',
   data: {
     type: 'bar',
-    columns: gon.bar_chart_data,
-    colors: gon.colors,
-    groups: [gon.groups]
+    columns: data.bar_chart_data,
+    colors: data.colors,
+    groups: [data.groups]
   },
   legend: {
     show: false
@@ -20,29 +24,12 @@ c3.generate({
   axis: {
     x: {
       type: 'category',
-      categories: gon.labels
+      categories: data.labels
     },
     y: {
       tick: {
         format: getTickFormat
       }
     }
-  }
-});
-
-c3.generate({
-  bindto: '#donut-chart',
-  data: {
-    type: 'donut',
-    columns: gon.totals,
-    colors: gon.colors
-  },
-  donut: {
-    label: {
-      show: false
-    }
-  },
-  legend: {
-    show: false
   }
 });

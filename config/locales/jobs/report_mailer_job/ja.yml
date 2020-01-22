@@ -1,0 +1,7 @@
+ja:
+  jobs:
+    report_mailer_job:
+      week:
+        title: '週次レポート'
+      month:
+        title: '月次レポート'

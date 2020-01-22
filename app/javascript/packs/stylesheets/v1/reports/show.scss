@@ -1,30 +1,15 @@
-@import '~normalize.css/normalize';
+@import '../../modules/main';
 @import '~c3/c3.min';
 
-@page {
-  margin: 50px 0;
-  margin-bottom: 60px;
-}
-body {
-  color: #000;
-  background-color: #fff;
-  font-size: 14px;
-  padding: 0 55px;
-  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
-  -webkit-print-color-adjust: exact;
-}
-.page {
-  page-break-after: always;
-}
-.header {
+.logo-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 3px solid #eee;
+  border-bottom: 3px solid $border-dark;
   padding-bottom: 40px;
   margin-bottom: 40px;
 }
-.title {
+.page .title {
   font-weight: normal;
   margin: 0;
   font-size: 24px;
@@ -32,14 +17,16 @@ body {
   display: flex;
   margin-right: 20px;
 }
-.content-header {
+.page .header {
   margin-top: 25px;
   margin-bottom: 50px;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
   p {
     font-size: 16px;
     margin: 0;
+    margin-top: 10px;
+    color: #666;
     span {
       margin: 0 5px;
     }
@@ -80,8 +67,10 @@ body {
   margin-right: 15px;
 }
 .projects li {
-  padding: 10px 0;
+  height: 50px;
+  align-items: center;
   display: flex;
+  border-bottom: 1px $border-dark solid;
   justify-content: space-between;
 }
 .c3-axis-y text,
@@ -92,14 +81,14 @@ body {
   stroke-width: 0;
 }
 .activity {
-  border-bottom: 1px #eee solid;
+  border-bottom: 1px $border-dark solid;
   display: flex;
   height: 60px;
   align-items: center;
   justify-content: space-between;
   page-break-inside: avoid;
   &:last-child {
-    border-bottom: 1px #eee solid;
+    border-bottom: 1px $border-dark solid;
   }
 }
 .activity-name {
@@ -108,9 +97,8 @@ body {
   overflow: hidden;
   h1 {
     font-weight: normal;
-    font-size: 14px;
+    font-size: $pdf-font-size;
     padding: 0;
-    margin: 0;
     display: inline;
     margin: 0;
     text-overflow: ellipsis;

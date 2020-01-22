@@ -1,0 +1,12 @@
+ruby:
+  data = {
+    bar_chart_data: report.bar_chart_data,
+    totals: report.totals.to_a,
+    groups: report.projects.map(&:id),
+    colors: report.colors,
+    labels: report.labels
+  }
+
+div id="bar-chart" data-json="#{data.to_json}"
+
+== javascript_include_tag asset_pack_url('javascripts/shared/bar-chart.js'), media: :all

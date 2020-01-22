@@ -12,8 +12,7 @@ module V1
       end
 
       def create
-        user = User.create!(user_params)
-        user.add_sample_projects
+        user = UserInitializer.new(user_params).create!
         sign_refresh_token(*RefreshToken.issue(user))
         UserMailer.sign_up(user).deliver_later
         render json: user
@@ -45,7 +44,8 @@ module V1
         params.require(:user).permit(
           :email,
           :password,
-          :password_confirmation
+          :password_confirmation,
+          :time_zone
         )
       end
     end
