@@ -16,7 +16,7 @@ class ReportMailer < ApplicationMailer
       user: user,
       start_date: range.begin,
       end_date: range.end,
-      time_zone: 'UTC' # TODO
+      time_zone: user.time_zone
     )
     report.valid!
     report
