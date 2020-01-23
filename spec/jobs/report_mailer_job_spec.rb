@@ -47,13 +47,13 @@ RSpec.describe ReportMailerJob, type: :job do
           :activity,
           user: user,
           started_at: Date.new(2017, 1, 8),
-          stopped_at: Date.new(2017, 1, 9),
+          stopped_at: Date.new(2017, 1, 9)
         )
         create(
           :activity,
           user: user,
           started_at: Date.new(2016, 12, 30),
-          stopped_at: Date.new(2017, 12, 31),
+          stopped_at: Date.new(2017, 12, 31)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -74,13 +74,13 @@ RSpec.describe ReportMailerJob, type: :job do
           :activity,
           user: user,
           started_at: Date.new(2016, 11, 29),
-          stopped_at: Date.new(2016, 11, 30),
+          stopped_at: Date.new(2016, 11, 30)
         )
         create(
           :activity,
           user: user,
           started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2),
+          stopped_at: Date.new(2017, 1, 2)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
