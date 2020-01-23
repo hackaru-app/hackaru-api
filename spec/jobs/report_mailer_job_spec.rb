@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe ReportMailerJob, type: :job do
   describe '#perform' do
-    let(:today) { Date.today }
+    let(:prev_week) { Date.today.prev_week(:sunday) }
+    let(:prev_month) { Date.today.prev_month }
 
     subject do
       ActionMailer::Base.deliveries
@@ -26,8 +27,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: today.prev_week + 1.day,
-          stopped_at: today.prev_week + 2.days
+          started_at: prev_week + 1.day,
+          stopped_at: prev_week + 2.days
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -48,8 +49,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: today.prev_week + 1.day,
-          stopped_at: today.prev_week + 2.days
+          started_at: prev_week + 1.day,
+          stopped_at: prev_week + 2.days
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -69,8 +70,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: today.prev_month + 1.day,
-          stopped_at: today.prev_month + 2.days
+          started_at: prev_month + 1.day,
+          stopped_at: prev_month + 2.days
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -90,8 +91,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: today.prev_month + 1.day,
-          stopped_at: today.prev_month + 2.days
+          started_at: prev_month + 1.day,
+          stopped_at: prev_month + 2.days
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -112,14 +113,14 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: users[0],
-          started_at: today.prev_week + 1.day,
-          stopped_at: today.prev_week + 2.days
+          started_at: prev_week + 1.day,
+          stopped_at: prev_week + 2.days
         )
         create(
           :activity,
           user: users[1],
-          started_at: today.prev_week + 1.day,
-          stopped_at: today.prev_week + 2.days
+          started_at: prev_week + 1.day,
+          stopped_at: prev_week + 2.days
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -156,7 +157,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: today.prev_week + 1.day,
+          started_at: prev_week + 1.day,
           stopped_at: nil
         )
         perform_enqueued_jobs do
