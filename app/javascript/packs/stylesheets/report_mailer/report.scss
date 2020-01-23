@@ -38,6 +38,9 @@
   .name {
     float: left;
     display: block;
+    width: 80%;
+    padding-right: 20px;
+    box-sizing: border-box;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -45,7 +48,6 @@
   .duration {
     float: right;
     display: block;
-    margin-left: 20px;
     color: $text-light;
     font-family: $font-family-duration;
   }
