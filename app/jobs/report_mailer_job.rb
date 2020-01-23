@@ -13,10 +13,9 @@ class ReportMailerJob < ApplicationJob
   private
 
   def build_range(period)
+    prev = Date.today - 1.public_send(period)
     args = period == 'week' ? [:sunday] : []
-    Date.today
-        .public_send("prev_#{period}", *args)
-        .public_send("all_#{period}", *args)
+    prev.public_send("all_#{period}", *args)
   end
 
   def send_mail(user, period)
