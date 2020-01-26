@@ -18,14 +18,20 @@ RSpec.describe ReportMailerJob, type: :job do
 
     context 'when period is week' do
       let(:args) { [{ 'period' => 'week' }] }
-      let(:user) { create(:user, receive_week_report: true) }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2)
+          started_at: Time.new(2017, 1, 1),
+          stopped_at: Time.new(2017, 1, 2)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -39,21 +45,27 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when period is week but user does not have activities in range' do
-      let(:user) { create(:user, receive_week_report: true) }
       let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2017, 1, 8),
-          stopped_at: Date.new(2017, 1, 9)
+          started_at: Time.new(2016, 12, 31, 23, 59, 59),
+          stopped_at: Time.new(2016, 12, 31, 23, 59, 59)
         )
         create(
           :activity,
           user: user,
-          started_at: Date.new(2016, 12, 30),
-          stopped_at: Date.new(2017, 12, 31)
+          started_at: Time.new(2017, 1, 8),
+          stopped_at: Time.new(2017, 1, 8)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -66,21 +78,27 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when period is month but user does not have activities in range' do
-      let(:args) { [{ 'period' => 'week' }] }
-      let(:user) { create(:user, receive_week_report: false) }
+      let(:args) { [{ 'period' => 'month' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2016, 11, 29),
-          stopped_at: Date.new(2016, 11, 30)
+          started_at: Time.new(2016, 11, 29),
+          stopped_at: Time.new(2016, 11, 29)
         )
         create(
           :activity,
           user: user,
-          started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2)
+          started_at: Time.new(2017, 1, 1),
+          stopped_at: Time.new(2017, 1, 1)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -94,14 +112,20 @@ RSpec.describe ReportMailerJob, type: :job do
 
     context 'when period is month but user does not want receive' do
       let(:args) { [{ 'period' => 'month' }] }
-      let(:user) { create(:user, receive_month_report: false) }
+      let(:user) do
+        create(
+          :user,
+          receive_month_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2)
+          started_at: Time.new(2017, 1, 1),
+          stopped_at: Time.new(2017, 1, 1)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -115,14 +139,20 @@ RSpec.describe ReportMailerJob, type: :job do
 
     context 'when period is month' do
       let(:args) { [{ 'period' => 'month' }] }
-      let(:user) { create(:user, receive_month_report: true) }
+      let(:user) do
+        create(
+          :user,
+          receive_month_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2016, 12, 1),
-          stopped_at: Date.new(2016, 12, 2)
+          started_at: Time.new(2016, 12, 1),
+          stopped_at: Time.new(2016, 12, 1)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -137,20 +167,27 @@ RSpec.describe ReportMailerJob, type: :job do
 
     context 'when target user is multiple' do
       let(:args) { [{ 'period' => 'week' }] }
-      let(:users) { create_list(:user, 2, receive_week_report: true) }
+      let(:users) do
+        create_list(
+          :user,
+          2,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: users[0],
-          started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2)
+          started_at: Time.new(2017, 1, 1),
+          stopped_at: Time.new(2017, 1, 1)
         )
         create(
           :activity,
           user: users[1],
-          started_at: Date.new(2017, 1, 1),
-          stopped_at: Date.new(2017, 1, 2)
+          started_at: Time.new(2017, 1, 1),
+          stopped_at: Time.new(2017, 1, 1)
         )
         perform_enqueued_jobs do
           ReportMailerJob.new.perform(*args)
@@ -165,8 +202,14 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when user does not have activities' do
-      let(:user) { create(:user, receive_week_report: true) }
       let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         perform_enqueued_jobs do
@@ -180,14 +223,20 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     context 'when user has activities but working' do
-      let(:user) { create(:user, receive_week_report: true) }
       let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC',
+        )
+      end
 
       before do
         create(
           :activity,
           user: user,
-          started_at: Date.new(2017, 1, 1),
+          started_at: Time.new(2017, 1, 1),
           stopped_at: nil
         )
         perform_enqueued_jobs do
@@ -197,6 +246,68 @@ RSpec.describe ReportMailerJob, type: :job do
 
       it 'does not send mail to user' do
         expect(subject.size).to be_zero
+      end
+    end
+
+    context 'when user has time zone is not UTC' do
+      let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'Asia/Tokyo'
+        )
+      end
+
+      before do
+        create(
+          :activity,
+          user: user,
+          started_at: Time.new(2017, 1, 1, 15),
+          stopped_at: Time.new(2017, 1, 1, 15)
+        )
+        perform_enqueued_jobs do
+          ReportMailerJob.new.perform(*args)
+        end
+      end
+
+      it 'send mail to user' do
+        expect(subject.size).to eq(1)
+        expect(subject.last.to.first).to eq(user.email)
+      end
+    end
+
+    context 'when user has time zone is not UTC and have no activities' do
+      let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'Asia/Tokyo'
+        )
+      end
+
+      before do
+        create(
+          :activity,
+          user: user,
+          started_at: Time.new(2017, 1, 1, 14, 59, 59, 59),
+          stopped_at: Time.new(2017, 1, 1, 14, 59, 59, 59)
+        )
+        create(
+          :activity,
+          user: user,
+          started_at: Time.new(2017, 1, 8, 15),
+          stopped_at: Time.new(2017, 1, 9, 15)
+        )
+        perform_enqueued_jobs do
+          ReportMailerJob.new.perform(*args)
+        end
+      end
+
+      it 'send mail to user' do
+        expect(subject.size).to eq(1)
+        expect(subject.last.to.first).to eq(user.email)
       end
     end
   end
