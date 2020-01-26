@@ -277,7 +277,7 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when user has time zone is not UTC and have no activities' do
+    context 'when user has time zone is not UTC and has no activities' do
       let(:args) { [{ 'period' => 'week' }] }
       let(:user) do
         create(
