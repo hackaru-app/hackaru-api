@@ -12,27 +12,29 @@ class ReportMailerJob < ApplicationJob
 
   private
 
-  def build_range(period)
-    prev = Date.today - 1.public_send(period)
-    args = period == 'week' ? [:sunday] : []
-    prev.public_send("all_#{period}", *args)
+  def target_users(period)
+    User.where("receive_#{period}_report": true).select do |user|
+      range = build_range(user, period)
+      user.activities.stopped.where(started_at: range).present?
+    end
   end
 
   def send_mail(user, period)
-    range = build_range(period)
-    scope = "jobs.report_mailer_job.#{period}"
     ReportMailer.report(
       user,
-      I18n.t(:title, scope: scope),
-      range.begin,
-      range.end
+      I18n.t(:title, scope: "jobs.report_mailer_job.#{period}"),
+      build_range(user, period).begin,
+      build_range(user, period).end
     ).deliver_later
   end
 
-  def target_users(period)
-    range = build_range(period)
-    User.where("receive_#{period}_report": true).select do |user|
-      user.activities.stopped.where(started_at: range).present?
-    end
+  def build_range(user, period)
+    args = period == 'week' ? [:sunday] : []
+    prev = current_time(user.time_zone) - 1.public_send(period)
+    prev.public_send("all_#{period}", *args)
+  end
+
+  def current_time(time_zone)
+    Time.now.asctime.in_time_zone(time_zone)
   end
 end
