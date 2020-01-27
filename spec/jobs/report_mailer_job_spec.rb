@@ -222,6 +222,34 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
+    context 'when user has activity without project' do
+      let(:args) { [{ 'period' => 'week' }] }
+      let(:user) do
+        create(
+          :user,
+          receive_week_report: true,
+          time_zone: 'UTC'
+        )
+      end
+
+      before do
+        create(
+          :activity,
+          project: nil,
+          user: user,
+          started_at: Time.new(2017, 1, 1, 15),
+          stopped_at: Time.new(2017, 1, 1, 15)
+        )
+        perform_enqueued_jobs do
+          ReportMailerJob.new.perform(*args)
+        end
+      end
+
+      it 'does not send mail to user' do
+        expect(subject.size).to be_zero
+      end
+    end
+
     context 'when user has activities but working' do
       let(:args) { [{ 'period' => 'week' }] }
       let(:user) do
