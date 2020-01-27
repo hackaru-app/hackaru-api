@@ -15,7 +15,9 @@ class ReportMailerJob < ApplicationJob
   def target_users(period)
     User.where("receive_#{period}_report": true).select do |user|
       range = build_range(user, period)
-      user.activities.stopped.where(started_at: range).present?
+      user.activities.stopped.where.not(project: nil)
+          .where(started_at: range)
+          .present?
     end
   end
 
