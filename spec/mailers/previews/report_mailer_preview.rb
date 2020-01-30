@@ -10,7 +10,7 @@ class ReportMailerPreview < ActionMailer::Preview
 
   def monthly
     title = I18n.t('jobs.report_mailer_job.month.title')
-    range = Time.new(2017, 1, 1).all_month(:sunday)
+    range = Time.new(2017, 1, 1).all_month
     report(title, range.begin, range.end)
   end
 
