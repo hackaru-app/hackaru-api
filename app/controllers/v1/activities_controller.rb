@@ -14,8 +14,8 @@ module V1
       param! :start, Time, required: true
       param! :end, Time, required: true
       render json: current_user.activities
-        .includes(:project)
-        .between(params[:start], params[:end])
+                               .includes(:project)
+                               .between(params[:start], params[:end])
     end
 
     def working

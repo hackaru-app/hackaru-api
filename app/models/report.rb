@@ -74,10 +74,10 @@ class Report
 
   def grouped_activities
     activities
-        .group(:project_id, :name, :color, :description)
-        .order(:project_id, 'SUM(duration) DESC')
-        .select(:project_id, :name, :color, :description,
-                'SUM(duration) as duration')
+      .group(:project_id, :name, :color, :description)
+      .order(:project_id, 'SUM(duration) DESC')
+      .select(:project_id, :name, :color, :description,
+              'SUM(duration) as duration')
   end
 
   def activities

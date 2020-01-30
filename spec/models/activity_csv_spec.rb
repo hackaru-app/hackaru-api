@@ -31,7 +31,7 @@ RSpec.describe ActivityCsv, type: :model do
           '"Description"',
           '"StartedAt"',
           '"StoppedAt"',
-          '"Duration"',
+          '"Duration"'
         ].join(',')
       end
 
@@ -134,7 +134,7 @@ RSpec.describe ActivityCsv, type: :model do
           '"Description"',
           '"StartedAt"',
           '"StoppedAt"',
-          '"Duration"',
+          '"Duration"'
         ].join(',')
       end
 

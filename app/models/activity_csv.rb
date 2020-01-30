@@ -37,8 +37,7 @@ class ActivityCsv
         activity.project&.id,
         activity.project&.name,
         activity.description,
-        activity.started_at,
-        activity.stopped_at,
+        activity.started_at, activity.stopped_at,
         activity.duration
       ]
     end
