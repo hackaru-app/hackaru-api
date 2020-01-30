@@ -30,7 +30,7 @@ section class="page"
 
       = render 'shared/donut_chart', report: @report
 
-- activities = @report.activities
+- activities = @report.grouped_activities
 - if activities.present?
   section class="page"
     header class="header"

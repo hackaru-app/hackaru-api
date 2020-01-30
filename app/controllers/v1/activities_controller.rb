@@ -2,8 +2,6 @@
 
 module V1
   class ActivitiesController < ApplicationController
-    include ActionController::MimeResponds
-
     before_action only: %i[index working] do
       authenticate_user_or_doorkeeper! 'activities:read'
     end
@@ -15,11 +13,9 @@ module V1
     def index
       param! :start, Time, required: true
       param! :end, Time, required: true
-
-      respond_to do |format|
-        format.json { render json: activities }
-        format.csv { send_data activity_csv, type: :csv }
-      end
+      render json: current_user.activities
+        .includes(:project)
+        .between(params[:start], params[:end])
     end
 
     def working
@@ -42,16 +38,6 @@ module V1
     end
 
     private
-
-    def activity_csv
-      ActivityCsv.new(activities).generate
-    end
-
-    def activities
-      current_user.activities
-        .includes(:project)
-        .between(params[:start], params[:end])
-    end
 
     def activity_params
       params.require(:activity).permit(

@@ -72,13 +72,17 @@ class Report
     super&.in_time_zone(time_zone)
   end
 
-  def activities
-    user.activities.joins(:project).stopped
-        .where(started_at: start_date..end_date)
+  def grouped_activities
+    activities
         .group(:project_id, :name, :color, :description)
         .order(:project_id, 'SUM(duration) DESC')
         .select(:project_id, :name, :color, :description,
                 'SUM(duration) as duration')
+  end
+
+  def activities
+    user.activities.joins(:project).stopped
+        .where(started_at: start_date..end_date)
   end
 
   private

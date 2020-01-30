@@ -32,7 +32,7 @@ section class="content"
       = t('.timers')
 
   ul class="dot-list activity-list"
-    - @report.activities.each do |activity|
+    - @report.grouped_activities.each do |activity|
       li
         div class="name"
           span class="dot" style="background-color: #{activity.color}"

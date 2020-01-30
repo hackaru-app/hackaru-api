@@ -38,6 +38,12 @@ RSpec.describe 'V1::Reports', type: :request do
       it { expect(response.content_type).to include('application/pdf') }
     end
 
+    context 'when extension is csv' do
+      let(:extension) { '.csv' }
+      it { expect(response).to have_http_status(200) }
+      it { expect(response.content_type).to include('text/csv') }
+    end
+
     context 'when extension is missing' do
       let(:extension) { '.unknown' }
       it { expect(response).to have_http_status(404) }

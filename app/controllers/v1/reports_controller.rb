@@ -12,11 +12,16 @@ module V1
       respond_to do |format|
         format.html { render :show, formats: [:html], layout: 'pdf' }
         format.json { render json: @report }
+        format.csv { send_data generate_csv(@report.activities), type: :csv }
         format.pdf { render_pdf :show }
       end
     end
 
     private
+
+    def generate_csv(activities)
+      ActivityCsv.new(activities).generate
+    end
 
     def build_report
       report = Report.new(
