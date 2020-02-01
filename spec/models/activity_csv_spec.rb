@@ -53,7 +53,7 @@ RSpec.describe ActivityCsv, type: :model do
     end
 
     context 'when time zone is not UTC' do
-      let(:time_zone) { 'Asia/Tokyo'}
+      let(:time_zone) { 'Asia/Tokyo' }
 
       let(:activities) do
         create_list(

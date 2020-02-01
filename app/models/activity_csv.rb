@@ -15,9 +15,9 @@ class ActivityCsv
   private
 
   def generate
-    csv = CSV.generate(force_quotes: true, headers: true) do |data|
+    CSV.generate(force_quotes: true, headers: true) do |data|
       data << headers
-      values.each do |value|
+      rows.each do |value|
         data << value
       end
     end
@@ -35,7 +35,7 @@ class ActivityCsv
     ].map { |key| I18n.t(key, scope: 'activity_csv') }
   end
 
-  def values
+  def rows
     @activities.map do |activity|
       [
         activity.id,
