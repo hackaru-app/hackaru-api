@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe ActivityCsv, type: :model do
-  describe '#generate' do
-    subject { described_class.new(activities).generate }
+  describe '#generate_bom' do
+    subject { described_class.new(activities).generate_bom }
 
     context 'when activities is not empty' do
       let(:project) do
@@ -25,7 +25,7 @@ RSpec.describe ActivityCsv, type: :model do
 
       it 'generates headers' do
         expect(subject.split("\n")[0]).to eq [
-          '"Id"',
+          "\uFEFF\"Id\"",
           '"ProjectId"',
           '"ProjectName"',
           '"Description"',
@@ -128,7 +128,7 @@ RSpec.describe ActivityCsv, type: :model do
 
       it 'generates headers' do
         expect(subject.split("\n")[0]).to eq [
-          '"Id"',
+          "\uFEFF\"Id\"",
           '"ProjectId"',
           '"ProjectName"',
           '"Description"',

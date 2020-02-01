@@ -7,16 +7,20 @@ class ActivityCsv
     @activities = activities
   end
 
+  def generate_bom
+    "\uFEFF#{generate}"
+  end
+
+  private
+
   def generate
-    CSV.generate(force_quotes: true, headers: true) do |data|
+    csv = CSV.generate(force_quotes: true, headers: true) do |data|
       data << headers
       values.each do |value|
         data << value
       end
     end
   end
-
-  private
 
   def headers
     %i[
