@@ -20,7 +20,7 @@ module V1
     private
 
     def generate_csv(activities)
-      ActivityCsv.new(activities).generate_bom
+      ActivityCsv.new(activities, params[:time_zone]).generate_bom
     end
 
     def build_report

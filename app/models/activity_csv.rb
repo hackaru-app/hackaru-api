@@ -3,8 +3,9 @@
 require 'csv'
 
 class ActivityCsv
-  def initialize(activities)
+  def initialize(activities, time_zone)
     @activities = activities
+    @time_zone = time_zone
   end
 
   def generate_bom
@@ -38,12 +39,16 @@ class ActivityCsv
     @activities.map do |activity|
       [
         activity.id,
-        activity.project&.id,
-        activity.project&.name,
+        activity.project&.id, activity.project&.name,
         activity.description,
-        activity.started_at, activity.stopped_at,
+        time_string(activity.started_at),
+        time_string(activity.stopped_at),
         activity.duration
       ]
     end
+  end
+
+  def time_string(time)
+    time&.in_time_zone(@time_zone)&.strftime('%F %T')
   end
 end

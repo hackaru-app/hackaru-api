@@ -4,11 +4,15 @@ require 'rails_helper'
 
 RSpec.describe ActivityCsv, type: :model do
   describe '#generate_bom' do
-    subject { described_class.new(activities).generate_bom }
+    let(:time_zone) { 'UTC' }
 
-    context 'when activities is not empty' do
+    subject do
+      described_class.new(activities, time_zone).generate_bom
+    end
+
+    context 'when activities is present' do
       let(:project) do
-        create(:project, name: 'ProjectName')
+        create(:project, name: 'Project')
       end
 
       let(:activities) do
@@ -39,10 +43,37 @@ RSpec.describe ActivityCsv, type: :model do
         expect(subject.split("\n")[1]).to eq [
           "\"#{activities[0].id}\"",
           "\"#{project.id}\"",
-          '"ProjectName"',
+          '"Project"',
           '"Description"',
-          '"2020-01-01 00:00:00 UTC"',
-          '"2020-01-02 00:00:00 UTC"',
+          '"2020-01-01 00:00:00"',
+          '"2020-01-02 00:00:00"',
+          '"86400"'
+        ].join(',')
+      end
+    end
+
+    context 'when time zone is not UTC' do
+      let(:time_zone) { 'Asia/Tokyo'}
+
+      let(:activities) do
+        create_list(
+          :activity,
+          1,
+          project: nil,
+          started_at: Time.new(2020, 1, 1),
+          stopped_at: Time.new(2020, 1, 2),
+          description: 'Description'
+        )
+      end
+
+      it 'generates value' do
+        expect(subject.split("\n")[1]).to eq [
+          "\"#{activities[0].id}\"",
+          '""',
+          '""',
+          '"Description"',
+          '"2020-01-01 09:00:00"',
+          '"2020-01-02 09:00:00"',
           '"86400"'
         ].join(',')
       end
@@ -66,8 +97,8 @@ RSpec.describe ActivityCsv, type: :model do
           '""',
           '""',
           '"Description"',
-          '"2020-01-01 00:00:00 UTC"',
-          '"2020-01-02 00:00:00 UTC"',
+          '"2020-01-01 00:00:00"',
+          '"2020-01-02 00:00:00"',
           '"86400"'
         ].join(',')
       end
@@ -91,8 +122,8 @@ RSpec.describe ActivityCsv, type: :model do
           '""',
           '""',
           '""',
-          '"2020-01-01 00:00:00 UTC"',
-          '"2020-01-02 00:00:00 UTC"',
+          '"2020-01-01 00:00:00"',
+          '"2020-01-02 00:00:00"',
           '"86400"'
         ].join(',')
       end
@@ -116,7 +147,7 @@ RSpec.describe ActivityCsv, type: :model do
           '""',
           '""',
           '""',
-          '"2020-01-01 00:00:00 UTC"',
+          '"2020-01-01 00:00:00"',
           '""',
           '""'
         ].join(',')
