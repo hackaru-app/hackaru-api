@@ -14,6 +14,6 @@
 
 <%= t('.timers') %>
 
-<% @report.activities.each do |activity| %>
+<% @report.grouped_activities.each do |activity| %>
 - <%= activity.description.present? ? activity.description : activity.name %>: <%= hhmmss(activity.duration) %>
 <% end %>

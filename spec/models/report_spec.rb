@@ -545,6 +545,89 @@ RSpec.describe Report, type: :model do
     end
 
     context 'when user has activities' do
+      before do
+        create(
+          :activity,
+          started_at: now,
+          stopped_at: now,
+          description: 'example1',
+          user: user
+        )
+        create(
+          :activity,
+          started_at: now + 1.day,
+          stopped_at: now + 1.day,
+          description: 'example1',
+          user: user
+        )
+      end
+
+      it 'returns activities' do
+        is_expected.to eq user.activities
+      end
+    end
+
+    context 'when user has activities but out of range' do
+      before do
+        create(
+          :activity,
+          started_at: now - 1.day,
+          stopped_at: now - 1.day,
+          description: 'example1',
+          user: user
+        )
+        create(
+          :activity,
+          started_at: now + 2.days,
+          stopped_at: now + 2.days,
+          description: 'example1',
+          user: user
+        )
+      end
+
+      it 'returns empty' do
+        is_expected.to eq []
+      end
+    end
+
+    context 'when user has working activities' do
+      before do
+        create(
+          :activity,
+          started_at: now,
+          stopped_at: nil,
+          duration: nil,
+          description: 'example1',
+          user: user
+        )
+      end
+
+      it 'returns empty' do
+        is_expected.to eq []
+      end
+    end
+
+    context 'when user does not have activities' do
+      it 'returns empty' do
+        is_expected.to eq []
+      end
+    end
+  end
+
+  describe '#grouped_activities' do
+    let(:now) { Time.now }
+    let(:user) { create(:user) }
+
+    subject do
+      Report.new(
+        user: user,
+        time_zone: 'UTC',
+        start_date: now,
+        end_date: now + 1.day
+      ).grouped_activities
+    end
+
+    context 'when user has activities' do
       let(:projects) { create_list(:project, 2, user: user) }
 
       before do
@@ -568,7 +651,7 @@ RSpec.describe Report, type: :model do
         )
       end
 
-      it 'returns activities correctly' do
+      it 'returns grouped activities' do
         expect(subject[0].description).to eq 'example1'
         expect(subject[0].duration).to eq 10_800
         expect(subject[1].description).to eq 'example2'
@@ -595,7 +678,7 @@ RSpec.describe Report, type: :model do
       end
 
       it 'returns empty' do
-        expect(subject).to eq []
+        is_expected.to eq []
       end
     end
 
@@ -612,13 +695,13 @@ RSpec.describe Report, type: :model do
       end
 
       it 'returns empty' do
-        expect(subject).to eq []
+        is_expected.to eq []
       end
     end
 
     context 'when user does not have activities' do
       it 'returns empty' do
-        expect(subject).to eq []
+        is_expected.to eq []
       end
     end
   end

@@ -1,0 +1,9 @@
+en:
+  activity_csv:
+    id: 'Id'
+    project_id: 'ProjectId'
+    project_name: 'ProjectName'
+    description: 'Description'
+    started_at: 'StartedAt'
+    stopped_at: 'StoppedAt'
+    duration: 'Duration'
