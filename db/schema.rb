@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_105107) do
+ActiveRecord::Schema.define(version: 2020_02_03_155219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_105107) do
   create_table "activity_calendars", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "token"
+    t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
     t.index ["token"], name: "index_activity_calendars_on_token", unique: true
     t.index ["user_id"], name: "index_activity_calendars_on_user_id", unique: true
   end
