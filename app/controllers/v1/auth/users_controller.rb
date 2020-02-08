@@ -45,7 +45,8 @@ module V1
           :email,
           :password,
           :password_confirmation,
-          :time_zone
+          :time_zone,
+          :locale
         )
       end
     end

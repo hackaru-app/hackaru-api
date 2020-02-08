@@ -16,6 +16,7 @@ RSpec.describe UserSerializer, type: :serializer do
         id: user.id,
         email: user.email,
         time_zone: user.time_zone,
+        locale: user.locale,
         receive_week_report: user.receive_week_report,
         receive_month_report: user.receive_month_report
       }.to_json)
