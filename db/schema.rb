@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2020_02_03_155219) do
   create_table "activity_calendars", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "token"
-    t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
-    t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["token"], name: "index_activity_calendars_on_token", unique: true
     t.index ["user_id"], name: "index_activity_calendars_on_user_id", unique: true
   end
