@@ -6,7 +6,9 @@ class ReportMailerJob < ApplicationJob
   def perform(*args)
     period = args[0]['period']
     target_users(period).each do |user|
-      send_mail(user, period)
+      I18n.with_locale(user.locale) do
+        send_mail(user, period)
+      end
     end
   end
 
