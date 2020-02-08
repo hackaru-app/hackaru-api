@@ -9,7 +9,8 @@ RSpec.describe UserInitializer, type: :model do
         email: 'test@example.com',
         password: 'password',
         password_confirmation: 'password',
-        time_zone: 'UTC'
+        time_zone: 'UTC',
+        locale: 'en'
       ).create!
     end
 

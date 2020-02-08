@@ -7,5 +7,6 @@ FactoryBot.define do
     receive_week_report { Faker::Boolean.boolean }
     receive_month_report { Faker::Boolean.boolean }
     time_zone { ActiveSupport::TimeZone::MAPPING.to_a.flatten.sample }
+    locale { I18n.available_locales.map(&:to_s).sample }
   end
 end

@@ -32,6 +32,11 @@ RSpec.describe User, type: :model do
       let(:array) { ActiveSupport::TimeZone::MAPPING.to_a.flatten }
       it { is_expected.to validate_inclusion_of(:time_zone).in_array(array) }
     end
+
+    describe 'locale' do
+      let(:array) { I18n.available_locales.map(&:to_s) }
+      it { is_expected.to validate_inclusion_of(:locale).in_array(array) }
+    end
   end
 
   describe '#destroy' do
