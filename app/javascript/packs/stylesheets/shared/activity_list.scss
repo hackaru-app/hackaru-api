@@ -1,0 +1,39 @@
+@import '../modules/main';
+
+.activity-list {
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 70px;
+  box-sizing: border-box;
+}
+.activity-list li {
+  vertical-align: baseline;
+  align-items: center;
+  overflow: hidden;
+  padding: 18px 0;
+  border-bottom: 1px $border solid;
+  margin: 0;
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .name {
+    float: left;
+    display: block;
+    width: 80%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .duration {
+    float: right;
+    display: block;
+    color: $text-light;
+    font-family: $font-family-duration;
+  }
+}

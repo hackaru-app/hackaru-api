@@ -62,6 +62,12 @@ class Activity < ApplicationRecord
     find_by(stopped_at: nil)
   end
 
+  def title
+    return description if description.present?
+    return activity.project.name if project
+    'No Project'
+  end
+
   private
 
   def calc_duration

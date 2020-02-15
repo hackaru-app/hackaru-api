@@ -1,0 +1,17 @@
+ruby:
+  activities = @activities.map do |activity|
+    {
+      color: activity.project&.color || '#ff0000',
+      title: activity.title,
+      duration: activity.duration
+    }
+  end
+
+section class="content"
+  h1 class="title"
+    | 長時間計測中のタイマーがあります。
+
+  = render 'shared/activity_list', activities: activities
+
+    / br
+    / == link_to t('.reset_password'), utm_url(@url), class: 'link-button'

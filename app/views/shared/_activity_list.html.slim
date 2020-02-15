@@ -1,0 +1,12 @@
+head
+  == stylesheet_pack_tag 'stylesheets/shared/activity_list'
+
+ul class="activity-list"
+  - activities.each do |activity|
+    li
+      div class="name"
+        span class="dot" style="background-color: #{activity[:color]}"
+        == activity[:title]
+
+      time class="duration"
+        == hhmmss(activity[:duration])
