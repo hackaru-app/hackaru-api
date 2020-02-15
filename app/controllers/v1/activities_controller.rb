@@ -20,7 +20,7 @@ module V1
     end
 
     def working
-      render json: current_user.activities.working
+      render json: current_user.activities.find_by(stopped_at: nil)
     end
 
     def create

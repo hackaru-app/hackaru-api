@@ -292,18 +292,4 @@ RSpec.describe Activity, type: :model do
       end
     end
   end
-
-  describe '.working' do
-    subject { described_class.working }
-
-    context 'when activity is not stopped' do
-      before { create(:activity, stopped_at: nil) }
-      it { is_expected.not_to be_nil }
-    end
-
-    context 'when activity is stopped' do
-      before { create(:activity, stopped_at: Time.now) }
-      it { is_expected.to be_nil }
-    end
-  end
 end
