@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActivityDecorator < ApplicationDecorator
   decorates_association :project
   delegate_all
@@ -5,6 +7,7 @@ class ActivityDecorator < ApplicationDecorator
   def description
     return object.description if object.description.present?
     return object.project.name if object.project
+
     'No Project'
   end
 
