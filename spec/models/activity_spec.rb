@@ -214,13 +214,7 @@ RSpec.describe Activity, type: :model do
       end
 
       it 'stop first activity' do
-        activity = users[0].activities[0]
-        expect(activity.reload.stopped_at).to eq('2019-01-01 00:00:00')
-      end
-
-      it 'does not stop second activity' do
-        activity = users[0].activities[1]
-        expect(activity.reload.stopped_at).to be_nil
+        expect(users[0].activities.where(stopped_at: nil).count).to eq(1)
       end
     end
 
