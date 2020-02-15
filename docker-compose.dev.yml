@@ -24,6 +24,7 @@ services:
   sidekiq:
     env_file: .env.development
     command: bundle exec sidekiq
+      -c 3
       -q hackaru-api_development_default
       -q hackaru-api_development_mailers
     volumes:

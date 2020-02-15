@@ -58,13 +58,25 @@ Rails.application.configure do
   config.active_job.queue_name_prefix = "hackaru-api_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :ses
+  config.action_mailer.delivery_method =
+    ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp').to_sym
+
+  config.action_mailer.asset_host =
+    "https://#{ENV.fetch('SMTP_ASSET_HOST', 'localhost:3000')}"
+
   config.action_mailer.default_url_options = {
     host: ENV.fetch('SMTP_DEFAULT_URL_HOST', 'localhost:3000'),
     protocol: 'https'
   }
-  config.action_mailer.asset_host =
-    "https://#{ENV.fetch('SMTP_ASSET_HOST', 'https://localhost:3000')}"
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch('SMTP_ADDRESS', 'localhost'),
+    port: ENV.fetch('SMTP_PORT', '25'),
+    domain: ENV.fetch('SMTP_DOMAIN', nil),
+    user_name: ENV.fetch('SMTP_USER_NAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
+    authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain'),
+    enable_starttls_auto: ENV.fetch('SMTP_ENABLE_STARTTLS_AUTO', true)
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

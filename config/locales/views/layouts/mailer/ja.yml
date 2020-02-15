@@ -1,0 +1,4 @@
+ja:
+  layouts:
+    mailer:
+      notification: '配信設定'

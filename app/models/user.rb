@@ -9,6 +9,8 @@ class User < ApplicationRecord
             length: { maximum: 191 },
             format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { in: 6..50 }, allow_nil: true
+  validates :time_zone, presence: true, inclusion: { in: :time_zones }
+  validates :locale, presence: true, inclusion: { in: :locales }
 
   with_options dependent: :delete do
     has_one :password_reset_token
@@ -34,12 +36,13 @@ class User < ApplicationRecord
     true
   end
 
-  def add_sample_projects
-    names = I18n.t('sample_projects')
-    projects << [
-      Project.new(color: '#4ab8b8', name: names[0]),
-      Project.new(color: '#a1c45a', name: names[1]),
-      Project.new(color: '#f95959', name: names[2])
-    ]
+  private
+
+  def time_zones
+    ActiveSupport::TimeZone::MAPPING.to_a.flatten
+  end
+
+  def locales
+    I18n.available_locales.map(&:to_s)
   end
 end

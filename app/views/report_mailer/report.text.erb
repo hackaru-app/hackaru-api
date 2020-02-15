@@ -1,0 +1,19 @@
+<%= @title %>
+<%= l(@report.start_date, format: '%F') %> - <%= l(@report.end_date, format: '%F') %>
+
+--
+
+<%= t('.projects') %>
+
+<% totals = @report.totals %>
+<% @report.projects.each do |project| %>
+- <%= project.name %>: <%= hhmmss(totals[project.id]) %>
+<% end %>
+
+--
+
+<%= t('.timers') %>
+
+<% @report.grouped_activities.each do |activity| %>
+- <%= activity.description.present? ? activity.description : activity.name %>: <%= hhmmss(activity.duration) %>
+<% end %>

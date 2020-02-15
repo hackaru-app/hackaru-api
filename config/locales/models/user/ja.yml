@@ -7,7 +7,5 @@ ja:
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: '確認用パスワード'
-  sample_projects:
-    - '仕事'
-    - '勉強'
-    - '読書'
+        time_zone: 'タイムゾーン'
+        locale: '言語'

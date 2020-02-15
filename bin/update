@@ -21,8 +21,7 @@ chdir APP_ROOT do
   system! 'yarn'
 
   puts "\n== Updating database =="
-  system! "bin/bundle exec ridgepole -c config/database.yml --apply --env \
-    #{ENV.fetch('RAILS_ENV')}"
+  system! 'bin/rails db:migrate'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'

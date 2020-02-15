@@ -12,7 +12,9 @@ RSpec.describe 'V1::Auth::Users', type: :request do
              params: {
                user: {
                  email: email,
-                 password: 'password'
+                 password: 'password',
+                 time_zone: 'UTC',
+                 locale: 'en'
                }
              }
       end

@@ -8,7 +8,7 @@ ja:
         description: '備考'
         started_at: '開始日時'
         stopped_at: '終了日時'
-        duration: '時間'
+        duration: '計測時間'
         project: 'プロジェクト'
     errors:
       models:

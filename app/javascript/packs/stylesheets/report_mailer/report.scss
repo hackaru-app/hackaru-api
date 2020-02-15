@@ -1,0 +1,63 @@
+@import '../modules/main';
+
+.header {
+  float: left;
+  margin-bottom: 40px;
+  h1 {
+    margin-right: 10px;
+  }
+  p {
+    font-size: 18px;
+    margin: 0;
+    color: $text-light;
+    margin-top: 5px;
+    span {
+      margin: 0 5px;
+    }
+  }
+}
+.projects {
+  margin-top: 40px;
+}
+.dot-list {
+  padding: 0;
+  box-sizing: border-box;
+}
+.dot-list li {
+  vertical-align: baseline;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px 0;
+  margin: 0;
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .name {
+    float: left;
+    display: block;
+    width: 80%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .duration {
+    float: right;
+    display: block;
+    color: $text-light;
+    font-family: $font-family-duration;
+  }
+}
+.activity-list {
+  padding-top: 10px;
+  padding-bottom: 70px;
+}
+.activity-list li {
+  padding: 18px 0;
+  border-bottom: 1px $border solid;
+}

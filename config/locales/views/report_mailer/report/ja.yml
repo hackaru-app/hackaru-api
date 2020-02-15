@@ -1,0 +1,4 @@
+ja:
+  report_mailer:
+    report:
+      timers: '計測一覧'

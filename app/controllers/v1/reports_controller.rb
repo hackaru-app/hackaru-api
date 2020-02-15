@@ -5,29 +5,22 @@ module V1
     include PdfRenderable
     include ActionController::MimeResponds
 
-    before_action :authenticate_user!, only: :show
+    before_action :authenticate_user!
 
     def show
       @report = build_report
-      set_show_variables
-
       respond_to do |format|
-        format.html { render :show, formats: [:html] }
+        format.html { render :show, formats: [:html], layout: 'pdf' }
         format.json { render json: @report }
+        format.csv { send_data generate_csv(@report.activities), type: :csv }
         format.pdf { render_pdf :show }
       end
     end
 
     private
 
-    def set_show_variables
-      gon.push(
-        bar_chart_data: @report.bar_chart_data,
-        totals: @report.totals.to_a,
-        groups: @report.projects.map(&:id),
-        colors: @report.colors,
-        labels: @report.labels
-      )
+    def generate_csv(activities)
+      ActivityCsv.new(activities, params[:time_zone]).generate_bom
     end
 
     def build_report
