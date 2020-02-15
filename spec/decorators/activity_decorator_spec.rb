@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ActivityDecorator, type: :model do
+RSpec.describe ActivityDecorator, type: :decorator do
   describe '#description' do
     subject { activity.decorate.description }
 
