@@ -4,7 +4,7 @@
 class ReminderMailerPreview < ActionMailer::Preview
   def remind
     user = FactoryBot.create(:user)
-    activities = FactoryBot.create_list(:activity, 2, project: nil, description: '')
+    activities = FactoryBot.create_list(:activity, 2)
     ReminderMailer.remind(user, activities)
   end
 end
