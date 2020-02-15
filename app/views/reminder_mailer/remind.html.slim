@@ -1,0 +1,7 @@
+section class="content"
+  h1 class="title"
+    = t('.title')
+
+  = render 'shared/activity_list', activities: @activities
+
+  == link_to t('.check'), utm_url(ENV.fetch('HACKARU_WEB_URL')), class: 'link-button'

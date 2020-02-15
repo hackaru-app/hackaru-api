@@ -1,0 +1,6 @@
+en:
+  reminder_mailer:
+    remind:
+      subject: 'These timers are still working'
+      title: 'These timers are still working'
+      check: 'Check it'

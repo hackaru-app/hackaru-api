@@ -214,11 +214,7 @@ RSpec.describe Activity, type: :model do
       end
 
       it 'stop first activity' do
-        expect(users[0].activities[0].stopped_at).to eq('2019-01-01 00:00:00')
-      end
-
-      it 'doest not stop second activity' do
-        expect(users[0].activities[1].stopped_at).to be(nil)
+        expect(users[0].activities.where(stopped_at: nil).count).to eq(1)
       end
     end
 
@@ -229,8 +225,8 @@ RSpec.describe Activity, type: :model do
       end
 
       it 'does not stop any activities' do
-        expect(users[0].activities[0].stopped_at).to be(nil)
-        expect(users[1].activities[0].stopped_at).to be(nil)
+        expect(users[0].activities[0].stopped_at).to be_nil
+        expect(users[1].activities[0].stopped_at).to be_nil
       end
     end
 
@@ -239,7 +235,7 @@ RSpec.describe Activity, type: :model do
       before { subject.update!(description: 'Review', stopped_at: nil) }
 
       it 'does not stop activity' do
-        expect(subject.reload.stopped_at).to be(nil)
+        expect(subject.reload.stopped_at).to be_nil
       end
     end
   end
