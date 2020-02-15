@@ -58,10 +58,6 @@ class Activity < ApplicationRecord
     where(id: ids).order(id: :desc).includes(:project).map(&:to_suggestion)
   end
 
-  def self.working
-    find_by(stopped_at: nil)
-  end
-
   private
 
   def calc_duration
