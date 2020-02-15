@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ActivityDecorator < ApplicationDecorator
-  decorates_association :project
   delegate_all
 
   def description
