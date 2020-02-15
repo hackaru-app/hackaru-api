@@ -5,7 +5,7 @@ AllCops:
     - vendor/**/*
     - node_modules/**/*
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 80
   IgnoredPatterns: ['^ *#']
 
