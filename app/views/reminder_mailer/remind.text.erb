@@ -1,5 +1,3 @@
 <%= t('.title') %>
 
-<% @activities.each do |activity| %>
-- <%= activity.decorate.description %>: <%= hhmmss(activity.duration) %>
-<% end %>
+<%= @activity.decorate.description %>: <%= hhmmss(@activity.duration) %>
