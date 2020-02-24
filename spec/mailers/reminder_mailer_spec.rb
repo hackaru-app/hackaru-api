@@ -4,15 +4,14 @@ require 'rails_helper'
 
 RSpec.describe ReminderMailer, type: :mailer do
   describe '#report' do
-    let(:user) { create(:user) }
-    let(:activity) { create(:activity, user: user) }
+    let(:activity) { create(:activity) }
 
     subject do
-      ReminderMailer.remind(user, activity)
+      ReminderMailer.remind(activity)
     end
 
     it 'send to user' do
-      expect(subject.to.first).to eq(user.email)
+      expect(subject.to.first).to eq(activity.user.email)
     end
   end
 end
