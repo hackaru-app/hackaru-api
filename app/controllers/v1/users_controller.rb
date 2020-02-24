@@ -20,7 +20,8 @@ module V1
         :time_zone,
         :locale,
         :receive_week_report,
-        :receive_month_report
+        :receive_month_report,
+        :receive_reminder
       )
     end
   end
