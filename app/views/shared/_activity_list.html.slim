@@ -8,5 +8,6 @@ ul class="activity-list"
         span class="dot" style="background-color: #{activity.decorate.color}"
         == activity.decorate.description
 
-      time class="duration"
-        == hhmmss(activity.decorate.duration)
+      - if activity.decorate.duration
+        time class="duration"
+          == hhmmss(activity.decorate.duration)
