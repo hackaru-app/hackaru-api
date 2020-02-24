@@ -18,7 +18,8 @@ RSpec.describe UserSerializer, type: :serializer do
         time_zone: user.time_zone,
         locale: user.locale,
         receive_week_report: user.receive_week_report,
-        receive_month_report: user.receive_month_report
+        receive_month_report: user.receive_month_report,
+        receive_reminder: user.receive_reminder
       }.to_json)
     end
   end

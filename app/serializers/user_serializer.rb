@@ -7,4 +7,5 @@ class UserSerializer < ActiveModel::Serializer
   attributes :locale
   attributes :receive_week_report
   attributes :receive_month_report
+  attributes :receive_reminder
 end
