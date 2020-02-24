@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_171321) do
+ActiveRecord::Schema.define(version: 2020_02_22_044020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_171321) do
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "reminded", default: false, null: false
     t.index ["project_id"], name: "index_activities_on_project_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 2020_02_07_171321) do
     t.boolean "receive_month_report", default: true, null: false
     t.string "time_zone", null: false
     t.string "locale", null: false
+    t.boolean "receive_reminder", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
