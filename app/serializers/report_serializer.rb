@@ -5,6 +5,7 @@ class ReportSerializer < ActiveModel::Serializer
   attributes :totals
   attributes :labels
   attributes :sums
+  attributes :grouped_activities
 
   def projects
     object.projects
@@ -20,5 +21,9 @@ class ReportSerializer < ActiveModel::Serializer
 
   def sums
     object.sums
+  end
+
+  def grouped_activities
+    object.grouped_activities
   end
 end
