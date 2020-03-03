@@ -1,3 +1,4 @@
 <%= t('.title') %>
 
-<%= @activity.decorate.description %>: <%= hhmmss(@activity.duration) %>
+<% view_object = ActivityViewObject.new(@activity) %>
+<%= view_object.description %>: <%= hhmmss(view_object.duration) %>
