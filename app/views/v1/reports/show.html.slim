@@ -36,4 +36,13 @@ section class="page"
     header class="header"
       h1 class="title" Timers
 
-    = render 'shared/activity_list', activities: activities
+    ul class="activity-list"
+      - activities.each do |activity|
+        - view_object = ActivityViewObject.new(activity)
+        li
+          div class="name"
+            span class="dot" style="background-color: #{view_object.color}"
+            == view_object.description
+
+          time class="duration"
+            == hhmmss(view_object.duration)

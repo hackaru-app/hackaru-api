@@ -31,4 +31,13 @@ section class="content"
       i data-feather="clock"
       = t('.timers')
 
-  = render 'shared/activity_list', activities: activities
+  ul class="dot-list activity-list"
+    - @report.activity_groups.each do |activity|
+      - view_object = ActivityViewObject.new(activity)
+      li
+        div class="name"
+          span class="dot" style="background-color: #{view_object.color}"
+          == view_object.description
+
+        time class="duration"
+          == hhmmss(view_object.duration)

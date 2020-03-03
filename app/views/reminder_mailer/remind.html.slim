@@ -1,7 +1,14 @@
+head
+  == stylesheet_pack_tag 'stylesheets/reminder_mailer/remind'
+
 section class="content"
   h1 class="title"
     = t('.title')
 
-  = render 'shared/activity_list', activities: [@activity]
+  div class="dot-text"
+    - view_object = ActivityViewObject.new(@activity)
+    div class="name"
+      span class="dot" style="background-color: #{view_object.color}"
+      == view_object.description
 
   == link_to t('.check'), utm_url(ENV.fetch('HACKARU_WEB_URL')), class: 'link-button'
