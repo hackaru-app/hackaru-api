@@ -10,14 +10,15 @@ class ActivityGroup
 
   def self.generate(activities)
     activities
+      .preload(:project)
       .group(:project_id, :description)
-      .order(:project_id, 'SUM(duration) DESC')
-      .select(:project_id, :description, 'SUM(duration) as duration')
-      .map do |grouped|
+      .order(:project_id, 'sum(duration) desc')
+      .select(:project_id, :description, 'sum(duration) as duration')
+      .map do |item|
         new(
-          project: Project.find(grouped.project_id),
-          description: grouped.description,
-          duration: grouped.duration
+          project: item.project,
+          description: item.description,
+          duration: item.duration
         )
       end
   end
