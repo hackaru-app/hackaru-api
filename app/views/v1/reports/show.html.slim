@@ -30,17 +30,10 @@ section class="page"
 
       = render 'shared/donut_chart', report: @report
 
-- activities = @report.grouped_activities
+- activities = @report.activity_groups
 - if activities.present?
   section class="page"
     header class="header"
       h1 class="title" Timers
 
-    - activities.each do |activity|
-      article class="activity"
-        div class="activity-name"
-          span class="dot" style="background-color: #{activity.color}"
-          h1
-            == activity.description.present? ? activity.description : activity.name
-        time
-          == hhmmss(activity.duration)
+    = render 'shared/activity_list', activities: activities

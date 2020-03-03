@@ -72,12 +72,8 @@ class Report
     super&.in_time_zone(time_zone)
   end
 
-  def grouped_activities
-    activities
-      .group(:project_id, :name, :color, :description)
-      .order(:project_id, 'SUM(duration) DESC')
-      .select(:project_id, :name, :color, :description,
-              'SUM(duration) as duration')
+  def activity_groups
+    ActivityGroup.generate(activities)
   end
 
   def activities

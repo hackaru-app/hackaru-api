@@ -31,12 +31,4 @@ section class="content"
       i data-feather="clock"
       = t('.timers')
 
-  ul class="dot-list activity-list"
-    - @report.grouped_activities.each do |activity|
-      li
-        div class="name"
-          span class="dot" style="background-color: #{activity.color}"
-          == activity.description.present? ? activity.description : activity.name
-
-        time class="duration"
-          == hhmmss(activity.duration)
+  = render 'shared/activity_list', activities: activities

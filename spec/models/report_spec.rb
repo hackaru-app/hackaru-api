@@ -614,7 +614,7 @@ RSpec.describe Report, type: :model do
     end
   end
 
-  describe '#grouped_activities' do
+  describe '#activity_groups' do
     let(:now) { Time.now }
     let(:user) { create(:user) }
 
@@ -624,7 +624,7 @@ RSpec.describe Report, type: :model do
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
-      ).grouped_activities
+      ).activity_groups
     end
 
     context 'when user has activities' do
