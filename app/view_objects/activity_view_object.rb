@@ -5,6 +5,10 @@ class ActivityViewObject
     @activity = activity
   end
 
+  def duration
+    @activity.duration
+  end
+
   def description
     return @activity.description if @activity.description.present?
     return @activity.project.name if @activity.project
