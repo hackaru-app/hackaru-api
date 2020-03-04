@@ -38,7 +38,7 @@ section class="page"
 
     ul class="activity-list"
       - activities.each do |activity|
-        - view_object = ActivityViewObject.new(activity)
+        - view_object = ActivityGroupViewObject.new(activity)
         li
           div class="name"
             span class="dot" style="background-color: #{view_object.color}"

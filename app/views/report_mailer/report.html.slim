@@ -33,7 +33,7 @@ section class="content"
 
   ul class="dot-list activity-list"
     - @report.activity_groups.each do |activity|
-      - view_object = ActivityViewObject.new(activity)
+      - view_object = ActivityGroupViewObject.new(activity)
       li
         div class="name"
           span class="dot" style="background-color: #{view_object.color}"
