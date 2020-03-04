@@ -1,0 +1,31 @@
+@import '../modules/main';
+
+.dot-text {
+  width: 100%;
+  vertical-align: baseline;
+  align-items: center;
+  overflow: hidden;
+  margin: 0;
+  .dot {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .text {
+    float: left;
+    display: block;
+    width: 80%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .duration {
+    float: right;
+    display: block;
+    font-family: $font-family-duration;
+  }
+}

@@ -5,8 +5,8 @@ services:
       WEBPACKER_DEV_SERVER_HOST: webpack
     env_file: .env.development
     volumes:
-      - .:/hackaru
-      - ./tmp/app:/hackaru/tmp
+      - .:/hackaru:cached
+      - ./tmp/app:/hackaru/tmp:cached
       - /hackaru/node_modules
 
   webpack:

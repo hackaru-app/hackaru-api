@@ -21,28 +21,22 @@ section class="page"
         - totals = @report.totals
         - @report.projects.each do |project|
           li
-            div class="project-name"
-              span class="dot" style="background-color: #{project.color}"
-              == project.name
-
-            span class="duration"
-              == hhmmss(totals[project.id])
+            = render 'shared/dot_text', color: project.color,
+              text: project.name,
+              duration: totals[project.id]
 
       = render 'shared/donut_chart', report: @report
 
-- activities = @report.activity_groups
-- if activities.present?
+- activity_groups = @report.activity_groups
+- if activity_groups
   section class="page"
     header class="header"
       h1 class="title" Timers
 
     ul class="activity-list"
-      - activities.each do |activity|
-        - view_object = ActivityGroupViewObject.new(activity)
+      - activity_groups.each do |activity_group|
         li
-          div class="name"
-            span class="dot" style="background-color: #{view_object.color}"
-            == view_object.description
-
-          time class="duration"
-            == hhmmss(view_object.duration)
+          - view_object = ActivityGroupViewObject.new(activity_group)
+          = render 'shared/dot_text', color: view_object.color,
+              text: view_object.description,
+              duration: view_object.duration
