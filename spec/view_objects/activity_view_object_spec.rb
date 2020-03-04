@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe ActivityDecorator, type: :decorator do
+RSpec.describe ActivityViewObject, type: :view_object do
   describe '#description' do
-    subject { activity.decorate.description }
+    subject { ActivityViewObject.new(activity).description }
 
     context 'when activity has description' do
       let(:activity) { create(:activity, description: 'Review') }
@@ -31,7 +31,7 @@ RSpec.describe ActivityDecorator, type: :decorator do
   end
 
   describe '#color' do
-    subject { activity.decorate.color }
+    subject { ActivityViewObject.new(activity).color }
 
     context 'when activity has project' do
       let(:project) { create(:project, color: '#ff0') }
@@ -48,6 +48,26 @@ RSpec.describe ActivityDecorator, type: :decorator do
     context 'when activity does not have project' do
       let(:activity) { create(:activity, project: nil) }
       it { is_expected.to eq('#cccfd9') }
+    end
+  end
+
+  describe '#duration' do
+    subject { ActivityViewObject.new(activity).duration }
+
+    context 'when activity is stopped' do
+      let(:activity) do
+        create(
+          :activity,
+          started_at: Date.new(2019, 1, 1),
+          stopped_at: Date.new(2019, 1, 2),
+        )
+      end
+      it { is_expected.to eq(86400) }
+    end
+
+    context 'when activity is working' do
+      let(:activity) { create(:activity, stopped_at: nil) }
+      it { is_expected.to be_nil }
     end
   end
 end

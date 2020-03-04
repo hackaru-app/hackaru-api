@@ -8,6 +8,10 @@ class ActivityGroup
   attribute :description, :string
   attribute :duration, :integer
 
+  validates :project, presence: true
+  validates :duration, presence: true
+  validates :description, presence: true
+
   def self.generate(activities)
     activities
       .preload(:project)
