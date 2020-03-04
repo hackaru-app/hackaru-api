@@ -1,0 +1,10 @@
+head
+  == stylesheet_link_tag asset_pack_url('stylesheets/shared/dot_text.css'), media: :all
+
+div class="dot-text"
+  div class="text"
+    span class="dot" style="background-color: #{color}"
+    == text
+
+  time class="duration"
+    == hhmmss(duration)
