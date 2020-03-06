@@ -13,21 +13,15 @@ class ActivityGroup
   validates :description, presence: true
 
   def self.generate(activities)
-    group(activities).map do |item|
-      new(
-        project: item.project,
-        description: item.description,
-        duration: item.duration
-      )
-    end
-  end
-
-  private
-
-  def self.group(activities)
     activities
       .preload(:project).group(:project_id, :description)
       .order(:project_id, 'sum(duration) desc')
       .select(:project_id, :description, 'sum(duration) as duration')
+      .map do |item|
+        new(
+          project: item.project, description: item.description,
+          duration: item.duration
+        )
+      end
   end
 end
