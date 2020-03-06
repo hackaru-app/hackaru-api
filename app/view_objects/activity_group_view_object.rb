@@ -10,9 +10,7 @@ class ActivityGroupViewObject
   end
 
   def description
-    @activity_group.description.present? ?
-      @activity_group.description :
-      @activity_group.project.name
+    @activity_group.description.presence || @activity_group.project.name
   end
 
   def color
