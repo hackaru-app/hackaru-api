@@ -18,6 +18,6 @@ class ActivityCalendar < ApplicationRecord
   def events
     activities.includes(:project).map do |activity|
       ActivityEvent.new(activity).event
-    end.reject(&:nil?)
+    end.compact
   end
 end

@@ -31,17 +31,17 @@ class Report
   validates :start_date, date: { before: :end_date }
 
   def totals
-    sums.map do |key, value|
+    sums.to_h do |key, value|
       [key, value.sum]
-    end.to_h
+    end
   end
 
   def sums
-    projects.map(&:id).map do |id|
+    projects.map(&:id).to_h do |id|
       values = group_by_period.select { |keys| keys[0] == id }.values
       values = labels.map { 0 } if values.empty?
       [id, values]
-    end.to_h
+    end
   end
 
   def projects
@@ -55,9 +55,9 @@ class Report
   end
 
   def colors
-    projects.map do |project|
+    projects.to_h do |project|
       [project.id, project.color]
-    end.to_h
+    end
   end
 
   def bar_chart_data
