@@ -31,7 +31,7 @@ RSpec.describe ActivityGroup, type: :model do
       it { expect(subject.size).to eq(1) }
       it { expect(subject.first.project).to eq(project) }
       it { expect(subject.first.description).to eq('Review code') }
-      it { expect(subject.first.duration).to eq(172800) }
+      it { expect(subject.first.duration).to eq(172_800) }
     end
 
     context 'when activity is empty' do

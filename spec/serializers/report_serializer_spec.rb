@@ -58,7 +58,7 @@ RSpec.describe ReportSerializer, type: :serializer do
         activity_groups: [
           {
             description: 'Review',
-            duration: 86400,
+            duration: 86_400,
             project: {
               color: project.color,
               name: project.name,

@@ -59,10 +59,10 @@ RSpec.describe ActivityViewObject, type: :view_object do
         create(
           :activity,
           started_at: Date.new(2019, 1, 1),
-          stopped_at: Date.new(2019, 1, 2),
+          stopped_at: Date.new(2019, 1, 2)
         )
       end
-      it { is_expected.to eq(86400) }
+      it { is_expected.to eq(86_400) }
     end
 
     context 'when activity is working' do
