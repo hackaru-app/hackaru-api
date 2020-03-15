@@ -27,6 +27,7 @@ RSpec.describe ReportSerializer, type: :serializer do
         :activity,
         user: user,
         project: project,
+        description: 'Review',
         started_at: now,
         stopped_at: now + 1.day
       )
@@ -53,7 +54,18 @@ RSpec.describe ReportSerializer, type: :serializer do
         ].to_h,
         totals: [
           [project.id, 86_400]
-        ].to_h
+        ].to_h,
+        activity_groups: [
+          {
+            description: 'Review',
+            duration: 86_400,
+            project: {
+              color: project.color,
+              name: project.name,
+              user_id: project.user_id
+            }
+          }
+        ]
       }.to_json)
     end
   end

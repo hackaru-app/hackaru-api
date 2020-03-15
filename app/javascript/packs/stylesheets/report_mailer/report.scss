@@ -17,47 +17,20 @@
   }
 }
 .projects {
+  padding: 0;
   margin-top: 40px;
 }
-.dot-list {
-  padding: 0;
-  box-sizing: border-box;
-}
-.dot-list li {
-  vertical-align: baseline;
-  align-items: center;
-  overflow: hidden;
+.projects li {
+  list-style-type: none;
   padding: 10px 0;
-  margin: 0;
-  .dot {
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
-  .name {
-    float: left;
-    display: block;
-    width: 80%;
-    padding-right: 20px;
-    box-sizing: border-box;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .duration {
-    float: right;
-    display: block;
-    color: $text-light;
-    font-family: $font-family-duration;
-  }
 }
-.activity-list {
+.activity-groups {
+  padding: 0;
   padding-top: 10px;
   padding-bottom: 70px;
 }
-.activity-list li {
+.activity-groups li {
   padding: 18px 0;
+  list-style-type: none;
   border-bottom: 1px $border solid;
 }

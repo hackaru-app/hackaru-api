@@ -1,17 +1,12 @@
 @import '../modules/main';
 
-.activity-list {
-  padding: 0;
-  padding-top: 10px;
-  box-sizing: border-box;
-}
-.activity-list li {
+.dot-text {
+  padding: 18px 0;
+  border-bottom: 1px $border solid;
   vertical-align: baseline;
   align-items: center;
   overflow: hidden;
-  padding: 18px 0;
-  border-bottom: 1px $border solid;
-  margin: 0;
+  margin: 20px 0;
   .dot {
     width: 8px;
     height: 8px;

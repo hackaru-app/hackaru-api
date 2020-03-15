@@ -1,4 +1,5 @@
 ja:
   report_mailer:
     report:
+      projects: 'プロジェクト一覧'
       timers: '計測一覧'

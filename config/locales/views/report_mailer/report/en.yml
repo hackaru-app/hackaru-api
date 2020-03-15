@@ -1,4 +1,5 @@
 en:
   report_mailer:
     report:
+      projects: 'Projects'
       timers: 'Timers'
