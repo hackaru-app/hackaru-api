@@ -16,7 +16,7 @@ RSpec.describe Activity, type: :model do
     it { is_expected.to validate_presence_of(:started_at) }
     it { is_expected.to validate_length_of(:description).is_at_most(191) }
 
-    describe 'stopped_at' do
+    describe 'started_at' do
       let(:started_at) { Time.now }
 
       subject do
@@ -47,6 +47,37 @@ RSpec.describe Activity, type: :model do
       context 'when stopped_at is nil' do
         let(:stopped_at) { nil }
         it { is_expected.to be_valid }
+      end
+    end
+
+    describe 'stopped_at' do
+      let(:started_at) { Time.now }
+
+      subject do
+        activity = build(
+          :activity,
+          started_at: started_at,
+          stopped_at: stopped_at
+        )
+        activity.valid?
+        activity
+      end
+
+      context 'when started_at + 1.year < stopped_at' do
+        let(:stopped_at) { started_at.next_year.tomorrow }
+        it { expect(subject.errors).to be_include :stopped_at }
+      end
+
+      context 'when started_at + 1.year = stopped_at' do
+        let(:stopped_at) { started_at.next_year }
+        it { is_expected.to be_valid }
+        it { expect(subject.save).to be(true) }
+      end
+
+      context 'when started_at + 1.year > stopped_at' do
+        let(:stopped_at) { started_at.next_year.yesterday }
+        it { is_expected.to be_valid }
+        it { expect(subject.save).to be(true) }
       end
     end
   end
