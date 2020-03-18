@@ -8,12 +8,18 @@ class Activity < ApplicationRecord
 
   validates :description, length: { maximum: 191 }
   validates :started_at, presence: true
-  validates :started_at,
-            date: { before_or_equal_to: :stopped_at }, if: :stopped?
-  validate :project_is_invalid
+  validate :project_is_invalid, if: :project_id
+
+  validates :started_at, date: {
+    before_or_equal_to: :stopped_at
+  }, if: :stopped_at
+
+  validates :stopped_at, date: {
+    before_or_equal_to: proc { |obj| obj.started_at.next_year }
+  }, if: %i[started_at stopped_at]
 
   before_save :set_duration
-  before_save :stop_other_workings, unless: :stopped?
+  before_save :stop_other_workings, unless: :stopped_at
 
   scope :between, lambda { |from, to|
     where('started_at <= ? and ? <= stopped_at', to, from)
@@ -31,7 +37,7 @@ class Activity < ApplicationRecord
   end
 
   def set_duration
-    self.duration = calc_duration
+    self.duration = stopped_at ? stopped_at - started_at : nil
   end
 
   def stop_other_workings
@@ -60,16 +66,7 @@ class Activity < ApplicationRecord
 
   private
 
-  def calc_duration
-    stopped_at ? stopped_at - started_at : nil
-  end
-
-  def stopped?
-    stopped_at.present?
-  end
-
   def project_is_invalid
-    return if project_id.nil?
     return if user.projects.exists?(id: project_id)
 
     errors.add(:project, :is_invalid)
