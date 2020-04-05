@@ -73,6 +73,7 @@ class Report
 
   def activities
     Activity.joins(:project)
+        .preload(:project)
         .merge(projects)
         .stopped
         .where(started_at: start_date..end_date)
