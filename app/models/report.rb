@@ -22,6 +22,7 @@ class Report
   attribute :start_date, :datetime
   attribute :end_date, :datetime
   attribute :time_zone, :string
+  attribute :project_ids
   attribute :user
 
   validates :user, presence: true
@@ -45,7 +46,7 @@ class Report
   end
 
   def projects
-    user.projects.order(:id)
+    user.projects.where(id: project_ids).order(:id)
   end
 
   def labels
@@ -77,7 +78,9 @@ class Report
   end
 
   def activities
-    user.activities.joins(:project).stopped
+    user.activities.joins(:project)
+        .stopped
+        .where(project_id: project_ids)
         .where(started_at: start_date..end_date)
   end
 

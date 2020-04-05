@@ -26,6 +26,7 @@ module V1
     def build_report
       report = Report.new(
         user: current_user,
+        project_ids: params[:project_ids],
         start_date: params[:start],
         end_date: params[:end],
         time_zone: params[:time_zone]
