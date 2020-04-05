@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Report, type: :model do
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:user) }
     it { is_expected.to validate_presence_of(:end_date) }
     it { is_expected.to validate_presence_of(:start_date) }
     it { is_expected.to validate_presence_of(:time_zone) }
@@ -15,7 +14,7 @@ RSpec.describe Report, type: :model do
 
         subject do
           report = Report.new(
-            user: create(:user),
+            projects: [],
             time_zone: 'UTC',
             start_date: start_date,
             end_date: end_date
@@ -48,7 +47,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: end_date
@@ -229,7 +228,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
@@ -311,7 +310,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
@@ -341,7 +340,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
@@ -367,7 +366,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: create(:user),
+        projects: [],
         time_zone: time_zone,
         start_date: start_date,
         end_date: start_date + 1.day
@@ -390,7 +389,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: create(:user),
+        projects: [],
         time_zone: time_zone,
         start_date: end_date - 1.day,
         end_date: end_date
@@ -414,7 +413,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: create(:user),
+        projects: [],
         time_zone: time_zone,
         start_date: start_date,
         end_date: end_date
@@ -497,7 +496,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 6.days
@@ -537,7 +536,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
@@ -620,7 +619,7 @@ RSpec.describe Report, type: :model do
 
     subject do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 1.day
