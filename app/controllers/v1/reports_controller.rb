@@ -19,8 +19,9 @@ module V1
 
     private
 
-    def projects
-      current_user.projects.where(id: params[:project_ids])
+    def projects(ids)
+      projects = current_user.projects
+      ids ? projects.where(id: ids) : projects
     end
 
     def generate_csv(activities)
@@ -29,7 +30,7 @@ module V1
 
     def build_report
       report = Report.new(
-        projects: projects,
+        projects: projects(params[:project_ids]),
         start_date: params[:start],
         end_date: params[:end],
         time_zone: params[:time_zone]
