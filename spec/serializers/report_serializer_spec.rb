@@ -10,7 +10,7 @@ RSpec.describe ReportSerializer, type: :serializer do
 
     let(:report) do
       Report.new(
-        user: user,
+        projects: user.projects,
         time_zone: 'UTC',
         start_date: now,
         end_date: now + 3.days
