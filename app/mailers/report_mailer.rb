@@ -13,7 +13,7 @@ class ReportMailer < ApplicationMailer
 
   def build_report(user, range)
     report = Report.new(
-      user: user,
+      projects: user.projects,
       start_date: range.begin,
       end_date: range.end,
       time_zone: user.time_zone
