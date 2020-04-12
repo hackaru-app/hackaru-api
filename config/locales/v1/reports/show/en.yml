@@ -1,0 +1,6 @@
+en:
+  v1:
+    reports:
+      show:
+        summary: 'Summary'
+        timers: 'Timers'

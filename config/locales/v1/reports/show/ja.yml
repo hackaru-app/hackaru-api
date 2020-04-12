@@ -1,0 +1,6 @@
+ja:
+  v1:
+    reports:
+      show:
+        summary: '計測レポート'
+        timers: '計測一覧'
