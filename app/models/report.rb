@@ -22,9 +22,8 @@ class Report
   attribute :start_date, :datetime
   attribute :end_date, :datetime
   attribute :time_zone, :string
-  attribute :user
+  attribute :projects
 
-  validates :user, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :time_zone, presence: true
@@ -42,10 +41,6 @@ class Report
       values = labels.map { 0 } if values.empty?
       [id, values]
     end
-  end
-
-  def projects
-    user.projects.order(:id)
   end
 
   def labels
@@ -77,8 +72,11 @@ class Report
   end
 
   def activities
-    user.activities.joins(:project).stopped
-        .where(started_at: start_date..end_date)
+    Activity.joins(:project)
+            .preload(:project)
+            .merge(projects)
+            .stopped
+            .where(started_at: start_date..end_date)
   end
 
   private
