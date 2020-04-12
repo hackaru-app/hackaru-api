@@ -19,13 +19,18 @@ module V1
 
     private
 
+    def projects(ids)
+      projects = current_user.projects
+      ids ? projects.where(id: ids) : projects
+    end
+
     def generate_csv(activities)
       ActivityCsv.new(activities, params[:time_zone]).generate_bom
     end
 
     def build_report
       report = Report.new(
-        user: current_user,
+        projects: projects(params[:project_ids]),
         start_date: params[:start],
         end_date: params[:end],
         time_zone: params[:time_zone]
