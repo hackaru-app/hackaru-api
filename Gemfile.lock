@@ -262,7 +262,7 @@ GEM
       rack (~> 2.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
-    sidekiq-cron (1.1.0)
+    sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
     simplecov (0.18.5)
@@ -345,7 +345,7 @@ DEPENDENCIES
   sentry-raven
   shoulda-matchers
   sidekiq
-  sidekiq-cron (~> 1.1)
+  sidekiq-cron (~> 1.2)
   simplecov (~> 0.18)
   slim
   slim_lint
