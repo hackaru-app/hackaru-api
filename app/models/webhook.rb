@@ -3,10 +3,11 @@
 class Webhook < ApplicationRecord
   belongs_to :user
 
-  validates :target_url, presence: true,
-                         length: { maximum: 1000 },
-                         format: /\A#{URI.regexp(%w[http https])}\z/,
-                         uniqueness: { scope: %i[user_id event] }
+  validates :target_url,
+            presence: true,
+            length: { maximum: 1000 },
+            format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/,
+            uniqueness: { scope: %i[user_id event] }
 
   def deliver(payload)
     conn = Faraday.new(url: target_url)
