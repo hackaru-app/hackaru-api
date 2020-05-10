@@ -17,6 +17,7 @@ jobs:
       script:
         - docker-compose run --rm sut
       after_success:
+        - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
         - bash <(curl -s https://codecov.io/bash) -f coverage/.resultset.json -Z
 
     - stage: push
