@@ -48,7 +48,6 @@ group :development do
 end
 
 group :test do
-  gem 'codecov', require: false
   gem 'json_spec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
