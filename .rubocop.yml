@@ -36,7 +36,7 @@ Style/MixinUsage:
 
 Metrics/BlockLength:
   Exclude:
-    - "spec/**/*_spec.rb"
-    - "spec/*_helper.rb"
-    - "spec/support/**/*.rb"
-    - "config/**/*.rb"
+    - spec/**/*_spec.rb
+    - spec/*_helper.rb
+    - spec/support/**/*.rb
+    - config/**/*.rb
