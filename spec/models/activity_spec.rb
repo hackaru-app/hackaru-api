@@ -249,7 +249,7 @@ RSpec.describe Activity, type: :model do
       end
     end
 
-    context 'when start activity twice but diffrent user' do
+    context 'when start activity twice but different user' do
       before do
         create(:activity, user: users[0], stopped_at: nil)
         create(:activity, user: users[1], stopped_at: nil)
