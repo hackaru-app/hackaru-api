@@ -14,17 +14,10 @@ jobs:
         - COMPOSE_FILE=docker-compose.test.yml
       services:
         - docker
-      before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
       script:
         - docker-compose run --rm sut
       after_success:
         - bash <(curl -s https://codecov.io/bash)
-      # after_script:
-      #   - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
-      #   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
     - stage: push
       language: minimal
