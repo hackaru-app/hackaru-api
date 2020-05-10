@@ -7,7 +7,10 @@ module V1
         application = Doorkeeper::Application.create!(application_params)
         render json: {
           web_url: ENV.fetch('HACKARU_WEB_URL'),
-          application: application
+          application: application.as_json.merge({
+            uid: application.uid,
+            secret: application.secret
+          })
         }
       end
 
