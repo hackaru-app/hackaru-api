@@ -17,7 +17,7 @@ jobs:
       script:
         - docker-compose run --rm sut
       after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash) -f coverage -v
 
     - stage: push
       language: minimal
