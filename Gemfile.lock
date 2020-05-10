@@ -77,6 +77,10 @@ GEM
     byebug (11.1.2)
     case_transform (0.2)
       activesupport
+    codecov (0.1.16)
+      json
+      simplecov
+      url
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -121,6 +125,7 @@ GEM
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
     jaro_winkler (1.5.4)
+    json (2.3.0)
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
@@ -293,6 +298,7 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
+    url (0.3.2)
     webmock (3.8.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -318,6 +324,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   brakeman
   byebug
+  codecov
   date_validator
   doorkeeper
   doorkeeper-i18n
@@ -359,4 +366,4 @@ RUBY VERSION
    ruby 2.7.1
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
