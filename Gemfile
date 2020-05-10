@@ -48,12 +48,12 @@ group :development do
 end
 
 group :test do
+  gem 'codecov', require: false
   gem 'json_spec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.18', require: false
   gem 'webmock'
-  gem 'codecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
