@@ -7,6 +7,8 @@ jobs:
         - bundle exec rubocop
         - bundle exec brakeman
         - bundle exec slim-lint app/views
+        - curl -L https://git.io/misspell | bash
+        - git ls-files | xargs bin/misspell
 
     - stage: test
       language: minimal
