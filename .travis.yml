@@ -2,7 +2,10 @@ jobs:
   include:
     - stage: lint
       language: ruby
-      cache: bundler
+      cache:
+        bundler: true
+        directories:
+          - bin/misspell
       script:
         - bundle exec rubocop
         - bundle exec brakeman
