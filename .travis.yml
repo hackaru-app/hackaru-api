@@ -3,11 +3,13 @@ jobs:
     - stage: lint
       language: ruby
       cache: bundler
+      services:
+        - docker
       script:
         - bundle exec rubocop
         - bundle exec brakeman
         - bundle exec slim-lint app/views
-        - curl -L https://git.io/misspell | bash && git ls-files | xargs bin/misspell --error
+        - docker run -v $(pwd):/src -w /src nickg/misspell /bin/sh -c 'git ls-files | xargs misspell -error'
 
     - stage: test
       language: minimal
