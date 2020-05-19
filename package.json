@@ -10,7 +10,7 @@
     "@rails/webpacker": "^4.0.7",
     "c3": "^0.7.11",
     "normalize.css": "^8.0.1",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^3.1.0"
   },
   "lint-staged": {
     "*.{js,vue}": [
