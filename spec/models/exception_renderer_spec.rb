@@ -23,6 +23,7 @@ RSpec.describe ExceptionRenderer, type: :model do
         class MockModel
           include ActiveModel::Model
           attr_accessor :attr
+
           validates :attr, presence: true
         end
       end
