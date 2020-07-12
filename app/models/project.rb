@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
-  include Webhookable
-
   belongs_to :user
   has_many :activities, dependent: :nullify
 
