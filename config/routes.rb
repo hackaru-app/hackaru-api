@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     resource :activity_calendar, only: %i[update show destroy]
     resources :activities, except: :show
     resources :projects, except: :show
-    resources :webhooks, except: :show
     resource :report, only: :show, defaults: { format: :json }
     resources :suggestions, only: :index
   end

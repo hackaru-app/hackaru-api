@@ -8,7 +8,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:projects).dependent(:delete_all) }
     it { is_expected.to have_many(:activities).dependent(:delete_all) }
     it { is_expected.to have_many(:refresh_tokens).dependent(:delete_all) }
-    it { is_expected.to have_many(:webhooks).dependent(:delete_all) }
   end
 
   describe 'validations' do
@@ -59,11 +58,6 @@ RSpec.describe User, type: :model do
 
     context 'when user has any refresh_token' do
       let(:user) { create(:refresh_token).user }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
-    end
-
-    context 'when user has any webhook' do
-      let(:user) { create(:webhook).user }
       it { expect(User.exists?(id: user.id)).to be_falsey }
     end
   end

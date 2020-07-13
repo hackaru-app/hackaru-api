@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
-  it_behaves_like 'webhookable'
-
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:project).optional }
@@ -145,25 +143,6 @@ RSpec.describe Activity, type: :model do
         end
         it { is_expected.to be_zero }
       end
-    end
-  end
-
-  describe '#deliver_stopped_webhooks' do
-    subject { create(:activity, stopped_at: stopped_at) }
-
-    before do
-      allow(subject).to receive(:deliver_webhooks)
-      subject.update(stopped_at: Time.now)
-    end
-
-    context 'when activity was working' do
-      let(:stopped_at) { nil }
-      it { is_expected.to have_received(:deliver_webhooks).with('stopped') }
-    end
-
-    context 'when activity was stopped' do
-      let(:stopped_at) { 1.day.ago }
-      it { is_expected.not_to have_received(:deliver_webhooks).with('stopped') }
     end
   end
 

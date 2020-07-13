@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
-  include Webhookable
-
   belongs_to :user
   belongs_to :project, optional: true
 
@@ -26,15 +24,6 @@ class Activity < ApplicationRecord
   }
 
   scope :stopped, -> { where.not(duration: nil) }
-
-  after_commit :deliver_stopped_webhooks, on: %i[update]
-
-  def deliver_stopped_webhooks
-    prevs = previous_changes[:stopped_at]
-    return unless stopped_at && prevs && prevs.first.nil?
-
-    deliver_webhooks 'stopped'
-  end
 
   def set_duration
     self.duration = stopped_at ? stopped_at - started_at : nil
