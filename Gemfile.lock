@@ -165,7 +165,7 @@ GEM
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.6)
-    puma (4.3.6)
+    puma (5.0.0)
       nio4r (~> 2.0)
     raabro (1.3.1)
     rack (2.2.3)
@@ -334,7 +334,7 @@ DEPENDENCIES
   okcomputer
   pg (>= 0.18, < 2.0)
   premailer-rails
-  puma (~> 4.3)
+  puma (~> 5.0)
   rack-attack
   rack-cors
   rails (~> 6.0)
