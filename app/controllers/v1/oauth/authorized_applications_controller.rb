@@ -12,7 +12,7 @@ module V1
             id: application.id,
             name: application.name,
             scopes: application.scopes,
-            created_at: application.created_at,
+            created_at: application.created_at
           }
         end
         render json: hash
