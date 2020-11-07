@@ -7,7 +7,15 @@ module V1
 
       def index
         applications = Doorkeeper::Application.authorized_for(current_user)
-        render json: applications, except: :secret
+        hash = applications.map do |application|
+          {
+            id: application.id,
+            name: application.name,
+            scopes: application.scopes,
+            created_at: application.created_at,
+          }
+        end
+        render json: hash
       end
 
       def destroy
