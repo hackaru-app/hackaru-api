@@ -43,5 +43,8 @@ module HackaruApi
     config.i18n.load_path += Dir[
       Rails.root.join('config', 'locales', '**', '*.{rb,yml}')
     ]
+
+    config.action_dispatch.default_headers['X-Frame-Options'] = 'DENY'
+    config.action_dispatch.default_headers['Referrer-Policy'] = 'no-referrer'
   end
 end
