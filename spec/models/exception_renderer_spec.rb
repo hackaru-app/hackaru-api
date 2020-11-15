@@ -13,23 +13,27 @@ RSpec.describe ExceptionRenderer, type: :model do
     end
 
     context 'when occurred custom exception' do
-      let(:exception) { class UnknownError < StandardError; end }
+      let(:exception) { StandardError.new }
       it { expect(subject.message).not_to be_nil }
       it { expect(subject.status).to eq 500 }
     end
 
     context 'when occurred validate exception' do
-      before do
-        class MockModel
+      let(:mock_model) do
+        Class.new do
           include ActiveModel::Model
-          attr_accessor :attr
+          attr_reader :attr
 
           validates :attr, presence: true
+
+          def self.name
+            'mock_model'
+          end
         end
       end
 
       let(:exception) do
-        record = MockModel.new
+        record = mock_model.new
         record.valid?
         ActiveRecord::RecordInvalid.new(record)
       end

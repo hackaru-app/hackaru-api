@@ -3,12 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe EmailHelper, type: :helper do
-  before do
-    class MockMailer < ActionMailer::Base
-      include EmailHelper
-    end
-  end
-
   describe '#utm_url' do
     subject { helper.utm_url url }
 
