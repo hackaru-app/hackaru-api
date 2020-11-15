@@ -30,9 +30,7 @@ class Report
   validates :start_date, date: { before: :end_date }
 
   def totals
-    sums.to_h do |key, value|
-      [key, value.sum]
-    end
+    sums.transform_values(&:sum)
   end
 
   def sums
