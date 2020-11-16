@@ -92,7 +92,7 @@ GEM
       railties (>= 5)
     doorkeeper-i18n (5.2.2)
       doorkeeper (>= 5.2)
-    erubi (1.9.0)
+    erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
     factory_bot (6.1.0)
