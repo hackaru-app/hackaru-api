@@ -266,10 +266,12 @@ GEM
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
-    simplecov (0.19.1)
+    simplecov (0.20.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.2)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -347,7 +349,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   sidekiq-cron (~> 1.2)
-  simplecov (~> 0.19)
+  simplecov (~> 0.20)
   slim
   slim_lint
   spring
