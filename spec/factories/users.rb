@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.unique.email }
+    email { Faker::Internet.unique.safe_email }
     password { Faker::Internet.password }
     receive_week_report { Faker::Boolean.boolean }
     receive_month_report { Faker::Boolean.boolean }
