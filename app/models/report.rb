@@ -58,11 +58,11 @@ class Report
   end
 
   def start_date
-    super&.in_time_zone(time_zone)
+    super&.in_time_zone(time_zone.presence || 'UTC')
   end
 
   def end_date
-    super&.in_time_zone(time_zone)
+    super&.in_time_zone(time_zone.presence || 'UTC')
   end
 
   def activity_groups

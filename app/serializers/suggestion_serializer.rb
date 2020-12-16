@@ -4,11 +4,6 @@ class SuggestionSerializer < ActiveModel::Serializer
   attributes :description
   has_one :project
 
-  def description
-    object.description
-  end
-
-  def project
-    object.project
-  end
+  delegate :description, to: :object
+  delegate :project, to: :object
 end

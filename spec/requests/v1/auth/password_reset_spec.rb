@@ -19,14 +19,15 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
     end
 
     context 'when email is registered' do
-      it { expect(response).to have_http_status(204) }
+      it { expect(response).to have_http_status(:no_content) }
       it { expect(ActionMailer::Base.deliveries.size).to eq(1) }
       it { expect(ActionMailer::Base.deliveries.last.to.first).to eq(email) }
     end
 
     context 'when email is not registered' do
       let(:email) { 'invalid' }
-      it { expect(response).to have_http_status(404) }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 
@@ -48,13 +49,15 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
 
     context 'when token is valid' do
       let(:token) { 'secret' }
-      it { expect(response).to have_http_status(204) }
+
+      it { expect(response).to have_http_status(:no_content) }
       it { expect(user.reload.authenticate('changed')).to be_truthy }
     end
 
     context 'when token is invalid' do
       let(:token) { 'invalid' }
-      it { expect(response).to have_http_status(401) }
+
+      it { expect(response).to have_http_status(:unauthorized) }
       it { expect(user.reload.authenticate('changed')).to be_falsy }
     end
   end

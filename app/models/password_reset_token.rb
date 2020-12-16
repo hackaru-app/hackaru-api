@@ -9,13 +9,13 @@ class PasswordResetToken < ApplicationRecord
   end
 
   def expired?
-    expired_at <= Time.now
+    expired_at <= Time.zone.now
   end
 
   def self.issue(user)
     raw = SecureRandom.urlsafe_base64(nil, false)
     password_reset_token = PasswordResetToken.find_or_initialize_by(user: user)
-    password_reset_token.update!(token: raw, expired_at: Time.now + 5.minutes)
+    password_reset_token.update!(token: raw, expired_at: Time.zone.now + 5.minutes)
     raw
   end
 

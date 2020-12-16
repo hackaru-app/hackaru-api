@@ -8,12 +8,12 @@ class RefreshToken < ApplicationRecord
     ::BCrypt::Password.new(token) == other
   end
 
-  def revoke(revoked_at = Time.now)
+  def revoke(revoked_at = Time.zone.now)
     update!(revoked_at: revoked_at)
   end
 
   def revoked?
-    revoked_at && revoked_at <= Time.now
+    revoked_at && revoked_at <= Time.zone.now
   end
 
   def self.issue(user)

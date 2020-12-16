@@ -29,11 +29,13 @@ RSpec.describe User, type: :model do
 
     describe 'time_zone' do
       let(:array) { ActiveSupport::TimeZone::MAPPING.to_a.flatten }
+
       it { is_expected.to validate_inclusion_of(:time_zone).in_array(array) }
     end
 
     describe 'locale' do
       let(:array) { I18n.available_locales.map(&:to_s) }
+
       it { is_expected.to validate_inclusion_of(:locale).in_array(array) }
     end
   end
@@ -43,28 +45,32 @@ RSpec.describe User, type: :model do
 
     context 'when user has any activity' do
       let(:user) { create(:activity).user }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
+
+      it { expect(described_class).not_to exist(id: user.id) }
     end
 
     context 'when user has any project' do
       let(:user) { create(:project).user }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
+
+      it { expect(described_class).not_to exist(id: user.id) }
     end
 
     context 'when user has any password_reset_token' do
       let(:user) { create(:password_reset_token).user }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
+
+      it { expect(described_class).not_to exist(id: user.id) }
     end
 
     context 'when user has any refresh_token' do
       let(:user) { create(:refresh_token).user }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
+
+      it { expect(described_class).not_to exist(id: user.id) }
     end
   end
 
   describe '#reset_password' do
     let(:user) { create(:user, password: 'unchanged') }
-    let(:expired_at) { Time.now + 1.day }
+    let(:expired_at) { Time.zone.now + 1.day }
 
     before do
       create(
@@ -75,53 +81,77 @@ RSpec.describe User, type: :model do
       )
     end
 
-    context 'raw token and password are valid' do
-      it 'change password' do
-        success = user.reset_password(
+    context 'when raw token and password are valid' do
+      let(:args) do
+        {
           token: 'secret',
           password: 'changed',
           password_confirmation: 'changed'
-        )
+        }
+      end
+
+      it 'changes password' do
+        user.reset_password(**args)
         expect(user.password).to eq('changed')
-        expect(success).to eq(true)
+      end
+
+      it 'returns true' do
+        expect(user.reset_password(**args)).to eq(true)
       end
     end
 
-    context 'raw token is invalid' do
-      it 'does not change password' do
-        success = user.reset_password(
+    context 'when raw token is invalid' do
+      let(:args) do
+        {
           token: 'invalid',
           password: 'changed',
           password_confirmation: 'changed'
-        )
+        }
+      end
+
+      it 'does not change password' do
+        user.reset_password(**args)
         expect(user.password).to eq('unchanged')
-        expect(success).to eq(false)
+      end
+
+      it 'returns false' do
+        expect(user.reset_password(**args)).to eq(false)
       end
     end
 
-    context 'token was expired' do
-      let(:expired_at) { Time.now - 1.day }
+    context 'when token was expired' do
+      let(:expired_at) { Time.zone.now - 1.day }
 
-      it 'does not change password' do
-        success = user.reset_password(
+      let(:args) do
+        {
           token: 'secret',
           password: 'changed',
           password_confirmation: 'changed'
-        )
+        }
+      end
+
+      it 'does not change password' do
+        user.reset_password(**args)
         expect(user.password).to eq('unchanged')
-        expect(success).to eq(false)
+      end
+
+      it 'returns false' do
+        expect(user.reset_password(**args)).to eq(false)
       end
     end
 
-    context 'password and password confirmation are not same' do
-      it 'does not change password' do
-        expect do
-          user.reset_password(
-            token: 'secret',
-            password: 'in',
-            password_confirmation: 'valid'
-          )
-        end.to raise_error ActiveRecord::RecordInvalid
+    context 'when password and password confirmation are not same' do
+      let(:args) do
+        {
+          token: 'secret',
+          password: 'in',
+          password_confirmation: 'valid'
+        }
+      end
+
+      it 'raises error' do
+        expect { user.reset_password(**args) }
+          .to raise_error ActiveRecord::RecordInvalid
       end
     end
   end

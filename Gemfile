@@ -41,6 +41,8 @@ group :development do
   gem 'brakeman'
   gem 'listen', '>= 3.0.5', '< 3.4'
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'slim_lint'
   gem 'spring'

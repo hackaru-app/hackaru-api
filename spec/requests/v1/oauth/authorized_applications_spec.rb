@@ -13,7 +13,7 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it 'does not include client secret' do
@@ -48,13 +48,13 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     end
 
     context 'when application exists' do
-      it { expect(response).to have_http_status(204) }
+      it { expect(response).to have_http_status(:no_content) }
       it { expect(access_token.reload.revoked_at).not_to be_nil }
       it { expect(access_grant.reload.revoked_at).not_to be_nil }
     end
 
     context 'when application does not exist' do
-      it { expect(response).to have_http_status(204) }
+      it { expect(response).to have_http_status(:no_content) }
     end
   end
 end

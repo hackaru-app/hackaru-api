@@ -21,19 +21,22 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
-    it 'send mail' do
+    it 'sends mail once' do
       expect(ActionMailer::Base.deliveries.size).to eq(1)
+    end
+
+    it 'sends mail' do
       expect(ActionMailer::Base.deliveries.last.to.first).to eq(email)
     end
 
     it 'creates an user' do
-      expect(User.find_by(email: 'foo@example.com')).to_not be_nil
+      expect(User.find_by(email: 'foo@example.com')).not_to be_nil
     end
 
-    it 'add some sample projects' do
+    it 'adds some sample projects' do
       user = User.find_by(email: 'foo@example.com')
       expect(user.projects.size).to eq(3)
     end
@@ -59,7 +62,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       let(:email) { 'changed@example.com' }
       let(:password) { 'changed' }
       let(:current_password) { 'password' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(user.reload.email).to eq('changed@example.com') }
       it { expect(user.reload.authenticate('changed')).to be_truthy }
     end
@@ -68,7 +72,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       let(:email) { 'changed@example.com' }
       let(:password) { '' }
       let(:current_password) { 'password' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(user.reload.email).to eq('changed@example.com') }
     end
 
@@ -77,16 +82,18 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       let(:password) { 'changed' }
       let(:current_password) { 'password' }
       let(:headers) { { 'X-Access-Token': 'invalid' } }
-      it { expect(response).to have_http_status(401) }
-      it { expect(user.reload.email).to_not eq('changed@example.com') }
+
+      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(user.reload.email).not_to eq('changed@example.com') }
     end
 
     context 'when current password is invalid' do
       let(:email) { 'changed@example.com' }
       let(:password) { 'changed' }
       let(:current_password) { 'invalid' }
-      it { expect(response).to have_http_status(422) }
-      it { expect(user.reload.email).to_not eq('changed@example.com') }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+      it { expect(user.reload.email).not_to eq('changed@example.com') }
     end
   end
 
@@ -106,21 +113,24 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
     context 'when current_password is valid' do
       let(:current_password) { 'password' }
-      it { expect(response).to have_http_status(200) }
-      it { expect(User.exists?(id: user.id)).to be_falsey }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(User).not_to exist(id: user.id) }
     end
 
     context 'when access tokens is invalid' do
       let(:current_password) { 'password' }
       let(:headers) { { 'X-Access-Token': 'invalid' } }
-      it { expect(response).to have_http_status(401) }
-      it { expect(User.exists?(id: user.id)).to be_truthy }
+
+      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(User).to exist(id: user.id) }
     end
 
     context 'when current_password is invalid' do
       let(:current_password) { 'invalid' }
-      it { expect(response).to have_http_status(422) }
-      it { expect(User.exists?(id: user.id)).to be_truthy }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+      it { expect(User).to exist(id: user.id) }
     end
   end
 end

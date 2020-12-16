@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HtmlApplicationController < ActionController::Base
+class HtmlApplicationController < ApplicationController
   include HttpAcceptLanguage::AutoLocale
   include Authenticatable
   include ErrorRenderable

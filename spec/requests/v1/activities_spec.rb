@@ -6,8 +6,8 @@ RSpec.describe 'V1::Activities', type: :request do
   describe 'GET /v1/activities' do
     let(:params) do
       {
-        start: 1.days.ago,
-        end: Time.now
+        start: 1.day.ago,
+        end: Time.zone.now
       }
     end
 
@@ -18,12 +18,13 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     context 'when params are correctly' do
-      it { expect(response).to have_http_status(200) }
+      it { expect(response).to have_http_status(:ok) }
     end
 
     context 'when params are missing' do
       let(:params) { {} }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 
@@ -34,13 +35,13 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'POST /v1/activities' do
     let(:user) { create(:user) }
-    let(:started_at) { Time.now }
+    let(:started_at) { Time.zone.now }
     let(:params) do
       {
         activity: {
@@ -57,31 +58,33 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     context 'when params are correctly' do
-      it { expect(response).to have_http_status(200) }
-      it { expect(user.activities.first).to_not be_nil }
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(user.activities.first).not_to be_nil }
     end
 
     context 'when params are invalid' do
       let(:started_at) { 'invalid' }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
 
     context 'when params are missing' do
       let(:params) { {} }
-      it { expect(response).to have_http_status(400) }
+
+      it { expect(response).to have_http_status(:bad_request) }
     end
   end
 
   describe 'PUT /v1/activities' do
     let(:activity) { create(:activity) }
-    let(:started_at) { Time.now }
+    let(:started_at) { Time.zone.now }
     let(:id) { activity.id }
     let(:params) do
       {
         activity: {
           description: 'Updated',
           started_at: started_at,
-          stopped_at: Time.now + 1.day
+          stopped_at: Time.zone.now + 1.day
         }
       }
     end
@@ -94,22 +97,25 @@ RSpec.describe 'V1::Activities', type: :request do
 
     context 'when activity does not exist' do
       let(:id) { 'invalid' }
-      it { expect(response).to have_http_status(404) }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
 
     context 'when params are correctly' do
-      it { expect(response).to have_http_status(200) }
+      it { expect(response).to have_http_status(:ok) }
       it { expect(activity.reload.description).to eq('Updated') }
     end
 
     context 'when params are invalid' do
       let(:started_at) { 'invalid' }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
 
     context 'when params are missing' do
       let(:params) { {} }
-      it { expect(response).to have_http_status(400) }
+
+      it { expect(response).to have_http_status(:bad_request) }
     end
   end
 
@@ -123,13 +129,15 @@ RSpec.describe 'V1::Activities', type: :request do
 
     context 'when activity exists' do
       let(:id) { activity.id }
-      it { expect(response).to have_http_status(200) }
-      it { expect(Activity.exists?(id: id)).to be_falsey }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(Activity).not_to exist(id: id) }
     end
 
     context 'when activity does not exist' do
       let(:id) { 'invalid' }
-      it { expect(response).to have_http_status(404) }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 end

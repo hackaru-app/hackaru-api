@@ -5,15 +5,7 @@ class ActivityGroupSerializer < ActiveModel::Serializer
   attributes :duration
   attributes :project
 
-  def project
-    object.project
-  end
-
-  def description
-    object.description
-  end
-
-  def duration
-    object.duration
-  end
+  delegate :project, to: :object
+  delegate :description, to: :object
+  delegate :duration, to: :object
 end

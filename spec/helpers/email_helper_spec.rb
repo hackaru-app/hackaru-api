@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe EmailHelper, type: :helper do
   describe '#utm_url' do
-    subject { helper.utm_url url }
+    subject(:utm_url) { helper.utm_url url }
 
     before do
       allow(helper).to receive(:controller_path).and_return(:controller_path)
@@ -13,8 +13,9 @@ RSpec.describe EmailHelper, type: :helper do
 
     context 'when url does not have query' do
       let(:url) { 'http://example.com' }
+
       it 'returns url correctly' do
-        expect(subject).to eq(
+        expect(utm_url).to eq(
           'http://example.com?utm_medium=email&utm_source=controller_path&utm_campaign=action_name'
         )
       end
@@ -22,8 +23,9 @@ RSpec.describe EmailHelper, type: :helper do
 
     context 'when url has query' do
       let(:url) { 'http://example.com?a=b' }
+
       it 'does not overwrite query' do
-        expect(subject).to eq(
+        expect(utm_url).to eq(
           'http://example.com?a=b&utm_medium=email&utm_source=controller_path&utm_campaign=action_name'
         )
       end

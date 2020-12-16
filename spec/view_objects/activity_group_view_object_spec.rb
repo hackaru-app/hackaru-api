@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ActivityGroupViewObject, type: :view_object do
   describe '#description' do
-    subject { ActivityGroupViewObject.new(activity_group).description }
+    subject { described_class.new(activity_group).description }
 
     context 'when activity has description' do
       let(:activity_group) do
@@ -14,6 +14,7 @@ RSpec.describe ActivityGroupViewObject, type: :view_object do
           duration: 0
         )
       end
+
       it { is_expected.to eq('Review code') }
     end
 
@@ -25,12 +26,13 @@ RSpec.describe ActivityGroupViewObject, type: :view_object do
           duration: 0
         )
       end
+
       it { is_expected.to eq('Review') }
     end
   end
 
   describe '#color' do
-    subject { ActivityGroupViewObject.new(activity_group).color }
+    subject { described_class.new(activity_group).color }
 
     let(:activity_group) do
       ActivityGroup.new(
@@ -39,11 +41,12 @@ RSpec.describe ActivityGroupViewObject, type: :view_object do
         duration: 0
       )
     end
+
     it { is_expected.to eq('#ff0') }
   end
 
   describe '#duration' do
-    subject { ActivityGroupViewObject.new(activity_group).duration }
+    subject { described_class.new(activity_group).duration }
 
     let(:activity_group) do
       ActivityGroup.new(
@@ -52,6 +55,7 @@ RSpec.describe ActivityGroupViewObject, type: :view_object do
         duration: 1000
       )
     end
+
     it { is_expected.to eq(1000) }
   end
 end

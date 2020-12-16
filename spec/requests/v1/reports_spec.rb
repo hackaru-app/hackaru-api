@@ -8,8 +8,8 @@ RSpec.describe 'V1::Reports', type: :request do
     let(:period) { 'day' }
     let(:params) do
       {
-        start: 1.days.ago,
-        end: Time.now,
+        start: 1.day.ago,
+        end: Time.zone.now,
         time_zone: time_zone
       }
     end
@@ -22,43 +22,50 @@ RSpec.describe 'V1::Reports', type: :request do
 
     context 'when extension is empty' do
       let(:extension) { '' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('application/json') }
     end
 
     context 'when extension is html' do
       let(:extension) { '.html' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('text/html') }
     end
 
     context 'when extension is pdf' do
       let(:extension) { '.pdf' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('application/pdf') }
     end
 
     context 'when extension is csv' do
       let(:extension) { '.csv' }
-      it { expect(response).to have_http_status(200) }
+
+      it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('text/csv') }
     end
 
     context 'when extension is missing' do
       let(:extension) { '.unknown' }
-      it { expect(response).to have_http_status(404) }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
 
     context 'when tine zone is invalid' do
       let(:extension) { '' }
       let(:time_zone) { 'Eagleland/Onett' }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
 
     context 'when params are missing' do
       let(:extension) { '' }
       let(:params) { {} }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 end

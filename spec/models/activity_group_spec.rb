@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ActivityGroup, type: :model do
   describe 'validations' do
-    subject { ActivityGroup.new }
+    subject { described_class.new }
 
     it { is_expected.to validate_presence_of(:project) }
     it { is_expected.to validate_presence_of(:duration) }
@@ -12,7 +12,7 @@ RSpec.describe ActivityGroup, type: :model do
   end
 
   describe '.generate' do
-    subject { ActivityGroup.generate(Activity.all) }
+    subject(:instance) { described_class.generate(Activity.all) }
 
     context 'when activity is not empty' do
       let(:project) { create(:project) }
@@ -28,15 +28,16 @@ RSpec.describe ActivityGroup, type: :model do
         )
       end
 
-      it { expect(subject.size).to eq(1) }
-      it { expect(subject.first.project).to eq(project) }
-      it { expect(subject.first.description).to eq('Review code') }
-      it { expect(subject.first.duration).to eq(172_800) }
+      it { expect(instance.size).to eq(1) }
+      it { expect(instance.first.project).to eq(project) }
+      it { expect(instance.first.description).to eq('Review code') }
+      it { expect(instance.first.duration).to eq(172_800) }
     end
 
     context 'when activity is empty' do
       let(:activities) { [] }
-      it { expect(subject).to be_empty }
+
+      it { expect(instance).to be_empty }
     end
   end
 end

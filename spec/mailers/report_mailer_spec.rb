@@ -4,11 +4,9 @@ require 'rails_helper'
 
 RSpec.describe ReportMailer, type: :mailer do
   describe '#report' do
-    let(:user) { create(:user) }
-
-    subject do
-      range = Date.today.all_week
-      ReportMailer.report(
+    subject(:mail) do
+      range = Time.zone.today.all_week
+      described_class.report(
         user,
         'title',
         range.begin,
@@ -16,12 +14,14 @@ RSpec.describe ReportMailer, type: :mailer do
       )
     end
 
+    let(:user) { create(:user) }
+
     it 'send to user' do
-      expect(subject.to.first).to eq(user.email)
+      expect(mail.to.first).to eq(user.email)
     end
 
     it 'has subject is correctly' do
-      expect(subject.subject).to eq 'title'
+      expect(mail.subject).to eq 'title'
     end
   end
 end

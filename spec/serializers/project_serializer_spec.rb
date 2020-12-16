@@ -4,15 +4,15 @@ require 'rails_helper'
 
 RSpec.describe ProjectSerializer, type: :serializer do
   describe '#to_json' do
-    let(:project) { create(:project) }
-
-    subject do
-      serializer = ProjectSerializer.new(project)
+    subject(:json) do
+      serializer = described_class.new(project)
       ActiveModelSerializers::Adapter.create(serializer).to_json
     end
 
+    let(:project) { create(:project) }
+
     it 'returns json' do
-      is_expected.to be_json_eql({
+      expect(json).to be_json_eql({
         id: project.id,
         name: project.name,
         color: project.color

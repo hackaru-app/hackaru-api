@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe UserInitializer, type: :model do
   describe '#create!' do
-    subject do
+    subject(:instance) do
       described_class.new(
         email: 'test@example.com',
         password: 'password',
@@ -14,9 +14,9 @@ RSpec.describe UserInitializer, type: :model do
       ).create!
     end
 
-    it { expect(subject.email).to eq('test@example.com') }
-    it { expect(subject.password).to eq('password') }
-    it { expect(subject.projects.size).to eq(3) }
-    it { expect(subject.time_zone).to eq('UTC') }
+    it { expect(instance.email).to eq('test@example.com') }
+    it { expect(instance.password).to eq('password') }
+    it { expect(instance.projects.size).to eq(3) }
+    it { expect(instance.time_zone).to eq('UTC') }
   end
 end

@@ -4,15 +4,15 @@ require 'rails_helper'
 
 RSpec.describe ActivitySerializer, type: :serializer do
   describe '#to_json' do
-    let(:activity) { create(:activity) }
-
-    subject do
-      serializer = ActivitySerializer.new(activity)
+    subject(:json) do
+      serializer = described_class.new(activity)
       ActiveModelSerializers::Adapter.create(serializer).to_json
     end
 
-    it 'returns json' do
-      is_expected.to be_json_eql({
+    let(:activity) { create(:activity) }
+
+    let(:expected_json) do
+      {
         id: activity.id,
         description: activity.description,
         started_at: activity.started_at,
@@ -23,7 +23,11 @@ RSpec.describe ActivitySerializer, type: :serializer do
           name: activity.project.name,
           color: activity.project.color
         }
-      }.to_json)
+      }.to_json
+    end
+
+    it 'returns json' do
+      expect(json).to be_json_eql(expected_json)
     end
   end
 end
