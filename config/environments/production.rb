@@ -107,4 +107,7 @@ Rails.application.configure do
 
   # Enable rack attack
   Rack::Attack.enabled = true
+
+  # We do not need frame.
+  config.action_dispatch.default_headers['X-Frame-Options'] = 'DENY'
 end

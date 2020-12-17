@@ -1,26 +1,28 @@
 # frozen_string_literal: true
 
 class RemoveDeviseTokenAuth < ActiveRecord::Migration[5.2]
-  def change
-    remove_column :users, :provider
-    remove_column :users, :uid
-    remove_column :users, :reset_password_token
-    remove_column :users, :reset_password_sent_at
-    remove_column :users, :allow_password_change
-    remove_column :users, :remember_created_at
-    remove_column :users, :sign_in_count
-    remove_column :users, :current_sign_in_at
-    remove_column :users, :current_sign_in_ip
-    remove_column :users, :last_sign_in_at
-    remove_column :users, :last_sign_in_ip
-    remove_column :users, :confirmation_token
-    remove_column :users, :confirmed_at
-    remove_column :users, :confirmation_sent_at
-    remove_column :users, :unconfirmed_email
-    remove_column :users, :name
-    remove_column :users, :nickname
-    remove_column :users, :image
-    remove_column :users, :tokens
+  def up
+    change_table :users, bulk: true do |t|
+      t.remove :provider, type: :string, null: false, default: 'email'
+      t.remove :uid, type: :string,  null: false, default: ''
+      t.remove :reset_password_token, type: :string
+      t.remove :reset_password_sent_at, type: :datetime
+      t.remove :allow_password_change, type: :boolean, default: false
+      t.remove :remember_created_at, type: :datetime
+      t.remove :sign_in_count, type: :integer, default: 0, null: false
+      t.remove :current_sign_in_at, type: :datetime
+      t.remove :current_sign_in_ip, type: :string
+      t.remove :last_sign_in_at, type: :datetime
+      t.remove :last_sign_in_ip, type: :string
+      t.remove :confirmation_token, type: :string
+      t.remove :confirmed_at, type: :string
+      t.remove :confirmation_sent_at, type: :datetime
+      t.remove :unconfirmed_email, type: :string
+      t.remove :name, type: :string
+      t.remove :nickname, type: :string
+      t.remove :image, type: :string
+      t.remove :tokens, type: :json
+    end
 
     rename_column :users, :encrypted_password, :password_digest
     change_column_null :users, :email, false
