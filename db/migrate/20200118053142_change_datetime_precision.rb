@@ -1,23 +1,35 @@
 # frozen_string_literal: true
 
 class ChangeDatetimePrecision < ActiveRecord::Migration[6.0]
-  def change
-    change_column :activities, :created_at, :datetime, precision: 6
-    change_column :activities, :updated_at, :datetime, precision: 6
+  def up
+    change_table :activities, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
 
-    change_column :password_reset_tokens, :created_at, :datetime, precision: 6
-    change_column :password_reset_tokens, :updated_at, :datetime, precision: 6
+    change_table :password_reset_tokens, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
 
-    change_column :projects, :created_at, :datetime, precision: 6
-    change_column :projects, :updated_at, :datetime, precision: 6
+    change_table :projects, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
 
-    change_column :refresh_tokens, :created_at, :datetime, precision: 6
-    change_column :refresh_tokens, :updated_at, :datetime, precision: 6
+    change_table :refresh_tokens, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
 
-    change_column :users, :created_at, :datetime, precision: 6
-    change_column :users, :updated_at, :datetime, precision: 6
+    change_table :users, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
 
-    change_column :webhooks, :created_at, :datetime, precision: 6
-    change_column :webhooks, :updated_at, :datetime, precision: 6
+    change_table :webhooks, bulk: true do |t|
+      t.change :created_at, :datetime, precision: 6
+      t.change :updated_at, :datetime, precision: 6
+    end
   end
 end

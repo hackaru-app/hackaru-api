@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module HackaruApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -37,14 +37,13 @@ module HackaruApi
     # Disable request forgery protection
     config.action_controller.allow_forgery_protection = false
 
-    config.action_mailer.preview_path = Rails.root.join('/spec/mailers/previews')
+    config.action_mailer.preview_path = Rails.root.join('spec/mailers/previews')
 
     config.i18n.available_locales = %i[ja en]
     config.i18n.load_path += Dir[
       Rails.root.join('config/locales/**/*.{rb,yml}')
     ]
 
-    config.action_dispatch.default_headers['X-Frame-Options'] = 'DENY'
     config.action_dispatch.default_headers['Referrer-Policy'] = 'no-referrer'
   end
 end

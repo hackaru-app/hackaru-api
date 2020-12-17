@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ReportMailer < ApplicationMailer
-  add_template_helper(DurationHelper)
-
   def report(user, title, from, to)
     @title = title
     @report = build_report(user, from..to)

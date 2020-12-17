@@ -81,4 +81,7 @@ Rails.application.configure do
 
   # Enable rack attack
   Rack::Attack.enabled = true
+
+  # It is needed for watching mailer preview.
+  config.action_dispatch.default_headers['X-Frame-Options'] = 'SAMEORIGIN'
 end

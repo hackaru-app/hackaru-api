@@ -1,6 +1,0 @@
-ja:
-  reminder_mailer:
-    remind:
-      subject: '長時間計測中のタイマーがあります。'
-      title: '長時間計測中のタイマーがあります。'
-      check: '確認する'
