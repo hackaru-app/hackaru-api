@@ -1,3 +1,7 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7
@@ -7,20 +11,10 @@ AllCops:
     - node_modules/**/*
 
 Layout/LineLength:
-  Max: 80
   IgnoredPatterns: ['^ *#']
 
 Style/Documentation:
   Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
 
 Metrics/AbcSize:
   Exclude:
@@ -40,3 +34,13 @@ Metrics/BlockLength:
     - "spec/*_helper.rb"
     - "spec/support/**/*.rb"
     - "config/**/*.rb"
+
+# TODO: Enabled rule after upgrade rails to 6.1
+# https://github.com/rubocop-hq/rubocop-rails/issues/110
+Rails/ReversibleMigration:
+  Enabled: false
+
+# TODO: Enabled rule after upgrade rails to 6.1
+# https://github.com/rubocop-hq/rubocop-rails/issues/110
+Rails/BulkChangeTable:
+  Enabled: false

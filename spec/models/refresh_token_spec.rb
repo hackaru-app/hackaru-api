@@ -11,23 +11,23 @@ RSpec.describe RefreshToken, type: :model do
     let(:user) { create(:user) }
 
     it 'issue refresh token' do
-      RefreshToken.issue(user)
-      expect(user.refresh_tokens.first).to_not be_nil
+      described_class.issue(user)
+      expect(user.refresh_tokens.first).not_to be_nil
     end
 
     it 'returns raw' do
-      _, raw = RefreshToken.issue(user)
-      expect(raw).to_not be_nil
+      _, raw = described_class.issue(user)
+      expect(raw).not_to be_nil
     end
 
     it 'returns refresh token' do
-      refresh_token, = RefreshToken.issue(user)
-      expect(refresh_token).to_not be_nil
+      refresh_token, = described_class.issue(user)
+      expect(refresh_token).not_to be_nil
     end
   end
 
   describe '#revoke' do
-    let(:now) { Time.now }
+    let(:now) { Time.zone.now }
     let(:refresh_token) { create(:refresh_token) }
 
     it 'set revoked at' do
@@ -40,37 +40,42 @@ RSpec.describe RefreshToken, type: :model do
     let(:refresh_token) { create(:refresh_token, revoked_at: revoked_at) }
 
     context 'when revoked at is before current time' do
-      let(:revoked_at) { Time.now - 1.day }
-      it { expect(refresh_token.revoked?).to be_truthy }
+      let(:revoked_at) { Time.zone.now - 1.day }
+
+      it { expect(refresh_token).to be_revoked }
     end
 
     context 'when revoked at is after current time' do
-      let(:revoked_at) { Time.now + 1.day }
-      it { expect(refresh_token.revoked?).to be_falsy }
+      let(:revoked_at) { Time.zone.now + 1.day }
+
+      it { expect(refresh_token).not_to be_revoked }
     end
 
     context 'when revoked at is nil' do
       let(:revoked_at) { nil }
-      it { expect(refresh_token.revoked?).to be_falsy }
+
+      it { expect(refresh_token).not_to be_revoked }
     end
   end
 
   describe '#fetch' do
-    let(:user) { create(:user) }
-    let(:issued) { RefreshToken.issue(user) }
+    subject { described_class.fetch(client_id: client_id, raw: raw) }
 
-    subject { RefreshToken.fetch(client_id: client_id, raw: raw) }
+    let(:user) { create(:user) }
+    let(:issued) { described_class.issue(user) }
 
     context 'when client id and raw are valid' do
       let(:refresh_token) { issued[0] }
       let(:client_id) { refresh_token.client_id }
       let(:raw) { issued[1] }
+
       it { is_expected.to eql(refresh_token) }
     end
 
     context 'when raw is invalid' do
       let(:client_id) { 'invalid' }
       let(:raw) { issued[1] }
+
       it { is_expected.to be_nil }
     end
 
@@ -78,13 +83,16 @@ RSpec.describe RefreshToken, type: :model do
       let(:refresh_token) { issued[0] }
       let(:client_id) { refresh_token.client_id }
       let(:raw) { issued[1] }
-      before { refresh_token.update!(revoked_at: Time.now - 1.day) }
+
+      before { refresh_token.update!(revoked_at: Time.zone.now - 1.day) }
+
       it { is_expected.to be_nil }
     end
 
     context 'when client id and raw are invalid' do
       let(:client_id) { 'invalid' }
       let(:raw) { 'invalid' }
+
       it { is_expected.to be_nil }
     end
   end
@@ -94,14 +102,14 @@ RSpec.describe RefreshToken, type: :model do
 
     context 'when raw is valid' do
       it 'returns true' do
-        refresh_token, raw = RefreshToken.issue(user)
+        refresh_token, raw = described_class.issue(user)
         expect(refresh_token == raw).to eq(true)
       end
     end
 
     context 'when raw is invalid' do
       it 'returns false' do
-        refresh_token, = RefreshToken.issue(user)
+        refresh_token, = described_class.issue(user)
         expect(refresh_token == 'invalid').to eq(false)
       end
     end

@@ -4,13 +4,13 @@
 class ReportMailerPreview < ActionMailer::Preview
   def weekly
     title = I18n.t('jobs.report_mailer_job.week.title')
-    range = Time.new(2017, 1, 1).all_week(:sunday)
+    range = Time.zone.local(2017, 1, 1).all_week(:sunday)
     report(title, range.begin, range.end)
   end
 
   def monthly
     title = I18n.t('jobs.report_mailer_job.month.title')
-    range = Time.new(2017, 1, 1).all_month
+    range = Time.zone.local(2017, 1, 1).all_month
     report(title, range.begin, range.end)
   end
 
@@ -21,8 +21,8 @@ class ReportMailerPreview < ActionMailer::Preview
     FactoryBot.create_list(
       :activity, 3,
       user: user,
-      started_at: Time.new(2017, 1, 1),
-      stopped_at: Time.new(2017, 1, 2)
+      started_at: Time.zone.local(2017, 1, 1),
+      stopped_at: Time.zone.local(2017, 1, 2)
     )
     ReportMailer.report(user, title, from, to)
   end

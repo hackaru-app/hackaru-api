@@ -11,29 +11,29 @@ RSpec.describe PasswordResetToken, type: :model do
     let(:user) { create(:user) }
 
     around do |e|
-      travel_to('2019-01-01 00:00:00'.to_time) { e.run }
+      travel_to('2019-01-01 00:00:00') { e.run }
     end
 
     it 'issue password reset token' do
-      PasswordResetToken.issue(user)
-      expect(user.password_reset_token).to_not be_nil
+      described_class.issue(user)
+      expect(user.password_reset_token).not_to be_nil
     end
 
     it 'set expired_at correctly' do
-      PasswordResetToken.issue(user)
+      described_class.issue(user)
       expect(user.password_reset_token.expired_at).to eq('2019-01-01 00:05:00')
     end
 
     it 'returns raw' do
-      raw = PasswordResetToken.issue(user)
-      expect(raw).to_not be_nil
+      raw = described_class.issue(user)
+      expect(raw).not_to be_nil
     end
 
     context 'when user already has token' do
       it 'override token' do
         prev = create(:password_reset_token, user: user)
-        PasswordResetToken.issue(user)
-        expect(prev.token).to_not eq(user.reload.password_reset_token.token)
+        described_class.issue(user)
+        expect(prev.token).not_to eq(user.reload.password_reset_token.token)
       end
     end
   end
@@ -44,12 +44,14 @@ RSpec.describe PasswordResetToken, type: :model do
     end
 
     context 'when token is not expired' do
-      let(:expired_at) { Time.now + 1.day }
+      let(:expired_at) { Time.zone.now + 1.day }
+
       it { is_expected.to eq(false) }
     end
 
     context 'when token was expired' do
-      let(:expired_at) { Time.now - 1.day }
+      let(:expired_at) { Time.zone.now - 1.day }
+
       it { is_expected.to eq(true) }
     end
   end
@@ -59,14 +61,14 @@ RSpec.describe PasswordResetToken, type: :model do
 
     context 'when raw is valid' do
       it 'returns true' do
-        raw = PasswordResetToken.issue(user)
+        raw = described_class.issue(user)
         expect(user.password_reset_token).to eq(raw)
       end
     end
 
     context 'when raw is invalid' do
       it 'returns false' do
-        PasswordResetToken.issue(user)
+        described_class.issue(user)
         expect(user.password_reset_token == 'invalid').to eq(false)
       end
     end

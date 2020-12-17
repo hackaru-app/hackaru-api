@@ -13,12 +13,13 @@ RSpec.describe 'V1::Suggestions', type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     context 'when params are invalid' do
       let(:params) { { q: 'query', limit: 'invalid' } }
-      it { expect(response).to have_http_status(422) }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 end

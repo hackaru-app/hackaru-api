@@ -23,7 +23,7 @@ module V1
           params[:id],
           current_user
         )
-        render status: 204
+        render status: :no_content
       end
     end
   end

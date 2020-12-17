@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ReportMailerJob, type: :job do
   describe '#perform' do
-    subject do
+    subject(:mails) do
       ActionMailer::Base.deliveries
     end
 
@@ -13,7 +13,7 @@ RSpec.describe ReportMailerJob, type: :job do
     end
 
     around do |e|
-      travel_to('2017-01-08 00:00:00'.to_time) { e.run }
+      travel_to('2017-01-08 00:00:00') { e.run }
     end
 
     context 'when period is week' do
@@ -30,17 +30,20 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 1),
-          stopped_at: Time.new(2017, 1, 2)
+          started_at: Time.zone.local(2017, 1, 1),
+          stopped_at: Time.zone.local(2017, 1, 2)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
-      it 'send mail to user' do
-        expect(subject.size).to eq(1)
-        expect(subject.last.to.first).to eq(user.email)
+      it 'sends mail once' do
+        expect(mails.size).to eq(1)
+      end
+
+      it 'sends mail to user' do
+        expect(mails.last.to.first).to eq(user.email)
       end
     end
 
@@ -58,22 +61,22 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2016, 12, 31, 23, 59, 59),
-          stopped_at: Time.new(2016, 12, 31, 23, 59, 59)
+          started_at: Time.zone.local(2016, 12, 31, 23, 59, 59),
+          stopped_at: Time.zone.local(2016, 12, 31, 23, 59, 59)
         )
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 8),
-          stopped_at: Time.new(2017, 1, 8)
+          started_at: Time.zone.local(2017, 1, 8),
+          stopped_at: Time.zone.local(2017, 1, 8)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -91,22 +94,22 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2016, 11, 29),
-          stopped_at: Time.new(2016, 11, 29)
+          started_at: Time.zone.local(2016, 11, 29),
+          stopped_at: Time.zone.local(2016, 11, 29)
         )
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 1),
-          stopped_at: Time.new(2017, 1, 1)
+          started_at: Time.zone.local(2017, 1, 1),
+          stopped_at: Time.zone.local(2017, 1, 1)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -124,16 +127,16 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 1),
-          stopped_at: Time.new(2017, 1, 1)
+          started_at: Time.zone.local(2017, 1, 1),
+          stopped_at: Time.zone.local(2017, 1, 1)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -151,17 +154,20 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2016, 12, 1),
-          stopped_at: Time.new(2016, 12, 1)
+          started_at: Time.zone.local(2016, 12, 1),
+          stopped_at: Time.zone.local(2016, 12, 1)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
-      it 'send mail to user' do
-        expect(subject.size).to eq(1)
-        expect(subject.last.to.first).to eq(user.email)
+      it 'sends mail once' do
+        expect(mails.size).to eq(1)
+      end
+
+      it 'sends mail to user' do
+        expect(mails.last.to.first).to eq(user.email)
       end
     end
 
@@ -180,24 +186,27 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: users[0],
-          started_at: Time.new(2017, 1, 1),
-          stopped_at: Time.new(2017, 1, 1)
+          started_at: Time.zone.local(2017, 1, 1),
+          stopped_at: Time.zone.local(2017, 1, 1)
         )
         create(
           :activity,
           user: users[1],
-          started_at: Time.new(2017, 1, 1),
-          stopped_at: Time.new(2017, 1, 1)
+          started_at: Time.zone.local(2017, 1, 1),
+          stopped_at: Time.zone.local(2017, 1, 1)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
-      it 'send mails to users' do
-        expect(subject.size).to eq(2)
-        expect(subject[0].to.first).to eq(users[0].email)
-        expect(subject[1].to.first).to eq(users[1].email)
+      it 'sends mails twice' do
+        expect(mails.size).to eq(2)
+      end
+
+      it 'sends mails to users' do
+        emails = mails.map { _1.to.first }
+        expect(emails).to eq([users[0].email, users[1].email])
       end
     end
 
@@ -213,12 +222,12 @@ RSpec.describe ReportMailerJob, type: :job do
 
       before do
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -237,16 +246,16 @@ RSpec.describe ReportMailerJob, type: :job do
           :activity,
           project: nil,
           user: user,
-          started_at: Time.new(2017, 1, 1, 15),
-          stopped_at: Time.new(2017, 1, 1, 15)
+          started_at: Time.zone.local(2017, 1, 1, 15),
+          stopped_at: Time.zone.local(2017, 1, 1, 15)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -264,16 +273,16 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 1),
+          started_at: Time.zone.local(2017, 1, 1),
           stopped_at: nil
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
       it 'does not send mail to user' do
-        expect(subject.size).to be_zero
+        expect(mails.size).to be_zero
       end
     end
 
@@ -291,17 +300,20 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 1, 15),
-          stopped_at: Time.new(2017, 1, 1, 15)
+          started_at: Time.zone.local(2017, 1, 1, 15),
+          stopped_at: Time.zone.local(2017, 1, 1, 15)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
-      it 'send mail to user' do
-        expect(subject.size).to eq(1)
-        expect(subject.last.to.first).to eq(user.email)
+      it 'sends mail once' do
+        expect(mails.size).to eq(1)
+      end
+
+      it 'sends mail to user' do
+        expect(mails.last.to.first).to eq(user.email)
       end
     end
 
@@ -325,17 +337,20 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :activity,
           user: user,
-          started_at: Time.new(2017, 1, 8, 15),
-          stopped_at: Time.new(2017, 1, 9, 15)
+          started_at: Time.zone.local(2017, 1, 8, 15),
+          stopped_at: Time.zone.local(2017, 1, 9, 15)
         )
         perform_enqueued_jobs do
-          ReportMailerJob.new.perform(*args)
+          described_class.new.perform(*args)
         end
       end
 
-      it 'send mail to user' do
-        expect(subject.size).to eq(1)
-        expect(subject.last.to.first).to eq(user.email)
+      it 'sends mail once' do
+        expect(mails.size).to eq(1)
+      end
+
+      it 'sends mail to user' do
+        expect(mails.last.to.first).to eq(user.email)
       end
     end
   end

@@ -7,7 +7,7 @@ module Authenticatable
 
   def authenticate_doorkeeper!(*scopes)
     doorkeeper_authorize!(*scopes)
-    return unless doorkeeper_token.present?
+    return if doorkeeper_token.blank?
 
     @current_user = User.find(doorkeeper_token[:resource_owner_id])
     Raven.user_context(id: @current_user.id)

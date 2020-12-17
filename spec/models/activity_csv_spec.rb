@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.describe ActivityCsv, type: :model do
   describe '#generate_bom' do
-    let(:time_zone) { 'UTC' }
-
-    subject do
+    subject(:csv) do
       described_class.new(activities, time_zone).generate_bom
     end
+
+    let(:time_zone) { 'UTC' }
 
     context 'when activities is present' do
       let(:project) do
@@ -21,14 +21,14 @@ RSpec.describe ActivityCsv, type: :model do
           1,
           user: project.user,
           project: project,
-          started_at: Time.new(2020, 1, 1),
-          stopped_at: Time.new(2020, 1, 2),
+          started_at: Time.zone.local(2020, 1, 1),
+          stopped_at: Time.zone.local(2020, 1, 2),
           description: 'Description'
         )
       end
 
-      it 'generates headers' do
-        expect(subject.split("\n")[0]).to eq [
+      let(:expected_headers) do
+        [
           "\uFEFF\"Id\"",
           '"ProjectId"',
           '"ProjectName"',
@@ -39,8 +39,8 @@ RSpec.describe ActivityCsv, type: :model do
         ].join(',')
       end
 
-      it 'generates value' do
-        expect(subject.split("\n")[1]).to eq [
+      let(:expected_values) do
+        [
           "\"#{activities[0].id}\"",
           "\"#{project.id}\"",
           '"Project"',
@@ -49,6 +49,14 @@ RSpec.describe ActivityCsv, type: :model do
           '"2020-01-02 00:00:00"',
           '"86400"'
         ].join(',')
+      end
+
+      it 'generates headers' do
+        expect(csv.split("\n")[0]).to eq(expected_headers)
+      end
+
+      it 'generates values' do
+        expect(csv.split("\n")[1]).to eq(expected_values)
       end
     end
 
@@ -60,14 +68,14 @@ RSpec.describe ActivityCsv, type: :model do
           :activity,
           1,
           project: nil,
-          started_at: Time.new(2020, 1, 1),
-          stopped_at: Time.new(2020, 1, 2),
+          started_at: Time.zone.local(2020, 1, 1),
+          stopped_at: Time.zone.local(2020, 1, 2),
           description: 'Description'
         )
       end
 
-      it 'generates value' do
-        expect(subject.split("\n")[1]).to eq [
+      let(:expected_values) do
+        [
           "\"#{activities[0].id}\"",
           '""',
           '""',
@@ -77,6 +85,10 @@ RSpec.describe ActivityCsv, type: :model do
           '"86400"'
         ].join(',')
       end
+
+      it 'generates values' do
+        expect(csv.split("\n")[1]).to eq(expected_values)
+      end
     end
 
     context 'when activity does not have project' do
@@ -85,14 +97,14 @@ RSpec.describe ActivityCsv, type: :model do
           :activity,
           1,
           project: nil,
-          started_at: Time.new(2020, 1, 1),
-          stopped_at: Time.new(2020, 1, 2),
+          started_at: Time.zone.local(2020, 1, 1),
+          stopped_at: Time.zone.local(2020, 1, 2),
           description: 'Description'
         )
       end
 
-      it 'generates value' do
-        expect(subject.split("\n")[1]).to eq [
+      let(:expected_values) do
+        [
           "\"#{activities[0].id}\"",
           '""',
           '""',
@@ -102,6 +114,10 @@ RSpec.describe ActivityCsv, type: :model do
           '"86400"'
         ].join(',')
       end
+
+      it 'generates values' do
+        expect(csv.split("\n")[1]).to eq(expected_values)
+      end
     end
 
     context 'when activity does not have description' do
@@ -110,14 +126,14 @@ RSpec.describe ActivityCsv, type: :model do
           :activity,
           1,
           project: nil,
-          started_at: Time.new(2020, 1, 1),
-          stopped_at: Time.new(2020, 1, 2),
+          started_at: Time.zone.local(2020, 1, 1),
+          stopped_at: Time.zone.local(2020, 1, 2),
           description: ''
         )
       end
 
-      it 'generates value' do
-        expect(subject.split("\n")[1]).to eq [
+      let(:expected_values) do
+        [
           "\"#{activities[0].id}\"",
           '""',
           '""',
@@ -126,6 +142,10 @@ RSpec.describe ActivityCsv, type: :model do
           '"2020-01-02 00:00:00"',
           '"86400"'
         ].join(',')
+      end
+
+      it 'generates values' do
+        expect(csv.split("\n")[1]).to eq(expected_values)
       end
     end
 
@@ -136,13 +156,13 @@ RSpec.describe ActivityCsv, type: :model do
           1,
           project: nil,
           description: '',
-          started_at: Time.new(2020, 1, 1),
+          started_at: Time.zone.local(2020, 1, 1),
           stopped_at: nil
         )
       end
 
-      it 'generates value' do
-        expect(subject.split("\n")[1]).to eq [
+      let(:expected_values) do
+        [
           "\"#{activities[0].id}\"",
           '""',
           '""',
@@ -152,13 +172,17 @@ RSpec.describe ActivityCsv, type: :model do
           '""'
         ].join(',')
       end
+
+      it 'generates values' do
+        expect(csv.split("\n")[1]).to eq(expected_values)
+      end
     end
 
     context 'when activities is empty' do
       let(:activities) { [] }
 
-      it 'generates headers' do
-        expect(subject.split("\n")[0]).to eq [
+      let(:expected_headers) do
+        [
           "\uFEFF\"Id\"",
           '"ProjectId"',
           '"ProjectName"',
@@ -169,8 +193,12 @@ RSpec.describe ActivityCsv, type: :model do
         ].join(',')
       end
 
-      it 'generates header only' do
-        expect(subject.split("\n").size).to eq(1)
+      it 'generates headers' do
+        expect(csv.split("\n")[0]).to eq(expected_headers)
+      end
+
+      it 'does not generates values' do
+        expect(csv.split("\n").size).to eq(1)
       end
     end
   end

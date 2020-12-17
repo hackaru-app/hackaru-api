@@ -7,23 +7,9 @@ class ReportSerializer < ActiveModel::Serializer
   attributes :sums
   has_many :activity_groups
 
-  def projects
-    object.projects
-  end
-
-  def totals
-    object.totals
-  end
-
-  def labels
-    object.labels
-  end
-
-  def sums
-    object.sums
-  end
-
-  def activity_groups
-    object.activity_groups
-  end
+  delegate :projects, to: :object
+  delegate :totals, to: :object
+  delegate :labels, to: :object
+  delegate :sums, to: :object
+  delegate :activity_groups, to: :object
 end

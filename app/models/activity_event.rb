@@ -27,6 +27,6 @@ class ActivityEvent
 
   def summary
     description = @activity.description
-    description.present? ? description : project_name
+    description.presence || project_name
   end
 end

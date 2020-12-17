@@ -4,18 +4,20 @@ require 'rails_helper'
 
 RSpec.describe ExceptionRenderer, type: :model do
   describe '#initialize' do
-    subject { ExceptionRenderer.new(exception) }
+    subject(:instance) { described_class.new(exception) }
 
     context 'when occurred routing exception' do
       let(:exception) { ActionController::RoutingError.new 'error' }
-      it { expect(subject.message).not_to be_nil }
-      it { expect(subject.status).to eq 404 }
+
+      it { expect(instance.message).not_to be_nil }
+      it { expect(instance.status).to eq 404 }
     end
 
     context 'when occurred custom exception' do
       let(:exception) { StandardError.new }
-      it { expect(subject.message).not_to be_nil }
-      it { expect(subject.status).to eq 500 }
+
+      it { expect(instance.message).not_to be_nil }
+      it { expect(instance.status).to eq 500 }
     end
 
     context 'when occurred validate exception' do
@@ -38,10 +40,13 @@ RSpec.describe ExceptionRenderer, type: :model do
         ActiveRecord::RecordInvalid.new(record)
       end
 
-      it 'returns first message' do
+      it 'returns instance with first message' do
         first = exception.record.errors.full_messages.first
-        expect(subject.message).to eq first
-        expect(subject.status).to eq 422
+        expect(instance.message).to eq first
+      end
+
+      it 'returns instance with status' do
+        expect(instance.status).to eq 422
       end
     end
   end

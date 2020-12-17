@@ -19,21 +19,23 @@ RSpec.describe 'V1::Auth::RefreshTokens', type: :request do
     end
 
     context 'when params are valid' do
-      it { expect(response).to have_http_status(200) }
-      it { expect(response.headers['X-Client-Id']).to_not be_nil }
-      it { expect(response.headers['X-Refresh-Token']).to_not be_nil }
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(response.headers['X-Client-Id']).not_to be_nil }
+      it { expect(response.headers['X-Refresh-Token']).not_to be_nil }
     end
 
     context 'when email is not registration' do
       let(:email) { 'invalid' }
-      it { expect(response).to have_http_status(401) }
+
+      it { expect(response).to have_http_status(:unauthorized) }
       it { expect(response.headers['X-Client-Id']).to be_nil }
       it { expect(response.headers['X-Refresh-Token']).to be_nil }
     end
 
     context 'when password is invalid' do
       let(:password) { 'invalid' }
-      it { expect(response).to have_http_status(401) }
+
+      it { expect(response).to have_http_status(:unauthorized) }
       it { expect(response.headers['X-Client-Id']).to be_nil }
       it { expect(response.headers['X-Refresh-Token']).to be_nil }
     end
@@ -48,17 +50,19 @@ RSpec.describe 'V1::Auth::RefreshTokens', type: :request do
     end
 
     context 'when refresh token and client id are valid' do
-      it { expect(response).to have_http_status(204) }
+      it { expect(response).to have_http_status(:no_content) }
     end
 
     context 'when client id is invalid' do
       let(:headers) { refresh_token_header.merge('X-Client-Id': 'invalid') }
-      it { expect(response).to have_http_status(204) }
+
+      it { expect(response).to have_http_status(:no_content) }
     end
 
     context 'when refresh token is invalid' do
       let(:headers) { refresh_token_header.merge('X-Refresh-Token': 'invalid') }
-      it { expect(response).to have_http_status(204) }
+
+      it { expect(response).to have_http_status(:no_content) }
     end
   end
 end

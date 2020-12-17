@@ -16,7 +16,7 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it 'has web_url' do
