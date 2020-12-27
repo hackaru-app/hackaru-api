@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module V1
-  class ReportsController < HtmlApplicationController
+  class ReportsController < ApplicationController
     include PdfRenderable
     include ActionController::MimeResponds
-
     before_action :authenticate_user!
 
     def show
