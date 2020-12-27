@@ -4,6 +4,8 @@ services:
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpack
     env_file: .env.development
+    stdin_open: true
+    tty: true
     volumes:
       - .:/hackaru:cached
       - ./tmp/app:/hackaru/tmp:cached
