@@ -9,7 +9,6 @@ jobs:
         - bundle exec rubocop
         - bundle exec brakeman
         - bundle exec slim-lint app/views
-        - docker run -v $(pwd):/src -w /src nickg/misspell /bin/sh -c 'git ls-files | xargs misspell -error'
 
     - stage: test
       language: minimal
