@@ -9,6 +9,7 @@ jobs:
         - bundle exec rubocop
         - bundle exec brakeman
         - bundle exec slim-lint app/views
+        - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
         - docker run -v $(pwd):/src -w /src nickg/misspell /bin/sh -c 'git ls-files | xargs misspell -error'
 
     - stage: test
@@ -22,6 +23,7 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script:
+        - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
         - docker-compose run --rm sut
       after_script:
         - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
