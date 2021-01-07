@@ -30,7 +30,7 @@ module V1
       private
 
       def validate_current_password!
-        current_password = params[:user][:current_password]
+        current_password = params.dig(:user, :current_password)
         valid = current_user.authenticate(current_password)
         render_error_by_key :current_password_invalid unless valid
       end

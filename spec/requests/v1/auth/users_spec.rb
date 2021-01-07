@@ -49,19 +49,19 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     before do
       put '/v1/auth/user',
           headers: headers,
-          params: {
-            user: {
-              email: email,
-              password: password,
-              current_password: current_password
-            }
-          }
+          params: params
     end
 
     context 'when params have email and password' do
-      let(:email) { 'changed@example.com' }
-      let(:password) { 'changed' }
-      let(:current_password) { 'password' }
+      let(:params) do
+        {
+          user: {
+            email: 'changed@example.com',
+            password: 'changed',
+            current_password: 'password'
+          }
+        }
+      end
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(user.reload.email).to eq('changed@example.com') }
@@ -69,28 +69,54 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     end
 
     context 'when params have email only' do
-      let(:email) { 'changed@example.com' }
-      let(:password) { '' }
-      let(:current_password) { 'password' }
+      let(:params) do
+        {
+          user: {
+            email: 'changed@example.com',
+            password: '',
+            current_password: 'password'
+          }
+        }
+      end
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(user.reload.email).to eq('changed@example.com') }
     end
 
     context 'when access tokens is invalid' do
-      let(:email) { 'changed@example.com' }
-      let(:password) { 'changed' }
-      let(:current_password) { 'password' }
       let(:headers) { { 'X-Access-Token': 'invalid' } }
+
+      let(:params) do
+        {
+          user: {
+            email: 'changed@example.com',
+            password: 'changed',
+            current_password: 'password'
+          }
+        }
+      end
 
       it { expect(response).to have_http_status(:unauthorized) }
       it { expect(user.reload.email).not_to eq('changed@example.com') }
     end
 
     context 'when current password is invalid' do
-      let(:email) { 'changed@example.com' }
-      let(:password) { 'changed' }
-      let(:current_password) { 'invalid' }
+      let(:params) do
+        {
+          user: {
+            email: 'changed@example.com',
+            password: 'changed',
+            current_password: 'invalid'
+          }
+        }
+      end
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+      it { expect(user.reload.email).not_to eq('changed@example.com') }
+    end
+
+    context 'when params are empty' do
+      let(:params) { nil }
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
       it { expect(user.reload.email).not_to eq('changed@example.com') }
