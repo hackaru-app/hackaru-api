@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Reports', type: :request do
   describe 'GET /v1/report' do
+    let(:user) { create(:user) }
+
     let(:time_zone) { 'Asia/Tokyo' }
     let(:period) { 'day' }
     let(:params) do
@@ -15,9 +17,11 @@ RSpec.describe 'V1::Reports', type: :request do
     end
 
     before do
+      create_list(:activity, 3, user: user)
+
       get "/v1/report#{extension}",
           params: params,
-          headers: access_token_header
+          headers: access_token_header(user)
     end
 
     context 'when extension is empty' do
