@@ -4,6 +4,10 @@ module V1
   class ReportsController < ApplicationController
     include PdfRenderable
     include ActionController::MimeResponds
+    include ActionController::Helpers
+
+    helper :duration
+
     before_action :authenticate_user!
 
     def show
