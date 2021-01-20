@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       resource :user, only: %i[update destroy]
       resources :refresh_tokens, only: :create
       resource :refresh_token, only: :destroy
+      resources :auth_tokens, only: :create
+      resource :auth_token, only: :destroy
       resources :access_tokens, only: :create
       resource :password_reset, only: [:update] do
         post :mails

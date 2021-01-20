@@ -8,10 +8,17 @@ module V1
         return render_error_by_key :refresh_token_invalid unless user
 
         response.set_header('X-Access-Token', AccessToken.new(user: user).issue)
+        store_auth_token_if_needed(user)
         render json: user
       end
 
       private
+
+      def store_auth_token_if_needed(user)
+        return if cookies.signed[:auth_token_id] && cookies.signed[:auth_token_raw]
+
+        store_auth_token(*AuthToken.issue!(user))
+      end
 
       def client_id
         request.headers['X-Client-Id']

@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:projects).dependent(:delete_all) }
     it { is_expected.to have_many(:activities).dependent(:delete_all) }
     it { is_expected.to have_many(:refresh_tokens).dependent(:delete_all) }
+    it { is_expected.to have_many(:auth_tokens).dependent(:delete_all) }
   end
 
   describe 'validations' do

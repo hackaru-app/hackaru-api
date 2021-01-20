@@ -2,7 +2,7 @@ ja:
   error_renderer:
     sign_in_failed:
       message: 'メールアドレスまたはパスワードが間違っています。'
-      status: 401
+      status: 400
     access_token_invalid:
       message: '認証に失敗しました。再度ログインし直してください。'
       status: 401
@@ -14,10 +14,10 @@ ja:
       status: 422
     password_reset_token_invalid:
       message: 'リクエストが不正または有効期限が切れています。メールの送信から再試行してください。'
-      status: 401
+      status: 400
     activity_calendar_token_invalid:
       message: 'URLが不正または有効期限が切れています。URLを再発行してください。'
-      status: 401
+      status: 400
     email_not_found:
       message: 'そのメールアドレスは登録されていません。'
       status: 404

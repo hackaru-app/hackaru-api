@@ -21,6 +21,7 @@ class User < ApplicationRecord
     has_many :projects
     has_many :activities
     has_many :refresh_tokens
+    has_many :auth_tokens
   end
 
   def reset_password(token:, password:, password_confirmation:)

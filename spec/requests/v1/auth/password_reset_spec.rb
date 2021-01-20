@@ -57,7 +57,7 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
     context 'when token is invalid' do
       let(:token) { 'invalid' }
 
-      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response).to have_http_status(:bad_request) }
       it { expect(user.reload.authenticate('changed')).to be_falsy }
     end
   end

@@ -45,5 +45,8 @@ module HackaruApi
     ]
 
     config.action_dispatch.default_headers['Referrer-Policy'] = 'no-referrer'
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
