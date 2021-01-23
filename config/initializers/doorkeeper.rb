@@ -9,7 +9,12 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    user = AccessToken.verify(request.headers['X-Access-Token'])
+    user = if request.headers['X-Access-Token']
+             AccessToken.verify(request.headers['X-Access-Token'])
+           elsif request.xhr? && valid_origin?
+             restore_auth_token&.user
+           end
+
     unless user
       renderer = ErrorRenderer.new(:access_token_invalid)
       render json: { message: renderer.message }, status: renderer.status
@@ -73,7 +78,7 @@ Doorkeeper.configure do
   # Defaults to ActionController::Base.
   # See https://github.com/doorkeeper-gem/doorkeeper#custom-base-controller
   #
-  # base_controller 'ApplicationController'
+  base_controller 'ApplicationController'
 
   # Reuse access token for the same resource owner within an application (disabled by default).
   #

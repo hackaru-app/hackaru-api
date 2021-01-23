@@ -11,7 +11,7 @@ RSpec.describe ErrorRenderer, type: :model do
     end
 
     it 'has status correctly' do
-      expect(instance.status).to eq 401
+      expect(instance.status).to eq 400
     end
   end
 end

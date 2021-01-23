@@ -14,6 +14,7 @@ module V1
       def create
         user = UserInitializer.new(user_params).create!
         sign_refresh_token(*RefreshToken.issue(user))
+        store_auth_token(*AuthToken.issue!(user))
         UserMailer.sign_up(user).deliver_later
         render json: user
       end
@@ -24,7 +25,9 @@ module V1
       end
 
       def destroy
-        render json: current_user.destroy!
+        user = current_user.destroy!
+        revoke_auth_token
+        render json: user
       end
 
       private

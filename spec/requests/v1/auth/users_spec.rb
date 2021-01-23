@@ -40,6 +40,14 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       user = User.find_by(email: 'foo@example.com')
       expect(user.projects.size).to eq(3)
     end
+
+    it 'issues auth_token_id' do
+      expect(response.cookies['auth_token_id']).not_to be_nil
+    end
+
+    it 'issues auth_token_raw' do
+      expect(response.cookies['auth_token_raw']).not_to be_nil
+    end
   end
 
   describe 'PUT /v1/auth/user' do
@@ -128,6 +136,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     let(:headers) { access_token_header(user) }
 
     before do
+      login(user)
       delete '/v1/auth/user',
              headers: headers,
              params: {
@@ -142,6 +151,10 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(User).not_to exist(id: user.id) }
+      it { expect(response.cookies).to include('auth_token_id') }
+      it { expect(response.cookies).to include('auth_token_raw') }
+      it { expect(response.cookies['auth_token_id']).to be_nil }
+      it { expect(response.cookies['auth_token_raw']).to be_nil }
     end
 
     context 'when access tokens is invalid' do
@@ -150,6 +163,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
       it { expect(response).to have_http_status(:unauthorized) }
       it { expect(User).to exist(id: user.id) }
+      it { expect(response.cookies).not_to include('auth_token_id') }
+      it { expect(response.cookies).not_to include('auth_token_raw') }
     end
 
     context 'when current_password is invalid' do
@@ -157,6 +172,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
       it { expect(User).to exist(id: user.id) }
+      it { expect(response.cookies).not_to include('auth_token_id') }
+      it { expect(response.cookies).not_to include('auth_token_raw') }
     end
   end
 end

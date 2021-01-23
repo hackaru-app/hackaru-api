@@ -33,14 +33,14 @@ RSpec.describe 'V1::ActivityCalendar', type: :request do
       let(:token) { activity_calendar.token }
       let(:user_id) { 0 }
 
-      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response).to have_http_status(:bad_request) }
     end
 
     context 'when token is invalid' do
       let(:token) { 'invalid' }
       let(:user_id) { activity_calendar.user.id }
 
-      it { expect(response).to have_http_status(:unauthorized) }
+      it { expect(response).to have_http_status(:bad_request) }
     end
   end
 

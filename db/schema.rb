@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_171321) do
+ActiveRecord::Schema.define(version: 2021_01_03_131555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2020_02_07_171321) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["token"], name: "index_activity_calendars_on_token", unique: true
     t.index ["user_id"], name: "index_activity_calendars_on_user_id", unique: true
+  end
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "token", null: false
+    t.datetime "expired_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_auth_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_auth_tokens_on_user_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
