@@ -37,6 +37,9 @@ module HackaruApi
     # Disable request forgery protection
     config.action_controller.allow_forgery_protection = false
 
+    # To prevent cors errors when exporting pdf
+    config.action_view.preload_links_header = false
+
     config.action_mailer.preview_path = Rails.root.join('spec/mailers/previews')
 
     config.i18n.available_locales = %i[ja en]

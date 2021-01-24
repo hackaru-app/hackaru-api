@@ -36,6 +36,7 @@ RSpec.describe 'V1::Reports', type: :request do
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('text/html') }
+      it { expect(response.header).not_to include('Link') }
     end
 
     context 'when extension is pdf' do
@@ -43,6 +44,7 @@ RSpec.describe 'V1::Reports', type: :request do
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('application/pdf') }
+      it { expect(response.header).not_to include('Link') }
     end
 
     context 'when extension is csv' do
