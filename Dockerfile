@@ -37,6 +37,7 @@ RUN apk -U upgrade \
     harfbuzz \
     ca-certificates \
     yarn \
+    less \
  && addgroup hackaru \
  && adduser -s /bin/sh -D -G hackaru hackaru \
  && chown hackaru:hackaru $API_DIR
