@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 module RavenExtraContext
-  extend ActiveSupport::Concern
-
-  included do
-    before_action :set_raven_extra_context
-  end
-
   private
 
   def set_raven_extra_context

@@ -6,6 +6,7 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
   describe 'POST /v1/oauth/applications' do
     before do
       post '/v1/oauth/applications',
+           headers: xhr_header,
            params: {
              application: {
                name: 'ExampleApp',

@@ -5,8 +5,9 @@ require 'rails_helper'
 RSpec.describe 'V1::Projects', type: :request do
   describe 'GET /v1/projects' do
     before do
+      login
       get '/v1/projects',
-          headers: access_token_header
+          headers: xhr_header
     end
 
     it 'returns http success' do
@@ -27,8 +28,9 @@ RSpec.describe 'V1::Projects', type: :request do
     end
 
     before do
+      login(user)
       post '/v1/projects',
-           headers: access_token_header(user),
+           headers: xhr_header,
            params: params
     end
 
@@ -64,8 +66,9 @@ RSpec.describe 'V1::Projects', type: :request do
     end
 
     before do
+      login(project.user)
       put "/v1/projects/#{id}",
-          headers: access_token_header(project.user),
+          headers: xhr_header,
           params: params
     end
 
@@ -97,8 +100,9 @@ RSpec.describe 'V1::Projects', type: :request do
     let(:project) { create(:project) }
 
     before do
+      login(project.user)
       delete "/v1/projects/#{id}",
-             headers: access_token_header(project.user)
+             headers: xhr_header
     end
 
     context 'when project exists' do

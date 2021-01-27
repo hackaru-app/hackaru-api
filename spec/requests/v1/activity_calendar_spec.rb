@@ -48,8 +48,9 @@ RSpec.describe 'V1::ActivityCalendar', type: :request do
     let(:user) { create(:user) }
 
     before do
+      login(user)
       put '/v1/activity_calendar',
-          headers: access_token_header(user)
+          headers: xhr_header
     end
 
     context 'when params are correctly' do
@@ -71,8 +72,9 @@ RSpec.describe 'V1::ActivityCalendar', type: :request do
     let(:user) { activity_calendar.user }
 
     before do
+      login(user)
       delete '/v1/activity_calendar',
-             headers: access_token_header(user)
+             headers: xhr_header
     end
 
     context 'when user has activity_calendar' do

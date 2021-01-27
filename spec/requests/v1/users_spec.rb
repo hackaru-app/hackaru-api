@@ -7,8 +7,8 @@ RSpec.describe 'V1::Users', type: :request do
     let(:user) { create(:user) }
 
     before do
-      get '/v1/user',
-          headers: access_token_header(user)
+      login(user)
+      get '/v1/user', headers: xhr_header
     end
 
     it 'returns http success' do
@@ -29,9 +29,8 @@ RSpec.describe 'V1::Users', type: :request do
     end
 
     before do
-      put '/v1/user',
-          headers: access_token_header(user),
-          params: params
+      login(user)
+      put '/v1/user', headers: xhr_header, params: params
     end
 
     context 'when params are correctly' do

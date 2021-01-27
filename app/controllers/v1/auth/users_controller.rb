@@ -13,7 +13,6 @@ module V1
 
       def create
         user = UserInitializer.new(user_params).create!
-        sign_refresh_token(*RefreshToken.issue(user))
         store_auth_token(*AuthToken.issue!(user))
         UserMailer.sign_up(user).deliver_later
         render json: user
@@ -25,9 +24,8 @@ module V1
       end
 
       def destroy
-        user = current_user.destroy!
         revoke_auth_token
-        render json: user
+        render json: current_user.destroy!
       end
 
       private
@@ -35,12 +33,7 @@ module V1
       def validate_current_password!
         current_password = params.dig(:user, :current_password)
         valid = current_user.authenticate(current_password)
-        render_error_by_key :current_password_invalid unless valid
-      end
-
-      def sign_refresh_token(refresh_token, raw)
-        response.set_header('X-Client-Id', refresh_token.client_id)
-        response.set_header('X-Refresh-Token', raw)
+        render_api_error_of :current_password_invalid unless valid
       end
 
       def user_params

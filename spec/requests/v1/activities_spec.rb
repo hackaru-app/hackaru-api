@@ -12,8 +12,9 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     before do
+      login
       get '/v1/activities',
-          headers: access_token_header,
+          headers: xhr_header,
           params: params
     end
 
@@ -98,8 +99,9 @@ RSpec.describe 'V1::Activities', type: :request do
 
   describe 'GET /v1/activities/working' do
     before do
+      login
       get '/v1/activities/working',
-          headers: access_token_header
+          headers: xhr_header
     end
 
     it 'returns http success' do
@@ -120,8 +122,9 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     before do
+      login(user)
       post '/v1/activities',
-           headers: access_token_header(user),
+           headers: xhr_header,
            params: params
     end
 
@@ -158,8 +161,9 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     before do
+      login(activity.user)
       put "/v1/activities/#{id}",
-          headers: access_token_header(activity.user),
+          headers: xhr_header,
           params: params
     end
 
@@ -191,8 +195,9 @@ RSpec.describe 'V1::Activities', type: :request do
     let(:activity) { create(:activity) }
 
     before do
+      login(activity.user)
       delete "/v1/activities/#{id}",
-             headers: access_token_header(activity.user)
+             headers: xhr_header
     end
 
     context 'when activity exists' do

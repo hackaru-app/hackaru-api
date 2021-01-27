@@ -19,9 +19,10 @@ RSpec.describe 'V1::Reports', type: :request do
     before do
       create_list(:activity, 3, user: user)
 
+      login(user)
       get "/v1/report#{extension}",
           params: params,
-          headers: access_token_header(user)
+          headers: xhr_header
     end
 
     context 'when extension is empty' do

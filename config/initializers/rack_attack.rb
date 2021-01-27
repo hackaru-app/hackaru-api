@@ -20,7 +20,7 @@ module Rack
 
     throttle('/v1', limit: 300, period: 5.minutes) do |req|
       if req.path.start_with?('/v1')
-        req.get_header('HTTP_X_ACCESS_TOKEN') ||
+        req.cookies['auth_token_id'] ||
           req.get_header('HTTP_AUTHORIZATION') ||
           req.ip
       end

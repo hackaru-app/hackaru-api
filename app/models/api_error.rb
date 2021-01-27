@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ErrorRenderer
+class ApiError
   attr_reader :message, :status
 
   def initialize(key)

@@ -9,6 +9,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     before do
       perform_enqueued_jobs do
         post '/v1/auth/users',
+             headers: xhr_header,
              params: {
                user: {
                  email: email,
@@ -52,11 +53,12 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
   describe 'PUT /v1/auth/user' do
     let(:user) { create(:user, password: 'password') }
-    let(:headers) { access_token_header(user) }
+    let(:current_user) { user }
 
     before do
+      login(current_user)
       put '/v1/auth/user',
-          headers: headers,
+          headers: xhr_header,
           params: params
     end
 
@@ -91,8 +93,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       it { expect(user.reload.email).to eq('changed@example.com') }
     end
 
-    context 'when access tokens is invalid' do
-      let(:headers) { { 'X-Access-Token': 'invalid' } }
+    context 'when user is not logged in' do
+      let(:current_user) { nil }
 
       let(:params) do
         {
@@ -133,12 +135,13 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
   describe 'DELETE /v1/auth/user' do
     let(:user) { create(:user, password: 'password') }
-    let(:headers) { access_token_header(user) }
+    let(:current_user) { user }
+    let(:current_password) { 'password' }
 
     before do
-      login(user)
+      login(current_user)
       delete '/v1/auth/user',
-             headers: headers,
+             headers: xhr_header,
              params: {
                user: {
                  current_password: current_password
@@ -147,8 +150,6 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     end
 
     context 'when current_password is valid' do
-      let(:current_password) { 'password' }
-
       it { expect(response).to have_http_status(:ok) }
       it { expect(User).not_to exist(id: user.id) }
       it { expect(response.cookies).to include('auth_token_id') }
@@ -157,9 +158,8 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       it { expect(response.cookies['auth_token_raw']).to be_nil }
     end
 
-    context 'when access tokens is invalid' do
-      let(:current_password) { 'password' }
-      let(:headers) { { 'X-Access-Token': 'invalid' } }
+    context 'when user is not logged in' do
+      let(:current_user) { nil }
 
       it { expect(response).to have_http_status(:unauthorized) }
       it { expect(User).to exist(id: user.id) }

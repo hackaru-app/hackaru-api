@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ErrorRenderer, type: :model do
+RSpec.describe ApiError, type: :model do
   describe '#initialize' do
     subject(:instance) { described_class.new(:sign_in_failed) }
 

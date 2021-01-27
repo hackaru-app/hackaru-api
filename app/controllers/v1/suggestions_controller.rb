@@ -3,7 +3,7 @@
 module V1
   class SuggestionsController < ApplicationController
     before_action only: %i[index] do
-      authenticate_user_or_doorkeeper! 'suggestions:read'
+      authenticate_user! 'suggestions:read'
     end
 
     def index

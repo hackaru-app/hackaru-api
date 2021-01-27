@@ -3,11 +3,11 @@
 module V1
   class ProjectsController < ApplicationController
     before_action only: :index do
-      authenticate_user_or_doorkeeper! 'projects:read'
+      authenticate_user! 'projects:read'
     end
 
     before_action only: %i[create update destroy] do
-      authenticate_user_or_doorkeeper! 'projects:write'
+      authenticate_user! 'projects:write'
     end
 
     def index

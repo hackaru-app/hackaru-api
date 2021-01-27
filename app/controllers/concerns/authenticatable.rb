@@ -5,6 +5,14 @@ module Authenticatable
 
   private
 
+  def authenticate_user!(*scopes)
+    if scopes.present? && request.headers['Authorization']
+      authenticate_doorkeeper!(*scopes)
+    else
+      authenticate_auth_token!
+    end
+  end
+
   def authenticate_doorkeeper!(*scopes)
     doorkeeper_authorize!(*scopes)
     return if doorkeeper_token.blank?
@@ -13,35 +21,10 @@ module Authenticatable
     Raven.user_context(id: @current_user.id)
   end
 
-  def authenticate_user!
-    if request.headers['X-Access-Token']
-      authenticate_user_from_access_token
-    else
-      authenticate_user_from_auth_token
-    end
-  end
+  def authenticate_auth_token!
+    @current_user = restore_auth_token&.user
+    return render_api_error_of :authenticate_failed unless @current_user
 
-  def authenticate_user_from_access_token
-    @current_user = AccessToken.verify(request.headers['X-Access-Token'])
-    render_error_by_key :access_token_invalid unless @current_user
-    Raven.user_context(id: @current_user&.id)
-  end
-
-  def authenticate_user_from_auth_token
-    return render_error_by_key :access_token_invalid unless request.xhr? && valid_origin?
-
-    auth_token = restore_auth_token
-    return render_error_by_key :access_token_invalid if auth_token.blank?
-
-    @current_user = auth_token.user
     Raven.user_context(id: @current_user.id)
-  end
-
-  def authenticate_user_or_doorkeeper!(*scopes)
-    if request.headers['Authorization']
-      authenticate_doorkeeper!(*scopes)
-    else
-      authenticate_user!
-    end
   end
 end
