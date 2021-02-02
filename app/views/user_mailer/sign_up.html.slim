@@ -8,7 +8,7 @@ section class="content"
     == t('.welcome.description')
     br
     == link_to t('.welcome.open_website'),
-      utm_url(ENV.fetch('HACKARU_WEB_URL')),
+      ENV.fetch('HACKARU_WEB_URL'),
       class: 'link-button'
 
 section class="content"
@@ -25,7 +25,7 @@ section class="content"
       li
         == t('.use_iphone.instruction_1',
             url: link_to(t('.use_iphone.website'),
-              utm_url(ENV.fetch('HACKARU_WEB_URL'))))
+              ENV.fetch('HACKARU_WEB_URL')))
 
       li
         == t('.use_iphone.instruction_2', share: image_pack_tag('share-icon.png', class: 'icon'))
@@ -37,7 +37,7 @@ section class="content"
       li
         == t('.use_android.instruction_1',
             url: link_to(t('.use_android.website'),
-              utm_url(ENV.fetch('HACKARU_WEB_URL'))))
+              ENV.fetch('HACKARU_WEB_URL')))
 
       li
         == t('.use_android.instruction_2')
@@ -48,6 +48,6 @@ section class="content"
 
   p == t('.use_desktop.description')
   p == link_to t('.use_desktop.download'),
-       'https://github.com/ktmouk/hackaru-desktop'
+       'https://github.com/hackaru-app/hackaru-desktop'
   p == image_pack_tag 'desktop.png', class: 'icon', size: '500x500'
   p == t('.use_desktop.thanks')
