@@ -13,6 +13,6 @@ html
         == yield
 
         footer class="footer"
-          == link_to 'Hackaru.app', utm_url(ENV.fetch('HACKARU_WEB_URL'))
+          == link_to 'Hackaru.app', ENV.fetch('HACKARU_WEB_URL')
           span ・
-          == link_to t('.notification'), utm_url("#{ENV.fetch('HACKARU_WEB_URL')}/settings/notifications")
+          == link_to t('.notification'), "#{ENV.fetch('HACKARU_WEB_URL')}/settings/notifications"
