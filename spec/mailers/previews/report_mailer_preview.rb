@@ -17,7 +17,7 @@ class ReportMailerPreview < ActionMailer::Preview
   private
 
   def report(title, from, to)
-    user = FactoryBot.create(:user, time_zone: 'UTC')
+    user = FactoryBot.create(:user, time_zone: 'Etc/UTC')
     FactoryBot.create_list(
       :activity, 3,
       user: user,
