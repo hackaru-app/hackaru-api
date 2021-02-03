@@ -21,7 +21,7 @@ RSpec.describe 'V1::Users', type: :request do
     let(:params) do
       {
         user: {
-          time_zone: 'UTC',
+          time_zone: 'Etc/UTC',
           receive_week_report: true,
           receive_month_report: true
         }
@@ -36,7 +36,7 @@ RSpec.describe 'V1::Users', type: :request do
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
-      it { expect(user.reload.time_zone).to eq('UTC') }
+      it { expect(user.reload.time_zone).to eq('Etc/UTC') }
       it { expect(user.reload.receive_week_report).to be(true) }
       it { expect(user.reload.receive_month_report).to be(true) }
     end

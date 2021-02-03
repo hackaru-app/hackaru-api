@@ -29,9 +29,9 @@ RSpec.describe User, type: :model do
     end
 
     describe 'time_zone' do
-      let(:array) { ActiveSupport::TimeZone::MAPPING.to_a.flatten }
+      let(:mapping) { ActiveSupport::TimeZone::MAPPING.values }
 
-      it { is_expected.to validate_inclusion_of(:time_zone).in_array(array) }
+      it { is_expected.to validate_inclusion_of(:time_zone).in_array(mapping) }
     end
 
     describe 'locale' do
