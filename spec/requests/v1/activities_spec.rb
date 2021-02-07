@@ -3,33 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'V1::Activities', type: :request do
-  describe 'GET /v1/activities (access_token)' do
-    let(:params) do
-      {
-        start: 1.day.ago,
-        end: Time.zone.now
-      }
-    end
-
-    before do
-      login
-      get '/v1/activities',
-          headers: xhr_header,
-          params: params
-    end
-
-    context 'when params are correctly' do
-      it { expect(response).to have_http_status(:ok) }
-    end
-
-    context 'when params are missing' do
-      let(:params) { {} }
-
-      it { expect(response).to have_http_status(:unprocessable_entity) }
-    end
-  end
-
-  describe 'GET /v1/activities (auth_token)' do
+  describe 'GET /v1/activities' do
     let(:headers) { xhr_header }
     let(:params) do
       {
@@ -59,41 +33,6 @@ RSpec.describe 'V1::Activities', type: :request do
       let(:headers) { {} }
 
       it { expect(response).to have_http_status(:unauthorized) }
-    end
-  end
-
-  describe 'GET /v1/activities (access_token, auth_token)' do
-    let(:auth_token_user) { create(:user) }
-    let(:access_token_user) { create(:user) }
-    let(:params) do
-      {
-        start: 1.day.ago,
-        end: Time.zone.now
-      }
-    end
-
-    before do
-      login(auth_token_user)
-      create(
-        :activity,
-        user: access_token_user,
-        started_at: 1.minute.ago,
-        stopped_at: 1.minute.ago
-      )
-      get '/v1/activities',
-          headers: access_token_header(access_token_user),
-          params: params
-    end
-
-    context 'when params are correctly' do
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(JSON.parse!(response.body).first['id']).to eq(access_token_user.activities.first.id) }
-    end
-
-    context 'when params are missing' do
-      let(:params) { {} }
-
-      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 
