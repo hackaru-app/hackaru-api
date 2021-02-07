@@ -9,7 +9,7 @@ RSpec.describe UserInitializer, type: :model do
         email: 'test@example.com',
         password: 'password',
         password_confirmation: 'password',
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         locale: 'en'
       ).create!
     end
@@ -17,6 +17,6 @@ RSpec.describe UserInitializer, type: :model do
     it { expect(instance.email).to eq('test@example.com') }
     it { expect(instance.password).to eq('password') }
     it { expect(instance.projects.size).to eq(3) }
-    it { expect(instance.time_zone).to eq('UTC') }
+    it { expect(instance.time_zone).to eq('Etc/UTC') }
   end
 end

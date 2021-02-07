@@ -7,7 +7,7 @@ RSpec.describe Report, type: :model do
     subject(:instance) do
       report = described_class.new(
         projects: [],
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: start_date,
         end_date: end_date
       )
@@ -45,7 +45,7 @@ RSpec.describe Report, type: :model do
     subject(:sums) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: end_date
       ).sums
@@ -226,7 +226,7 @@ RSpec.describe Report, type: :model do
     subject(:totals) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 1.day
       ).totals
@@ -308,7 +308,7 @@ RSpec.describe Report, type: :model do
     subject(:colors) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 1.day
       ).colors
@@ -338,7 +338,7 @@ RSpec.describe Report, type: :model do
     subject(:projects) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 1.day
       ).projects
@@ -502,7 +502,7 @@ RSpec.describe Report, type: :model do
     subject(:bar_chart_data) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 6.days
       ).bar_chart_data
@@ -543,7 +543,7 @@ RSpec.describe Report, type: :model do
     subject(:activities) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 1.day
       ).activities
@@ -626,7 +626,7 @@ RSpec.describe Report, type: :model do
     subject(:activity_groups) do
       described_class.new(
         projects: user.projects,
-        time_zone: 'UTC',
+        time_zone: 'Etc/UTC',
         start_date: now,
         end_date: now + 1.day
       ).activity_groups

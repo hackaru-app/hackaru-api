@@ -22,7 +22,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -53,7 +53,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -86,7 +86,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -119,7 +119,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_month_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -146,7 +146,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_month_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -178,7 +178,7 @@ RSpec.describe ReportMailerJob, type: :job do
           :user,
           2,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -216,7 +216,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -237,7 +237,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
@@ -265,7 +265,7 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'UTC'
+          time_zone: 'Etc/UTC'
         )
       end
 
