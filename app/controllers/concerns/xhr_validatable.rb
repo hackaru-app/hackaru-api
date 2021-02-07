@@ -5,7 +5,7 @@ module XhrValidatable
 
   def validate_xhr!
     valid = request.xhr? && valid_origin?
-    render_error_by_key :sign_in_failed unless valid
+    render_api_error_of :authenticate_failed unless valid
   end
 
   def valid_origin?

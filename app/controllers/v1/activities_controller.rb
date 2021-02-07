@@ -3,11 +3,11 @@
 module V1
   class ActivitiesController < ApplicationController
     before_action only: %i[index working] do
-      authenticate_user_or_doorkeeper! 'activities:read'
+      authenticate_user! 'activities:read'
     end
 
     before_action only: %i[create update destroy] do
-      authenticate_user_or_doorkeeper! 'activities:write'
+      authenticate_user! 'activities:write'
     end
 
     def index

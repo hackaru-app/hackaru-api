@@ -7,9 +7,10 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     let(:user) { create(:user) }
 
     before do
+      login(user)
       create(:oauth_access_token, resource_owner_id: user.id)
       get '/v1/oauth/authorized_applications',
-          headers: access_token_header(user)
+          headers: xhr_header
     end
 
     it 'returns http success' do
@@ -43,8 +44,9 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     end
 
     before do
+      login(user)
       delete "/v1/oauth/authorized_applications/#{id}",
-             headers: access_token_header(user)
+             headers: xhr_header
     end
 
     context 'when application exists' do

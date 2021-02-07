@@ -3,11 +3,8 @@ ja:
     sign_in_failed:
       message: 'メールアドレスまたはパスワードが間違っています。'
       status: 400
-    access_token_invalid:
+    authenticate_failed:
       message: '認証に失敗しました。再度ログインし直してください。'
-      status: 401
-    refresh_token_invalid:
-      message: 'リフレッシュトークンが不正または失効しています。再度ログインし直してください。'
       status: 401
     current_password_invalid:
       message: '現在のパスワードが正しくありません。'

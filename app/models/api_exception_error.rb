@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExceptionRenderer < ErrorRenderer
+class ApiExceptionError < ApiError
   def initialize(exception)
     super exception.class.name.gsub(/::/, '.').underscore
     @exception = exception

@@ -10,6 +10,7 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
     before do
       perform_enqueued_jobs do
         post '/v1/auth/password_reset/mails',
+             headers: xhr_header,
              params: {
                user: {
                  email: email
@@ -37,6 +38,7 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
     before do
       create(:password_reset_token, user: user, token: 'secret')
       put '/v1/auth/password_reset',
+          headers: xhr_header,
           params: {
             user: {
               id: user.id,

@@ -20,7 +20,6 @@ class User < ApplicationRecord
   with_options dependent: :delete_all do
     has_many :projects
     has_many :activities
-    has_many :refresh_tokens
     has_many :auth_tokens
   end
 

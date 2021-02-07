@@ -3,11 +3,8 @@ en:
     sign_in_failed:
       message: 'Invalid email or password.'
       status: 400
-    access_token_invalid:
+    authenticate_failed:
       message: 'Authenticate failed, please sign in before continuing.'
-      status: 401
-    refresh_token_invalid:
-      message: 'Refresh token is invalid or expired, please sign in before continuing.'
       status: 401
     current_password_invalid:
       message: 'Current password is invalid.'

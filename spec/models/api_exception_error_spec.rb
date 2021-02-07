@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ExceptionRenderer, type: :model do
+RSpec.describe ApiExceptionError, type: :model do
   describe '#initialize' do
     subject(:instance) { described_class.new(exception) }
 

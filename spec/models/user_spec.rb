@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_one(:password_reset_token).dependent(:delete) }
     it { is_expected.to have_many(:projects).dependent(:delete_all) }
     it { is_expected.to have_many(:activities).dependent(:delete_all) }
-    it { is_expected.to have_many(:refresh_tokens).dependent(:delete_all) }
     it { is_expected.to have_many(:auth_tokens).dependent(:delete_all) }
   end
 
@@ -62,8 +61,8 @@ RSpec.describe User, type: :model do
       it { expect(described_class).not_to exist(id: user.id) }
     end
 
-    context 'when user has any refresh_token' do
-      let(:user) { create(:refresh_token).user }
+    context 'when user has any auth_token' do
+      let(:user) { create(:auth_token).user }
 
       it { expect(described_class).not_to exist(id: user.id) }
     end

@@ -7,8 +7,9 @@ RSpec.describe 'V1::Suggestions', type: :request do
     let(:params) { { q: 'query', limit: 10 } }
 
     before do
+      login
       get '/v1/suggestions',
-          headers: access_token_header,
+          headers: xhr_header,
           params: params
     end
 
