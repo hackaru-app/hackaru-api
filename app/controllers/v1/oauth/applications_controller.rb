@@ -20,6 +20,7 @@ module V1
         params.require(:application).permit(
           :name,
           :redirect_uri,
+          :confidential,
           :scopes
         )
       end

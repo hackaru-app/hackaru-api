@@ -7,7 +7,12 @@ Rails.application.config.filter_parameters += %i[
   password
   password_confirmation
   current_password
-  client_id
   token
   email
+  client_id
+  client_secret
+  state
+  code
+  code_challenge
+  code_verifier
 ]
