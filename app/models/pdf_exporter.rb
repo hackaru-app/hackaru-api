@@ -7,7 +7,7 @@ class PdfExporter
 
   def export
     file = open_html_temp_file
-    file_path = Shellwords.join(['file://', file.path])
+    file_path = URI.join('file://', file.path).to_s
     pdf_data, = Open3.capture3('scripts/pdf.js', file_path)
     file.unlink
     pdf_data
