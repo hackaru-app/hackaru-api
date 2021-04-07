@@ -7,8 +7,6 @@ class ApplicationController < ActionController::API
   include XhrValidatable
   include AuthTokenStorable
   include Authenticatable
-  include RavenExtraContext
 
-  before_action :set_raven_extra_context
   before_action :validate_xhr!
 end
