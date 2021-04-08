@@ -18,13 +18,13 @@ module Authenticatable
     return if doorkeeper_token.blank?
 
     @current_user = User.find(doorkeeper_token[:resource_owner_id])
-    Raven.user_context(id: @current_user.id)
+    Sentry.set_user(id: @current_user.id)
   end
 
   def authenticate_auth_token!
     @current_user = restore_auth_token&.user
     return render_api_error_of :authenticate_failed unless @current_user
 
-    Raven.user_context(id: @current_user.id)
+    Sentry.set_user(id: @current_user.id)
   end
 end
