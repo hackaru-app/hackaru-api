@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Reports', type: :request do
   describe 'GET /v1/report' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
-
+    let(:extension) { '' }
     let(:time_zone) { 'Asia/Tokyo' }
-    let(:period) { 'day' }
     let(:params) do
       {
         start: 1.day.ago,
@@ -22,12 +22,12 @@ RSpec.describe 'V1::Reports', type: :request do
       login(user)
       get "/v1/report#{extension}",
           params: params,
-          headers: xhr_header
+          headers: headers
     end
 
-    context 'when extension is empty' do
-      let(:extension) { '' }
+    it_behaves_like 'validates xhr'
 
+    context 'when extension is empty' do
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.content_type).to include('application/json') }
     end
@@ -55,7 +55,7 @@ RSpec.describe 'V1::Reports', type: :request do
       it { expect(response.content_type).to include('text/csv') }
     end
 
-    context 'when extension is missing' do
+    context 'when extension is invalid' do
       let(:extension) { '.unknown' }
 
       it { expect(response).to have_http_status(:not_found) }

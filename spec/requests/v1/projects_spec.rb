@@ -4,18 +4,23 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Projects', type: :request do
   describe 'GET /v1/projects' do
+    let(:headers) { xhr_header }
+
     before do
       login
       get '/v1/projects',
-          headers: xhr_header
+          headers: headers
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'POST /v1/projects' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:color) { '#ff0000' }
     let(:params) do
@@ -30,9 +35,11 @@ RSpec.describe 'V1::Projects', type: :request do
     before do
       login(user)
       post '/v1/projects',
-           headers: xhr_header,
+           headers: headers,
            params: params
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
@@ -53,6 +60,7 @@ RSpec.describe 'V1::Projects', type: :request do
   end
 
   describe 'PUT /v1/projects' do
+    let(:headers) { xhr_header }
     let(:project) { create(:project) }
     let(:color) { '#ffffff' }
     let(:id) { project.id }
@@ -68,9 +76,11 @@ RSpec.describe 'V1::Projects', type: :request do
     before do
       login(project.user)
       put "/v1/projects/#{id}",
-          headers: xhr_header,
+          headers: headers,
           params: params
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when project does not exist' do
       let(:id) { 'invalid' }
@@ -97,17 +107,19 @@ RSpec.describe 'V1::Projects', type: :request do
   end
 
   describe 'DELETE /v1/projects' do
+    let(:headers) { xhr_header }
     let(:project) { create(:project) }
+    let(:id) { project.id }
 
     before do
       login(project.user)
       delete "/v1/projects/#{id}",
-             headers: xhr_header
+             headers: headers
     end
 
-    context 'when project exists' do
-      let(:id) { project.id }
+    it_behaves_like 'validates xhr'
 
+    context 'when project exists' do
       it { expect(response).to have_http_status(:ok) }
       it { expect(Project).not_to exist(id: id) }
     end

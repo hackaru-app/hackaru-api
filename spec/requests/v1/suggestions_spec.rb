@@ -4,16 +4,19 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Suggestions', type: :request do
   describe 'GET /v1/suggestions' do
+    let(:headers) { xhr_header }
     let(:params) { { q: 'query', limit: 10 } }
 
     before do
       login
       get '/v1/suggestions',
-          headers: xhr_header,
+          headers: headers,
           params: params
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
 

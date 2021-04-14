@@ -4,11 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Auth::AuthTokens', type: :request do
   describe 'POST /v1/auth/auth_tokens' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
+    let(:email) { user.email }
+    let(:password) { user.password }
 
     before do
       post '/v1/auth/auth_tokens',
-           headers: xhr_header,
+           headers: headers,
            params: {
              user: {
                email: email,
@@ -16,6 +19,8 @@ RSpec.describe 'V1::Auth::AuthTokens', type: :request do
              }
            }
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when email and password are valid' do
       let(:email) { user.email }
@@ -42,19 +47,22 @@ RSpec.describe 'V1::Auth::AuthTokens', type: :request do
   end
 
   describe 'DELETE /v1/auth/auth_tokens' do
+    let(:headers) { xhr_header }
+    let(:current_user) { create(:user) }
+
     before do
       login(current_user)
       delete '/v1/auth/auth_token',
-             headers: xhr_header
+             headers: headers
     end
 
     around do |e|
       travel_to('2021-01-01 00:00:00') { e.run }
     end
 
-    context 'when user logged in' do
-      let(:current_user) { create(:user) }
+    it_behaves_like 'validates xhr'
 
+    context 'when user logged in' do
       it { expect(response).to have_http_status(:no_content) }
       it { expect(current_user.auth_tokens.first.expired_at).to eq(Time.zone.now) }
     end
