@@ -2,7 +2,7 @@
 
 module V1
   module Auth
-    class PasswordResetsController < ApplicationController
+    class PasswordResetsController < V1::Auth::ApplicationController
       def mails
         user = User.find_by(email: user_params[:email])
         return render_api_error_of :email_not_found unless user

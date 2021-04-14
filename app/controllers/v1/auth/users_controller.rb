@@ -2,7 +2,7 @@
 
 module V1
   module Auth
-    class UsersController < ApplicationController
+    class UsersController < V1::Auth::ApplicationController
       before_action only: %i[update destroy] do
         authenticate_user!
       end

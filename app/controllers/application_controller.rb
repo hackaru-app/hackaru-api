@@ -7,6 +7,4 @@ class ApplicationController < ActionController::API
   include XhrValidatable
   include AuthTokenStorable
   include Authenticatable
-
-  before_action :validate_xhr!
 end
