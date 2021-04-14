@@ -1,27 +1,41 @@
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Build Status](https://travis-ci.org/ktmouk/hackaru-api.svg?branch=master)](https://travis-ci.org/ktmouk/hackaru-api)
+# hackaru-api
+The API server for Hackaru.  
+An open source and simple time tracking app.
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/5dedffcfb6bc88f0d799/maintainability)](https://codeclimate.com/github/hackaru-app/hackaru-api/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5dedffcfb6bc88f0d799/test_coverage)](https://codeclimate.com/github/hackaru-app/hackaru-api/test_coverage)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-<br>
-<p align="center">
-  <p align="center"><img src="./docs/images/architecture.png" width="500" /></p>
-  <p align="center">Hackaru API</p>
-  <p align="center">Provide RESTful API and OAuth2.</p>
-</p>
+## Features
+Want to know that you can do with Hackaru?  
+For more information on the app, please see the main repository [README](https://github.com/hackaru-app/hackaru).　
 
-## Contributing
-1. Install [docker-compose](https://docs.docker.com/compose/install/) and [bundler](https://bundler.io/).
-1. [Fork](https://github.com/ktmouk/hackaru-apu/fork) and clone this repository.
-1. Check out new branch. `git checkout -b new-feature`
-1. Copy env file from the sample file. `cp .env.sample .env.development`
-1. Setup server. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm api bin/setup`
-1. Start dev server. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
-1. Improve codes.
-1. Run rubocop and brakeman. `bundle && bundle exec rubocop && bundle exec brakeman`
-1. Run test. `docker-compose -f docker-compose.test.yml run sut`
-1. Create a new pull request.
+## Roles
+The API server provides REST API to web server and desktop app.
+
+## Feedback
+
+Do you find a bug or would like to submit feature requests?  
+Please let us know via [Issues](https://github.com/hackaru-app/hackaru/issues). 😉
+
+## Quickstart
+
+You can run Hackaru on your local easily using [docker-compose](https://docs.docker.com/compose/install).  
+
+It's also necessary to run the web server if you want to login to Hackaru on your browser.  
+Please see the web server [README](https://github.com/hackaru-app/hackaru-web).
+
+```sh
+# Clone this repository.
+git clone git@github.com:hackaru-app/hackaru-api.git
+cd hackaru-api
+
+# Copy and rename env file.
+cp .env.sample .env.development
+
+# Try accessing http://localhost:3000 after execution.
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
 
 ## License
 
