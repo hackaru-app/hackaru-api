@@ -4,16 +4,19 @@ require 'rails_helper'
 
 RSpec.describe 'V1::OAuth::Applications', type: :request do
   describe 'GET /v1/oauth/authorized_applications' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
 
     before do
       login(user)
       create(:oauth_access_token, resource_owner_id: user.id)
       get '/v1/oauth/authorized_applications',
-          headers: xhr_header
+          headers: headers
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
 
@@ -23,8 +26,8 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
   end
 
   describe 'DELETE /v1/oauth/authorized_applications' do
+    let(:headers) { xhr_header }
     let(:application) { create(:oauth_application) }
-    let(:id) { application.id }
     let(:user) { create(:user) }
 
     let!(:access_token) do
@@ -45,9 +48,11 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
 
     before do
       login(user)
-      delete "/v1/oauth/authorized_applications/#{id}",
-             headers: xhr_header
+      delete "/v1/oauth/authorized_applications/#{application.id}",
+             headers: headers
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when application exists' do
       it { expect(response).to have_http_status(:no_content) }

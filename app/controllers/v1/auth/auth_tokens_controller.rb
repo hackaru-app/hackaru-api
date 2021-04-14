@@ -2,7 +2,7 @@
 
 module V1
   module Auth
-    class AuthTokensController < ApplicationController
+    class AuthTokensController < V1::Auth::ApplicationController
       def create
         user = User.find_by(email: user_params[:email])
         singed_in = user&.authenticate(user_params[:password])

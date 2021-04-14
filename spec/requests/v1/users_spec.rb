@@ -4,19 +4,23 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Users', type: :request do
   describe 'GET /v1/user' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
 
     before do
       login(user)
-      get '/v1/user', headers: xhr_header
+      get '/v1/user', headers: headers
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'PUT /v1/user' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:params) do
       {
@@ -30,8 +34,10 @@ RSpec.describe 'V1::Users', type: :request do
 
     before do
       login(user)
-      put '/v1/user', headers: xhr_header, params: params
+      put '/v1/user', headers: headers, params: params
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }

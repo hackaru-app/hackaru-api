@@ -4,13 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Auth::PasswordReset', type: :request do
   describe 'POST /v1/auth/password_reset/mails' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:email) { user.email }
 
     before do
       perform_enqueued_jobs do
         post '/v1/auth/password_reset/mails',
-             headers: xhr_header,
+             headers: headers,
              params: {
                user: {
                  email: email
@@ -18,6 +19,8 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
              }
       end
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when email is registered' do
       it { expect(response).to have_http_status(:no_content) }
@@ -33,12 +36,14 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
   end
 
   describe 'PUT /v1/auth/password_reset' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
+    let(:token) { 'secret' }
 
     before do
       create(:password_reset_token, user: user, token: 'secret')
       put '/v1/auth/password_reset',
-          headers: xhr_header,
+          headers: headers,
           params: {
             user: {
               id: user.id,
@@ -49,9 +54,9 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
           }
     end
 
-    context 'when token is valid' do
-      let(:token) { 'secret' }
+    it_behaves_like 'validates xhr'
 
+    context 'when token is valid' do
       it { expect(response).to have_http_status(:no_content) }
       it { expect(user.reload.authenticate('changed')).to be_truthy }
     end

@@ -3,6 +3,8 @@
 module V1
   module OAuth
     class ApplicationsController < ApplicationController
+      before_action :validate_xhr!
+
       def create
         application = Doorkeeper::Application.create!(application_params)
         render json: {

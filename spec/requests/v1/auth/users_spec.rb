@@ -4,12 +4,13 @@ require 'rails_helper'
 
 RSpec.describe 'V1::Auth::Users', type: :request do
   describe 'POST /v1/auth/users' do
+    let(:headers) { xhr_header }
     let(:email) { 'foo@example.com' }
 
     before do
       perform_enqueued_jobs do
         post '/v1/auth/users',
-             headers: xhr_header,
+             headers: headers,
              params: {
                user: {
                  email: email,
@@ -21,7 +22,9 @@ RSpec.describe 'V1::Auth::Users', type: :request do
       end
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
 
@@ -52,27 +55,29 @@ RSpec.describe 'V1::Auth::Users', type: :request do
   end
 
   describe 'PUT /v1/auth/user' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user, password: 'password') }
     let(:current_user) { user }
+    let(:params) do
+      {
+        user: {
+          email: 'changed@example.com',
+          password: 'changed',
+          current_password: 'password'
+        }
+      }
+    end
 
     before do
       login(current_user)
       put '/v1/auth/user',
-          headers: xhr_header,
+          headers: headers,
           params: params
     end
 
-    context 'when params have email and password' do
-      let(:params) do
-        {
-          user: {
-            email: 'changed@example.com',
-            password: 'changed',
-            current_password: 'password'
-          }
-        }
-      end
+    it_behaves_like 'validates xhr'
 
+    context 'when params have email and password' do
       it { expect(response).to have_http_status(:ok) }
       it { expect(user.reload.email).to eq('changed@example.com') }
       it { expect(user.reload.authenticate('changed')).to be_truthy }
@@ -134,6 +139,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
   end
 
   describe 'DELETE /v1/auth/user' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user, password: 'password') }
     let(:current_user) { user }
     let(:current_password) { 'password' }
@@ -141,13 +147,15 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     before do
       login(current_user)
       delete '/v1/auth/user',
-             headers: xhr_header,
+             headers: headers,
              params: {
                user: {
                  current_password: current_password
                }
              }
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when current_password is valid' do
       it { expect(response).to have_http_status(:ok) }

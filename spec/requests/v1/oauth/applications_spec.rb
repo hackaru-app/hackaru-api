@@ -4,9 +4,11 @@ require 'rails_helper'
 
 RSpec.describe 'V1::OAuth::Applications', type: :request do
   describe 'POST /v1/oauth/applications' do
+    let(:headers) { xhr_header }
+
     before do
       post '/v1/oauth/applications',
-           headers: xhr_header,
+           headers: headers,
            params: {
              application: {
                name: 'ExampleApp',
@@ -16,7 +18,9 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
            }
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
 

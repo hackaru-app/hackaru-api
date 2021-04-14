@@ -45,13 +45,16 @@ RSpec.describe 'V1::ActivityCalendar', type: :request do
   end
 
   describe 'PUT /v1/activity_calendar' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
 
     before do
       login(user)
       put '/v1/activity_calendar',
-          headers: xhr_header
+          headers: headers
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
@@ -68,14 +71,17 @@ RSpec.describe 'V1::ActivityCalendar', type: :request do
   end
 
   describe 'DELETE /v1/activity_calendar' do
+    let(:headers) { xhr_header }
     let(:activity_calendar) { create(:activity_calendar) }
     let(:user) { activity_calendar.user }
 
     before do
       login(user)
       delete '/v1/activity_calendar',
-             headers: xhr_header
+             headers: headers
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when user has activity_calendar' do
       it { expect(response).to have_http_status(:no_content) }

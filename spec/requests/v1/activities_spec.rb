@@ -19,6 +19,8 @@ RSpec.describe 'V1::Activities', type: :request do
           params: params
     end
 
+    it_behaves_like 'validates xhr'
+
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
     end
@@ -28,27 +30,26 @@ RSpec.describe 'V1::Activities', type: :request do
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
     end
-
-    context 'when xhr header is missing' do
-      let(:headers) { {} }
-
-      it { expect(response).to have_http_status(:unauthorized) }
-    end
   end
 
   describe 'GET /v1/activities/working' do
+    let(:headers) { xhr_header }
+
     before do
       login
       get '/v1/activities/working',
-          headers: xhr_header
+          headers: headers
     end
 
-    it 'returns http success' do
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'POST /v1/activities' do
+    let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:started_at) { Time.zone.now }
     let(:params) do
@@ -63,9 +64,11 @@ RSpec.describe 'V1::Activities', type: :request do
     before do
       login(user)
       post '/v1/activities',
-           headers: xhr_header,
+           headers: headers,
            params: params
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
@@ -86,9 +89,11 @@ RSpec.describe 'V1::Activities', type: :request do
   end
 
   describe 'PUT /v1/activities' do
+    let(:headers) { xhr_header }
     let(:activity) { create(:activity) }
     let(:started_at) { Time.zone.now }
     let(:id) { activity.id }
+
     let(:params) do
       {
         activity: {
@@ -102,9 +107,11 @@ RSpec.describe 'V1::Activities', type: :request do
     before do
       login(activity.user)
       put "/v1/activities/#{id}",
-          headers: xhr_header,
+          headers: headers,
           params: params
     end
+
+    it_behaves_like 'validates xhr'
 
     context 'when activity does not exist' do
       let(:id) { 'invalid' }
@@ -131,17 +138,19 @@ RSpec.describe 'V1::Activities', type: :request do
   end
 
   describe 'DELETE /v1/activities' do
+    let(:headers) { xhr_header }
     let(:activity) { create(:activity) }
+    let(:id) { activity.id }
 
     before do
       login(activity.user)
       delete "/v1/activities/#{id}",
-             headers: xhr_header
+             headers: headers
     end
 
-    context 'when activity exists' do
-      let(:id) { activity.id }
+    it_behaves_like 'validates xhr'
 
+    context 'when activity exists' do
       it { expect(response).to have_http_status(:ok) }
       it { expect(Activity).not_to exist(id: id) }
     end

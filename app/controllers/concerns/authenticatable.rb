@@ -9,6 +9,7 @@ module Authenticatable
     if scopes.present? && request.headers['Authorization']
       authenticate_doorkeeper!(*scopes)
     else
+      validate_xhr!
       authenticate_auth_token!
     end
   end

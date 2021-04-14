@@ -2,8 +2,6 @@
 
 module V1
   class ActivityCalendarsController < ApplicationController
-    skip_before_action :validate_xhr!, only: :show
-
     before_action only: %i[update destroy] do
       authenticate_user!
     end
