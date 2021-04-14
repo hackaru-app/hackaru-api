@@ -14,6 +14,10 @@ RSpec.describe 'V1::Projects', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'projects:read' }
+    end
+
     it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
@@ -40,6 +44,10 @@ RSpec.describe 'V1::Projects', type: :request do
     end
 
     it_behaves_like 'validates xhr'
+
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'projects:write' }
+    end
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
@@ -82,6 +90,10 @@ RSpec.describe 'V1::Projects', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'projects:write' }
+    end
+
     context 'when project does not exist' do
       let(:id) { 'invalid' }
 
@@ -118,6 +130,10 @@ RSpec.describe 'V1::Projects', type: :request do
     end
 
     it_behaves_like 'validates xhr'
+
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'projects:write' }
+    end
 
     context 'when project exists' do
       it { expect(response).to have_http_status(:ok) }

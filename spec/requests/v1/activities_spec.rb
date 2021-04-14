@@ -21,6 +21,10 @@ RSpec.describe 'V1::Activities', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'activities:read' }
+    end
+
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
     end
@@ -42,6 +46,10 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     it_behaves_like 'validates xhr'
+
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'activities:read' }
+    end
 
     it 'returns ok' do
       expect(response).to have_http_status(:ok)
@@ -69,6 +77,10 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     it_behaves_like 'validates xhr'
+
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'activities:write' }
+    end
 
     context 'when params are correctly' do
       it { expect(response).to have_http_status(:ok) }
@@ -113,6 +125,10 @@ RSpec.describe 'V1::Activities', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'activities:write' }
+    end
+
     context 'when activity does not exist' do
       let(:id) { 'invalid' }
 
@@ -149,6 +165,10 @@ RSpec.describe 'V1::Activities', type: :request do
     end
 
     it_behaves_like 'validates xhr'
+
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'activities:write' }
+    end
 
     context 'when activity exists' do
       it { expect(response).to have_http_status(:ok) }

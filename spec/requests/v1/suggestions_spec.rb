@@ -16,6 +16,10 @@ RSpec.describe 'V1::Suggestions', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'suggestions:read' }
+    end
+
     it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end
