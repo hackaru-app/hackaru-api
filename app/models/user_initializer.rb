@@ -8,15 +8,15 @@ class UserInitializer
   def create!
     user = User.new(@params)
     user.projects = build_projects
-    user.time_zone = converted_time_zone
+    user.time_zone = time_zone
     user.save!
     user
   end
 
   private
 
-  def converted_time_zone
-    TimeZoneConverter.new(@params[:time_zone]).convert
+  def time_zone
+    ClosestTimeZoneFinder.new(@params[:time_zone]).find
   end
 
   def build_projects

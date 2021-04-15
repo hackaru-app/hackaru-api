@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe TimeZoneConverter, type: :model do
-  describe '#convert' do
-    subject(:converted) do
-      instance.convert
+RSpec.describe ClosestTimeZoneFinder, type: :model do
+  describe '#find' do
+    subject(:found) do
+      instance.find
     end
 
     let(:instance) { described_class.new(time_zone) }
@@ -26,7 +26,7 @@ RSpec.describe TimeZoneConverter, type: :model do
       let(:time_zone) { 'invalid' }
 
       it 'raises error' do
-        expect { instance.convert }
+        expect { instance.find }
           .to raise_error TZInfo::InvalidTimezoneIdentifier
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe TimeZoneConverter, type: :model do
       let(:time_zone) { nil }
 
       it 'raises error' do
-        expect { instance.convert }
+        expect { instance.find }
           .to raise_error TZInfo::InvalidTimezoneIdentifier
       end
     end
