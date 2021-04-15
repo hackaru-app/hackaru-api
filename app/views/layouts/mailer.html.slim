@@ -2,13 +2,13 @@ doctype html
 html
   head
     meta http-equiv="Content-Type" content="text/html; charset=utf-8"
-    == stylesheet_pack_tag 'stylesheets/layouts/mailer'
+    == stylesheet_link_tag webpack_url('stylesheets/views/layouts/mailer.css')
 
   body
     section class="body-wrapper"
       section class="wrapper"
         header class="logo-header"
-          == image_pack_tag 'logo.png', size: '28x28'
+          == image_tag webpack_url('images/logo.png'), size: '28x28'
 
         == yield
 

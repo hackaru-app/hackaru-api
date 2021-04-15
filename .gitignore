@@ -34,10 +34,11 @@
 # MacOS
 .DS_Store
 
-# Webpacker
+# Webpack
 /public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
+
+# Dependencies
+node_modules
+
+# Yarn
+yarn-error.log

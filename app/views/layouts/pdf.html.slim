@@ -4,7 +4,7 @@ html
     meta http-equiv="Content-Type" content="text/html; charset=utf-8"
     == stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Noto+Sans+JP', media: :all
     == stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:400,700', media: :all
-    == stylesheet_link_tag asset_pack_url('stylesheets/layouts/pdf.css'), media: :all
+    == stylesheet_link_tag webpack_url('stylesheets/views/layouts/pdf.css'), media: :all
 
   body
     == yield

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open3'
+
 class PdfExporter
   def initialize(html)
     @html = html

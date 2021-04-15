@@ -2,6 +2,7 @@
 
 class ApplicationMailer < ActionMailer::Base
   helper :duration
+  helper :webpack_url
 
   default from: "Hackaru <#{ENV.fetch('SMTP_FROM', 'no-reply@example.com')}>"
   layout 'mailer'

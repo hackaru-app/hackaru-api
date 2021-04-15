@@ -7,6 +7,7 @@ module V1
     include ActionController::Helpers
 
     helper :duration
+    helper :webpack_url
 
     before_action :authenticate_user!
 
