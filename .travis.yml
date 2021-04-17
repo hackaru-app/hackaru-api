@@ -2,8 +2,6 @@ jobs:
   include:
     - stage: lint
       language: ruby
-      rvm:
-        - 2.7.2
       cache: bundler
       services:
         - docker
@@ -13,6 +11,13 @@ jobs:
         - bundle exec slim-lint app/views
         - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
         - docker run -v $(pwd):/src -w /src nickg/misspell /bin/sh -c 'git ls-files | xargs misspell -error'
+    -
+      language: node_js
+      node_js:
+        - 15
+      cache: yarn
+      script:
+        - yarn lint .
 
     - stage: test
       language: minimal

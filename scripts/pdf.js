@@ -5,12 +5,12 @@ const puppeteer = require('puppeteer');
 async function exportPdf() {
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/chromium-browser',
-    args: ['--no-sandbox']
+    args: ['--no-sandbox'],
   });
 
   const page = await browser.newPage();
   await page.goto(process.argv[2], {
-    waitUntil: ['networkidle2']
+    waitUntil: ['networkidle2'],
   });
 
   data = await page.pdf({ format: 'A4' });
