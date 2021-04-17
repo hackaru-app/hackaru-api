@@ -1,10 +1,10 @@
 head
-  == stylesheet_pack_tag 'stylesheets/report_mailer/report'
+  == stylesheet_link_tag webpack_url('stylesheets/views/report-mailer/report.css')
 
 section class="content"
   header class="header"
     h1 class="title"
-      == image_pack_tag 'bar-chart-icon.png', class: 'icon'
+      == image_tag webpack_url('images/bar-chart-icon.png'), class: 'icon'
       = @title
     p
       == l(@report.start_date, format: '%F')

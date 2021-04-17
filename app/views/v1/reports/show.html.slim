@@ -1,9 +1,9 @@
 head
-  == stylesheet_link_tag asset_pack_url('stylesheets/v1/reports/show.css'), media: :all
+  == stylesheet_link_tag webpack_url('stylesheets/views/v1/reports/show.css'), media: :all
 
 section class="page"
   header class="logo-header"
-    == image_tag asset_pack_url('media/images/logo-black.png'), size: '24x24'
+    == image_tag webpack_url('images/logo-black.png'), size: '24x24'
     p hackaru.app
 
   section

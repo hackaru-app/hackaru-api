@@ -1,8 +1,6 @@
 version: '3'
 services:
   api:
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: webpack
     env_file: .env.development
     stdin_open: true
     tty: true
@@ -13,15 +11,14 @@ services:
 
   webpack:
     build: .
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
     env_file: .env.development
-    command: bin/webpack-dev-server
+    command: yarn dev
     volumes:
-      - ./app/javascript:/hackaru/app/javascript
-      - ./public/:/hackaru/public
-    ports:
-      - 3035:3035
+      - ./app/assets:/hackaru/app/assets
+      - ./public/packs:/hackaru/public/packs
+      - ./webpack.common.js:/hackaru/webpack.common.js
+      - ./webpack.dev.js:/hackaru/webpack.dev.js
+      - ./package.json:/hackaru/package.json
 
   sidekiq:
     env_file: .env.development

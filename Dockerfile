@@ -8,7 +8,7 @@ RUN apk -U upgrade \
 COPY Gemfile Gemfile.lock $API_DIR/
 RUN bundle install -j4
 
-FROM node:14-alpine as node
+FROM node:15.14.0-alpine as node
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 COPY package.json yarn.lock $API_DIR/
@@ -43,5 +43,5 @@ RUN apk -U upgrade \
  && chown hackaru:hackaru $API_DIR
 COPY --chown=hackaru:hackaru . $API_DIR
 USER hackaru
-RUN /hackaru/bin/webpack
+RUN yarn build
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
