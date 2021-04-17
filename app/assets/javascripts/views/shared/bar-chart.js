@@ -6,9 +6,7 @@ function getTickFormat(seconds) {
   return hours % 0.5 === 0 ? `${hours}h` : '';
 }
 
-const data = JSON.parse(
-  document.getElementById('bar-chart').dataset.json
-);
+const data = JSON.parse(document.getElementById('bar-chart').dataset.json);
 
 c3.generate({
   bindto: '#bar-chart',
@@ -16,20 +14,20 @@ c3.generate({
     type: 'bar',
     columns: data.bar_chart_data,
     colors: data.colors,
-    groups: [data.groups]
+    groups: [data.groups],
   },
   legend: {
-    show: false
+    show: false,
   },
   axis: {
     x: {
       type: 'category',
-      categories: data.labels
+      categories: data.labels,
     },
     y: {
       tick: {
-        format: getTickFormat
-      }
-    }
-  }
+        format: getTickFormat,
+      },
+    },
+  },
 });

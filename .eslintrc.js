@@ -1,10 +1,20 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 2020,
+    sourceType: 'module',
   },
-  extends: [
-    'plugin:prettier/recommended',
-    'prettier/standard',
-  ]
-}
+  env: {
+    browser: true,
+  },
+  extends: ['plugin:prettier/recommended', 'prettier'],
+  rules: {
+    'no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+      },
+    ],
+  },
+};
