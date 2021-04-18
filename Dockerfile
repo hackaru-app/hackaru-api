@@ -11,21 +11,17 @@ RUN bundle install -j4
 FROM node:15.14.0-alpine as node
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
-COPY package.json yarn.lock $API_DIR/
-RUN yarn
+COPY package.json \
+  yarn.lock \
+  webpack.common.js \
+  webpack.prod.js \
+  $API_DIR/
+COPY /app/assets $API_DIR/app/assets
+RUN yarn && yarn build
 
 FROM ruby:2.7.3-alpine3.13
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
-COPY --from=bundler \
-    /usr/local/bundle \
-    /usr/local/bundle
-COPY --from=node \
-    /hackaru/node_modules \
-    /hackaru/node_modules
-COPY --from=node \
-    /usr/local/bin/node \
-    /usr/local/bin/node
 RUN apk -U upgrade \
  && apk add --update --no-cache \
     tzdata \
@@ -36,12 +32,23 @@ RUN apk -U upgrade \
     freetype-dev \
     harfbuzz \
     ca-certificates \
-    yarn \
     less \
- && addgroup hackaru \
+    yarn
+COPY --from=node \
+    /usr/local/bin/node \
+    /usr/local/bin/node
+COPY --from=bundler \
+    /usr/local/bundle \
+    /usr/local/bundle
+COPY --from=node \
+    $API_DIR/node_modules \
+    $API_DIR/node_modules
+COPY --from=node \
+    $API_DIR/public/packs \
+    $API_DIR/public/packs
+RUN addgroup hackaru \
  && adduser -s /bin/sh -D -G hackaru hackaru \
  && chown hackaru:hackaru $API_DIR
 COPY --chown=hackaru:hackaru . $API_DIR
 USER hackaru
-RUN yarn build
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
