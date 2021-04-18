@@ -33,6 +33,9 @@ cd hackaru-api
 # Copy and rename env file.
 cp .env.sample .env.development
 
+# Set up the database, build assets, etc.
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml run api bin/setup
+
 # Try accessing http://localhost:3000 after execution.
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
