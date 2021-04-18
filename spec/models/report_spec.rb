@@ -28,13 +28,13 @@ RSpec.describe Report, type: :model do
       it { is_expected.to be_valid }
     end
 
-    context 'when started_date = end_date' do
+    context 'when start_date = end_date' do
       let(:end_date) { start_date }
 
       it { expect(instance.errors).to be_include :start_date }
     end
 
-    context 'when started_date > end_date' do
+    context 'when start_date > end_date' do
       let(:end_date) { 1.day.ago }
 
       it { expect(instance.errors).to be_include :start_date }

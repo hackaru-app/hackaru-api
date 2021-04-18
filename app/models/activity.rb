@@ -8,13 +8,10 @@ class Activity < ApplicationRecord
   validates :started_at, presence: true
   validate :project_is_invalid, if: :project_id
 
-  validates :started_at, date: {
-    before_or_equal_to: :stopped_at
-  }, if: :stopped_at
-
-  validates :stopped_at, date: {
-    before_or_equal_to: proc { |obj| obj.started_at.next_year }
-  }, if: %i[started_at stopped_at]
+  with_options if: :stopped_at do
+    validates_datetime :started_at, on_or_before: :stopped_at
+    validates_datetime :stopped_at, on_or_before: -> { _1.started_at.next_year }
+  end
 
   before_save :set_duration
   before_save :stop_other_workings, unless: :stopped_at

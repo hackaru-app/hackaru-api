@@ -1,0 +1,10 @@
+ja:
+  activemodel:
+    models:
+      report: 'レポート'
+    attributes:
+      report:
+        start_date: '開始日'
+        end_date: '終了日'
+        time_zone: 'タイムゾーン'
+        project: 'プロジェクト'
