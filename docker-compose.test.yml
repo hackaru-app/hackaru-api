@@ -6,13 +6,13 @@ services:
   redis:
     image: redis:4.0
 
-  sut:
+  api:
     build: .
     env_file: .env.test
-    command: bin/rspec
+    command: bundle exec rspec
     user: root
     volumes:
-      - .:/hackaru
+      - .:/hackaru:delegated
       - /hackaru/tmp
       - /hackaru/node_modules
     links:
