@@ -26,7 +26,7 @@ RSpec.describe Activity, type: :model do
     it { is_expected.to validate_length_of(:description).is_at_most(191) }
 
     context 'when started_at < stopped_at' do
-      let(:stopped_at) { Time.zone.now.tomorrow }
+      let(:stopped_at) { Time.zone.now + 1.hour }
 
       it { is_expected.to be_valid }
     end
@@ -38,7 +38,7 @@ RSpec.describe Activity, type: :model do
     end
 
     context 'when started_at > stopped_at' do
-      let(:stopped_at) { 1.day.ago }
+      let(:stopped_at) { 1.hour.ago }
 
       it { expect(instance.errors).to be_include :started_at }
     end
