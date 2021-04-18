@@ -13,6 +13,7 @@ services:
     user: root
     volumes:
       - .:/hackaru
+      - /hackaru/tmp
       - /hackaru/node_modules
     links:
       - db

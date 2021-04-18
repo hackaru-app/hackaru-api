@@ -4,9 +4,10 @@ services:
     env_file: .env.development
     stdin_open: true
     tty: true
+    user: root
     volumes:
-      - .:/hackaru:cached
-      - ./tmp/app:/hackaru/tmp:cached
+      - .:/hackaru:delegated
+      - /hackaru/tmp
       - /hackaru/node_modules
 
   webpack:
@@ -14,21 +15,22 @@ services:
     env_file: .env.development
     command: yarn dev
     volumes:
-      - ./app/assets:/hackaru/app/assets
-      - ./public/packs:/hackaru/public/packs
-      - ./webpack.common.js:/hackaru/webpack.common.js
-      - ./webpack.dev.js:/hackaru/webpack.dev.js
-      - ./package.json:/hackaru/package.json
+      - ./app/assets:/hackaru/app/assets:delegated
+      - ./public/packs:/hackaru/public/packs:delegated
+      - ./webpack.common.js:/hackaru/webpack.common.js:delegated
+      - ./webpack.dev.js:/hackaru/webpack.dev.js:delegated
+      - ./package.json:/hackaru/package.json:delegated
 
   sidekiq:
     env_file: .env.development
+    user: root
     command: bundle exec sidekiq
-      -c 3
+      -c 1
       -q hackaru-api_development_default
       -q hackaru-api_development_mailers
     volumes:
-      - .:/hackaru
-      - ./tmp/sidekiq:/hackaru/tmp
+      - .:/hackaru:delegated
+      - /hackaru/tmp
       - /hackaru/node_modules
 
   mailcatcher:
