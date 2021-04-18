@@ -31,7 +31,8 @@ jobs:
         - ./cc-test-reporter before-build
       script:
         - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-        - docker-compose run --rm sut
+        - docker-compose run --rm api bin/setup
+        - docker-compose run --rm api
       after_script:
         - sudo sed -ie "s|/hackaru|$(pwd)|" coverage/.resultset.json
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

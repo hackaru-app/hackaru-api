@@ -1,0 +1,26 @@
+version: '6.0'
+
+environment:
+  COMPOSE_EXT: dev
+
+compose:
+  files:
+    - docker-compose.yml
+    - docker-compose.$COMPOSE_EXT.yml
+
+interaction:
+  setup:
+    service: api
+    command: bin/setup
+  bundle:
+    service: api
+    command: bundle
+  rspec:
+    service: api
+    environment:
+      COMPOSE_EXT: test
+    command: bundle exec rspec
+
+provision:
+  - cp .env.sample .env.development
+  - dip setup
