@@ -23,7 +23,7 @@ RSpec.describe Report, type: :model do
     it { is_expected.to validate_presence_of(:time_zone) }
 
     context 'when start_date < end_date' do
-      let(:end_date) { Time.zone.now.tomorrow }
+      let(:end_date) { Time.zone.now + 1.hour }
 
       it { is_expected.to be_valid }
     end
@@ -35,7 +35,7 @@ RSpec.describe Report, type: :model do
     end
 
     context 'when start_date > end_date' do
-      let(:end_date) { 1.day.ago }
+      let(:end_date) { 1.hour.ago }
 
       it { expect(instance.errors).to be_include :start_date }
     end

@@ -27,7 +27,7 @@ class Report
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :time_zone, presence: true
-  validates_date :start_date, before: :end_date
+  validates_datetime :start_date, before: :end_date
 
   def totals
     sums.transform_values(&:sum)
