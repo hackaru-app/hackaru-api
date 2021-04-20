@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
 
   scope :v1 do
-    use_doorkeeper
+    use_doorkeeper do
+      skip_controllers :applications, :authorized_applications
+    end
   end
 
   namespace :v1 do
