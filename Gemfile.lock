@@ -160,7 +160,7 @@ GEM
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
     jsonapi-renderer (0.2.2)
-    jwt (2.2.2)
+    jwt (2.2.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
