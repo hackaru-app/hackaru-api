@@ -9,7 +9,6 @@ module Authenticatable
     if scopes.present? && request.headers['Authorization']
       authenticate_doorkeeper!(*scopes)
     else
-      validate_xhr!
       authenticate_auth_token!
     end
   end
@@ -23,6 +22,8 @@ module Authenticatable
   end
 
   def authenticate_auth_token!
+    return render_api_error_of :authenticate_failed unless valid_xhr?
+
     @current_user = restore_auth_token&.user
     return render_api_error_of :authenticate_failed unless @current_user
 
