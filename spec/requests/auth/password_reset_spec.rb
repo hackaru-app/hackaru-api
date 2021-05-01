@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::Auth::PasswordReset', type: :request do
-  describe 'POST /v1/auth/password_reset/mails' do
+RSpec.describe 'Auth::PasswordReset', type: :request do
+  describe 'POST /auth/password_reset/mails' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:email) { user.email }
 
     before do
       perform_enqueued_jobs do
-        post '/v1/auth/password_reset/mails',
+        post '/auth/password_reset/mails',
              headers: headers,
              params: {
                user: {
@@ -35,14 +35,14 @@ RSpec.describe 'V1::Auth::PasswordReset', type: :request do
     end
   end
 
-  describe 'PUT /v1/auth/password_reset' do
+  describe 'PUT /auth/password_reset' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:token) { 'secret' }
 
     before do
       create(:password_reset_token, user: user, token: 'secret')
-      put '/v1/auth/password_reset',
+      put '/auth/password_reset',
           headers: headers,
           params: {
             user: {

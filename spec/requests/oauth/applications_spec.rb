@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::OAuth::Applications', type: :request do
-  describe 'POST /v1/oauth/applications' do
+RSpec.describe 'OAuth::Applications', type: :request do
+  describe 'POST /oauth/applications' do
     let(:headers) { xhr_header }
 
     before do
-      post '/v1/oauth/applications',
+      post '/oauth/applications',
            headers: headers,
            params: {
              application: {

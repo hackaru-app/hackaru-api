@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::Auth::AuthTokens', type: :request do
-  describe 'POST /v1/auth/auth_tokens' do
+RSpec.describe 'Auth::AuthTokens', type: :request do
+  describe 'POST /auth/auth_tokens' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
     let(:email) { user.email }
     let(:password) { user.password }
 
     before do
-      post '/v1/auth/auth_tokens',
+      post '/auth/auth_tokens',
            headers: headers,
            params: {
              user: {
@@ -46,13 +46,13 @@ RSpec.describe 'V1::Auth::AuthTokens', type: :request do
     end
   end
 
-  describe 'DELETE /v1/auth/auth_tokens' do
+  describe 'DELETE /auth/auth_tokens' do
     let(:headers) { xhr_header }
     let(:current_user) { create(:user) }
 
     before do
       login(current_user)
-      delete '/v1/auth/auth_token',
+      delete '/auth/auth_token',
              headers: headers
     end
 
