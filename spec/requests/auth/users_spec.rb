@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::Auth::Users', type: :request do
-  describe 'POST /v1/auth/users' do
+RSpec.describe 'Auth::Users', type: :request do
+  describe 'POST /auth/users' do
     let(:headers) { xhr_header }
     let(:email) { 'foo@example.com' }
 
     before do
       perform_enqueued_jobs do
-        post '/v1/auth/users',
+        post '/auth/users',
              headers: headers,
              params: {
                user: {
@@ -54,7 +54,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     end
   end
 
-  describe 'PUT /v1/auth/user' do
+  describe 'PUT /auth/user' do
     let(:headers) { xhr_header }
     let(:user) { create(:user, password: 'password') }
     let(:current_user) { user }
@@ -70,7 +70,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
     before do
       login(current_user)
-      put '/v1/auth/user',
+      put '/auth/user',
           headers: headers,
           params: params
     end
@@ -138,7 +138,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
     end
   end
 
-  describe 'DELETE /v1/auth/user' do
+  describe 'DELETE /auth/user' do
     let(:headers) { xhr_header }
     let(:user) { create(:user, password: 'password') }
     let(:current_user) { user }
@@ -146,7 +146,7 @@ RSpec.describe 'V1::Auth::Users', type: :request do
 
     before do
       login(current_user)
-      delete '/v1/auth/user',
+      delete '/auth/user',
              headers: headers,
              params: {
                user: {

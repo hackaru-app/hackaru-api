@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::OAuth::Applications', type: :request do
-  describe 'GET /v1/oauth/authorized_applications' do
+RSpec.describe 'OAuth::Applications', type: :request do
+  describe 'GET /oauth/authorized_applications' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
 
     before do
       login(user)
       create(:oauth_access_token, resource_owner_id: user.id)
-      get '/v1/oauth/authorized_applications',
+      get '/oauth/authorized_applications',
           headers: headers
     end
 
@@ -25,7 +25,7 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
     end
   end
 
-  describe 'DELETE /v1/oauth/authorized_applications' do
+  describe 'DELETE /oauth/authorized_applications' do
     let(:headers) { xhr_header }
     let(:application) { create(:oauth_application) }
     let(:user) { create(:user) }
@@ -48,7 +48,7 @@ RSpec.describe 'V1::OAuth::Applications', type: :request do
 
     before do
       login(user)
-      delete "/v1/oauth/authorized_applications/#{application.id}",
+      delete "/oauth/authorized_applications/#{application.id}",
              headers: headers
     end
 
