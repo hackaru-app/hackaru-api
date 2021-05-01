@@ -12,7 +12,7 @@
   "dependencies": {
     "c3": "^0.7.20",
     "normalize.css": "^8.0.1",
-    "puppeteer": "^8.0.0"
+    "puppeteer": "^9.0.0"
   },
   "lint-staged": {
     "*.js": [
