@@ -2,7 +2,7 @@
 
 module V1
   class SuggestionsController < ApplicationController
-    before_action only: %i[index] do
+    before_action only: :index do
       authenticate_user! 'suggestions:read'
     end
 

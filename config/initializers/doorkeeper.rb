@@ -109,7 +109,8 @@ Doorkeeper.configure do
                   'activities:write',
                   'projects:read',
                   'projects:write',
-                  'suggestions:read'
+                  'suggestions:read',
+                  'user:read'
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
