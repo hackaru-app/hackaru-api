@@ -4,13 +4,13 @@ class ActivityGroup
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  attribute :project
   attribute :description, :string
   attribute :duration, :integer
+  attribute :project
 
-  validates :project, presence: true
   validates :duration, presence: true
   validates :description, presence: true
+  validates :project, presence: true
 
   def self.generate(activities)
     activities

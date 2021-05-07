@@ -2,13 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe ReportSerializer, type: :serializer do
+RSpec.describe ReportBlueprint, type: :blueprint do
   describe '#to_json' do
     subject(:json) do
-      serializer = described_class.new(report)
-      ActiveModelSerializers::Adapter.create(serializer).to_json
+      described_class.render(report)
     end
 
+    let(:user) { create(:user) }
+    let(:project) { create(:project, user: user) }
     let(:now) { Time.zone.parse('2019-01-01T00:00:00') }
     let(:expected_json) do
       {
@@ -16,8 +17,7 @@ RSpec.describe ReportSerializer, type: :serializer do
           {
             id: project.id,
             color: project.color,
-            name: project.name,
-            user_id: project.user_id
+            name: project.name
           }
         ],
         labels: %w[
@@ -38,15 +38,12 @@ RSpec.describe ReportSerializer, type: :serializer do
             duration: 86_400,
             project: {
               color: project.color,
-              name: project.name,
-              user_id: project.user_id
+              name: project.name
             }
           }
         ]
       }.to_json
     end
-    let(:user) { create(:user) }
-    let(:project) { create(:project, user: user) }
 
     let(:report) do
       Report.new(

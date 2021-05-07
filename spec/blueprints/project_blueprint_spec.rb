@@ -2,11 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe ProjectSerializer, type: :serializer do
+RSpec.describe ProjectBlueprint, type: :blueprint do
   describe '#to_json' do
     subject(:json) do
-      serializer = described_class.new(project)
-      ActiveModelSerializers::Adapter.create(serializer).to_json
+      described_class.render(project)
     end
 
     let(:project) { create(:project) }
