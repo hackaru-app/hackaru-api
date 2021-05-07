@@ -5,12 +5,12 @@ module V1
     before_action :authenticate_user!
 
     def show
-      render json: current_user
+      render json: UserBlueprint.render(current_user)
     end
 
     def update
       current_user.update!(user_params)
-      render json: current_user
+      render json: UserBlueprint.render(current_user)
     end
 
     private

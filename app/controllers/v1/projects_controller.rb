@@ -11,22 +11,23 @@ module V1
     end
 
     def index
-      render json: current_user.projects
+      render json: ProjectBlueprint.render(current_user.projects)
     end
 
     def create
-      render json: current_user.projects.create!(project_params)
+      project = current_user.projects.create!(project_params)
+      render json: ProjectBlueprint.render(project)
     end
 
     def update
       project = current_user.projects.find(params[:id])
       project.update!(project_params)
-      render json: project
+      render json: ProjectBlueprint.render(project)
     end
 
     def destroy
       project = current_user.projects.find(params[:id])
-      render json: project.destroy
+      render json: ProjectBlueprint.render(project.destroy)
     end
 
     private

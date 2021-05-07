@@ -2,11 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe UserSerializer, type: :serializer do
+RSpec.describe UserBlueprint, type: :blueprint do
   describe '#to_json' do
     subject(:json) do
-      serializer = described_class.new(user)
-      ActiveModelSerializers::Adapter.create(serializer).to_json
+      described_class.render(user)
     end
 
     let(:user) { create(:user) }

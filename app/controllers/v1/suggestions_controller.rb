@@ -10,10 +10,9 @@ module V1
       param! :q, String, default: ''
       param! :limit, Integer, range: 0..100, default: 50
 
-      render json: current_user.activities.suggestions(
-        query: params[:q],
-        limit: params[:limit]
-      )
+      activities = current_user.activities
+      suggestions = activities.suggestions(query: params[:q], limit: params[:limit])
+      render json: SuggestionBlueprint.render(suggestions)
     end
   end
 end

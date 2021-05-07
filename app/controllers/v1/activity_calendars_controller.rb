@@ -7,7 +7,8 @@ module V1
     end
 
     def update
-      render json: ActivityCalendar.find_or_create_by(user: current_user)
+      activity_calendar = ActivityCalendar.find_or_create_by(user: current_user)
+      render json: ActivityCalendarBlueprint.render(activity_calendar)
     end
 
     def show
