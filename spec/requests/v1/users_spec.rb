@@ -14,6 +14,10 @@ RSpec.describe 'V1::Users', type: :request do
 
     it_behaves_like 'validates xhr'
 
+    it_behaves_like 'authorizes doorkeeper' do
+      let(:scopes) { 'user:read' }
+    end
+
     it 'returns ok' do
       expect(response).to have_http_status(:ok)
     end

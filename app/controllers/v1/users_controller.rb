@@ -2,7 +2,13 @@
 
 module V1
   class UsersController < ApplicationController
-    before_action :authenticate_user!
+    before_action only: :show do
+      authenticate_user! 'user:read'
+    end
+
+    before_action only: :update do
+      authenticate_user!
+    end
 
     def show
       render json: UserBlueprint.render(current_user)
