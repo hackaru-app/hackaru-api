@@ -62,16 +62,15 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'active_model_serializers', '~> 0.10.12'
 gem 'aws-sdk-rails'
 gem 'bcrypt'
+gem 'blueprinter'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
 gem 'faraday'
 gem 'groupdate'
 gem 'http_accept_language'
 gem 'icalendar'
-gem 'jwt'
 gem 'okcomputer'
 gem 'premailer-rails'
 gem 'rack-attack'

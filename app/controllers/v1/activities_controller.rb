@@ -13,29 +13,34 @@ module V1
     def index
       param! :start, Time, required: true
       param! :end, Time, required: true
-      render json: current_user
-        .activities
-        .includes(:project)
-        .between(params[:start], params[:end])
+
+      render json: ActivityBlueprint.render(
+        current_user
+          .activities
+          .includes(:project)
+          .between(params[:start], params[:end])
+      )
     end
 
     def working
-      render json: current_user.activities.find_by(stopped_at: nil)
+      activity = current_user.activities.find_by(stopped_at: nil)
+      render json: activity ? ActivityBlueprint.render(activity) : nil
     end
 
     def create
-      render json: current_user.activities.create!(activity_params)
+      activity = current_user.activities.create!(activity_params)
+      render json: ActivityBlueprint.render(activity)
     end
 
     def update
       activity = current_user.activities.find(params[:id])
       activity.update!(activity_params)
-      render json: activity
+      render json: ActivityBlueprint.render(activity)
     end
 
     def destroy
       activity = current_user.activities.find(params[:id])
-      render json: activity.destroy
+      render json: ActivityBlueprint.render(activity.destroy)
     end
 
     private

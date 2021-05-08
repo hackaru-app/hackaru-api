@@ -2,11 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe ActivityCalendarSerializer, type: :serializer do
+RSpec.describe ActivityCalendarBlueprint, type: :blueprint do
   describe '#to_json' do
     subject(:json) do
-      serializer = described_class.new(activity_calendar)
-      ActiveModelSerializers::Adapter.create(serializer).to_json
+      described_class.render(activity_calendar)
     end
 
     let(:activity_calendar) { create(:activity_calendar) }

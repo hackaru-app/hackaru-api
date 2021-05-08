@@ -15,7 +15,7 @@ module V1
       @report = build_report
       respond_to do |format|
         format.html { render :show, formats: [:html], layout: 'pdf' }
-        format.json { render json: @report }
+        format.json { render json: ReportBlueprint.render(@report) }
         format.csv { send_data generate_csv(@report.activities), type: :csv }
         format.pdf { render_pdf :show }
       end
