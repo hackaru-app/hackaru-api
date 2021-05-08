@@ -8,7 +8,7 @@ module Auth
       return render_api_error_of :sign_in_failed unless singed_in
 
       store_auth_token(*AuthToken.issue!(user))
-      render json: UserBlueprint.render(user)
+      render json: UserBlueprint.render(user, view: :auth)
     end
 
     def destroy

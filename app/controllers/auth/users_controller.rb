@@ -14,17 +14,17 @@ module Auth
       user = UserInitializer.new(user_params).create!
       store_auth_token(*AuthToken.issue!(user))
       UserMailer.sign_up(user).deliver_later
-      render json: UserBlueprint.render(user)
+      render json: UserBlueprint.render(user, view: :auth)
     end
 
     def update
       current_user.update!(user_params)
-      render json: UserBlueprint.render(current_user)
+      render json: UserBlueprint.render(current_user, view: :auth)
     end
 
     def destroy
       revoke_auth_token
-      render json: UserBlueprint.render(current_user.destroy!)
+      render json: UserBlueprint.render(current_user.destroy!, view: :auth)
     end
 
     private
