@@ -153,7 +153,6 @@ GEM
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    jwt (2.2.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -373,7 +372,6 @@ DEPENDENCIES
   http_accept_language
   icalendar
   json_spec
-  jwt
   listen (>= 3.0.5, < 3.6)
   okcomputer
   pg (>= 0.18, < 2.0)
