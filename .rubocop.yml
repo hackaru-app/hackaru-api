@@ -34,3 +34,7 @@ Metrics/BlockLength:
     - "spec/*_helper.rb"
     - "spec/support/**/*.rb"
     - "config/**/*.rb"
+
+# TODO: change to false
+Rails/EnvironmentVariableAccess:
+  AllowReads: true
