@@ -1,0 +1,22 @@
+name: slim-lint
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+
+      - name: Set up Ruby version
+        uses: ruby/setup-ruby@b161cb92f0e2f28d992f04f38fff204d84132c47
+        with:
+          bundler-cache: true
+
+      - name: Run slim-lint
+        run: bundle exec slim-lint app/views
