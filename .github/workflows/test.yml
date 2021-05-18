@@ -1,0 +1,32 @@
+name: test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+
+      - name: Run test
+        run: |
+          docker-compose run --rm api bin/setup
+          docker-compose run --rm api
+        env:
+          COMPOSE_FILE: docker-compose.test.yml
+
+      - name: Fix coverage paths
+        run: sudo sed -i -e "s|/hackaru|$(pwd)|" coverage/.resultset.json
+
+      - name: Publish code coverage
+        if: ${{ env.CC_TEST_REPORTER_ID != '' }}
+        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3
+        with:
+          coverageLocations: coverage/.resultset.json:simplecov
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
