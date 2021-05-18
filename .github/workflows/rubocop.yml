@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  run-lint:
+  run-rubocop:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
