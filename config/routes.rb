@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
 
   use_doorkeeper do
+    controllers authorizations: 'oauth/authorizations'
     skip_controllers :applications, :authorized_applications
   end
 
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
   # DEPRECATED
   scope :v1 do
     use_doorkeeper do
+      controllers authorizations: 'oauth/authorizations'
       skip_controllers :applications, :authorized_applications
     end
 
