@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_013812) do
+ActiveRecord::Schema.define(version: 2021_05_24_080651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,16 +138,6 @@ ActiveRecord::Schema.define(version: 2021_03_02_013812) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "webhooks", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "target_url", null: false
-    t.string "event", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "target_url", "event"], name: "index_webhooks_on_user_id_and_target_url_and_event", unique: true
-    t.index ["user_id"], name: "index_webhooks_on_user_id"
-  end
-
   add_foreign_key "activities", "projects", on_delete: :nullify
   add_foreign_key "activities", "users", on_delete: :cascade
   add_foreign_key "activity_calendars", "users", on_delete: :cascade
@@ -156,5 +146,4 @@ ActiveRecord::Schema.define(version: 2021_03_02_013812) do
   add_foreign_key "password_reset_tokens", "users", on_delete: :cascade
   add_foreign_key "projects", "users", on_delete: :cascade
   add_foreign_key "refresh_tokens", "users", on_delete: :cascade
-  add_foreign_key "webhooks", "users", on_delete: :cascade
 end
