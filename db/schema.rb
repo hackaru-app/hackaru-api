@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_080651) do
+ActiveRecord::Schema.define(version: 2021_05_24_082032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,18 +114,6 @@ ActiveRecord::Schema.define(version: 2021_05_24_080651) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "refresh_tokens", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "token", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "client_id", null: false
-    t.datetime "revoked_at"
-    t.index ["client_id"], name: "index_refresh_tokens_on_client_id", unique: true
-    t.index ["token"], name: "index_refresh_tokens_on_token", unique: true
-    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "password_digest", default: "", null: false
     t.string "email", null: false
@@ -145,5 +133,4 @@ ActiveRecord::Schema.define(version: 2021_05_24_080651) do
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "password_reset_tokens", "users", on_delete: :cascade
   add_foreign_key "projects", "users", on_delete: :cascade
-  add_foreign_key "refresh_tokens", "users", on_delete: :cascade
 end
