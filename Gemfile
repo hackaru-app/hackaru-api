@@ -55,7 +55,7 @@ group :test do
   gem 'json_spec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'simplecov', '< 0.18', require: false
+  gem 'simplecov', '< 0.22', require: false
   gem 'webmock'
 end
 
