@@ -110,7 +110,7 @@ GEM
       addressable
     diff-lcs (1.4.4)
     docile (1.4.0)
-    doorkeeper (5.5.1)
+    doorkeeper (5.5.2)
       railties (>= 5)
     doorkeeper-i18n (5.2.2)
       doorkeeper (>= 5.2)
