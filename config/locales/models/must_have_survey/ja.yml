@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      must_have_survey: 'ユーザアンケート'
+    errors:
+      models:
+        must_have_survey:
+          attributes:
+            user_id:
+              taken: 'は既に回答済みです'

@@ -32,7 +32,7 @@ RSpec.describe 'Auth::AuthTokens', type: :request do
     end
 
     context 'when email is invalid' do
-      let(:email) { 'example@example.com' }
+      let(:email) { 'test@example.com' }
       let(:password) { user.password }
 
       it { expect(response).to have_http_status(:bad_request) }
