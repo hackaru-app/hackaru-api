@@ -57,11 +57,11 @@ RSpec.describe 'V1::Users', type: :request do
     end
 
     context 'when params have email' do
-      let(:user) { create(:user, email: 'example@example.com') }
+      let(:user) { create(:user, email: 'test@example.com') }
       let(:params) { { user: { email: 'changed@example.com' } } }
 
       it { expect(response).to have_http_status(:ok) }
-      it { expect(user.reload.email).to eq('example@example.com') }
+      it { expect(user.reload.email).to eq('test@example.com') }
     end
 
     context 'when params have password' do

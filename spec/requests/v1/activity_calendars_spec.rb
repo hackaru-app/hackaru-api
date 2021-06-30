@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'V1::ActivityCalendar', type: :request do
+RSpec.describe 'V1::ActivityCalendars', type: :request do
   describe 'GET /v1/activity_calendar' do
     let(:activity_calendar) { create(:activity_calendar) }
     let(:params) do
