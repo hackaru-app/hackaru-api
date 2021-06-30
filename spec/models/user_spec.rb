@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { is_expected.to have_one(:password_reset_token).dependent(:destroy) }
+    it { is_expected.to have_one(:must_have_survey).dependent(:nullify) }
     it { is_expected.to have_many(:projects).dependent(:destroy) }
     it { is_expected.to have_many(:activities).dependent(:destroy) }
     it { is_expected.to have_many(:auth_tokens).dependent(:destroy) }
@@ -17,7 +18,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to validate_presence_of(:email) }
       it { is_expected.to validate_uniqueness_of(:email) }
       it { is_expected.to validate_length_of(:email).is_at_most(191) }
-      it { is_expected.to allow_value('example@example.com').for(:email) }
+      it { is_expected.to allow_value('test@example.com').for(:email) }
       it { is_expected.not_to allow_value('invalid').for(:email) }
     end
 
@@ -55,16 +56,24 @@ RSpec.describe User, type: :model do
       it { expect(described_class).not_to exist(id: user.id) }
     end
 
-    context 'when user has any password_reset_token' do
+    context 'when user has password_reset_token' do
       let(:user) { create(:password_reset_token).user }
 
       it { expect(described_class).not_to exist(id: user.id) }
     end
 
-    context 'when user has any auth_token' do
+    context 'when user has auth_token' do
       let(:user) { create(:auth_token).user }
 
       it { expect(described_class).not_to exist(id: user.id) }
+    end
+
+    context 'when user has must_have_survey' do
+      let(:must_have_survey) { create(:must_have_survey) }
+      let(:user) { must_have_survey.user }
+
+      it { expect(described_class).not_to exist(id: user.id) }
+      it { expect(MustHaveSurvey).to exist(id: must_have_survey.id) }
     end
   end
 

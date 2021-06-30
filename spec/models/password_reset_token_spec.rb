@@ -14,12 +14,12 @@ RSpec.describe PasswordResetToken, type: :model do
       travel_to('2019-01-01 00:00:00') { e.run }
     end
 
-    it 'issue password reset token' do
+    it 'issues password reset token' do
       described_class.issue(user)
       expect(user.password_reset_token).not_to be_nil
     end
 
-    it 'set expired_at correctly' do
+    it 'sets expired_at correctly' do
       described_class.issue(user)
       expect(user.password_reset_token.expired_at).to eq('2019-01-01 00:05:00')
     end
@@ -77,7 +77,7 @@ RSpec.describe PasswordResetToken, type: :model do
   describe '#hash_token' do
     let(:password_reset_token) { create(:password_reset_token) }
 
-    it 'hash token before save' do
+    it 'hashes token before save' do
       expect(password_reset_token.token).to start_with('$2a$')
     end
   end

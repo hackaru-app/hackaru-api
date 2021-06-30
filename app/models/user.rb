@@ -20,6 +20,10 @@ class User < ApplicationRecord
     has_many :auth_tokens
   end
 
+  with_options dependent: :nullify do
+    has_one :must_have_survey
+  end
+
   def reset_password(token:, password:, password_confirmation:)
     return false if password_reset_token&.expired?
     return false if password_reset_token != token
