@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { is_expected.to have_one(:password_reset_token).dependent(:delete) }
-    it { is_expected.to have_many(:projects).dependent(:delete_all) }
-    it { is_expected.to have_many(:activities).dependent(:delete_all) }
-    it { is_expected.to have_many(:auth_tokens).dependent(:delete_all) }
+    it { is_expected.to have_one(:password_reset_token).dependent(:destroy) }
+    it { is_expected.to have_many(:projects).dependent(:destroy) }
+    it { is_expected.to have_many(:activities).dependent(:destroy) }
+    it { is_expected.to have_many(:auth_tokens).dependent(:destroy) }
   end
 
   describe 'validations' do

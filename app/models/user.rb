@@ -12,12 +12,9 @@ class User < ApplicationRecord
   validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone::MAPPING.values }
   validates :locale, presence: true, inclusion: { in: :locales }
 
-  with_options dependent: :delete do
+  with_options dependent: :destroy do
     has_one :password_reset_token
     has_one :activity_calendar
-  end
-
-  with_options dependent: :delete_all do
     has_many :projects
     has_many :activities
     has_many :auth_tokens
