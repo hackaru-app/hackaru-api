@@ -348,9 +348,10 @@ RSpec.describe Report, type: :model do
     let(:user) { create(:user) }
 
     context 'when user has projects' do
+      before { create_list(:project, 2, user: user) }
+
       it 'returns projects correctly' do
-        projects = create_list(:project, 2, user: user)
-        expect(projects).to eq projects
+        expect(projects).to eq user.projects
       end
     end
 
