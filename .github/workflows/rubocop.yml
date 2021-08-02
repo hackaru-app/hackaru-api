@@ -2,10 +2,10 @@ name: rubocop
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   run-rubocop:
     runs-on: ubuntu-latest
