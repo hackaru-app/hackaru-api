@@ -1,29 +1,29 @@
 .dot-text {
-  width: 100%;
-  vertical-align: baseline;
   align-items: center;
-  overflow: hidden;
   margin: 0;
+  overflow: hidden;
+  vertical-align: baseline;
+  width: 100%;
   .dot {
-    width: 8px;
-    height: 8px;
-    display: inline-block;
     border-radius: 50%;
+    display: inline-block;
+    height: 8px;
     margin-right: 15px;
+    width: 8px;
   }
   .text {
-    float: left;
-    display: block;
-    width: 80%;
-    padding-right: 20px;
     box-sizing: border-box;
+    display: block;
+    float: left;
+    overflow: hidden;
+    padding-right: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    width: 80%;
   }
   .duration {
-    float: right;
     display: block;
+    float: right;
     font-family: $font-family-duration;
   }
 }

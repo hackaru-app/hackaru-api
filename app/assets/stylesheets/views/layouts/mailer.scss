@@ -1,12 +1,12 @@
 body {
   color: $text;
+  font-family: $font-family;
   font-size: $font-size;
   line-height: $line-height;
-  font-family: $font-family;
 }
 .body-wrapper {
-  padding: 40px 0;
   background-color: $grey-f5f5f5;
+  padding: 40px 0;
 }
 a {
   color: $text-primary;
@@ -16,36 +16,36 @@ a {
 }
 .wrapper {
   background-color: $white;
-  padding: 55px;
-  padding-bottom: 40px;
-  margin-bottom: 40px;
-  box-sizing: border-box;
   border-bottom: 3px solid $border;
-  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
+  margin-bottom: 40px;
   max-width: 650px;
   min-width: 500px;
+  padding: 55px;
+  padding-bottom: 40px;
+  width: 100%;
 }
 .title {
   align-items: center;
+  font-size: 22px;
   font-weight: normal;
   margin: 0;
-  font-size: 22px;
   .icon {
     margin-right: 10px;
     width: 14px;
   }
 }
 .link-button {
-  margin-top: 25px;
-  display: inline-block;
-  padding: 15px 20px;
   background-color: $cyan;
-  line-height: 1;
+  border: 0;
   border-radius: 3px;
   color: $white;
+  display: inline-block;
+  line-height: 1;
+  margin-top: 25px;
+  padding: 15px 20px;
   text-decoration: none;
-  border: 0;
 }
 .footer {
   span {
@@ -57,7 +57,7 @@ a {
   }
 }
 .content {
-  padding: 40px 0;
-  margin-bottom: 20px;
   border-bottom: 1px $border solid;
+  margin-bottom: 20px;
+  padding: 40px 0;
 }
