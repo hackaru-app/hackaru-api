@@ -1,26 +1,26 @@
 @import '~c3/c3.min';
 
 .logo-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid $border-dark;
-  padding-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 .page .title {
-  font-weight: normal;
-  margin: 0;
-  font-size: 24px;
   align-items: center;
   display: flex;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0;
   margin-right: 20px;
 }
 .page .header {
-  margin-top: 25px;
-  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
+  margin-top: 25px;
   p {
     font-size: 16px;
     margin: 0;
@@ -33,24 +33,24 @@
 #bar-chart {
   box-sizing: border-box;
   height: 250px;
-  margin-left: -30px;
   margin-bottom: 20px;
+  margin-left: -30px;
 }
 #donut-chart {
-  width: 250px;
-  height: 250px;
   flex-shrink: 1;
+  height: 250px;
+  width: 250px;
 }
 .content {
-  margin-top: 50px;
   display: flex;
   justify-content: space-between;
+  margin-top: 50px;
 }
 .projects {
-  width: 100%;
+  box-sizing: border-box;
   padding: 0;
   padding-right: 60px;
-  box-sizing: border-box;
+  width: 100%;
 }
 .projects li {
   height: 40px;
@@ -58,19 +58,19 @@
 }
 .c3-axis-y text,
 .c3-axis-x text {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 }
 .c3-chart-arc path {
   stroke-width: 0;
 }
 .activity-groups {
+  box-sizing: border-box;
   padding: 0;
   padding-top: 10px;
-  box-sizing: border-box;
 }
 .activity-groups li {
-  padding: 18px 0;
   border-bottom: 1px $border solid;
   list-style-type: none;
   margin: 0;
+  padding: 18px 0;
 }

@@ -3,7 +3,7 @@ $grey-333: #333c4f;
 $grey-666: #68757d;
 $grey-999: #9aa5ab;
 $grey-ccc: #cdd0d1;
-$grey-eee: #eeeeee;
+$grey-eee: #eee;
 $grey-f0f0f0: #f0f1f2;
 $grey-f5f5f5: #f5f6f7;
 $grey-fafafa: #fafafc;
@@ -48,9 +48,9 @@ $border-dark: $grey-eee;
 $background: $grey-f5f5f5;
 
 // Animation
-$animation-duration: .25s;
+$animation-duration: 0.25s;
 
 // MediaQueries
 $breakpoints: (
-  'small': 640px
+  'small': 640px,
 );
