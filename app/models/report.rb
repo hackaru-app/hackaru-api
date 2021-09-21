@@ -81,7 +81,7 @@ class Report
 
   def series
     dates = [start_date]
-    dates << dates.last + 1.send(period) while dates.last <= end_date
+    dates << (dates.last + 1.send(period)) while dates.last <= end_date
     dates.pop
     dates
   end

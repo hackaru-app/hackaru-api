@@ -12,7 +12,7 @@ div class="bar-chart-container" style="height: #{max_height}px"
   - sums_by_date.each_with_index do |sums, date_index|
     div class="date" style="height: #{max_height}px; width: #{100.0 / sums_by_date.count}%"
 
-      - height = max_height - sums.sum * 1.00 / max_sum * max_height
+      - height = max_height - (sums.sum * 1.00 / max_sum * max_height)
       div class="bar" style="height: #{height}px; background-color: transparent;"
 
       - sums.each_with_index do |sum, sum_index|
