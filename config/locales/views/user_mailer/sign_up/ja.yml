@@ -22,7 +22,7 @@ ja:
         instruction_2: 'Chromeのメニューを開き「ホーム画面に追加」をタップして完了です。'
         website: 'Webサイト'
       use_desktop:
-        title: 'デスクトップ版で自動で計測する。'
-        description: 'Hackaruはデスクトップ版からでも使用できます。自動計測を使えば、好きなアプリを使用している時間を自動で計測できます。Windows、MacOS、Linux に対応しています。'
+        title: 'デスクトップ版で計測する。'
+        description: 'デスクトップ版のアプリをインストールすれば、メニューバーから素早く計測を開始できます。Windows、Mac、Linuxに対応しています。'
         download: 'デスクトップ版をダウンロード'
         thanks: 'それでは、Hackaruをお楽しみください！😉'
