@@ -31,7 +31,7 @@ module Rack
         'Content-Type' => 'application/json',
         'RateLimit-Limit' => limit.to_s,
         'RateLimit-Remaining' => '0',
-        'RateLimit-Reset' => (now + (period - now % period)).to_s
+        'RateLimit-Reset' => (now + (period - (now % period))).to_s
       }
     end
 
