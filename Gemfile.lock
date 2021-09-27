@@ -112,7 +112,7 @@ GEM
     docile (1.4.0)
     doorkeeper (5.5.3)
       railties (>= 5)
-    doorkeeper-i18n (5.2.2)
+    doorkeeper-i18n (5.2.3)
       doorkeeper (>= 5.2)
     erubi (1.10.0)
     et-orbi (1.2.4)
