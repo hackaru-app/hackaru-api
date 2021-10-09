@@ -30,7 +30,6 @@ ja:
         message: 'パラメータが正しくありません。'
         status: 422
     rails_param:
-      param:
-        invalid_parameter_error:
-          message: 'パラメータが正しくありません。'
-          status: 422
+      invalid_parameter_error:
+        message: 'パラメータが正しくありません。'
+        status: 422
