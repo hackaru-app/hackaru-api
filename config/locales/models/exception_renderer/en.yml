@@ -30,7 +30,6 @@ en:
         message: 'The request has invalid parameter.'
         status: 422
     rails_param:
-      param:
-        invalid_parameter_error:
-          message: 'The request has invalid parameter.'
-          status: 422
+      invalid_parameter_error:
+        message: 'The request has invalid parameter.'
+        status: 422
