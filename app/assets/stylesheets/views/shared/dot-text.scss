@@ -4,6 +4,7 @@
   overflow: hidden;
   vertical-align: baseline;
   width: 100%;
+
   .dot {
     border-radius: 50%;
     display: inline-block;
@@ -11,6 +12,7 @@
     margin-right: 15px;
     width: 8px;
   }
+
   .text {
     box-sizing: border-box;
     display: block;
@@ -21,6 +23,7 @@
     white-space: nowrap;
     width: 80%;
   }
+
   .duration {
     display: block;
     float: right;

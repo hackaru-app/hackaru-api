@@ -4,16 +4,20 @@ body {
   font-size: $font-size;
   line-height: $line-height;
 }
+
 .body-wrapper {
   background-color: $grey-f5f5f5;
   padding: 40px 0;
 }
+
 a {
   color: $text-primary;
 }
+
 .logo-header {
   margin-bottom: 10px;
 }
+
 .wrapper {
   background-color: $white;
   border-bottom: 3px solid $border;
@@ -26,16 +30,19 @@ a {
   padding-bottom: 40px;
   width: 100%;
 }
+
 .title {
   align-items: center;
   font-size: 22px;
   font-weight: normal;
   margin: 0;
+
   .icon {
     margin-right: 10px;
     width: 14px;
   }
 }
+
 .link-button {
   background-color: $cyan;
   border: 0;
@@ -47,15 +54,18 @@ a {
   padding: 15px 20px;
   text-decoration: none;
 }
+
 .footer {
   span {
     color: $grey-ccc;
     margin: 0 5px;
   }
+
   a {
     text-decoration: none;
   }
 }
+
 .content {
   border-bottom: 1px $border solid;
   margin-bottom: 20px;
