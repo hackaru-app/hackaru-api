@@ -4,25 +4,30 @@
   padding-top: 10px;
   width: 100%;
 }
+
 .bar-chart-container .date {
   border-bottom: 1px solid $border;
   border-right: 1px solid $border;
   box-sizing: border-box;
   float: left;
+
   &:last-child {
     border-right: 0;
   }
 }
+
 .bar-chart-container .bars {
   height: 100%;
   position: relative;
   width: 100%;
 }
+
 .bar-chart-container .bar {
   margin: 0 auto;
   top: 0;
   width: 65%;
 }
+
 .bar-chart-container .label {
   display: block;
   font-size: 12px;

@@ -1,32 +1,39 @@
 .header {
   float: left;
   margin-bottom: 40px;
+
   h1 {
     margin-right: 10px;
   }
+
   p {
     color: $text-light;
     font-size: 18px;
     margin: 0;
     margin-top: 5px;
+
     span {
       margin: 0 5px;
     }
   }
 }
+
 .projects {
   margin-top: 40px;
   padding: 0;
 }
+
 .projects li {
   list-style-type: none;
   padding: 10px 0;
 }
+
 .activity-groups {
   padding: 0;
   padding-bottom: 70px;
   padding-top: 10px;
 }
+
 .activity-groups li {
   border-bottom: 1px $border solid;
   list-style-type: none;

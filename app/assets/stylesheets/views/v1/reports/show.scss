@@ -8,6 +8,7 @@
   margin-bottom: 40px;
   padding-bottom: 40px;
 }
+
 .page .title {
   align-items: center;
   display: flex;
@@ -16,58 +17,70 @@
   margin: 0;
   margin-right: 20px;
 }
+
 .page .header {
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
   margin-top: 25px;
+
   p {
     font-size: 16px;
     margin: 0;
     margin-top: 15px;
+
     span {
       margin: 0 5px;
     }
   }
 }
+
 #bar-chart {
   box-sizing: border-box;
   height: 250px;
   margin-bottom: 20px;
   margin-left: -30px;
 }
+
 #donut-chart {
   flex-shrink: 1;
   height: 250px;
   width: 250px;
 }
+
 .content {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
 }
+
 .projects {
   box-sizing: border-box;
   padding: 0;
   padding-right: 60px;
   width: 100%;
 }
+
 .projects li {
   height: 40px;
   list-style-type: none;
 }
+
 .c3-axis-y text,
 .c3-axis-x text {
   font-family: 'Roboto', sans-serif;
 }
+
 .c3-chart-arc path {
   stroke-width: 0;
 }
+
 .activity-groups {
   box-sizing: border-box;
   padding: 0;
   padding-top: 10px;
 }
+
 .activity-groups li {
   border-bottom: 1px $border solid;
   list-style-type: none;
