@@ -33,7 +33,7 @@
     "lint-staged": "^11.2.6",
     "mini-css-extract-plugin": "^2.4.3",
     "prettier": "^2.4.1",
-    "sass": "^1.43.3",
+    "sass": "^1.43.4",
     "sass-loader": "^12.2.0",
     "style-resources-loader": "^1.4.1",
     "stylelint": "^13.13.1",
