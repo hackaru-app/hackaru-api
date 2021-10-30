@@ -6,4 +6,10 @@ module.exports = {
     'scss/at-rule-no-unknown': true,
     'order/properties-alphabetical-order': true,
   },
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
 };
