@@ -8,7 +8,7 @@ RUN apk -U upgrade \
 COPY Gemfile Gemfile.lock $API_DIR/
 RUN bundle install -j4
 
-FROM node:16.12.0-alpine as node
+FROM node:17.0.1-alpine as node
 ENV API_DIR /hackaru
 WORKDIR $API_DIR
 COPY package.json \
