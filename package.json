@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "eslint": "eslint --ext .js --ignore-path .gitignore",
-    "stylelint": "stylelint '**/*.scss'",
+    "stylelint": "stylelint '**/*.scss' --ignore-path .gitignore",
+    "prettier": "prettier --ignore-path .gitignore",
     "build": "webpack -c webpack.prod.js",
     "dev": "webpack -c webpack.dev.js",
     "postinstall": "husky install"
@@ -17,10 +18,12 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn eslint --fix"
+      "yarn eslint --fix",
+      "yarn prettier --write"
     ],
     "*.scss": [
-      "yarn stylelint --fix"
+      "yarn stylelint --fix",
+      "yarn prettier --write"
     ]
   },
   "devDependencies": {
@@ -28,7 +31,6 @@
     "css-loader": "^6.5.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.0.2",
     "mini-css-extract-plugin": "^2.4.4",
@@ -40,9 +42,8 @@
     "style-resources-loader": "^1.4.1",
     "stylelint": "^14.1.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^24.0.0",
+    "stylelint-config-standard-scss": "^2.0.1",
     "stylelint-order": "^5.0.0",
-    "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.0.0",
     "webpack": "^5.64.0",
     "webpack-cli": "^4.9.1",

@@ -1,11 +1,6 @@
 module.exports = {
-  plugins: ['stylelint-order', 'stylelint-scss'],
-  extends: ['stylelint-config-standard', 'stylelint-prettier/recommended'],
-  rules: {
-    'at-rule-no-unknown': null,
-    'scss/at-rule-no-unknown': true,
-    'order/properties-alphabetical-order': true,
-  },
+  plugins: ['stylelint-order'],
+  extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier'],
   overrides: [
     {
       files: ['**/*.scss'],

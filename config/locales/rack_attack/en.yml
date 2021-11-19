@@ -1,5 +1,5 @@
 en:
   rack_attack:
     throttled:
-        message: 'Retry later.'
-        status: 429
+      message: 'Retry later.'
+      status: 429

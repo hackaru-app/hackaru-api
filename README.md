@@ -1,4 +1,5 @@
 # hackaru-api
+
 The API server for Hackaru.  
 An open source and simple time tracking app.
 
@@ -7,10 +8,12 @@ An open source and simple time tracking app.
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
+
 Want to know that you can do with Hackaru?  
-For more information on the app, please see the main repository [README](https://github.com/hackaru-app/hackaru).　
+For more information on the app, please see the main repository [README](https://github.com/hackaru-app/hackaru).
 
 ## Roles
+
 The API server provides REST API to web server and desktop app.
 
 ## Feedback
@@ -20,7 +23,7 @@ Please let us know via [Issues](https://github.com/hackaru-app/hackaru/issues). 
 
 ## Quickstart
 
-You can run Hackaru on your local easily using [docker-compose](https://docs.docker.com/compose/install).  
+You can run Hackaru on your local easily using [docker-compose](https://docs.docker.com/compose/install).
 
 It's also necessary to run the web server if you want to login to Hackaru on your browser.  
 Please see the web server [README](https://github.com/hackaru-app/hackaru-web).

@@ -3,6 +3,6 @@ en:
     password_reset:
       subject: 'Reset Password instruction'
       title: 'Someone has requested a reset your password.'
-      description: 'You can click the link below if you want reset password.
-        If you didn''t request this, please remove this email.'
+      description: "You can click the link below if you want reset password.
+        If you didn't request this, please remove this email."
       reset_password: 'Reset password'
