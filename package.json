@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "c3": "^0.7.20",
-    "normalize.css": "^8.0.1",
-    "puppeteer": "^11.0.0"
+    "puppeteer": "^11.0.0",
+    "ress": "^4.0.0"
   },
   "lint-staged": {
     "*.js": [

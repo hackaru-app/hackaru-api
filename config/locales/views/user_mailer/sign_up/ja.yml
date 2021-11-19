@@ -23,6 +23,6 @@ ja:
         website: 'Webサイト'
       use_desktop:
         title: 'デスクトップ版で計測する。'
-        description: 'デスクトップ版のアプリをインストールすれば、メニューバーから素早く計測を開始できます。Windows、Mac、Linuxに対応しています。'
+        description: 'デスクトップ版のアプリをインストールして素早く計測を開始できます。Windows、Mac、Linuxに対応しています。'
         download: 'デスクトップ版をダウンロード'
         thanks: 'それでは、Hackaruをお楽しみください！😉'

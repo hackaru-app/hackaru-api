@@ -24,6 +24,6 @@ en:
       use_desktop:
         title: 'Use with Desktop app'
         description: 'Hackaru can also be used from the desktop version.
-          By installing the desktop app, you can quickly measure the time from the menu-bar. Supports Windows, Mac and Linux.'
+          By installing the desktop app, you can quickly measure the time. Supports Windows, Mac and Linux.'
         download: 'Download desktop app'
         thanks: 'Enjoy using Hackaru! 😉'
