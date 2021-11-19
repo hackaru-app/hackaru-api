@@ -7,7 +7,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['plugin:prettier/recommended', 'prettier'],
+  extends: ['prettier'],
   rules: {
     'no-unused-vars': [
       'error',

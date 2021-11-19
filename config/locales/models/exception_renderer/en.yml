@@ -1,7 +1,7 @@
 en:
   exception_renderer:
     default:
-      message: 'We''re sorry, but something went wrong.'
+      message: "We're sorry, but something went wrong."
       status: 500
     argument_error:
       message: 'The request has invalid parameter.'
