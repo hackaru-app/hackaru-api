@@ -2007,11 +2007,6 @@ normalize-selector@^0.2.0:
   resolved "https://registry.yarnpkg.com/normalize-selector/-/normalize-selector-0.2.0.tgz#d0b145eb691189c63a78d201dc4fdb1293ef0c03"
   integrity sha1-0LFF62kRicY6eNIB3E/bEpPvDAM=
 
-normalize.css@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
-  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
-
 npm-run-path@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-4.0.1.tgz#b7ecd1e5ed53da8e37a55e1c2269e0b97ed748ea"
@@ -2374,6 +2369,11 @@ resolve@^1.10.0, resolve@^1.9.0:
   dependencies:
     is-core-module "^2.2.0"
     path-parse "^1.0.6"
+
+ress@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ress/-/ress-4.0.0.tgz#784200da045548f67c26ca35dc18ff764b924c7d"
+  integrity sha512-awpQM9e6VL6ljw4XuH/ww2q4IEU0SAY9Lcvu4h4nIB5c5XhTUXH3Me8WA0zW3s3naU79lY8uVUJg30dvKJ5cNw==
 
 restore-cursor@^3.1.0:
   version "3.1.0"
