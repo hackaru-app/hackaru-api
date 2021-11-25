@@ -95,7 +95,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     blueprinter (0.25.3)
-    bootsnap (1.9.1)
+    bootsnap (1.9.3)
       msgpack (~> 1.0)
     brakeman (5.1.2)
     builder (3.2.4)
@@ -416,7 +416,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.0.3p157
 
 BUNDLED WITH
-   2.2.22
+   2.2.32
