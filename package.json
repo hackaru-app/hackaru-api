@@ -34,7 +34,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
     "mini-css-extract-plugin": "^2.4.5",
-    "postcss": "^8.3.11",
+    "postcss": "^8.4.4",
     "postcss-scss": "^4.0.2",
     "prettier": "^2.4.1",
     "sass": "^1.43.4",
