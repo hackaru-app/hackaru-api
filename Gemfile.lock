@@ -353,7 +353,8 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
-    validates_timeliness (6.0.0.alpha1)
+    validates_timeliness (6.0.0.beta2)
+      activemodel (>= 6.0.0, < 7)
       timeliness (>= 0.3.10, < 1)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -412,7 +413,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   timeliness-i18n
   tzinfo-data
-  validates_timeliness (~> 6.0.0.alpha1)
+  validates_timeliness (~> 6.0.0.beta2)
   webmock
 
 RUBY VERSION
