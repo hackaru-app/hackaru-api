@@ -41,7 +41,8 @@ module Auth
         :password,
         :password_confirmation,
         :time_zone,
-        :locale
+        :locale,
+        :start_day
       )
     end
   end

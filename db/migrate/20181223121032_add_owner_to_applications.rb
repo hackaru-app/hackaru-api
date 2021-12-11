@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddOwnerToApplication < ActiveRecord::Migration[5.2]
+class AddOwnerToApplications < ActiveRecord::Migration[5.2]
   def change
     change_table :oauth_applications, bulk: true do |t|
       t.integer :owner_id, null: true

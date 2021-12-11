@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { in: 6..50 }, allow_nil: true
   validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone::MAPPING.values }
   validates :locale, presence: true, inclusion: { in: :locales }
+  validates :start_day, presence: true, inclusion: { in: 0..6 }
 
   with_options dependent: :destroy do
     has_one :password_reset_token

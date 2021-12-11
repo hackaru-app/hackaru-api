@@ -10,7 +10,8 @@ RSpec.describe UserInitializer, type: :model do
         password: 'password',
         password_confirmation: 'password',
         time_zone: 'Etc/UTC',
-        locale: 'en'
+        locale: 'en',
+        start_day: 0
       ).create!
     end
 
@@ -18,5 +19,6 @@ RSpec.describe UserInitializer, type: :model do
     it { expect(instance.password).to eq('password') }
     it { expect(instance.projects.size).to eq(3) }
     it { expect(instance.time_zone).to eq('Etc/UTC') }
+    it { expect(instance.start_day).to eq(0) }
   end
 end

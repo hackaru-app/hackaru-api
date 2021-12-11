@@ -31,7 +31,8 @@ RSpec.describe 'V1::Users', type: :request do
         user: {
           time_zone: 'Etc/UTC',
           receive_week_report: true,
-          receive_month_report: true
+          receive_month_report: true,
+          start_day: 0
         }
       }
     end
@@ -48,6 +49,7 @@ RSpec.describe 'V1::Users', type: :request do
       it { expect(user.reload.time_zone).to eq('Etc/UTC') }
       it { expect(user.reload.receive_week_report).to be(true) }
       it { expect(user.reload.receive_month_report).to be(true) }
+      it { expect(user.reload.start_day).to eq(0) }
     end
 
     context 'when params are missing' do

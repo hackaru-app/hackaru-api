@@ -8,4 +8,5 @@ ja:
         password: 'パスワード'
         password_confirmation: '確認用パスワード'
         time_zone: 'タイムゾーン'
+        start_day: '週の始まり'
         locale: '言語'
