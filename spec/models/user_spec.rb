@@ -31,13 +31,20 @@ RSpec.describe User, type: :model do
     describe 'time_zone' do
       let(:mapping) { ActiveSupport::TimeZone::MAPPING.values }
 
+      it { is_expected.to validate_presence_of(:time_zone) }
       it { is_expected.to validate_inclusion_of(:time_zone).in_array(mapping) }
     end
 
     describe 'locale' do
       let(:array) { I18n.available_locales.map(&:to_s) }
 
+      it { is_expected.to validate_presence_of(:locale) }
       it { is_expected.to validate_inclusion_of(:locale).in_array(array) }
+    end
+
+    describe 'start_day' do
+      it { is_expected.to validate_presence_of(:start_day) }
+      it { is_expected.to validate_inclusion_of(:start_day).in_range(0..6) }
     end
   end
 

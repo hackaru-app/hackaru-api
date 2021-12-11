@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddClientIdToRefreshToken < ActiveRecord::Migration[5.2]
+class AddClientIdToRefreshTokens < ActiveRecord::Migration[5.2]
   def change
     change_table :refresh_tokens, bulk: true do |t|
       t.string :client_id

@@ -16,7 +16,8 @@ RSpec.describe UserBlueprint, type: :blueprint do
           time_zone: user.time_zone,
           locale: user.locale,
           receive_week_report: user.receive_week_report,
-          receive_month_report: user.receive_month_report
+          receive_month_report: user.receive_month_report,
+          start_day: user.start_day
         }.to_json
       end
 
@@ -38,7 +39,8 @@ RSpec.describe UserBlueprint, type: :blueprint do
           time_zone: user.time_zone,
           locale: user.locale,
           receive_week_report: user.receive_week_report,
-          receive_month_report: user.receive_month_report
+          receive_month_report: user.receive_month_report,
+          start_day: user.start_day
         }.to_json
       end
 

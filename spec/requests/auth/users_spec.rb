@@ -16,7 +16,8 @@ RSpec.describe 'Auth::Users', type: :request do
                  email: email,
                  password: 'password',
                  time_zone: 'Etc/UTC',
-                 locale: 'en'
+                 locale: 'en',
+                 start_day: 0
                }
              }
       end
