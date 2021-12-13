@@ -22,7 +22,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -47,13 +48,14 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when period is week but user does not have activities in range' do
+    context 'when period is week but user has no activities in range' do
       let(:args) { [{ 'period' => 'week' }] }
       let(:user) do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -80,13 +82,14 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when period is month but user does not have activities in range' do
+    context 'when period is month but user has no activities in range' do
       let(:args) { [{ 'period' => 'month' }] }
       let(:user) do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -113,7 +116,7 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when period is month but user does not want receive' do
+    context 'when user does not want to receive' do
       let(:args) { [{ 'period' => 'month' }] }
       let(:user) do
         create(
@@ -178,7 +181,8 @@ RSpec.describe ReportMailerJob, type: :job do
           :user,
           2,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -210,13 +214,14 @@ RSpec.describe ReportMailerJob, type: :job do
       end
     end
 
-    context 'when user does not have activities' do
+    context 'when user has no activities' do
       let(:args) { [{ 'period' => 'week' }] }
       let(:user) do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -237,7 +242,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -265,7 +271,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Etc/UTC'
+          time_zone: 'Etc/UTC',
+          start_day: 0
         )
       end
 
@@ -292,7 +299,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Asia/Tokyo'
+          time_zone: 'Asia/Tokyo',
+          start_day: 0
         )
       end
 
@@ -323,7 +331,8 @@ RSpec.describe ReportMailerJob, type: :job do
         create(
           :user,
           receive_week_report: true,
-          time_zone: 'Asia/Tokyo'
+          time_zone: 'Asia/Tokyo',
+          start_day: 0
         )
       end
 

@@ -1,7 +1,5 @@
 en:
   jobs:
     report_mailer_job:
-      week:
+      weekly:
         title: 'Weekly Report'
-      month:
-        title: 'Monthly Report'
