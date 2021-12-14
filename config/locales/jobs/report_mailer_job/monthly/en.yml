@@ -1,0 +1,5 @@
+en:
+  jobs:
+    report_mailer_job:
+      monthly:
+        title: 'Monthly Report'

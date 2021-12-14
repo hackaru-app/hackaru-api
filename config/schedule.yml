@@ -1,5 +1,5 @@
 weekly_report_mailer_job:
-  cron: '0 12 * * 0'
+  cron: '0 12 * * *'
   class: 'ReportMailerJob'
   args:
     period: 'week'

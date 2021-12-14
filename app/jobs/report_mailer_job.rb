@@ -3,42 +3,43 @@
 class ReportMailerJob < ApplicationJob
   queue_as :low
 
+  STRATEGY_CLASSES = {
+    week: ReportMailerJob::Weekly,
+    month: ReportMailerJob::Monthly
+  }.freeze
+
+  private_constant :STRATEGY_CLASSES
+
   def perform(*args)
-    period = args[0]['period']
-    target_users(period).each do |user|
+    strategy = build_strategy(args[0]['period'])
+
+    target_users(strategy).each do |user|
       I18n.with_locale(user.locale) do
-        send_mail(user, period)
+        send_mail(user, strategy)
       end
     end
   end
 
   private
 
-  def target_users(period)
-    User.where("receive_#{period}_report": true).select do |user|
-      range = build_range(user, period)
+  def build_strategy(period)
+    STRATEGY_CLASSES[period.to_sym].new(Time.zone.now)
+  end
+
+  def target_users(strategy)
+    strategy.target_users.select do |user|
       user.activities.stopped.where.not(project: nil)
-          .where(started_at: range)
+          .where(started_at: strategy.build_period(user))
           .present?
     end
   end
 
-  def send_mail(user, period)
+  def send_mail(user, strategy)
     ReportMailer.report(
       user,
-      I18n.t(:title, scope: "jobs.report_mailer_job.#{period}"),
-      build_range(user, period).begin,
-      build_range(user, period).end
+      strategy.title,
+      strategy.build_period(user).begin,
+      strategy.build_period(user).end
     ).deliver_later
-  end
-
-  def build_range(user, period)
-    args = period == 'week' ? [:sunday] : []
-    prev = current_time(user.time_zone) - 1.public_send(period)
-    prev.public_send("all_#{period}", *args)
-  end
-
-  def current_time(time_zone)
-    Time.now.asctime.in_time_zone(time_zone)
   end
 end
