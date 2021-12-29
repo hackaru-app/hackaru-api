@@ -8,7 +8,7 @@ module V1
 
     def index
       param! :q, String, default: ''
-      param! :limit, Integer, range: 0..100, default: 50
+      param! :limit, Integer, in: 0..100, default: 50
 
       activities = current_user.activities
       suggestions = activities.suggestions(query: params[:q], limit: params[:limit])

@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :auth_token do
     user
     token { Faker::Internet.password }
-    expired_at { Time.zone.now + 1.day }
+    expired_at { 1.day.from_now }
   end
 end

@@ -111,7 +111,7 @@ RSpec.describe 'V1::Activities', type: :request do
         activity: {
           description: 'Updated',
           started_at: started_at,
-          stopped_at: Time.zone.now + 1.day
+          stopped_at: 1.day.from_now
         }
       }
     end

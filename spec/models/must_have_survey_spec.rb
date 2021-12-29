@@ -68,7 +68,7 @@ RSpec.describe MustHaveSurvey, type: :model do
     end
 
     context 'when user signed up 30 days ago and user has enough activities' do
-      let(:user) { create(:user, created_at: Time.zone.now - 30.days) }
+      let(:user) { create(:user, created_at: 30.days.ago) }
 
       before { create_list(:activity, 10, user: user) }
 
@@ -76,7 +76,7 @@ RSpec.describe MustHaveSurvey, type: :model do
     end
 
     context 'when user signed up 29 days ago and user has enough activities' do
-      let(:user) { create(:user, created_at: Time.zone.now - 29.days) }
+      let(:user) { create(:user, created_at: 29.days.ago) }
 
       before { create_list(:activity, 10, user: user) }
 
@@ -84,7 +84,7 @@ RSpec.describe MustHaveSurvey, type: :model do
     end
 
     context 'when user signed up 30 days ago and user does not have enough activities' do
-      let(:user) { create(:user, created_at: Time.zone.now - 30.days) }
+      let(:user) { create(:user, created_at: 30.days.ago) }
 
       before { create_list(:activity, 9, user: user) }
 
@@ -92,7 +92,7 @@ RSpec.describe MustHaveSurvey, type: :model do
     end
 
     context 'when user has already answered' do
-      let(:user) { create(:user, created_at: Time.zone.now - 30.days) }
+      let(:user) { create(:user, created_at: 30.days.ago) }
 
       before do
         create_list(:activity, 10, user: user)

@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
 
   describe '#reset_password' do
     let(:user) { create(:user, password: 'unchanged') }
-    let(:expired_at) { Time.zone.now + 1.day }
+    let(:expired_at) { 1.day.from_now }
 
     before do
       create(
@@ -136,7 +136,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when token was expired' do
-      let(:expired_at) { Time.zone.now - 1.day }
+      let(:expired_at) { 1.day.ago }
 
       let(:args) do
         {

@@ -118,7 +118,7 @@ RSpec.describe AuthToken, type: :model do
     end
 
     context 'when auth_token updated' do
-      before { auth_token.update!(updated_at: Time.zone.now + 1.day) }
+      before { auth_token.update!(updated_at: 1.day.from_now) }
 
       it { expect(auth_token.token).to start_with('$2a$') }
       it { expect(BCrypt::Password.new(auth_token.token)).to eq('secret') }

@@ -44,13 +44,13 @@ RSpec.describe PasswordResetToken, type: :model do
     end
 
     context 'when token is not expired' do
-      let(:expired_at) { Time.zone.now + 1.day }
+      let(:expired_at) { 1.day.from_now }
 
       it { is_expected.to eq(false) }
     end
 
     context 'when token was expired' do
-      let(:expired_at) { Time.zone.now - 1.day }
+      let(:expired_at) { 1.day.ago }
 
       it { is_expected.to eq(true) }
     end

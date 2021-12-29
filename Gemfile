@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -75,7 +75,7 @@ gem 'okcomputer'
 gem 'premailer-rails'
 gem 'rack-attack'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 6.0 '
+gem 'rails-i18n', '~> 7.0'
 gem 'rails_param'
 gem 'ransack'
 gem 'sentry-rails'
@@ -85,4 +85,6 @@ gem 'sidekiq'
 gem 'sidekiq-cron', '~> 1.2'
 gem 'slim'
 gem 'timeliness-i18n'
-gem 'validates_timeliness', '~> 6.0.0.beta2'
+
+# TEMP
+gem 'validates_timeliness', git: 'https://github.com/mitsuru/validates_timeliness.git', branch: 'rails7'

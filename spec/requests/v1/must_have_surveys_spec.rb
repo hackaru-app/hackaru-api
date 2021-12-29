@@ -17,7 +17,7 @@ RSpec.describe 'V1::MustHaveSurveys', type: :request do
     context 'when user is answerable' do
       let(:expected_json) { { answerable: true }.to_json }
       let(:user) do
-        user = create(:user, created_at: Time.zone.now - 60.days)
+        user = create(:user, created_at: 60.days.ago)
         create_list(:activity, 10, user: user)
         user
       end
