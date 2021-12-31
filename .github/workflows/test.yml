@@ -16,17 +16,18 @@ jobs:
       - name: Run test
         run: |
           docker-compose run --rm api bin/setup
-          docker-compose run --rm api
+          docker-compose run -e CC_TEST_REPORTER_ID --rm api
         env:
           COMPOSE_FILE: docker-compose.test.yml
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: Fix coverage paths
-        run: sudo sed -i -e "s|/hackaru|$(pwd)|" coverage/.resultset.json
+        run: sudo sed -i -e "s|/hackaru|$(pwd)|" coverage/coverage.json
 
       - name: Publish code coverage
         if: ${{ env.CC_TEST_REPORTER_ID != '' }}
         uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3
         with:
-          coverageLocations: coverage/.resultset.json:simplecov
+          coverageLocations: coverage/coverage.json:simplecov
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
