@@ -4,6 +4,7 @@ class ReportMailer < ApplicationMailer
   def report(user, title, from, to)
     @title = title
     @report = build_report(user, from..to)
+    @user_id = user.id
     mail(subject: @title, to: user.email)
   end
 

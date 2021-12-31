@@ -3,13 +3,13 @@
 # Preview all emails at http://localhost:3000/rails/mailers/report_mailer
 class ReportMailerPreview < ActionMailer::Preview
   def weekly
-    title = I18n.t('jobs.report_mailer_job.week.title')
+    title = I18n.t('jobs.report_mailer_job.weekly.title')
     range = Time.zone.local(2017, 1, 1).all_week(:sunday)
     report(title, range.begin, range.end)
   end
 
   def monthly
-    title = I18n.t('jobs.report_mailer_job.month.title')
+    title = I18n.t('jobs.report_mailer_job.monthly.title')
     range = Time.zone.local(2017, 1, 1).all_month
     report(title, range.begin, range.end)
   end

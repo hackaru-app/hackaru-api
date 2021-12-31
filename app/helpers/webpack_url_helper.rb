@@ -2,6 +2,7 @@
 
 module WebpackUrlHelper
   MANIFEST_PATH = 'public/packs/manifest.json'
+  private_constant :MANIFEST_PATH
 
   def webpack_url(path)
     asset_url(manifest.fetch(path.to_s))

@@ -35,3 +35,6 @@ section class="content"
         = render 'shared/dot_text', color: view_object.color,
             text: view_object.description,
             duration: view_object.duration
+
+== image_tag mixpanel_pixel_url('Open report mail',
+      { distinct_id: @user_id, days: (@report.start_date.to_date..@report.end_date.to_date).count })
