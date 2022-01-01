@@ -8,6 +8,7 @@ class UserMailer < ApplicationMailer
   end
 
   def sign_up(user)
+    @user_id = user.id
     subject = I18n.t('user_mailer.sign_up.subject')
     mail(subject: subject, to: user.email)
   end

@@ -53,3 +53,5 @@ section class="content"
        'https://github.com/hackaru-app/hackaru-desktop'
   p == image_tag webpack_url('images/desktop.png'), class: 'icon', size: '500x500'
   p == t('.use_desktop.thanks')
+
+== image_tag mixpanel_pixel_url('Open signUp mail', { distinct_id: @user_id })
