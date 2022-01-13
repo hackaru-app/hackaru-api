@@ -378,7 +378,6 @@ DEPENDENCIES
   doorkeeper-i18n
   factory_bot_rails
   faker
-  faraday
   groupdate
   http_accept_language
   icalendar
