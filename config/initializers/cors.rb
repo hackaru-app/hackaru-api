@@ -30,24 +30,6 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
 
-    # DEPRECATED
-    resource '/v1/auth/*',
-             headers: [],
-             methods: [],
-             credentials: false
-
-    # DEPRECATED
-    resource '/v1/oauth/authorize',
-             headers: [],
-             methods: [],
-             credentials: false
-
-    # DEPRECATED
-    resource '/v1/oauth/*',
-             headers: :any,
-             methods: %i[get post put patch options delete],
-             credentials: false
-
     resource '/v1/*',
              headers: :any,
              methods: %i[get post put patch options delete],
