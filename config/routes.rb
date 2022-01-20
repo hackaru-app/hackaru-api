@@ -36,9 +36,5 @@ Rails.application.routes.draw do
     resources :projects, except: :show
     resource :report, only: :show, defaults: { format: :json }
     resources :suggestions, only: :index
-
-    resource :must_have_survey, only: %i[create] do
-      get :answerable
-    end
   end
 end
