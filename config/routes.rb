@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   end
 
   namespace :oauth do
-    resources :applications, only: :create
     resources :authorized_applications, only: %i[index destroy]
   end
 
