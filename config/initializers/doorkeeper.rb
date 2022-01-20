@@ -224,4 +224,6 @@ Doorkeeper.configure do
   # WWW-Authenticate Realm (default "Doorkeeper").
   #
   # realm "Doorkeeper"
+
+  allow_token_introspection false
 end
