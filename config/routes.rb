@@ -42,27 +42,4 @@ Rails.application.routes.draw do
       get :answerable
     end
   end
-
-  # DEPRECATED
-  scope :v1 do
-    use_doorkeeper do
-      controllers authorizations: 'oauth/authorizations'
-      skip_controllers :applications, :authorized_applications
-    end
-
-    namespace :oauth do
-      resources :applications, only: :create
-      resources :authorized_applications, only: %i[index destroy]
-    end
-
-    namespace :auth do
-      resources :users, only: :create
-      resource :user, only: %i[update destroy]
-      resources :auth_tokens, only: :create
-      resource :auth_token, only: :destroy
-      resource :password_reset, only: [:update] do
-        post :mails
-      end
-    end
-  end
 end
