@@ -33,7 +33,7 @@
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.7",
-    "mini-css-extract-plugin": "^2.5.1",
+    "mini-css-extract-plugin": "^2.5.2",
     "postcss": "^8.4.5",
     "postcss-scss": "^4.0.3",
     "prettier": "^2.5.1",
