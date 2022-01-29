@@ -135,7 +135,7 @@ GEM
     hashdiff (1.0.1)
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     icalendar (2.7.1)
       ice_cube (~> 0.16)
@@ -278,9 +278,9 @@ GEM
     rubocop-rspec (2.8.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
-    sentry-rails (5.0.0)
+    sentry-rails (5.0.1)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.0.0)
+      sentry-ruby-core (~> 5.0.1)
     sentry-ruby (5.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       sentry-ruby-core (= 5.0.1)
@@ -341,7 +341,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
