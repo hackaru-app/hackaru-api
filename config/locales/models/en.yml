@@ -1,0 +1,4 @@
+en:
+  errors:
+    messages:
+      invalid_owner: 'is not found.'

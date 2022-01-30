@@ -12,6 +12,8 @@ RSpec.describe Activity, type: :model do
     subject(:instance) do
       activity = build(
         :activity,
+        user: user,
+        project: project,
         started_at: started_at,
         stopped_at: stopped_at
       )
@@ -19,6 +21,8 @@ RSpec.describe Activity, type: :model do
       activity
     end
 
+    let(:user) { create(:user) }
+    let(:project) { nil }
     let(:started_at) { Time.zone.now }
     let(:stopped_at) { Time.zone.now }
 
@@ -65,6 +69,24 @@ RSpec.describe Activity, type: :model do
       let(:stopped_at) { started_at.next_year.yesterday }
 
       it { is_expected.to be_valid }
+    end
+
+    context 'when project is nil' do
+      let(:project) { nil }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when user has the project' do
+      let(:project) { create(:project, user: user) }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when user does not have the project' do
+      let(:project) { create(:project) }
+
+      it { expect(instance.errors).to be_include :project }
     end
   end
 
@@ -139,38 +161,6 @@ RSpec.describe Activity, type: :model do
       end
 
       it { is_expected.to be_zero }
-    end
-  end
-
-  describe '#project_is_invalid' do
-    subject(:instance) do
-      activity = build(
-        :activity,
-        user: user,
-        project: project
-      )
-      activity.valid?
-      activity
-    end
-
-    let(:user) { create(:user) }
-
-    context 'when project is nil' do
-      let(:project) { nil }
-
-      it { is_expected.to be_valid }
-    end
-
-    context 'when user has this project' do
-      let(:project) { create(:project, user: user) }
-
-      it { is_expected.to be_valid }
-    end
-
-    context 'when user does not have this project' do
-      let(:project) { create(:project) }
-
-      it { expect(instance.errors).to be_include :project }
     end
   end
 

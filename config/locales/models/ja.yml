@@ -1,0 +1,4 @@
+ja:
+  errors:
+    messages:
+      invalid_owner: 'が見つかりません。'
