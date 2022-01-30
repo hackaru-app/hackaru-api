@@ -6,7 +6,7 @@ class Activity < ApplicationRecord
 
   validates :description, length: { maximum: 191 }
   validates :started_at, presence: true
-  validate :project_is_invalid, if: :project_id
+  validates :project, owner: { model: :user }, if: :project_id
 
   with_options if: :stopped_at do
     validates_datetime :started_at, on_or_before: :stopped_at
@@ -48,13 +48,5 @@ class Activity < ApplicationRecord
           .maximum(:id)
           .values
     where(id: ids).order(id: :desc).includes(:project).map(&:to_suggestion)
-  end
-
-  private
-
-  def project_is_invalid
-    return if user.projects.exists?(id: project_id)
-
-    errors.add(:project, :is_invalid)
   end
 end
