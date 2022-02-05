@@ -2,20 +2,20 @@
 
 module Rack
   class Attack
-    throttle('/v1/auth/users', limit: 5, period: 30.minutes) do |req|
-      req.ip if req.path == '/v1/auth/users'
+    throttle('/auth/users', limit: 5, period: 30.minutes) do |req|
+      req.ip if req.path == '/auth/users'
     end
 
-    throttle('/v1/oauth/authorize', limit: 25, period: 5.minutes) do |req|
-      req.ip if req.path == '/v1/oauth/authorize'
+    throttle('/oauth/authorize', limit: 25, period: 5.minutes) do |req|
+      req.ip if req.path == '/oauth/authorize'
     end
 
-    throttle('/v1/auth/*', limit: 25, period: 5.minutes) do |req|
-      req.ip if req.path.start_with?('/v1/auth')
+    throttle('/auth/*', limit: 25, period: 5.minutes) do |req|
+      req.ip if req.path.start_with?('/auth')
     end
 
-    throttle('/v1/oauth/*', limit: 300, period: 5.minutes) do |req|
-      req.ip if req.path.start_with?('/v1/oauth')
+    throttle('/oauth/*', limit: 300, period: 5.minutes) do |req|
+      req.ip if req.path.start_with?('/oauth')
     end
 
     throttle('/v1', limit: 300, period: 5.minutes) do |req|
