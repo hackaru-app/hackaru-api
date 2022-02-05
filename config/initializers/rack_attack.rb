@@ -35,13 +35,13 @@ module Rack
       }
     end
 
-    self.throttled_response = lambda do |env|
+    self.throttled_responder = lambda do |request|
       status = I18n.t('rack_attack.throttled.status')
       message = I18n.t('rack_attack.throttled.message')
       headers = throttled_headers(
-        env['rack.attack.match_data'][:epoch_time],
-        env['rack.attack.match_data'][:period],
-        env['rack.attack.match_data'][:limit]
+        request.env['rack.attack.match_data'][:epoch_time],
+        request.env['rack.attack.match_data'][:period],
+        request.env['rack.attack.match_data'][:limit]
       )
       [status, headers, [{ message: message }.to_json]]
     end
