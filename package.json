@@ -14,7 +14,7 @@
   "dependencies": {
     "c3": "^0.7.20",
     "puppeteer": "^13.4.1",
-    "ress": "^4.0.0"
+    "ress": "^5.0.2"
   },
   "lint-staged": {
     "*.js": [
