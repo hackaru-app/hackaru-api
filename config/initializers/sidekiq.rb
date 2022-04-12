@@ -26,7 +26,3 @@ end
 schedule_file = 'config/schedule.yml'
 
 Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file) if File.exist?(schedule_file) && Sidekiq.server?
-
-# Avoid deprecation warns on production because of the sidekiq-cron
-# TODO: https://github.com/ondrejbartas/sidekiq-cron/pull/309
-Redis.silence_deprecations = Rails.env.production?
