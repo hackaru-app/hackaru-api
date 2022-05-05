@@ -13,6 +13,10 @@ class Activity < ApplicationRecord
     validates_datetime :stopped_at, on_or_before: -> { _1.started_at.next_year }
   end
 
+  with_options unless: :stopped_at do
+    validates_datetime :started_at, on_or_before: -> { Time.now }
+  end
+
   before_save :set_duration
   before_save :stop_other_workings, unless: :stopped_at
 
