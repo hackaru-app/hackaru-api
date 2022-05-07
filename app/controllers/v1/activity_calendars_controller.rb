@@ -17,7 +17,7 @@ module V1
 
       calendar = ActivityCalendar.find_by(user_id: params[:user_id])
       if calendar&.token == params[:token]
-        render plain: calendar.to_ical, content_type: 'text/calendar'
+        render plain: calendar.to_ical(limit: 4000), content_type: 'text/calendar'
       else
         render_api_error_of :activity_calendar_token_invalid
       end

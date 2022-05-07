@@ -9,7 +9,7 @@ RSpec.describe ActivityCalendar, type: :model do
   end
 
   describe '#to_ical' do
-    subject(:ical) { create(:activity_calendar, user: user).to_ical }
+    subject(:ical) { create(:activity_calendar, user: user).to_ical(limit: 10) }
 
     context 'when user has activities' do
       let(:activity) { create(:activity) }
@@ -41,6 +41,27 @@ RSpec.describe ActivityCalendar, type: :model do
       let(:user) { create(:user) }
 
       it { is_expected.not_to be_include 'BEGIN:VEVENT' }
+    end
+
+    context 'when the user has more activities than the limit' do
+      let(:user) { create(:user) }
+
+      before { create_list(:activity, 20, user: user) }
+
+      it { expect(ical.scan('DTSTART').count).to eq(10) }
+    end
+
+    context 'when multiple users have activities' do
+      let(:activities) { create_list(:activity, 2) }
+      let(:user) { activities[0].user }
+
+      it 'has summary the current user has' do
+        expect(ical).to be_include "SUMMARY:#{activities[0].description}"
+      end
+
+      it 'does not have summary other users has' do
+        expect(ical).not_to be_include "SUMMARY:#{activities[1].description}"
+      end
     end
   end
 end
