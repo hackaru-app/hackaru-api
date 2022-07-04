@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   namespace :auth do
     resources :users, only: :create
-    resource :user, only: %i[update destroy]
+    resource :user, only: %i[update show destroy]
     resources :auth_tokens, only: :create
     resource :auth_token, only: :destroy
     resource :password_reset, only: [:update] do

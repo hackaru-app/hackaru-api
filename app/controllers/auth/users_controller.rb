@@ -2,12 +2,16 @@
 
 module Auth
   class UsersController < Auth::ApplicationController
-    before_action only: %i[update destroy] do
+    before_action only: %i[update show destroy] do
       authenticate_user!
     end
 
     before_action only: %i[update destroy] do
       validate_current_password!
+    end
+
+    def show
+      render json: UserBlueprint.render(current_user, view: :auth)
     end
 
     def create
