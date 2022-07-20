@@ -3,6 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Auth::Users', type: :request do
+  describe 'GET /v1/user' do
+    let(:headers) { xhr_header }
+    let(:user) { create(:user) }
+
+    before do
+      login(user)
+      get '/auth/user', headers: headers
+    end
+
+    it_behaves_like 'validates xhr'
+
+    it 'returns ok' do
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe 'POST /auth/users' do
     let(:headers) { xhr_header }
     let(:email) { 'foo@example.com' }
