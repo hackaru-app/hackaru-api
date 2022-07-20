@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Auth::Users', type: :request do
-  describe 'GET /v1/user' do
+  describe 'GET /auth/user' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
 
