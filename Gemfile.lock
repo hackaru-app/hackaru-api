@@ -112,7 +112,7 @@ GEM
     docile (1.4.0)
     doorkeeper (5.5.4)
       railties (>= 5)
-    doorkeeper-i18n (5.2.3)
+    doorkeeper-i18n (5.2.4)
       doorkeeper (>= 5.2)
     erubi (1.10.0)
     et-orbi (1.2.7)
@@ -160,7 +160,7 @@ GEM
     msgpack (1.5.4)
     multi_json (1.15.0)
     nio4r (2.5.8)
-    nokogiri (1.13.7)
+    nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     okcomputer (1.18.4)
@@ -328,7 +328,7 @@ GEM
     timeliness-i18n (0.11.0)
       railties
       timeliness
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
     validates_timeliness (6.0.0.beta2)
