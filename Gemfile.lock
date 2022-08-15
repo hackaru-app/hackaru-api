@@ -295,7 +295,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
-    sidekiq-cron (1.6.0)
+    sidekiq-cron (1.7.0)
       fugit (~> 1)
       sidekiq (>= 4.2.1)
     simplecov (0.21.2)
@@ -382,7 +382,7 @@ DEPENDENCIES
   sentry-sidekiq
   shoulda-matchers
   sidekiq
-  sidekiq-cron (~> 1.6)
+  sidekiq-cron (~> 1.7)
   simplecov
   slim
   slim_lint
