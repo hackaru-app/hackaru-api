@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "c3": "^0.7.20",
-    "puppeteer": "^15.5.0",
+    "puppeteer": "^16.1.0",
     "ress": "^5.0.2"
   },
   "lint-staged": {
