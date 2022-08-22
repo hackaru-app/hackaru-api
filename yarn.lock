@@ -2300,7 +2300,7 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.3.11, postcss@^8.4.14, postcss@^8.4.16, postcss@^8.4.7:
+postcss@^8.3.11, postcss@^8.4.16, postcss@^8.4.7:
   version "8.4.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
   integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
@@ -2529,10 +2529,10 @@ sass-loader@^13.0.2:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.54.4:
-  version "1.54.4"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.4.tgz#803ff2fef5525f1dd01670c3915b4b68b6cba72d"
-  integrity sha512-3tmF16yvnBwtlPrNBHw/H907j8MlOX8aTBnlNX1yrKx24RKcJGPyLhFUwkoKBKesR3unP93/2z14Ll8NicwQUA==
+sass@^1.54.5:
+  version "1.54.5"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.5.tgz#93708f5560784f6ff2eab8542ade021a4a947b3a"
+  integrity sha512-p7DTOzxkUPa/63FU0R3KApkRHwcVZYC0PLnLm5iyZACyp15qSi32x7zVUhRdABAATmkALqgGrjCJAcWvobmhHw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
