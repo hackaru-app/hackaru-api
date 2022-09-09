@@ -16,6 +16,7 @@ module Authenticatable
   def authenticate_doorkeeper!(*scopes)
     doorkeeper_authorize!(*scopes)
     return if doorkeeper_token.blank?
+    return unless valid_doorkeeper_token?
 
     @current_user = User.find(doorkeeper_token[:resource_owner_id])
     Sentry.set_user(id: @current_user.id)

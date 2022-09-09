@@ -8,4 +8,5 @@ end
 
 RSpec.configure do |config|
   config.include XhrHeaderHelper, type: :request
+  config.include XhrHeaderHelper, type: :controller
 end
