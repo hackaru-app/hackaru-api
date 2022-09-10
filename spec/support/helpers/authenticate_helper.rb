@@ -5,8 +5,12 @@ module AuthenticateHelper
     return unless user
 
     auth_token = create(:auth_token, user: user, token: 'secret')
-    store_signed_cookie(:auth_token_id, auth_token.id)
-    store_signed_cookie(:auth_token_raw, 'secret')
+    store_auth_token(auth_token.id, 'secret')
+  end
+
+  def store_auth_token(id, raw)
+    store_signed_cookie(:auth_token_id, id)
+    store_signed_cookie(:auth_token_raw, raw)
   end
 
   private
@@ -21,4 +25,5 @@ end
 
 RSpec.configure do |config|
   config.include AuthenticateHelper, type: :request
+  config.include AuthenticateHelper, type: :controller
 end
