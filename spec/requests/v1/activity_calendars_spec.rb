@@ -36,11 +36,55 @@ RSpec.describe 'V1::ActivityCalendars', type: :request do
       it { expect(response).to have_http_status(:bad_request) }
     end
 
-    context 'when token is invalid' do
+    context 'when the token is for another user' do
+      let(:token) { create(:activity_calendar).token }
+      let(:user_id) { create(:activity_calendar).user_id }
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when the token is invalid' do
       let(:token) { 'invalid' }
       let(:user_id) { activity_calendar.user.id }
 
       it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when params have no token and an user has no token' do
+      let(:params) { { user_id: create(:user).id } }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+    end
+
+    context 'when the token is blank and an user has no token' do
+      let(:params) { { token: '', user_id: create(:user).id } }
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when the token is zero and an user has no token' do
+      let(:params) { { token: 0, user_id: create(:user).id } }
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when the token is false and an user has no token' do
+      let(:params) { { token: false, user_id: create(:user).id } }
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when the token is nil and an user has no token' do
+      let(:params) { { token: nil, user_id: create(:user).id } }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+    end
+
+    context 'when the user_id param has multiple ids' do
+      let(:token) { activity_calendar.token }
+      let(:user_id) { [activity_calendar.user.id, create(:user).id] }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 
