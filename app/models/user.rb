@@ -22,7 +22,8 @@ class User < ApplicationRecord
   end
 
   def reset_password(token:, password:, password_confirmation:)
-    return false if password_reset_token&.expired?
+    return false if password_reset_token.blank? || token.blank?
+    return false if password_reset_token.expired?
     return false if password_reset_token != token
 
     update!(

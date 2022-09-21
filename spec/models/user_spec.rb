@@ -147,6 +147,44 @@ RSpec.describe User, type: :model do
       end
     end
 
+    context 'when no params' do
+      let(:args) do
+        {
+          token: nil,
+          password: nil,
+          password_confirmation: nil
+        }
+      end
+
+      it 'does not change password' do
+        user.reset_password(**args)
+        expect(user.password).to eq('unchanged')
+      end
+
+      it 'returns false' do
+        expect(user.reset_password(**args)).to eq(false)
+      end
+    end
+
+    context 'when no token' do
+      let(:args) do
+        {
+          token: nil,
+          password: 'changed',
+          password_confirmation: 'changed'
+        }
+      end
+
+      it 'does not change password' do
+        user.reset_password(**args)
+        expect(user.password).to eq('unchanged')
+      end
+
+      it 'returns false' do
+        expect(user.reset_password(**args)).to eq(false)
+      end
+    end
+
     context 'when password and password confirmation are not same' do
       let(:args) do
         {

@@ -9,22 +9,30 @@ RSpec.describe 'Auth::AuthTokens', type: :request do
     let(:email) { user.email }
     let(:password) { user.password }
 
-    before do
-      post '/auth/auth_tokens',
-           headers: headers,
-           params: {
-             user: {
-               email: email,
-               password: password
+    it_behaves_like 'validates xhr' do
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+               user: {
+                 email: user.email,
+                 password: user.password
+               }
              }
-           }
+      end
     end
 
-    it_behaves_like 'validates xhr'
-
     context 'when email and password are valid' do
-      let(:email) { user.email }
-      let(:password) { user.password }
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+               user: {
+                 email: user.email,
+                 password: user.password
+               }
+             }
+      end
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.cookies).to include('auth_token_id') }
@@ -32,15 +40,56 @@ RSpec.describe 'Auth::AuthTokens', type: :request do
     end
 
     context 'when email is invalid' do
-      let(:email) { 'test@example.com' }
-      let(:password) { user.password }
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+               user: {
+                 email: 'test@example.com',
+                 password: user.password
+               }
+             }
+      end
 
       it { expect(response).to have_http_status(:bad_request) }
     end
 
     context 'when password is invalid' do
-      let(:email) { user.email }
-      let(:password) { 'invalid' }
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+               user: {
+                 email: user.email,
+                 password: 'invalid'
+               }
+             }
+      end
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when password is missing' do
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+               user: {
+                 email: user.email
+               }
+             }
+      end
+
+      it { expect(response).to have_http_status(:bad_request) }
+    end
+
+    context 'when all params are missing' do
+      before do
+        post '/auth/auth_tokens',
+             headers: headers,
+             params: {
+             }
+      end
 
       it { expect(response).to have_http_status(:bad_request) }
     end

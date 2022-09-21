@@ -10,6 +10,8 @@ module Auth
     end
 
     def update
+      return render_api_error_of(:password_reset_token_invalid) unless all_params_exists?
+
       User.find(password_reset_params[:id]).reset_password(
         token: password_reset_params[:token],
         password: password_reset_params[:password],
@@ -18,6 +20,13 @@ module Auth
     end
 
     private
+
+    def all_params_exists?
+      password_reset_params[:token].present? &&
+        password_reset_params[:id].present? &&
+        password_reset_params[:password].present? &&
+        password_reset_params[:password_confirmation].present?
+    end
 
     def user_params
       params.require(:user).permit(:email)

@@ -147,6 +147,21 @@ RSpec.describe 'Auth::Users', type: :request do
       it { expect(user.reload.email).not_to eq('changed@example.com') }
     end
 
+    context 'when current password is nil' do
+      let(:params) do
+        {
+          user: {
+            email: 'changed@example.com',
+            password: 'changed',
+            current_password: nil
+          }
+        }
+      end
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+      it { expect(user.reload.email).not_to eq('changed@example.com') }
+    end
+
     context 'when params are empty' do
       let(:params) { nil }
 
