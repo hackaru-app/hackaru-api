@@ -38,31 +38,91 @@ RSpec.describe 'Auth::PasswordReset', type: :request do
   describe 'PUT /auth/password_reset' do
     let(:headers) { xhr_header }
     let(:user) { create(:user) }
-    let(:token) { 'secret' }
 
-    before do
-      create(:password_reset_token, user: user, token: 'secret')
-      put '/auth/password_reset',
-          headers: headers,
-          params: {
-            user: {
-              id: user.id,
-              token: token,
-              password: 'changed',
-              password_confirmation: 'changed'
+    it_behaves_like 'validates xhr' do
+      before do
+        create(:password_reset_token, user: user, token: 'secret')
+        put '/auth/password_reset',
+            headers: headers,
+            params: {
+              user: {
+                id: user.id,
+                token: 'secret',
+                password: 'changed',
+                password_confirmation: 'changed'
+              }
             }
-          }
+      end
     end
 
-    it_behaves_like 'validates xhr'
-
     context 'when token is valid' do
+      before do
+        create(:password_reset_token, user: user, token: 'secret')
+        put '/auth/password_reset',
+            headers: headers,
+            params: {
+              user: {
+                id: user.id,
+                token: 'secret',
+                password: 'changed',
+                password_confirmation: 'changed'
+              }
+            }
+      end
+
       it { expect(response).to have_http_status(:no_content) }
       it { expect(user.reload.authenticate('changed')).to be_truthy }
     end
 
     context 'when token is invalid' do
-      let(:token) { 'invalid' }
+      before do
+        create(:password_reset_token, user: user, token: 'secret')
+        put '/auth/password_reset',
+            headers: headers,
+            params: {
+              user: {
+                id: user.id,
+                token: 'invalid',
+                password: 'changed',
+                password_confirmation: 'changed'
+              }
+            }
+      end
+
+      it { expect(response).to have_http_status(:bad_request) }
+      it { expect(user.reload.authenticate('changed')).to be_falsy }
+    end
+
+    context 'when token is missing' do
+      before do
+        put '/auth/password_reset',
+            headers: headers,
+            params: {
+              user: {
+                id: user.id,
+                password: 'changed',
+                password_confirmation: 'changed'
+              }
+            }
+      end
+
+      it { expect(response).to have_http_status(:bad_request) }
+      it { expect(user.reload.authenticate('changed')).to be_falsy }
+    end
+
+    context 'when token is blank' do
+      before do
+        put '/auth/password_reset',
+            headers: headers,
+            params: {
+              user: {
+                id: user.id,
+                token: '',
+                password: 'changed',
+                password_confirmation: 'changed'
+              }
+            }
+      end
 
       it { expect(response).to have_http_status(:bad_request) }
       it { expect(user.reload.authenticate('changed')).to be_falsy }
