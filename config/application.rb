@@ -42,7 +42,7 @@ module HackaruApi
 
     config.action_mailer.preview_path = Rails.root.join('spec/mailers/previews')
 
-    config.i18n.available_locales = %i[ja en]
+    config.i18n.available_locales = %i[ja en zh-CN]
     config.i18n.load_path += Dir[
       Rails.root.join('config/locales/**/*.{rb,yml}')
     ]
