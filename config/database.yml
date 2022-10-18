@@ -2,10 +2,10 @@ default: &default
   adapter: <%= ENV.fetch('DB_ADAPTER', 'postgresql') %>
   encoding: <%= ENV.fetch('DB_ENCODING', 'unicode') %>
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  host: <%= ENV.fetch('DB_HOST', '172.25.192.1') %>
-  port: <%= ENV.fetch('DB_PORT', '3306') %>
-  username: <%= ENV.fetch('DB_USER', 'root') %>
-  password: <%= ENV.fetch('DB_PASS', '123123') %>
+  host: <%= ENV.fetch('DB_HOST', 'db') %>
+  port: <%= ENV.fetch('DB_PORT', '5432') %>
+  username: <%= ENV.fetch('DB_USER', 'postgres') %>
+  password: <%= ENV.fetch('DB_PASS', '') %>
 
 development:
   <<: *default
