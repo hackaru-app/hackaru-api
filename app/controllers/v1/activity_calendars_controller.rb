@@ -15,12 +15,9 @@ module V1
       param! :user_id, Integer, required: true
       param! :token, String, required: true
 
-      calendar = ActivityCalendar.find_by(user_id: params[:user_id])
-      if calendar&.token == params[:token]
-        render plain: calendar.to_ical(limit: 4000), content_type: 'text/calendar'
-      else
-        render_api_error_of :activity_calendar_token_invalid
-      end
+      calendar = Icalendar::Calendar.new
+      calendar.append_custom_property('X-WR-CALNAME;VALUE=TEXT', 'Hackaru')
+      render plain: calendar.to_ical, content_type: 'text/calendar'
     end
 
     def destroy
