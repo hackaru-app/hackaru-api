@@ -1,6 +1,6 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: <%= ENV.fetch('DB_ADAPTER', 'postgresql') %>
+  encoding: <%= ENV.fetch('DB_ENCODING', 'unicode') %>
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
   host: <%= ENV.fetch('DB_HOST', 'db') %>
   port: <%= ENV.fetch('DB_PORT', '5432') %>
@@ -17,4 +17,4 @@ test:
 
 production:
   <<: *default
-  database: hackaru-api_production
+  database: <%= ENV.fetch('DB_DATABASE', 'hackaru-api_production') %>

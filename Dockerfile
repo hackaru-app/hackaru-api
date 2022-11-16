@@ -4,7 +4,8 @@ WORKDIR $API_DIR
 RUN apk -U upgrade \
  && apk add --update --no-cache -t build-dependencies \
     build-base \
-    postgresql-dev
+    postgresql-dev \
+    mariadb-dev
 COPY Gemfile Gemfile.lock $API_DIR/
 RUN bundle install -j4
 
@@ -26,6 +27,7 @@ RUN apk -U upgrade \
  && apk add --update --no-cache \
     tzdata \
     postgresql-client \
+    mariadb-connector-c-dev \
     chromium \
     nss \
     freetype \
